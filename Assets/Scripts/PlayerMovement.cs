@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private GameObject interactionPoint;
+    private Quaternion rotateClockwise = Quaternion.Euler(0, 0, 90);
 
     [SerializeField]
     private Animator animator;
@@ -76,11 +77,21 @@ public class PlayerMovement : MonoBehaviour
         forceTranslate = true;
         rb.isKinematic = true;
     }
+
+    public void teleportTranslate(Vector2 newPosition)
+    {
+        rb.isKinematic = true;
+        transform.position = newPosition;
+        rb.isKinematic = false;
+    }
     private void EndForcedTranslate()
     {
         forceTranslate = false;
         forcedTranslatePos = new Vector2(0, 0);
         forcedTranslateSpeed = 0;
         rb.isKinematic = false;
+
+        GameObject otherPlayer = transform.parent.GetComponent<PlayerHandler>().getOtherPlayer(gameObject);
+        otherPlayer.GetComponent<PlayerMovement>().teleportTranslate(transform.position + (rotateClockwise * lastMovement));
     }
 }

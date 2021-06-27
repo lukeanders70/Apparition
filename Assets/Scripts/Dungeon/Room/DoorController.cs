@@ -17,6 +17,7 @@ public class DoorController : MonoBehaviour
         if (collidedObject.tag == "Player" && oppostiteDoor != null)
         {
             Vector2 playerMovePosition = oppostiteDoor.GetComponent<DoorController>().teleportPoint.transform.position;
+
             collidedObject.GetComponent<PlayerMovement>().ForceTranslate(playerMovePosition, 5);
 
             GameObject.Find("Main Camera").GetComponent<CameraMoveController>().MoveToObject(oppostiteDoor.GetComponent<DoorController>().insideRoom, 50);
