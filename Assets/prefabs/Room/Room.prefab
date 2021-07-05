@@ -119,6 +119,8 @@ GameObject:
   m_Component:
   - component: {fileID: 122319395201439123}
   - component: {fileID: 5151347997636064211}
+  - component: {fileID: -2748858838668381693}
+  - component: {fileID: 5914841311711546194}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -169,6 +171,35 @@ MonoBehaviour:
   rightDoorPosition: {fileID: 122319396702104686}
   bottomDoorPosition: {fileID: 122319396511641520}
   topDoorPosition: {fileID: 122319395466855188}
+--- !u!114 &-2748858838668381693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122319395201439116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372e4cf80d27055429e2307d3694ddfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemies: 5
+  minEnemies: 2
+  enemyPrefab: {fileID: 4736983304645431534, guid: f22f5070d10857f4f8bd712ffc264423, type: 3}
+--- !u!114 &5914841311711546194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122319395201439116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5315f0a40b8a848ad9ddb2ee0b22c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyManager: {fileID: -2748858838668381693}
+  doorManager: {fileID: 5151347997636064211}
 --- !u!1 &122319395298431629
 GameObject:
   m_ObjectHideFlags: 0

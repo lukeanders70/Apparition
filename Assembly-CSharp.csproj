@@ -56,21 +56,23 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\InteractionController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\Doors.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
     <Compile Include="Assets\Scripts\SpiritHandler.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\DoorController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayGenerator.cs" />
+    <Compile Include="Assets\Scripts\CameraMoveController.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\SwapHandler.cs" />
     <Compile Include="Assets\Scripts\Constants.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\PlayerHandler.cs" />
     <Compile Include="Assets\Scripts\SpawnEnemies.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
-    <Compile Include="Assets\Scripts\CameraMoveController.cs" />
-    <Compile Include="Assets\Scripts\InteractionController.cs" />
-    <Compile Include="Assets\PlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
