@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Doors : MonoBehaviour
+public class DoorManager : MonoBehaviour
 {
     public float doorSpawnProbablity;
 
@@ -30,7 +30,7 @@ public class Doors : MonoBehaviour
         };
     }
 
-    public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position)
+    public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position, float? doorSpawnProbabilityOverride)
     {
         foreach (Vector2 direction in Constants.directions.Values)
         {
@@ -39,7 +39,7 @@ public class Doors : MonoBehaviour
             if(dungeon.ContainsKey(neighboorPosition))
             {
                 GameObject neighbooringRoom = dungeon[neighboorPosition];
-                GameObject oppositeRoomDoor = neighbooringRoom.GetComponent<Doors>().doors[oppositeDirection];
+                GameObject oppositeRoomDoor = neighbooringRoom.GetComponent<DoorManager>().doors[oppositeDirection];
                 if (oppositeRoomDoor.GetComponent<DoorController>().state == DoorState.Open)
                 {
                     AddDoor(direction, oppositeRoomDoor);
@@ -47,7 +47,7 @@ public class Doors : MonoBehaviour
                 {
                     AddDoorwayWall(direction);
                 }
-            } else if (Random.value < doorSpawnProbablity)
+            } else if (doorSpawnProbabilityOverride == null ? Random.value < doorSpawnProbablity : Random.value < doorSpawnProbabilityOverride)
             {
                 AddDoor(direction, null);
             } else
