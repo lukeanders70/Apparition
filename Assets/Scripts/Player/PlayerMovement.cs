@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+#nullable enable
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    private PlayerMoveCallback? moveCallback;
     private bool forceTranslate = false;
     private Vector2 forcedTranslatePos = new Vector2(0, 0);
     private float forcedTranslateSpeed = 0;
@@ -70,12 +71,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ForceTranslate(Vector2 newPosition, float speed)
+    public void ForceTranslate(Vector2 newPosition, float speed, PlayerMoveCallback? callback)
     {
         forcedTranslatePos = newPosition;
         forcedTranslateSpeed = speed;
         forceTranslate = true;
         rb.isKinematic = true;
+        moveCallback = callback;
     }
 
     public void teleportTranslate(Vector2 newPosition)
@@ -91,7 +93,8 @@ public class PlayerMovement : MonoBehaviour
         forcedTranslateSpeed = 0;
         rb.isKinematic = false;
 
-        GameObject otherPlayer = transform.parent.GetComponent<PlayerHandler>().getOtherPlayer(gameObject);
-        otherPlayer.GetComponent<PlayerMovement>().teleportTranslate(transform.position + (rotateClockwise * lastMovement));
+        if(moveCallback != null) { moveCallback(); }
     }
 }
+
+public delegate void PlayerMoveCallback();

@@ -417,12 +417,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1511029986}
   - component: {fileID: 1511029991}
-  - component: {fileID: 1511029989}
   - component: {fileID: 1511029988}
   - component: {fileID: 1511029990}
   - component: {fileID: 1511029987}
   - component: {fileID: 1511029992}
   - component: {fileID: 1511029993}
+  - component: {fileID: 1511029989}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -480,8 +480,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &1511029989
-CircleCollider2D:
+--- !u!61 &1511029989
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -493,9 +493,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0000004768372, y: -0.3340932}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.625}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.7030287, y: 0.7835801}
+  m_EdgeRadius: 0
 --- !u!114 &1511029990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,8 +662,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1989842406}
   - component: {fileID: 1989842405}
-  - component: {fileID: 1989842403}
   - component: {fileID: 1989842402}
+  - component: {fileID: 1989842403}
   - component: {fileID: 1989842404}
   - component: {fileID: 1989842407}
   - component: {fileID: 1989842408}
@@ -686,8 +696,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &1989842403
-CircleCollider2D:
+--- !u!61 &1989842403
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -699,9 +709,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000047683716, y: -0.3340932}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.625}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.7030287, y: 0.78358006}
+  m_EdgeRadius: 0
 --- !u!114 &1989842404
 MonoBehaviour:
   m_ObjectHideFlags: 0

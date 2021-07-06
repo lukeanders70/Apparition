@@ -15,7 +15,6 @@ public class EnemyMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //Debug.DrawLine(transform.position, transform.position + movement, Color.magenta);
         rb.velocity = movement * speed;
     }
 

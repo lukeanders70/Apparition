@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwapHandler : MonoBehaviour
+public class SpiritController : MonoBehaviour
 {
     [SerializeField]
     private int speed = 10;
@@ -10,6 +10,8 @@ public class SwapHandler : MonoBehaviour
     private int damage = 1;
     [SerializeField]
     private SpriteRenderer spriteRenderer;
+
+    private bool isMoving = false;
 
     public void Swap(GameObject newParent)
     {
@@ -24,6 +26,7 @@ public class SwapHandler : MonoBehaviour
 
     private IEnumerator Move(GameObject newParent)
     {
+        isMoving = true;
         Vector3 targetPosition = newParent.transform.position;
         while (Vector3.Distance(transform.position, targetPosition) > 0.001f)
         {
@@ -34,13 +37,14 @@ public class SwapHandler : MonoBehaviour
         transform.SetParent(newParent.transform);
         spriteRenderer.color = Color.clear;
         transform.localPosition = Vector3.zero;
+        isMoving = false;
         yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
-        if(collidedObject.tag == "Enemy")
+        if(isMoving && collidedObject.tag == "Enemy")
         {
             Health healthComponent = collidedObject.GetComponent<Health>();
             if(healthComponent != null)
