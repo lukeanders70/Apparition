@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-#nullable enable
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -17,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    #nullable enable
     private PlayerMoveCallback? moveCallback;
     private bool forceTranslate = false;
     private Vector2 forcedTranslatePos = new Vector2(0, 0);

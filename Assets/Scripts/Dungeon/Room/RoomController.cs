@@ -11,12 +11,12 @@ public class RoomController : MonoBehaviour
 
     public void SetupRoom(
         Dictionary<Vector2, GameObject> dungeon,
-        Vector2 position,
+        Vector2 indexPosition,
         float? doorSpawnProbabilityOverride
     )
     {
-        doorManager.SetupDoors(dungeon, position, doorSpawnProbabilityOverride);
-        enemyManager.SetEnemies();
+        doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
+        enemyManager.SetEnemies(indexPosition);
     }
 
     public void ExitRoom()
