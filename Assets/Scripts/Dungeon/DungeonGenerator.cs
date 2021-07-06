@@ -25,25 +25,25 @@ public class DungeonGenerator : MonoBehaviour
         Dictionary<Vector2, GameObject> dungeon = new Dictionary<Vector2, GameObject>();
         List<Vector2> edge = new List<Vector2>();
 
-        GameObject firstRoom = AddRoom(transform.position, dungeon, 1f);
+        GameObject firstRoom = AddRoom(Vector2.zero, dungeon, 1f);
         UpdateEdge(new Vector2(0, 0), firstRoom, edge, dungeon);
 
         for (int i = 0; i < numRooms - 1; i++)
         {
             int index = Random.Range(0, edge.Count);
-            Vector2 positionToAdd = edge[index];
+            Vector2 indexPositionToAdd = edge[index];
 
             GameObject newRoom;
             if (edge.Count > 1 || i == numRooms - 1)
             {
-                newRoom = AddRoom(positionToAdd, dungeon, null);
+                newRoom = AddRoom(indexPositionToAdd, dungeon, null);
             }
             else
             {
-                newRoom = AddRoom(positionToAdd, dungeon, 1f);
+                newRoom = AddRoom(indexPositionToAdd, dungeon, 1f);
             }
-            UpdateEdge(positionToAdd, newRoom, edge, dungeon);
-            edge.Remove(positionToAdd);
+            UpdateEdge(indexPositionToAdd, newRoom, edge, dungeon);
+            edge.Remove(indexPositionToAdd);
 
         }
     }
@@ -59,16 +59,16 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private GameObject AddRoom(Vector2 positionToAdd, Dictionary<Vector2, GameObject> dungeon, float? doorProbability)
+    private GameObject AddRoom(Vector2 indexPositionToAdd, Dictionary<Vector2, GameObject> dungeon, float? doorProbability)
     {
         GameObject newRoom = Instantiate(
             RoomPrefab,
-            transform.position + new Vector3(positionToAdd.x * roomWidth, positionToAdd.y * roomHeight),
+            transform.position + new Vector3(indexPositionToAdd.x * roomWidth, indexPositionToAdd.y * roomHeight),
             transform.rotation
         );
         newRoom.transform.parent = transform;
-        newRoom.GetComponent<RoomController>().SetupRoom(dungeon, positionToAdd, doorProbability);
-        dungeon.Add(positionToAdd, newRoom);
+        newRoom.GetComponent<RoomController>().SetupRoom(dungeon, indexPositionToAdd, doorProbability);
+        dungeon.Add(indexPositionToAdd, newRoom);
 
         return newRoom;
     }

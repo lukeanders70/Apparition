@@ -16,9 +16,9 @@ public class EnemyManager : MonoBehaviour
     List<GameObject> enemyPrefabs = new List<GameObject>();
     List<GameObject> enemies = new List<GameObject>();
 
-    public void SetEnemies()
+    public void SetEnemies(Vector2 roomIndexPosition)
     {
-        int numEnemies = Random.Range(maxEnemies, minEnemies);
+        int numEnemies = roomIndexPosition == Vector2.zero ? 0 : Random.Range(maxEnemies, minEnemies);
         for (int i = 0; i < numEnemies; i++)
         {
             enemyPrefabs.Add(enemyPrefab);
