@@ -25,7 +25,7 @@ public class SpiritHandler : MonoBehaviour
 
     public void AttemptSwap()
     {
-        SwapHandler sh = spirit.GetComponent<SwapHandler>();
+        SpiritController sh = spirit.GetComponent<SpiritController>();
         if (spirit.transform.parent == this.transform && sh != null && otherPlayer != null)
         {
             sh.Swap(otherPlayer);
