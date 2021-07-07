@@ -12,7 +12,7 @@ public class DoorwayGenerator : MonoBehaviour
     #nullable enable
     public GameObject AddDoor(GameObject room, GameObject? oppostiteDoor)
     {
-        GameObject door = GameObject.Instantiate(doorPrefab, transform.position, transform.rotation);
+        GameObject door = Instantiate(doorPrefab, transform.position, transform.rotation);
         door.GetComponent<DoorController>().insideRoom = room;
         door.GetComponent<DoorController>().oppostiteDoor = oppostiteDoor;
         door.transform.parent = room.transform;
@@ -27,7 +27,7 @@ public class DoorwayGenerator : MonoBehaviour
 
     public GameObject AddDoorwayWall(GameObject room)
     {
-        GameObject doorwayWall = GameObject.Instantiate(doorwayWallPrefab, transform.position, transform.rotation);
+        GameObject doorwayWall = Instantiate(doorwayWallPrefab, transform.position, transform.rotation);
         doorwayWall.transform.parent = room.transform;
         return doorwayWall;
     }
