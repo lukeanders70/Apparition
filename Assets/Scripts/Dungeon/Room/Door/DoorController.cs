@@ -22,31 +22,39 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    public bool Navigable()
+    {
+        return oppostiteDoor != null;
+    }
+
     void PassThrough(GameObject activePlayer)
     {
-        GameObject inactivePlayer = activePlayer.transform.parent.GetComponent<PlayerHandler>().getOtherPlayer(activePlayer);
+        if (Navigable())
+        {
+            GameObject inactivePlayer = activePlayer.transform.parent.GetComponent<PlayerHandler>().getOtherPlayer(activePlayer);
 
-        GameObject oppositeRoom = oppostiteDoor.GetComponent<DoorController>().insideRoom;
-        Vector2 activePlayerMovePosition = oppostiteDoor.GetComponent<DoorController>().teleportPoint1.transform.position;
-        Vector2 inactivePlayerMovePosition = oppostiteDoor.GetComponent<DoorController>().teleportPoint2.transform.position;
+            GameObject oppositeRoom = oppostiteDoor.GetComponent<DoorController>().insideRoom;
+            Vector2 activePlayerMovePosition = oppostiteDoor.GetComponent<DoorController>().teleportPoint1.transform.position;
+            Vector2 inactivePlayerMovePosition = oppostiteDoor.GetComponent<DoorController>().teleportPoint2.transform.position;
 
-        activePlayer.GetComponent<PlayerMovement>().ForceTranslate(
-            activePlayerMovePosition,
-            5,
-            delegate()
-            {
-                inactivePlayer.GetComponent<PlayerMovement>().teleportTranslate(inactivePlayerMovePosition);
-            }
-        );
+            activePlayer.GetComponent<PlayerMovement>().ForceTranslate(
+                activePlayerMovePosition,
+                5,
+                delegate ()
+                {
+                    inactivePlayer.GetComponent<PlayerMovement>().teleportTranslate(inactivePlayerMovePosition);
+                }
+            );
 
-        GameObject.Find("Main Camera").GetComponent<CameraMoveController>().MoveToObject(
-            oppositeRoom,
-            50,
-            delegate() { 
-                insideRoom.GetComponent<RoomController>().ExitRoom();
-                oppositeRoom.GetComponent<RoomController>().EnterRoom();
-            }
-        );
+            GameObject.Find("Main Camera").GetComponent<CameraMoveController>().MoveToObject(
+                oppositeRoom,
+                50,
+                delegate () {
+                    insideRoom.GetComponent<RoomController>().ExitRoom();
+                    oppositeRoom.GetComponent<RoomController>().EnterRoom();
+                }
+            );
+        }
     }
 }
 

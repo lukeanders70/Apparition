@@ -30,6 +30,23 @@ public class DoorManager : MonoBehaviour
         };
     }
 
+    public void Start()
+    {
+        PlugInvalidDoors();
+    }
+
+    private void PlugInvalidDoors()
+    {
+        foreach (Vector2 direction in Constants.directions.Values)
+        {
+            GameObject door = doors[direction];
+            if (door != null && !door.GetComponent<DoorController>().Navigable())
+            {
+                AddDoorwayWall(direction);
+            }
+        }
+    }
+
     public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position, float? doorSpawnProbabilityOverride)
     {
         foreach (Vector2 direction in Constants.directions.Values)
@@ -61,11 +78,21 @@ public class DoorManager : MonoBehaviour
     public void AddDoor(Vector2 direction, GameObject? oppositeRoomDoor)
     {
         GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoor(gameObject, oppositeRoomDoor);
+        if (doors.ContainsKey(direction))
+        {
+            Destroy(doors[direction]);
+            doors.Remove(direction);
+        }
         doors.Add(direction, newDoor);
     }
     public void AddDoorwayWall(Vector2 direction)
     {
         GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoorwayWall(gameObject);
+        if (doors.ContainsKey(direction))
+        {
+            Destroy(doors[direction]);
+            doors.Remove(direction);
+        }
         doors.Add(direction, newDoor);
     }
 

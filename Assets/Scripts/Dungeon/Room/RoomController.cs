@@ -9,6 +9,9 @@ public class RoomController : MonoBehaviour
     [SerializeField]
     private DoorManager doorManager;
 
+    /**
+     * Call when a room is first created
+     */
     public void SetupRoom(
         Dictionary<Vector2, GameObject> dungeon,
         Vector2 indexPosition,
