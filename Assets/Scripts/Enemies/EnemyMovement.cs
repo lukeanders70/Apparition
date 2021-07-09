@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = movement * speed;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
         if( collidedObject.tag == "Player")
@@ -30,7 +30,9 @@ public class EnemyMovement : MonoBehaviour
         }
         else if(collidedObject.tag == "Wall")
         {
-            MoveRandomDirection();
+            movement = Vector3.Reflect(movement, collision.GetContact(0).normal);
+            movement.Normalize();
+            Debug.Log(movement);
         }
     }
 
