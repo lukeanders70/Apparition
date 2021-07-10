@@ -32,7 +32,6 @@ public class EnemyMovement : MonoBehaviour
         {
             movement = Vector3.Reflect(movement, collision.GetContact(0).normal);
             movement.Normalize();
-            Debug.Log(movement);
         }
     }
 
