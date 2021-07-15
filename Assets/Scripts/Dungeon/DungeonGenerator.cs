@@ -5,6 +5,9 @@ using UnityEngine;
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField]
+    private TextAsset staticDungeonJson;
+
+    [SerializeField]
     private GameObject RoomPrefab;
     [SerializeField]
     private float roomHeight;
@@ -17,15 +20,16 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Awake()
     {
-        GenerateDungeon();
+        StaticDungeonInfo staticDungeonInfo = JsonUtility.FromJson<StaticDungeonInfo>(staticDungeonJson.text);
+        GenerateDungeon(staticDungeonInfo);
     }
 
-    void GenerateDungeon()
+    void GenerateDungeon(StaticDungeonInfo staticDungeonInfo)
     {
         Dictionary<Vector2, GameObject> dungeon = new Dictionary<Vector2, GameObject>();
         List<Vector2> edge = new List<Vector2>();
 
-        GameObject firstRoom = AddRoom(Vector2.zero, dungeon, 1f);
+        GameObject firstRoom = AddRoom(Vector2.zero, dungeon, staticDungeonInfo, 1f);
         UpdateEdge(new Vector2(0, 0), firstRoom, edge, dungeon);
 
         for (int i = 0; i < numRooms - 1; i++)
@@ -36,11 +40,11 @@ public class DungeonGenerator : MonoBehaviour
             GameObject newRoom;
             if (edge.Count > 1 || i == numRooms - 1)
             {
-                newRoom = AddRoom(indexPositionToAdd, dungeon, null);
+                newRoom = AddRoom(indexPositionToAdd, dungeon, staticDungeonInfo, null);
             }
             else
             {
-                newRoom = AddRoom(indexPositionToAdd, dungeon, 1f);
+                newRoom = AddRoom(indexPositionToAdd, dungeon, staticDungeonInfo, 1f);
             }
             UpdateEdge(indexPositionToAdd, newRoom, edge, dungeon);
             edge.Remove(indexPositionToAdd);
@@ -59,7 +63,12 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private GameObject AddRoom(Vector2 indexPositionToAdd, Dictionary<Vector2, GameObject> dungeon, float? doorProbability)
+    private GameObject AddRoom(
+        Vector2 indexPositionToAdd,
+        Dictionary<Vector2, GameObject> dungeon,
+        StaticDungeonInfo staticDungeonInfo,
+        float? doorProbability
+        )
     {
         GameObject newRoom = Instantiate(
             RoomPrefab,
@@ -67,7 +76,7 @@ public class DungeonGenerator : MonoBehaviour
             transform.rotation
         );
         newRoom.transform.parent = transform;
-        newRoom.GetComponent<RoomController>().SetupRoom(dungeon, indexPositionToAdd, doorProbability);
+        newRoom.GetComponent<RoomController>().SetupRoom(dungeon, indexPositionToAdd, staticDungeonInfo, doorProbability);
         dungeon.Add(indexPositionToAdd, newRoom);
 
         return newRoom;

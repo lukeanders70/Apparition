@@ -13,15 +13,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab;
 
-    List<GameObject> enemyPrefabs = new List<GameObject>();
+    List<EnemyInfo> enemyPrefabs = new List<EnemyInfo>();
     List<GameObject> enemies = new List<GameObject>();
 
-    public void SetEnemies(Vector2 roomIndexPosition)
+    public void SetEnemies(Vector2 roomIndexPosition, StaticDungeonInfo staticDungeonInfo)
     {
         int numEnemies = roomIndexPosition == Vector2.zero ? 0 : Random.Range(maxEnemies, minEnemies);
         for (int i = 0; i < numEnemies; i++)
         {
-            enemyPrefabs.Add(enemyPrefab);
+
+            enemyPrefabs.Add(new EnemyInfo(enemyPrefab, staticDungeonInfo.getEnemyPosition(numEnemies, i)));
         }
 
     }
@@ -31,11 +32,11 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < enemyPrefabs.Count; i++)
         {
             GameObject newEnemy = Instantiate(
-                enemyPrefabs[i],
+                enemyPrefabs[i].prefab,
                 gameObject.transform,
                 false
             );
-            newEnemy.transform.localPosition = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f));
+            newEnemy.transform.localPosition = enemyPrefabs[i].spawnPosition;
             enemies.Add(newEnemy);
         }
     }
@@ -44,7 +45,7 @@ public class EnemyManager : MonoBehaviour
     {
         if(enemies.Count == enemyPrefabs.Count)
         {
-            List<GameObject> newEnemyPrefabs = new List<GameObject>();
+            List<EnemyInfo> newEnemyPrefabs = new List<EnemyInfo>();
             for (int i = 0; i < enemies.Count; i++)
             {
                 if(enemies[i] != null)
@@ -59,5 +60,16 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.LogError($"enemy count {enemies.Count} did not equal prefab count {enemyPrefabs.Count} in room");
         }
+    }
+}
+
+class EnemyInfo
+{
+    public GameObject prefab;
+    public Vector3 spawnPosition;
+    public EnemyInfo(GameObject pref, Vector3 sPosition)
+    {
+        prefab = pref;
+        spawnPosition = sPosition;
     }
 }
