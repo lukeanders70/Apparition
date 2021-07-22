@@ -13,7 +13,7 @@ public class BasicHealth : MonoBehaviour, Health
         health = maxHealth;
     }
 
-    public void Damage(int damage)
+    virtual public void Damage(int damage)
     {
         health = Mathf.Max(health - damage, 0);
         if (health == 0)
