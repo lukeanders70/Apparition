@@ -80,6 +80,8 @@
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Scripts\UI\TitleSceneController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\RusherAI.cs" />
+    <Compile Include="Assets\Utils\AIHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
