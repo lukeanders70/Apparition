@@ -27,7 +27,7 @@ public class RusherAI : BasicHealth
     {
         if (!IsStopped() && intendedLocation != null)
         {
-            if(Vector3.Distance(transform.position, (Vector3)intendedLocation) < 0.05)
+            if (Vector3.Distance(transform.position, (Vector3)intendedLocation) < 0.05)
             {
                 Stop();
             } else
@@ -50,12 +50,19 @@ public class RusherAI : BasicHealth
         }
         else if (collidedObject.tag == "Wall")
         {
+            Debug.Log("Hit Wall");
+            Vector3 oppositeDirection = direction * -1f;
             Stop();
+            SetIntention(transform.position + (oppositeDirection * 0.3f));
         }
     }
 
     private void Stop()
     {
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
         rb.velocity = Vector2.zero;
         direction = Vector2.zero;
         intendedLocation = null;
@@ -91,8 +98,10 @@ public class RusherAI : BasicHealth
     {
         if(position != null)
         {
+            Debug.Log("setting intended location");
             intendedLocation = position;
             direction = ((Vector3) intendedLocation) - transform.position;
+            direction.Normalize();
         } else
         {
             direction = AIHelpers.RandomDirection();

@@ -4,31 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public sealed class StaticDungeonInfo
 {
-    public enemyConfiguration[] enemyConfigurations;
+    public EnemyConfiguration[] enemyConfigurations;
     public RoomType[] roomTypes;
-    public Vector2 getEnemyPosition(int numEnemies, int enemyIndex)
-    {
-        if (numEnemies - 1 < enemyConfigurations.Length)
-        {
-            if (enemyIndex < enemyConfigurations[numEnemies - 1].positions.Length)
-            {
-                return enemyConfigurations[numEnemies - 1].positions[enemyIndex].ToVector();
-            }
-        }
-        return new Vector2(Random.Range(-2f, 2f), Random.Range(-2f, 2f));
-    }
-
-    public EnemyProbability[] GetEnemyProbabilities(string roomTypeName)
-    {
-        foreach (RoomType roomType in roomTypes)
-        {
-            if(roomType.name == roomTypeName)
-            {
-                return roomType.enemyProbabilities;
-            }
-        }
-        return new EnemyProbability[] { };
-    }
 }
 
 // Room Types //
@@ -50,13 +27,13 @@ public class EnemyProbability
 // Enemy Configurations //
 
 [System.Serializable]
-public class enemyConfiguration
+public class EnemyConfiguration
 {
-    public enemyPosition[] positions;
+    public EnemyPosition[] positions;
 }
 
 [System.Serializable]
-public class enemyPosition
+public class EnemyPosition
 {
     public int x;
     public int y;
