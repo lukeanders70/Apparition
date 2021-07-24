@@ -19,8 +19,10 @@ public class RoomController : MonoBehaviour
         float? doorSpawnProbabilityOverride
     )
     {
+        RoomType roomType = staticDungeonInfo.roomTypes[Random.Range(0, staticDungeonInfo.roomTypes.Length)];
+
         doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
-        enemyManager.SetEnemies(indexPosition, staticDungeonInfo);
+        enemyManager.SetEnemies(indexPosition, staticDungeonInfo, roomType);
     }
 
     public void ExitRoom()

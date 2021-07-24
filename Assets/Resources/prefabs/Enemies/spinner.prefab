@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8757365119298908291}
   - component: {fileID: 4271417062539697852}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: spinner
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
