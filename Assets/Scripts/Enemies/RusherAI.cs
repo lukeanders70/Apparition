@@ -7,7 +7,6 @@ public class RusherAI : BasicHealth
 {
     public Rigidbody2D rb;
 
-    private Vector3 direction = Vector2.zero;
     private Vector3? intendedLocation;
     [SerializeField] 
     private float speed;
@@ -32,7 +31,8 @@ public class RusherAI : BasicHealth
                 Stop();
             } else
             {
-                rb.velocity = (direction * speed);
+                Vector3 dir = ((Vector3)intendedLocation - transform.position).normalized;
+                rb.velocity = (dir * speed);
             }
         }
     }
@@ -50,8 +50,8 @@ public class RusherAI : BasicHealth
         }
         else if (collidedObject.tag == "Wall")
         {
-            Debug.Log("Hit Wall");
-            Vector3 oppositeDirection = direction * -1f;
+            Vector3 oppositeDirection = collision.contacts[0].normal;
+            oppositeDirection.Normalize();
             Stop();
             SetIntention(transform.position + (oppositeDirection * 0.3f));
         }
@@ -64,14 +64,13 @@ public class RusherAI : BasicHealth
             StopCoroutine(currentCoroutine);
         }
         rb.velocity = Vector2.zero;
-        direction = Vector2.zero;
         intendedLocation = null;
         currentCoroutine = StartCoroutine(Wander());
     }
 
     IEnumerator Aggro()
     {
-        GameObject closestPlayer = AIHelpers.GetClosestPlayer(transform.position);
+        GameObject? closestPlayer = AIHelpers.GetClosestPlayer(transform.position);
         if(closestPlayer == null)
         {
             Stop();
@@ -84,7 +83,7 @@ public class RusherAI : BasicHealth
 
     private bool IsStopped()
     {
-        return (direction == Vector3.zero) && (intendedLocation == null) && (rb.velocity == Vector2.zero);
+        return (intendedLocation == null) && (rb.velocity == Vector2.zero);
     }
 
 
@@ -98,15 +97,12 @@ public class RusherAI : BasicHealth
     {
         if(position != null)
         {
-            Debug.Log("setting intended location");
             intendedLocation = position;
-            direction = ((Vector3) intendedLocation) - transform.position;
-            direction.Normalize();
         } else
         {
-            direction = AIHelpers.RandomDirection();
+            Vector3 dir = AIHelpers.RandomDirection();
             var intendedDistance = Random.Range(1.0f, 3.0f);
-            intendedLocation = transform.position + (direction * intendedDistance);
+            intendedLocation = transform.position + (dir * intendedDistance);
         }
     }
 
