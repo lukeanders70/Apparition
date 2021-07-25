@@ -7,7 +7,7 @@ public class RusherAI : BasicHealth
 {
     public Rigidbody2D rb;
 
-    private Vector3? intendedLocation;
+    private Vector2? intendedLocation;
     [SerializeField] 
     private float speed;
     [SerializeField]
@@ -26,12 +26,14 @@ public class RusherAI : BasicHealth
     {
         if (!IsStopped() && intendedLocation != null)
         {
-            if (Vector3.Distance(transform.position, (Vector3)intendedLocation) < 0.05)
+            if (Vector2.Distance(transform.position, (Vector2)intendedLocation) < 0.05)
             {
                 Stop();
             } else
             {
-                Vector3 dir = ((Vector3)intendedLocation - transform.position).normalized;
+                Vector3 dir = ((Vector2)intendedLocation - (Vector2)transform.position).normalized;
+                Debug.Log(dir);
+                Debug.Log(intendedLocation);
                 rb.velocity = (dir * speed);
             }
         }
