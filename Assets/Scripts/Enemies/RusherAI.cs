@@ -32,8 +32,6 @@ public class RusherAI : BasicHealth
             } else
             {
                 Vector3 dir = ((Vector2)intendedLocation - (Vector2)transform.position).normalized;
-                Debug.Log(dir);
-                Debug.Log(intendedLocation);
                 rb.velocity = (dir * speed);
             }
         }
