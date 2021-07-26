@@ -11,6 +11,9 @@ public class SpiritController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private ParticleSystem ps;
+
     private bool isMoving = false;
 
     public void Swap(GameObject newParent)
@@ -46,6 +49,8 @@ public class SpiritController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if(isMoving && collidedObject.tag == "Enemy")
         {
+            ParticleSystem hitParticals =  Instantiate(ps);
+            hitParticals.transform.position = transform.position;
             Health healthComponent = collidedObject.GetComponent<Health>();
             if(healthComponent != null)
             {
