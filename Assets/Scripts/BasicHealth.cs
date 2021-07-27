@@ -8,9 +8,14 @@ public class BasicHealth : MonoBehaviour, Health
     public int health;
     public int maxHealth;
 
+    public Color deathColor;
+
+    private ParticleSystem? deathParticals;
+
     public void Awake()
     {
         health = maxHealth;
+        deathParticals = Resources.Load<ParticleSystem>("prefabs/Effects/Destroy");
     }
 
     virtual public void Damage(int damage)
@@ -39,6 +44,13 @@ public class BasicHealth : MonoBehaviour, Health
 
     public void Kill()
     {
+        ParticleSystem? psInstance = Instantiate(deathParticals);
+        if (psInstance != null)
+        {
+            psInstance.transform.position = transform.position;
+            ParticleSystem.MainModule ma = psInstance.main;
+            ma.startColor = deathColor;
+        }
         Destroy(gameObject);
     }
 }
