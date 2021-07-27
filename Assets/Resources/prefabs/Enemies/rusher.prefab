@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
+  deathColor: {r: 1, g: 0.015723169, b: 0.015723169, a: 0.827451}
   rb: {fileID: 1725158747151057044}
   speed: 3
   damage: 1
