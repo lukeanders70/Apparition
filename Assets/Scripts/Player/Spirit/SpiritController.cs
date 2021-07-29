@@ -49,7 +49,7 @@ public class SpiritController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if(isMoving && collidedObject.tag == "Enemy")
         {
-            ParticleSystem hitParticals =  Instantiate(ps);
+            ParticleSystem hitParticals = Instantiate(ps);
             hitParticals.transform.position = transform.position;
             Health healthComponent = collidedObject.GetComponent<Health>();
             if(healthComponent != null)
