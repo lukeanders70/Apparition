@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, Health
@@ -6,12 +7,19 @@ public class PlayerHealth : MonoBehaviour, Health
     private GameObject gameOver;
     [SerializeField]
     private PlayerHandler playerHandler;
+    [SerializeField]
+    private HealthContainerController healthContainer;
     public int health;
     public int maxHealth;
 
     public void Damage(int damage)
     {
-        Kill();
+        health = Math.Max(0, health - 1);
+        healthContainer.UpdateHealth(health);
+        if(health == 0)
+        {
+            Kill();
+        }
     }
 
     public int GetHealth()
