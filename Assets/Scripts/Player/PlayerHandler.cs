@@ -12,6 +12,12 @@ public class PlayerHandler : MonoBehaviour
         return player == player1 ? player2 : player1;
     }
 
+    public void SetColor(Color c)
+    {
+        player1.GetComponent<SpriteRenderer>().color = c;
+        player2.GetComponent<SpriteRenderer>().color = c;
+    }
+
     public void Kill()
     {
         player1.GetComponent<Health>().Kill();
