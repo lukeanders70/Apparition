@@ -48,7 +48,7 @@ public class RusherAI : BasicHealth
                 colliderHealth.Damage(damage);
             }
         }
-        else if (collidedObject.tag == "Wall")
+        else
         {
             Vector3 oppositeDirection = collision.contacts[0].normal;
             oppositeDirection.Normalize();
@@ -76,8 +76,9 @@ public class RusherAI : BasicHealth
             Stop();
             yield break;
         }
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
         Vector3 closestPlayerPosition = closestPlayer.transform.position;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         SetIntention(closestPlayerPosition);
     }
 
@@ -89,6 +90,7 @@ public class RusherAI : BasicHealth
 
     IEnumerator Wander()
     {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         yield return new WaitForSeconds(3);
         SetIntention(null);
     }

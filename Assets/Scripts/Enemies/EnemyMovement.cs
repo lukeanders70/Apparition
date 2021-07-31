@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
                 colliderHealth.Damage(damage);
             }
         }
-        else if(collidedObject.tag == "Wall")
+        else
         {
             movement = Vector3.Reflect(movement, collision.GetContact(0).normal);
             movement.Normalize();
