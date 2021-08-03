@@ -12,6 +12,8 @@ public class RusherAI : BasicHealth
     private float speed;
     [SerializeField]
     private int damage;
+    [SerializeField]
+    private Animator animator;
 
     private Coroutine? currentCoroutine = null;
 
@@ -31,8 +33,10 @@ public class RusherAI : BasicHealth
                 Stop();
             } else
             {
+                animator.SetBool("isWalking", true);
                 Vector3 dir = ((Vector2)intendedLocation - (Vector2)transform.position).normalized;
                 rb.velocity = (dir * speed);
+                animator.SetFloat("lastHorizontal", rb.velocity.x);
             }
         }
     }
@@ -59,6 +63,7 @@ public class RusherAI : BasicHealth
 
     private void Stop()
     {
+        animator.SetBool("isWalking", false);
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
