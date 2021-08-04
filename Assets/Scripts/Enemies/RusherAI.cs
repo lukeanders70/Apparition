@@ -38,6 +38,9 @@ public class RusherAI : BasicHealth
                 rb.velocity = (dir * speed);
                 animator.SetFloat("lastHorizontal", rb.velocity.x);
             }
+        } else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
