@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.24935055}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.75064945}
   m_EdgeRadius: 0
 --- !u!50 &1725158747151057044
 Rigidbody2D:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
-  deathColor: {r: 1, g: 0.8930817, b: 0.8930817, a: 0.827451}
+  deathColor: {r: 0.5568628, g: 0.6117647, b: 0.69411767, a: 1}
   rb: {fileID: 1725158747151057044}
   speed: 3
   damage: 1
