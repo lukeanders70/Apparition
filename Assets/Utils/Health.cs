@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface Health
 {
-    public void Damage(int damage);
+    public bool Damage(int damage);
 
     public int GetHealth();
 

@@ -18,13 +18,14 @@ public class BasicHealth : MonoBehaviour, Health
         deathParticals = Resources.Load<ParticleSystem>("prefabs/Effects/Destroy");
     }
 
-    virtual public void Damage(int damage)
+    virtual public bool Damage(int damage)
     {
         health = Mathf.Max(health - damage, 0);
         if (health == 0)
         {
             Kill();
         }
+        return true;
     }
 
     public int GetHealth()

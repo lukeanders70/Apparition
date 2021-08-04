@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour, Health
 
     private bool damagable = true;
 
-    public void Damage(int damage)
+    public bool Damage(int damage)
     {
         if(damagable)
         {
@@ -26,7 +26,9 @@ public class PlayerHealth : MonoBehaviour, Health
             {
                 Kill();
             }
+            return true;
         }
+        return false;
     }
 
     IEnumerator HitInvincible()

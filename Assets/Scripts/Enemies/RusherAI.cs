@@ -113,13 +113,13 @@ public class RusherAI : BasicHealth
         }
     }
 
-    override public void Damage(int damage)
+    override public bool Damage(int damage)
     {
         if(currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
         }
         currentCoroutine = StartCoroutine(Aggro());
-        base.Damage(damage);
+        return base.Damage(damage);
     }
 }
