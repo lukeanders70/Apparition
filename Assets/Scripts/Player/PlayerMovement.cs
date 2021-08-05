@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (forceTranslate && forcedTranslatePos != null && forcedTranslateSpeed > 0)
         {
-            if(Vector2.Distance(forcedTranslatePos, transform.position) > 0.01)
+            if(Vector2.Distance(forcedTranslatePos, transform.position) > 0.03)
             {
                 transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, transform.position.y), forcedTranslatePos, forcedTranslateSpeed * Time.deltaTime);
             } else
