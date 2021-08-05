@@ -7,7 +7,7 @@ public class HealthContainerController : MonoBehaviour
     public PlayerHealth ph;
     public GameObject healthImage;
 
-    private float distanceBetweenHealthImages = 15.0f;
+    private float distanceBetweenHealthImages = 12.0f;
     private Stack<GameObject> healthImages = new Stack<GameObject>();
 
     // Start is called before the first frame update
