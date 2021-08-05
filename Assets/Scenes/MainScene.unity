@@ -1522,8 +1522,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staticDungeonJson: {fileID: 4900000, guid: 58456c4e0b133534db0ad4c122599d3a, type: 3}
   RoomPrefab: {fileID: 122319395201439116, guid: 06f4f4a2047988742840751afbd0162c, type: 3}
-  roomHeight: 17
-  roomWidth: 29
+  roomHeight: 16
+  roomWidth: 28
   numRooms: 15
 --- !u!4 &2137089098
 Transform:
