@@ -13,18 +13,49 @@ public class EnemyManager : MonoBehaviour
     List<EnemyInfo> enemyPrefabs = new List<EnemyInfo>();
     List<GameObject> enemies = new List<GameObject>();
 
-    public void SetEnemies(Vector2 roomIndexPosition, StaticDungeonInfo staticDungeonInfo, RoomType roomType)
+    public void SetEnemies(Vector2 roomIndexPosition, StaticDungeonInfo staticDungeonInfo, RoomGrid roomGrid, RoomType roomType)
     {
         int numEnemies = roomIndexPosition == Vector2.zero ? 0 : Random.Range(maxEnemies, minEnemies);
-        for (int i = 0; i < numEnemies; i++)
+        AreaRange enemySpawnRange = new AreaRange((6, 3), (18, 8));
+        /*        for (int i = 0; i < numEnemies; i++)
+                {
+                    var prefab = getEnemyPrefab(roomType);
+                    if(prefab != null)
+                    {
+                        enemyPrefabs.Add(new EnemyInfo(
+                            prefab,
+                            getEnemyPosition(staticDungeonInfo.enemyConfigurations, numEnemies, i))
+                        );
+                    }
+                }*/
+        int count = 0;
+        for(int i = enemySpawnRange.startX; i < enemySpawnRange.endX; i++)
         {
-            var prefab = getEnemyPrefab(roomType);
-            if(prefab != null)
+            for (int j = enemySpawnRange.startY; j < enemySpawnRange.endY; j++)
             {
-                enemyPrefabs.Add(new EnemyInfo(prefab, getEnemyPosition(staticDungeonInfo.enemyConfigurations, numEnemies, i)));
+                int numEnemiesLeftToSpawn = numEnemies - enemyPrefabs.Count;
+                int numTilesLeft = enemySpawnRange.numTilesInRange - count;
+                float spawnProbability = numTilesLeft != 0 ? (float) numEnemiesLeftToSpawn / (float) numTilesLeft : 0;
+                Debug.Log(i + ", " + j + " | " +numEnemiesLeftToSpawn + " " + numTilesLeft + " " + spawnProbability);
+                if(spawnProbability > Random.Range(0f, 1.0f))
+                {
+                    AddEnemy(i, j, getEnemyPrefab(roomType), roomGrid);
+                }
+                count += 1;
             }
         }
+    }
 
+    private void AddEnemy(int x, int y, GameObject prefab, RoomGrid roomGrid)
+    {
+        Vector2? location = roomGrid.addObject(prefab, x, y);
+        if(location != null)
+        {
+            enemyPrefabs.Add(new EnemyInfo(
+                prefab,
+                (Vector3) location
+            ));
+        }
     }
 
     public void SpawnEnemies()
