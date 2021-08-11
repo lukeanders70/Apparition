@@ -20,9 +20,10 @@ public class RoomController : MonoBehaviour
     )
     {
         RoomType roomType = staticDungeonInfo.roomTypes[Random.Range(0, staticDungeonInfo.roomTypes.Length)];
+        RoomGrid roomGrid = new RoomGrid();
 
         doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
-        enemyManager.SetEnemies(indexPosition, staticDungeonInfo, roomType);
+        enemyManager.SetEnemies(indexPosition, staticDungeonInfo, roomGrid, roomType);
     }
 
     public void ExitRoom()
