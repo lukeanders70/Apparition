@@ -7,6 +7,8 @@ public class RoomController : MonoBehaviour
     [SerializeField]
     private EnemyManager enemyManager;
     [SerializeField]
+    private ObsticleManager obsticleManager;
+    [SerializeField]
     private DoorManager doorManager;
 
     /**
@@ -23,16 +25,19 @@ public class RoomController : MonoBehaviour
         RoomGrid roomGrid = new RoomGrid();
 
         doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
+        obsticleManager.SetObsticles(indexPosition, staticDungeonInfo, roomGrid, roomType);
         enemyManager.SetEnemies(indexPosition, staticDungeonInfo, roomGrid, roomType);
     }
 
     public void ExitRoom()
     {
         enemyManager.ExitRoom();
+        obsticleManager.ExitRoom();
     }
 
     public void EnterRoom()
     {
         enemyManager.SpawnEnemies();
+        obsticleManager.SpawnObjects();
     }
 }
