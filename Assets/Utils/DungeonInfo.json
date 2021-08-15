@@ -10,8 +10,9 @@
     	{
     		"name" : "basic", 
     		"enemyProbabilities" : [
-    			{ "name": "spinner", "probability": 0.8 },
-    			{ "name": "rusher", "probability": 0.2 }
+    			{ "name": "spinner", "probability": 0.7 },
+    			{ "name": "rusher", "probability": 0.2 },
+                { "name": "spinnerFast", "probability": 0.1 }
     		]
     	}
     ]
