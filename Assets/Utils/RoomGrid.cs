@@ -11,8 +11,8 @@ public class RoomGrid
     {
         (int, int) size = GetSize(o);
         Vector2 offset = GetOffset(o);
-        float xVal = ((xIndex - center.Item1) + (size.Item1 / 2)) - offset.x;
-        float yVal = ((yIndex - center.Item2) + (size.Item1 / 2)) - offset.y;
+        float xVal = ((xIndex - center.Item1) + ((float) size.Item1 / 2.0f)) - offset.x;
+        float yVal = -(((yIndex - center.Item2) + ((float) size.Item2 / 2.0f)) + offset.y);
         return new Vector2(xVal, yVal);
     }
 
