@@ -6,7 +6,6 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
     private int maxEnemies;
-
     [SerializeField]
     private int minEnemies;
 
@@ -17,17 +16,7 @@ public class EnemyManager : MonoBehaviour
     {
         int numEnemies = roomIndexPosition == Vector2.zero ? 0 : Random.Range(maxEnemies, minEnemies);
         AreaRange enemySpawnRange = new AreaRange((6, 3), (18, 8));
-        /*        for (int i = 0; i < numEnemies; i++)
-                {
-                    var prefab = getEnemyPrefab(roomType);
-                    if(prefab != null)
-                    {
-                        enemyPrefabs.Add(new EnemyInfo(
-                            prefab,
-                            getEnemyPosition(staticDungeonInfo.enemyConfigurations, numEnemies, i))
-                        );
-                    }
-                }*/
+
         int count = 0;
         for(int i = enemySpawnRange.startX; i < enemySpawnRange.endX; i++)
         {
@@ -36,7 +25,6 @@ public class EnemyManager : MonoBehaviour
                 int numEnemiesLeftToSpawn = numEnemies - enemyPrefabs.Count;
                 int numTilesLeft = enemySpawnRange.numTilesInRange - count;
                 float spawnProbability = numTilesLeft != 0 ? (float) numEnemiesLeftToSpawn / (float) numTilesLeft : 0;
-                Debug.Log(i + ", " + j + " | " +numEnemiesLeftToSpawn + " " + numTilesLeft + " " + spawnProbability);
                 if(spawnProbability > Random.Range(0f, 1.0f))
                 {
                     AddEnemy(i, j, getEnemyPrefab(roomType), roomGrid);

@@ -7,10 +7,12 @@ public class RoomGrid
     private (int, int) center = (13, 6);
     GridCell[,] objectLocations = new GridCell[26, 13];
 
-    public Vector2 GetLocationCell(int xIndex, int yIndex, (int, int) size)
+    public Vector2 GetLocationCell(int xIndex, int yIndex, GameObject o)
     {
-        float xVal = (xIndex - center.Item1) + (size.Item1 / 2);
-        float yVal = (yIndex - center.Item2) + (size.Item1 / 2);
+        (int, int) size = GetSize(o);
+        Vector2 offset = GetOffset(o);
+        float xVal = ((xIndex - center.Item1) + (size.Item1 / 2)) - offset.x;
+        float yVal = ((yIndex - center.Item2) + (size.Item1 / 2)) - offset.y;
         return new Vector2(xVal, yVal);
     }
 
@@ -22,12 +24,12 @@ public class RoomGrid
             objectLocations[xIndex, yIndex] = new GridCell(o, GridCell.CellType.primary, size);
             for (int i = xIndex + 1; i < xIndex + size.Item1; i++)
             {
-                for (int j = yIndex + 1; i < yIndex + size.Item2; i++)
+                for (int j = yIndex + 1; j < yIndex + size.Item2; j++)
                 {
                     objectLocations[i, j] = new GridCell(o, GridCell.CellType.overflow, size, (xIndex, yIndex));
                 }
             }
-            return GetLocationCell(xIndex, yIndex, size);
+            return GetLocationCell(xIndex, yIndex, o);
         }
         return null;
     }
@@ -68,13 +70,17 @@ public class RoomGrid
             }
         }
         return o;
-    }    
+    }
 
     public bool isEmpty(int xIndex, int yIndex, (int, int) size)
     {
+        if (!IsInRange(xIndex, yIndex, size))
+        {
+            return false;
+        }
         for(int i = xIndex; i < xIndex + size.Item1; i++)
         {
-            for (int j = yIndex; i < yIndex + size.Item2; i++)
+            for (int j = yIndex; j < yIndex + size.Item2; j++)
             {
                 if(objectLocations[i, j] != null)
                 {
@@ -83,6 +89,16 @@ public class RoomGrid
             }
         }
         return true;
+    }
+
+    private bool IsInRange(int xIndex, int yIndex, (int, int) size)
+    {
+        return !(
+            xIndex < 0 ||
+            yIndex < 0 ||
+            xIndex + size.Item1 > objectLocations.GetLength(0) || 
+            yIndex + size.Item2 > objectLocations.GetLength(1)
+            );
     }
 
     private (int, int) GetSize(GameObject o)
@@ -95,6 +111,19 @@ public class RoomGrid
         } else
         {
             return (1, 1);
+        }
+    }
+    private Vector2 GetOffset(GameObject o)
+    {
+        BoxCollider2D oCollider;
+        bool hasCollider = o.TryGetComponent(out oCollider);
+        if (hasCollider)
+        {
+            return oCollider.offset;
+        }
+        else
+        {
+            return Vector2.zero;
         }
     }
 }

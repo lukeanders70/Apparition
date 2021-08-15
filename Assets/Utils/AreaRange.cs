@@ -19,4 +19,14 @@ public class AreaRange
 
         numTilesInRange = System.Math.Max((endX - startX) * (endY - startY), 0);
     }
+
+    public static int GetNumTilesInRanges(AreaRange[] ranges)
+    {
+        int totalSpawnTiles = 0;
+        for (int rangeIndex = 0; rangeIndex < ranges.Length; rangeIndex++)
+        {
+            totalSpawnTiles += ranges[rangeIndex].numTilesInRange;
+        }
+        return totalSpawnTiles;
+    }
 }
