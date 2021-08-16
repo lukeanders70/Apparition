@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void EndForcedTranslate()
     {
+        transform.position = forcedTranslatePos;
         forceTranslate = false;
         forcedTranslatePos = new Vector2(0, 0);
         forcedTranslateSpeed = 0;
