@@ -37,7 +37,7 @@ public class RoomController : MonoBehaviour
 
     public void EnterRoom()
     {
-        enemyManager.SpawnEnemies();
+        enemyManager.SpawnObjects();
         obsticleManager.SpawnObjects();
     }
 }
