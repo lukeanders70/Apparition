@@ -28,9 +28,9 @@ public class GridObjectManager : MonoBehaviour
             {
                 for (int j = range.startY; j < range.endY; j++)
                 {
-                    int numEnemiesLeftToSpawn = numObjects - objectPrefabs.Count;
+                    int numObjectsLeftToSpawn = numObjects - objectPrefabs.Count;
                     int numTilesLeft = totalSpawnTiles - count;
-                    float spawnProbability = numTilesLeft != 0 ? (float)numEnemiesLeftToSpawn / (float)numTilesLeft : 0;
+                    float spawnProbability = numTilesLeft != 0 ? (float)numObjectsLeftToSpawn / (float)numTilesLeft : 0;
                     if (spawnProbability > Random.Range(0f, 1.0f))
                     {
                         AddObject(i, j, loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)), roomGrid);

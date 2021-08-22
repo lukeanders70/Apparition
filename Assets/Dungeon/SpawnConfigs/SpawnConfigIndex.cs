@@ -31,7 +31,6 @@ namespace StaticDungeon
     public class EasyDonutSpawnConfig : SpawnConfig
     {
         virtual public string Name { get; set; } = "easy-donut";
-        private static ObjectProbability<string>[] preabProbs = { new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f } };
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
                 minObjects = 1,
@@ -41,8 +40,8 @@ namespace StaticDungeon
                 },
                 areaRanges = new AreaRange[]
                 {
-                    new AreaRange((0, 0), (11, 3)),
-                    new AreaRange((0, 0), (11, 13)),
+                    new AreaRange((0, 0), (10, 3)),
+                    new AreaRange((0, 8), (10, 13)),
                     new AreaRange((15, 0), (25, 3)),
                     new AreaRange((15, 8), (25, 13))
                 }
