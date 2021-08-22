@@ -21,7 +21,8 @@ public class RoomController : MonoBehaviour
         float? doorSpawnProbabilityOverride
     )
     {
-        StaticDungeon.Room roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(levelInfo.NearRooms);
+        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 2 ? levelInfo.FarRooms : Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 1 ? levelInfo.MediumRooms : levelInfo.NearRooms;
+        StaticDungeon.Room roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
         StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomInfo.SpawnConfigProbs);
         RoomGrid roomGrid = new RoomGrid();
 
