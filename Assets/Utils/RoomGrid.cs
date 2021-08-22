@@ -16,17 +16,49 @@ public class RoomGrid
         return new Vector2(xVal, yVal);
     }
 
+    public void print()
+    {
+        var s = "";
+        for (int i = 0; i < objectLocations.GetLength(1); i++)
+        {
+            for (int j = 0; j < objectLocations.GetLength(0); j++)
+            {
+                var obj = objectLocations[j, i];
+                if(obj != null)
+                {
+                    if(obj.primaryIndex != null)
+                    {
+                        s += " " + obj.primaryIndex;
+                    }
+                    else
+                    {
+                        s += " (p, p)";
+                    }
+                }
+                else
+                {
+                    s += "  (x, x)";
+                }
+            }
+            s += "\n";
+        }
+        Debug.Log(s);
+    }
+
     public Vector2? addObject(GameObject o, int xIndex, int yIndex)
     {
         (int, int) size = GetSize(o);
         if(isEmpty(xIndex, yIndex, size))
         {
             objectLocations[xIndex, yIndex] = new GridCell(o, GridCell.CellType.primary, size);
-            for (int i = xIndex + 1; i < xIndex + size.Item1; i++)
+            for (int i = xIndex; i < xIndex + size.Item1; i++)
             {
-                for (int j = yIndex + 1; j < yIndex + size.Item2; j++)
+                for (int j = yIndex; j < yIndex + size.Item2; j++)
                 {
-                    objectLocations[i, j] = new GridCell(o, GridCell.CellType.overflow, size, (xIndex, yIndex));
+                    if(!(i == xIndex && j == yIndex))
+                    {
+                        objectLocations[i, j] = new GridCell(o, GridCell.CellType.overflow, size, (xIndex, yIndex));
+                    }
                 }
             }
             return GetLocationCell(xIndex, yIndex, o);
