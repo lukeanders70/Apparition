@@ -9,6 +9,7 @@ namespace StaticDungeon
         public static Dictionary<string, Room> rooms = new Dictionary<string, Room>()
         {
             { "basic", new BasicRoom() },
+            { "basic-harder", new BasicHarderRoom() }
         };
     }
 
@@ -23,9 +24,17 @@ namespace StaticDungeon
         public string Name { get; set; } = "basic-room";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.3f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-donut"], probability = 0.3f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.4f }
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.5f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.5f }
+        };
+    }
+
+    public class BasicHarderRoom : Room
+    {
+        public string Name { get; set; } = "basic-harder";
+        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+        {
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-donut"], probability = 1.0f },
         };
     }
 }
