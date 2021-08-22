@@ -10,7 +10,7 @@ public class GridObjectManager : MonoBehaviour
     // Start is called before the first frame update
     public void SetObjects(
         RoomGrid roomGrid,
-        ObjectFrequency[] prefabFreqs,
+        StaticDungeon.ObjectProbability<string>[] prefabFreqs,
         AreaRange[] spawnRanges,
         int minObjects = 0,
         int maxObject = 0
@@ -33,7 +33,7 @@ public class GridObjectManager : MonoBehaviour
                     float spawnProbability = numTilesLeft != 0 ? (float)numEnemiesLeftToSpawn / (float)numTilesLeft : 0;
                     if (spawnProbability > Random.Range(0f, 1.0f))
                     {
-                        AddObject(i, j, getObjectPrefab(prefabFreqs), roomGrid);
+                        AddObject(i, j, loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)), roomGrid);
                     }
                     count += 1;
                 }
@@ -44,7 +44,7 @@ public class GridObjectManager : MonoBehaviour
     public void AddObject(int x, int y, GameObject prefab, RoomGrid roomGrid)
     {
         Vector2? location = roomGrid.addObject(prefab, x, y);
-        if (location != null)
+        if (location != null && prefab != null)
         {
             objectPrefabs.Add(new ObjectInfo(
                 prefab,
@@ -52,18 +52,10 @@ public class GridObjectManager : MonoBehaviour
             ));
         }
     }
-
-    private GameObject? getObjectPrefab(ObjectFrequency[] prefabFreqs)
+    private GameObject loadPrefabFromPath(string path)
     {
-        float r = Random.Range(0f, 1.0f);
-        var sum = 0f;
-        foreach (ObjectFrequency prefabFreq in prefabFreqs)
-        {
-            sum += prefabFreq.freq;
-            if (sum > r)
-            {
-                return Resources.Load<GameObject>("prefabs/" + prefabFreq.prefabPath);
-            }
+        if(path != "") {
+            return Resources.Load<GameObject>("prefabs/" + path);
         }
         return null;
     }

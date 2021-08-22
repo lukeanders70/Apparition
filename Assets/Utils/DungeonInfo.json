@@ -1,19 +1,84 @@
 {
-    "enemyConfigurations" : [
-        { "positions": [{"x": 0, "y": 0}]},
-        { "positions": [{"x": -1, "y": 0}, {"x": 1, "y": 0}]},
-        { "positions": [{"x": -1, "y": 0}, {"x": 1, "y": 0}, {"x": 0, "y": 1}]},
-        { "positions": [{"x": -1, "y": 1}, {"x": 1, "y": 1}, {"x": -1, "y": -1}, {"x": 1, "y": -1}]},
-        { "positions": [{"x": -1, "y": 1}, {"x": 1, "y": 1}, {"x": -1, "y": -1}, {"x": 1, "y": -1}, {"x": 0, "y": -1}]}
+    "levels" : [
+        {
+            "allowedRoomTypes" : [
+                {"roomTypeName": "basic-easy", "distance": "all"},
+                {"roomTypeName": "basic-medium", "distance": "far"}
+            ]
+        }
     ],
     "roomTypes" : [
     	{
-    		"name" : "basic", 
-    		"enemyProbabilities" : [
-    			{ "name": "spinner", "probability": 0.7 },
-    			{ "name": "rusher", "probability": 0.2 },
-                { "name": "spinnerFast", "probability": 0.1 }
-    		]
+    		"roomTypeName" : "basic-easy",
+    		"spawnConfigs" : [{"spawnConfigName": "easy-donut", "probability": 1.0}]
+    	},
+    	{
+    		"roomTypeName" : "basic-medium",
+    		"spawnConfigs" : [{"spawnConfigName": "medium-donut", "probability": 1.0}]
     	}
+    ],
+    "spawnConfigs" : [
+        {
+            "spawnConfigName" : "easy-donut",
+            "description": "walls allowed outside, enemies on inside",
+
+            "obsticleRanges": [
+                {
+                    "maxObjects": 5,
+                    "minObjects": 1,
+                    "prefabPaths" : [{"path" : "Obstacles/stoneObstacle", "probability": 1.0}],
+                    "areaRanges": [
+                        {"x1": 0, "y1": 0, "x2": 11, "y2": 3},
+                        {"x1": 0, "y1": 8, "x2": 11, "y2": 13},
+                        {"x1": 15, "y1": 0, "x2": 25, "y2": 3},
+                        {"x1": 15, "y1": 8, "x2": 25, "y2": 13}
+                    ]
+                }
+            ],
+            "enemyRanges": [
+                {
+                    "maxObjects": 5,
+                    "minObjects": 1,
+                    "prefabPaths" : [
+                        {"path" : "Enemies/spinner", "probability": 0.7},
+                        {"path" : "Enemies/spinnerFast", "probability": 0.1},
+                        {"path" : "Enemies/rusher", "probability": 0.2}
+                    ],
+                    "areaRanges": [
+                        {"x1": 6, "y1": 3, "x2": 18, "y2": 8}
+                    ]
+                }
+            ]
+        },
+        {
+            "spawnConfigName" : "medium-donut",
+            "description": "walls allowed outside, enemies on inside",
+            "obsticleRanges": [
+                {
+                    "maxObjects": 5,
+                    "minObjects": 1,
+                    "prefabPaths" : [{"path" : "Obstacles/stoneObstacle", "probability": 1.0}],
+                    "areaRanges": [
+                        {"x1": 0, "y1": 0, "x2": 11, "y2": 3},
+                        {"x1": 0, "y1": 8, "x2": 11, "y2": 13},
+                        {"x1": 15, "y1": 0, "x2": 25, "y2": 3},
+                        {"x1": 15, "y1": 8, "x2": 25, "y2": 13}
+                    ]
+                }
+            ],
+            "enemyRanges": [
+                {
+                    "maxObjects": 5,
+                    "minObjects": 3,
+                    "prefabPaths" : [
+                        {"path" : "Enemies/spinnerFast", "probability": 0.5},
+                        {"path" : "Enemies/rusher", "probability": 0.5}
+                    ],
+                    "areaRanges": [
+                        {"x1": 6, "y1": 3, "x2": 18, "y2": 8}
+                    ]
+                }
+            ]
+        }
     ]
 }
