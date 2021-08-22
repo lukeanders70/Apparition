@@ -17,16 +17,17 @@ public class RoomController : MonoBehaviour
     public void SetupRoom(
         Dictionary<Vector2, GameObject> dungeon,
         Vector2 indexPosition,
-        StaticDungeonInfo staticDungeonInfo,
+        StaticDungeon.Level levelInfo,
         float? doorSpawnProbabilityOverride
     )
     {
-        RoomType roomType = staticDungeonInfo.roomTypes[Random.Range(0, staticDungeonInfo.roomTypes.Length)];
+        StaticDungeon.Room roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(levelInfo.NearRooms);
+        StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomInfo.SpawnConfigProbs);
         RoomGrid roomGrid = new RoomGrid();
 
         doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
-        obsticleManager.SetObsticles(indexPosition, staticDungeonInfo, roomGrid, roomType);
-        enemyManager.SetEnemies(indexPosition, staticDungeonInfo, roomGrid, roomType);
+        obsticleManager.SetObsticles(indexPosition, roomGrid, spawnConfigInfo);
+        enemyManager.SetEnemies(indexPosition, roomGrid, spawnConfigInfo);
     }
 
     public void ExitRoom()
