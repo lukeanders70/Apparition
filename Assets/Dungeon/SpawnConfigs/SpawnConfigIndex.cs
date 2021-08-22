@@ -9,7 +9,8 @@ namespace StaticDungeon
         public static Dictionary<string, SpawnConfig> spawnConfigs = new Dictionary<string, SpawnConfig>()
         {
             { "easy-donut", new EasyDonutSpawnConfig() },
-            { "medium-donut", new  MediumDonutSpawnConfig() }
+            { "medium-donut", new  MediumDonutSpawnConfig() },
+            { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() }
         };
     }
 
@@ -59,6 +60,40 @@ namespace StaticDungeon
                 areaRanges = new AreaRange[]
                 {
                     new AreaRange((6, 3), (18, 8))
+                }
+            }
+        };
+    }
+
+    public class EasyInverseDonutSpawnConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "easy-inverse-donut";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
+                },
+                areaRanges = new AreaRange[]
+                {
+                    new AreaRange((6, 3), (18, 8))
+                }
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.2f }
+                },
+                areaRanges = new AreaRange[]
+                {
+                    new AreaRange((4, 3), (5, 8)),
+                    new AreaRange((19, 3), (21, 8))
                 }
             }
         };
