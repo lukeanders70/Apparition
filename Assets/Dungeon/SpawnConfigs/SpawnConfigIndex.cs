@@ -14,10 +14,19 @@ namespace StaticDungeon
         };
     }
 
+    public enum Symmetry
+    {
+        None,
+        LeftRight,
+        TopBottom,
+        Quadrant
+    }
+
     public class ObjectRanges
     {
         public int maxObjects;
         public int minObjects;
+        public Symmetry symmetry;
         public ObjectProbability<string>[] prefabPathProbs;
         public AreaRange[] areaRanges;
     }
@@ -36,6 +45,7 @@ namespace StaticDungeon
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 5,
+                symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] { 
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
@@ -52,6 +62,7 @@ namespace StaticDungeon
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 5,
+                symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
                     new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
@@ -72,6 +83,7 @@ namespace StaticDungeon
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 5,
+                symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
@@ -85,6 +97,7 @@ namespace StaticDungeon
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 5,
+                symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
                     new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
@@ -107,6 +120,7 @@ namespace StaticDungeon
             new ObjectRanges {
                 minObjects = 3,
                 maxObjects = 5,
+                symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.4f },
                     new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.6f }

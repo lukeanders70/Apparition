@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomGrid
 {
-    private (int, int) center = (13, 6);
+    public (int, int) center = (13, 6);
     GridCell[,] objectLocations = new GridCell[26, 13];
 
     public Vector2 GetLocationCell(int xIndex, int yIndex, GameObject o)

@@ -13,7 +13,8 @@ public class GridObjectManager : MonoBehaviour
         StaticDungeon.ObjectProbability<string>[] prefabFreqs,
         AreaRange[] spawnRanges,
         int minObjects = 0,
-        int maxObject = 0
+        int maxObject = 0,
+        StaticDungeon.Symmetry symmetry = StaticDungeon.Symmetry.None
     )
     {
 
@@ -24,20 +25,46 @@ public class GridObjectManager : MonoBehaviour
         for (int rangeIndex = 0; rangeIndex < spawnRanges.Length; rangeIndex++)
         {
             AreaRange range = spawnRanges[rangeIndex];
-            for (int i = range.startX; i < range.endX; i++)
+            int xMax = symmetry == StaticDungeon.Symmetry.LeftRight || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endX, roomGrid.center.Item1 - 1) : range.endX;
+            int yMax = symmetry == StaticDungeon.Symmetry.TopBottom || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endY, roomGrid.center.Item2 - 1) : range.endY;
+            for (int i = range.startX; i < xMax; i++)
             {
-                for (int j = range.startY; j < range.endY; j++)
+                for (int j = range.startY; j < yMax; j++)
                 {
                     int numObjectsLeftToSpawn = numObjects - objectPrefabs.Count;
                     int numTilesLeft = totalSpawnTiles - count;
                     float spawnProbability = numTilesLeft != 0 ? (float)numObjectsLeftToSpawn / (float)numTilesLeft : 0;
                     if (spawnProbability > Random.Range(0f, 1.0f))
                     {
-                        AddObject(i, j, loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)), roomGrid);
+                        AddObjectWithSymmetrty(i, j, loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)), roomGrid, symmetry);
                     }
                     count += 1;
                 }
             }
+        }
+    }
+
+    public void AddObjectWithSymmetrty(int x, int y, GameObject prefab, RoomGrid roomGrid, StaticDungeon.Symmetry symmetry)
+    {
+        switch (symmetry)
+        {
+            case StaticDungeon.Symmetry.None:
+                AddObject(x, y, prefab, roomGrid);
+                break;
+            case StaticDungeon.Symmetry.LeftRight:
+                AddObject(x, y, prefab, roomGrid);
+                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
+                break;
+            case StaticDungeon.Symmetry.TopBottom:
+                AddObject(x, y, prefab, roomGrid);
+                AddObject(x, (roomGrid.center.Item2 - 1) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
+                break;
+            case StaticDungeon.Symmetry.Quadrant:
+                AddObject(x, y, prefab, roomGrid);
+                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
+                AddObject(x, (roomGrid.center.Item2) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
+                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), (roomGrid.center.Item2) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
+                break;
         }
     }
 
