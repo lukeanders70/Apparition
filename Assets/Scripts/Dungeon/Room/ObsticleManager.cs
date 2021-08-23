@@ -19,7 +19,8 @@ public class ObsticleManager : GridObjectManager
                 oRange.prefabPathProbs,
                 oRange.areaRanges,
                 roomIndexPosition == Vector2.zero ? 0 : oRange.minObjects,
-                roomIndexPosition == Vector2.zero ? 0 : oRange.maxObjects
+                roomIndexPosition == Vector2.zero ? 0 : oRange.maxObjects,
+                oRange.symmetry
             );
         }
 
