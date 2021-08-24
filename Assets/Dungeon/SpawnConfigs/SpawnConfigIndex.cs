@@ -43,18 +43,16 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "easy-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
+                minObjects = 5,
                 maxObjects = 5,
-                symmetry = Symmetry.None,
-                prefabPathProbs = new ObjectProbability<string>[] { 
+                symmetry = Symmetry.LeftRight,
+                prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
                 areaRanges = new AreaRange[]
                 {
                     new AreaRange((0, 0), (10, 3)),
-                    new AreaRange((0, 8), (10, 13)),
-                    new AreaRange((15, 0), (25, 3)),
-                    new AreaRange((15, 8), (25, 13))
+                    new AreaRange((0, 8), (10, 13))
                 }
             }
         };
@@ -81,15 +79,15 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "easy-inverse-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
+                minObjects = 5,
                 maxObjects = 5,
-                symmetry = Symmetry.None,
+                symmetry = Symmetry.TopBottom,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
                 areaRanges = new AreaRange[]
                 {
-                    new AreaRange((6, 3), (18, 8))
+                    new AreaRange((6, 3), (18, 6))
                 }
             }
         };
