@@ -9,19 +9,32 @@ public class ObsticleManager : GridObjectManager
     public int maxObsticles;
 
     // Start is called before the first frame update
-    public void SetObsticles(Vector2 roomIndexPosition, RoomGrid roomGrid, StaticDungeon.SpawnConfig spawnConfigInfo)
+    public void SetObsticles(RoomGrid roomGrid, StaticDungeon.SpawnConfig spawnConfigInfo)
     {
         foreach (StaticDungeon.ObjectRanges oRange in spawnConfigInfo.ObsticleRanges)
         {
-            
-            SetObjects(
-                roomGrid,
-                oRange.prefabPathProbs,
-                oRange.areaRanges,
-                roomIndexPosition == Vector2.zero ? 0 : oRange.minObjects,
-                roomIndexPosition == Vector2.zero ? 0 : oRange.maxObjects,
-                oRange.symmetry
-            );
+            if (oRange.areaRanges != null)
+            {
+                SetObjects(
+                    roomGrid,
+                    oRange.prefabPathProbs,
+                    oRange.areaRanges,
+                    oRange.minObjects,
+                    oRange.maxObjects,
+                    oRange.symmetry
+                );
+            } else
+            {
+                SetObjects(
+                    roomGrid,
+                    oRange.prefabPathProbs,
+                    oRange.absoluteLocations,
+                    oRange.minObjects,
+                    oRange.maxObjects,
+                    oRange.symmetry
+                );
+            }
+
         }
 
     }

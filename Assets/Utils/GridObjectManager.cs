@@ -44,6 +44,34 @@ public class GridObjectManager : MonoBehaviour
         }
     }
 
+        public void SetObjects(
+        RoomGrid roomGrid,
+        StaticDungeon.ObjectProbability<string>[] prefabFreqs,
+        (int, int)[] spawnLocations,
+        int minObjects = 0,
+        int maxObject = 0,
+        StaticDungeon.Symmetry symmetry = StaticDungeon.Symmetry.None
+    )
+    {
+
+        foreach ((int, int) spawnLocation in spawnLocations)
+        {
+            AddObjectWithSymmetrty(
+                spawnLocation.Item1,
+                spawnLocation.Item2,
+                loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)),
+                roomGrid,
+                symmetry
+            );
+        }
+    }
+
+    public void ClearObjects()
+    {
+        objectPrefabs = new List<ObjectInfo>();
+         objects = new List<GameObject>();
+    }
+
     public void AddObjectWithSymmetrty(int x, int y, GameObject prefab, RoomGrid roomGrid, StaticDungeon.Symmetry symmetry)
     {
         switch (symmetry)

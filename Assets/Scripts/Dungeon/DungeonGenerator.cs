@@ -47,8 +47,8 @@ public class DungeonGenerator : MonoBehaviour
             }
             UpdateEdge(indexPositionToAdd, newRoom, edge, dungeon);
             edge.Remove(indexPositionToAdd);
-
         }
+        SetExit(dungeon, levelInfo.ExitRoom);
     }
 
     private void UpdateEdge(Vector2 roomPosition, GameObject newRoom, List<Vector2> edge, Dictionary<Vector2, GameObject> dungeon)
@@ -59,6 +59,32 @@ public class DungeonGenerator : MonoBehaviour
             {
                 edge.Add(roomPosition + neighboorDirection);
             }
+        }
+    }
+
+    private void SetExit(Dictionary<Vector2, GameObject> dungeon, StaticDungeon.Room exitRoomInfo)
+    {
+        float maxDistance = 0;
+        Vector2 maxKey = Vector2.zero;
+        float maxSingleAxisDistance = 0; // tie breaker
+        foreach(Vector2 key in dungeon.Keys)
+        {
+            float manDistance = Mathf.Abs(key.x) + Mathf.Abs(key.y);
+            float singleAxisDistance = Mathf.Max(Mathf.Abs(key.x), Mathf.Abs(key.y));
+            if ((manDistance > maxDistance) || (manDistance == maxDistance && singleAxisDistance > maxSingleAxisDistance))
+            {
+                maxDistance = manDistance;
+                maxKey = key;
+                maxSingleAxisDistance = singleAxisDistance;
+            }
+        }
+        if (dungeon[maxKey] != null)
+        {
+            Debug.Log("Setting Exit Room: " + maxKey);
+            dungeon[maxKey].GetComponent<RoomController>().SetRoomInfo(exitRoomInfo);
+        } else
+        {
+            Debug.LogError("Exit Room Key " + maxKey + " was not found!");
         }
     }
 

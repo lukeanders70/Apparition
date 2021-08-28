@@ -10,7 +10,8 @@ namespace StaticDungeon
         {
             { "easy-donut", new EasyDonutSpawnConfig() },
             { "medium-donut", new  MediumDonutSpawnConfig() },
-            { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() }
+            { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
+            { "ladder", new LadderConfig() }
         };
     }
 
@@ -29,6 +30,7 @@ namespace StaticDungeon
         public Symmetry symmetry;
         public ObjectProbability<string>[] prefabPathProbs;
         public AreaRange[] areaRanges;
+        public (int, int)[] absoluteLocations;
     }
 
     public interface SpawnConfig
@@ -129,5 +131,23 @@ namespace StaticDungeon
                 }
             }
         };
+    }
+
+    public class LadderConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "ladder";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/ladder", probability = 1.0f }
+                },
+                absoluteLocations = new (int, int)[] { (11, 4) }
+            }
+        };
+
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
     }
 }

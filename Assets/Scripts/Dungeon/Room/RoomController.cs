@@ -21,14 +21,22 @@ public class RoomController : MonoBehaviour
         float? doorSpawnProbabilityOverride
     )
     {
+        doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
+
         StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 2 ? levelInfo.FarRooms : Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 1 ? levelInfo.MediumRooms : levelInfo.NearRooms;
         StaticDungeon.Room roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
-        StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomInfo.SpawnConfigProbs);
-        RoomGrid roomGrid = new RoomGrid();
 
-        doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
-        obsticleManager.SetObsticles(indexPosition, roomGrid, spawnConfigInfo);
-        enemyManager.SetEnemies(indexPosition, roomGrid, spawnConfigInfo);
+        SetRoomInfo(roomInfo);
+    }
+
+    public void SetRoomInfo(StaticDungeon.Room newRoomInfo)
+    {
+        StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(newRoomInfo.SpawnConfigProbs);
+        RoomGrid roomGrid = new RoomGrid();
+        obsticleManager.ClearObjects();
+        enemyManager.ClearObjects();
+        obsticleManager.SetObsticles(roomGrid, spawnConfigInfo);
+        enemyManager.SetEnemies(roomGrid, spawnConfigInfo);
     }
 
     public void ExitRoom()
