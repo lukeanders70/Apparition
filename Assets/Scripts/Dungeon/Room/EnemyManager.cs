@@ -9,18 +9,33 @@ public class EnemyManager : GridObjectManager
     [SerializeField]
     private int minEnemies;
 
-    public void SetEnemies(Vector2 roomIndexPosition, RoomGrid roomGrid, StaticDungeon.SpawnConfig spawnConfigInfo)
+    public void SetEnemies(RoomGrid roomGrid, StaticDungeon.SpawnConfig spawnConfigInfo)
     {
 
         foreach (StaticDungeon.ObjectRanges oRange in spawnConfigInfo.EnemyRanges)
         {
-            SetObjects(
-                roomGrid,
-                oRange.prefabPathProbs,
-                oRange.areaRanges,
-                oRange.minObjects,
-                oRange.maxObjects
-            );
+            if (oRange.areaRanges != null)
+            {
+                SetObjects(
+                    roomGrid,
+                    oRange.prefabPathProbs,
+                    oRange.areaRanges,
+                    oRange.minObjects,
+                    oRange.maxObjects,
+                    oRange.symmetry
+                );
+            }
+            else
+            {
+                SetObjects(
+                    roomGrid,
+                    oRange.prefabPathProbs,
+                    oRange.absoluteLocations,
+                    oRange.minObjects,
+                    oRange.maxObjects,
+                    oRange.symmetry
+                );
+            }
         }
     }
 }
