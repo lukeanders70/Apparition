@@ -91,6 +91,7 @@
     <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
     <Compile Include="Assets\Dungeon\Levels\LevelIndex.cs" />
     <Compile Include="Assets\Dungeon\Utils.cs" />
+    <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
