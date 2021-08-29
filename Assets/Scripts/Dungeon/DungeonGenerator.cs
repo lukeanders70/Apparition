@@ -16,15 +16,30 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField]
     private float numRooms;
 
-    public Dictionary<Vector2, GameObject> rooms = new Dictionary<Vector2, GameObject>();
+    private GameObject level;
+    private int levelIndex = 0;
 
     private void Awake()
     {
-        GenerateDungeon(StaticDungeon.LevelIndex.levels[0]);
+        GenerateDungeon(StaticDungeon.LevelIndex.levels[levelIndex]);
     }
 
-    void GenerateDungeon(StaticDungeon.Level levelInfo)
+    public bool MoveDown()
     {
+        if (StaticDungeon.LevelIndex.levels.Length > levelIndex + 1)
+        {
+            levelIndex = levelIndex + 1;
+            GenerateDungeon(StaticDungeon.LevelIndex.levels[levelIndex]);
+            return true;
+        }
+        Debug.LogError("Failed to move down to level index: " + (levelIndex + 1));
+        return false;
+    }
+
+    private void GenerateDungeon(StaticDungeon.Level levelInfo)
+    {
+        replaceLevel(levelInfo.Name);
+
         Dictionary<Vector2, GameObject> dungeon = new Dictionary<Vector2, GameObject>();
         List<Vector2> edge = new List<Vector2>();
 
@@ -80,7 +95,6 @@ public class DungeonGenerator : MonoBehaviour
         }
         if (dungeon[maxKey] != null)
         {
-            Debug.Log("Setting Exit Room: " + maxKey);
             dungeon[maxKey].GetComponent<RoomController>().SetRoomInfo(exitRoomInfo);
         } else
         {
@@ -97,13 +111,24 @@ public class DungeonGenerator : MonoBehaviour
     {
         GameObject newRoom = Instantiate(
             RoomPrefab,
-            transform.position + new Vector3(indexPositionToAdd.x * roomWidth, indexPositionToAdd.y * roomHeight),
-            transform.rotation
+            level.transform.position + new Vector3(indexPositionToAdd.x * roomWidth, indexPositionToAdd.y * roomHeight),
+            level.transform.rotation
         );
-        newRoom.transform.parent = transform;
+        newRoom.transform.parent = level.transform;
         newRoom.GetComponent<RoomController>().SetupRoom(dungeon, indexPositionToAdd, levelInfo, doorProbability);
         dungeon.Add(indexPositionToAdd, newRoom);
 
         return newRoom;
+    }
+
+    private void replaceLevel(string newLevelName)
+    {
+        if (level != null)
+        {
+            Destroy(level);
+        } 
+        level = new GameObject(newLevelName);
+        level.transform.parent = transform;
+        level.transform.position = Vector3.zero;
     }
 }

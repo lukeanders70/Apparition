@@ -53,6 +53,15 @@ public class CameraMoveController : MonoBehaviour
         moveCallback = callback;
     }
 
+    public void Recenter()
+    {
+        enabled = false;
+        moving = false;
+        speed = 0;
+        transform.position = new Vector3(0,0, this.transform.position.z);
+        moveCallback = null;
+    }
+
 }
 
 public delegate void CameraMoveCallback();
