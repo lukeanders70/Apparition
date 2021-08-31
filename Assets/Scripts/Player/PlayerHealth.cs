@@ -57,8 +57,14 @@ public class PlayerHealth : MonoBehaviour, Health
 
     public void Kill()
     {
-        Destroy(playerHandler.player1.gameObject);
-        Destroy(playerHandler.player2.gameObject);
-        gameOver.SetActive(true);
+        GameObject transitions = GameObject.Find("Transitions");
+        StartCoroutine(transitions.GetComponent<Transitions>().LevelTransition(
+            () =>
+            {
+                Destroy(playerHandler.player1.gameObject);
+                Destroy(playerHandler.player2.gameObject);
+                gameOver.SetActive(true);
+            }
+        ));
     }
 }
