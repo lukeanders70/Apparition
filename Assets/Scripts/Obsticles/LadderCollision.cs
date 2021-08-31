@@ -19,7 +19,7 @@ public class LadderCollision : MonoBehaviour
             PlayerHandler playerHandler = collidedObject.transform.parent.GetComponent<PlayerHandler>();
             if (dungeon != null)
             {
-                playerHandler.PauseMovement();
+                Time.timeScale = 0;
                 StartCoroutine(transitions.GetComponent<Transitions>().LevelTransition(
                     () =>
                     {
@@ -30,7 +30,7 @@ public class LadderCollision : MonoBehaviour
                             GameObject Player = collidedObject.transform.parent.gameObject;
                             Player.GetComponent<PlayerHandler>().resetPosition();
                         }
-                        playerHandler.UnPauseMovement();
+                        Time.timeScale = 1;
                     }
                 ));
             } else
