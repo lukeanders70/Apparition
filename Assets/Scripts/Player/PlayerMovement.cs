@@ -22,9 +22,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 forcedTranslatePos = new Vector2(0, 0);
     private float forcedTranslateSpeed = 0;
 
+    private bool stopMoveOverride = false;
+
+    public void StopMove()
+    {
+        stopMoveOverride = true;
+    }
+
+    public void StartMove()
+    {
+        stopMoveOverride = false;
+    }
+
     private bool CanMove()
     {
-        return gameObject.GetComponent<SpiritHandler>().spirit.transform.parent == this.transform;
+        return (!stopMoveOverride) && (gameObject.GetComponent<SpiritHandler>().spirit.transform.parent == this.transform);
     }
 
     private void Update()

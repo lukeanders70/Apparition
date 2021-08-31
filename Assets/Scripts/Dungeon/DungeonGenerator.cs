@@ -15,6 +15,8 @@ public class DungeonGenerator : MonoBehaviour
     private float roomWidth;
     [SerializeField]
     private float numRooms;
+    [SerializeField]
+    private Animator levelTransition;
 
     private GameObject level;
     private int levelIndex = 0;

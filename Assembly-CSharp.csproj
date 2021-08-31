@@ -92,6 +92,7 @@
     <Compile Include="Assets\Dungeon\Levels\LevelIndex.cs" />
     <Compile Include="Assets\Dungeon\Utils.cs" />
     <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
+    <Compile Include="Assets\Utils\Transitions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

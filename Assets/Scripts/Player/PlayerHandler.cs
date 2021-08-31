@@ -40,4 +40,15 @@ public class PlayerHandler : MonoBehaviour
         player2.GetComponent<PlayerMovement>().teleportTranslate(player2StartPosition);
 
     }
+
+    public void PauseMovement()
+    {
+        player1.GetComponent<PlayerMovement>().StopMove();
+        player2.GetComponent<PlayerMovement>().StopMove();
+    }
+    public void UnPauseMovement()
+    {
+        player1.GetComponent<PlayerMovement>().StartMove();
+        player2.GetComponent<PlayerMovement>().StartMove();
+    }
 }
