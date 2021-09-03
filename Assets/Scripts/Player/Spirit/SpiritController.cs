@@ -41,6 +41,7 @@ public class SpiritController : MonoBehaviour
         spriteRenderer.color = Color.clear;
         transform.localPosition = Vector3.zero;
         isMoving = false;
+        newParent.GetComponent<SpiritHandler>().ReceiveSpirit();
         yield break;
     }
 

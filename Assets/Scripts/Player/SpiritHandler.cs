@@ -7,11 +7,14 @@ public class SpiritHandler : MonoBehaviour
     public GameObject spirit;
     public GameObject otherPlayer;
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
-        if (spirit != null)
+        if (spirit.transform.parent != transform)
         {
-            spirit.transform.SetParent(this.transform);
+            spriteRenderer.material.SetFloat("_GrayscaleAmount", 1.0f);
         }
     }
 
@@ -25,10 +28,21 @@ public class SpiritHandler : MonoBehaviour
 
     public void AttemptSwap()
     {
-        SpiritController sh = spirit.GetComponent<SpiritController>();
-        if (spirit.transform.parent == this.transform && sh != null && otherPlayer != null)
+        SpiritController sc = spirit.GetComponent<SpiritController>();
+        if (spirit.transform.parent == this.transform && sc != null && otherPlayer != null)
         {
-            sh.Swap(otherPlayer);
+            RemoveSpirit();
+            sc.Swap(otherPlayer);
         }
+    }
+
+    public void RemoveSpirit()
+    {
+        spriteRenderer.material.SetFloat("_GrayscaleAmount", 1.0f);
+    }
+
+    public void ReceiveSpirit()
+    {
+        spriteRenderer.material.SetFloat("_GrayscaleAmount", 0.0f);
     }
 }
