@@ -1120,7 +1120,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f69b29d8683346a488b6548934c90dea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1166,6 +1166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spirit: {fileID: 1388813911}
   otherPlayer: {fileID: 1989842401}
+  spriteRenderer: {fileID: 1511029991}
 --- !u!95 &1511029993
 Animator:
   serializedVersion: 3
@@ -1410,7 +1411,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f69b29d8683346a488b6548934c90dea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1484,6 +1485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spirit: {fileID: 1388813911}
   otherPlayer: {fileID: 1511029985}
+  spriteRenderer: {fileID: 1989842405}
 --- !u!95 &1989842409
 Animator:
   serializedVersion: 3
@@ -1741,7 +1743,7 @@ MonoBehaviour:
   RoomPrefab: {fileID: 122319395201439116, guid: 06f4f4a2047988742840751afbd0162c, type: 3}
   roomHeight: 16
   roomWidth: 28
-  numRooms: 2
+  numRooms: 15
   levelTransition: {fileID: 66578517}
 --- !u!4 &2137089098
 Transform:
