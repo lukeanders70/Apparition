@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#nullable enable
-public class RusherAI : BasicHealth
+public class RusherAI : BasicEnemyAI
 {
     public Rigidbody2D rb;
 
@@ -11,11 +10,9 @@ public class RusherAI : BasicHealth
     [SerializeField] 
     private float speed;
     [SerializeField]
-    private int damage;
-    [SerializeField]
     private Animator animator;
 
-    private Coroutine? currentCoroutine = null;
+    private Coroutine currentCoroutine = null;
 
     // Start is called before the first frame update
     void Start()
@@ -44,24 +41,14 @@ public class RusherAI : BasicHealth
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    override public void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject collidedObject = collision.collider.gameObject;
-        if (collidedObject.tag == "Player")
-        {
-            Health colliderHealth = collision.collider.GetComponent<Health>();
-            if (colliderHealth != null)
-            {
-                colliderHealth.Damage(damage);
-            }
-        }
-        else
-        {
-            Vector3 oppositeDirection = collision.contacts[0].normal;
-            oppositeDirection.Normalize();
-            Stop();
-            SetIntention(transform.position + (oppositeDirection * 0.3f));
-        }
+        Vector3 oppositeDirection = collision.contacts[0].normal;
+        oppositeDirection.Normalize();
+        Stop();
+        SetIntention(transform.position + (oppositeDirection * 0.3f));
+
+        base.OnCollisionEnter2D(collision);
     }
 
     private void Stop()
@@ -78,7 +65,7 @@ public class RusherAI : BasicHealth
 
     IEnumerator Aggro()
     {
-        GameObject? closestPlayer = AIHelpers.GetClosestPlayer(transform.position);
+        GameObject closestPlayer = AIHelpers.GetClosestPlayer(transform.position);
         if(closestPlayer == null)
         {
             Stop();

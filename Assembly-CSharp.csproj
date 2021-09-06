@@ -93,6 +93,8 @@
     <Compile Include="Assets\Dungeon\Utils.cs" />
     <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
     <Compile Include="Assets\Utils\Transitions.cs" />
+    <Compile Include="Assets\Scripts\Enemies\BlobAI.cs" />
+    <Compile Include="Assets\Scripts\Enemies\BasicEnemyAI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
