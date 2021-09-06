@@ -83,7 +83,7 @@ public class RoomGrid
         }
     }
 
-    public GameObject? removeObject(int xIndex, int yIndex)
+    public GameObject removeObject(int xIndex, int yIndex)
     {
         (int, int)? primaryIndexNullable = findPrimaryIndex(xIndex, yIndex);
         if(primaryIndexNullable == null)

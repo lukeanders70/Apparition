@@ -69,7 +69,7 @@ public class GridObjectManager : MonoBehaviour
     public void ClearObjects()
     {
         objectPrefabs = new List<ObjectInfo>();
-         objects = new List<GameObject>();
+        objects = new List<GameObject>();
     }
 
     public void AddObjectWithSymmetrty(int x, int y, GameObject prefab, RoomGrid roomGrid, StaticDungeon.Symmetry symmetry)

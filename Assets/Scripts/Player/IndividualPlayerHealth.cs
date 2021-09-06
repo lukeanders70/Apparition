@@ -5,7 +5,7 @@ public class IndividualPlayerHealth : MonoBehaviour, Health
     [SerializeField]
     private PlayerHealth healthDelegate;
 
-    private ParticleSystem? damageParticals;
+    private ParticleSystem damageParticals;
 
     public void Awake()
     {

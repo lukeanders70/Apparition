@@ -30,4 +30,19 @@ public class AIHelpers
         }
         return null;
     }
+    public static IEnumerator MoveTo(Rigidbody2D rb, Vector3 position, float speed, System.Action callback)
+    {
+        while(Vector2.Distance(rb.position, position) > 0.05)
+        {
+            Vector3 dir = ((Vector2)position - rb.position).normalized;
+            rb.velocity = (dir * speed);
+            yield return null;
+        }
+        rb.velocity = Vector3.zero;
+        if (callback != null)
+        {
+            callback();
+        }
+        yield break;
+    }
 }

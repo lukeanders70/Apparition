@@ -8,6 +8,8 @@ public class BasicHealth : MonoBehaviour, Health
     public int health;
     public int maxHealth;
 
+    public bool invicible = false;
+
     public Color deathColor;
 
     private ParticleSystem? deathParticals;
@@ -20,10 +22,13 @@ public class BasicHealth : MonoBehaviour, Health
 
     virtual public bool Damage(int damage)
     {
-        health = Mathf.Max(health - damage, 0);
-        if (health == 0)
+        if(!invicible)
         {
-            Kill();
+            health = Mathf.Max(health - damage, 0);
+            if (health == 0)
+            {
+                Kill();
+            }
         }
         return true;
     }
@@ -43,7 +48,7 @@ public class BasicHealth : MonoBehaviour, Health
         Mathf.Min(health + amount, maxHealth);
     }
 
-    public void Kill()
+    protected void SpawnDeathParticles()
     {
         ParticleSystem? psInstance = Instantiate(deathParticals);
         if (psInstance != null)
@@ -52,6 +57,11 @@ public class BasicHealth : MonoBehaviour, Health
             ParticleSystem.MainModule ma = psInstance.main;
             ma.startColor = deathColor;
         }
+    }
+
+    virtual public void Kill()
+    {
+        SpawnDeathParticles();
         Destroy(gameObject);
     }
 }
