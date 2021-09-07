@@ -15,6 +15,16 @@ namespace StaticDungeon
         };
     }
 
+    static class AreaRanges
+    {
+        public static AreaRange[] centerArea = { new AreaRange((6, 3), (18, 8)) };
+        public static AreaRange[] midLeftmidRightStrips = {
+            new AreaRange((4, 3), (5, 8)),
+            new AreaRange((19, 3), (21, 8))
+        };
+
+    }
+
     public enum Symmetry
     {
         None,
@@ -51,11 +61,7 @@ namespace StaticDungeon
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
-                areaRanges = new AreaRange[]
-                {
-                    new AreaRange((0, 0), (10, 3)),
-                    new AreaRange((0, 8), (10, 13))
-                }
+                areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = {
@@ -68,10 +74,7 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.2f }
                 },
-                areaRanges = new AreaRange[]
-                {
-                    new AreaRange((6, 3), (18, 8))
-                }
+                areaRanges = AreaRanges.centerArea
             }
         };
     }
@@ -87,10 +90,7 @@ namespace StaticDungeon
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
                 },
-                areaRanges = new AreaRange[]
-                {
-                    new AreaRange((6, 3), (18, 6))
-                }
+                areaRanges = AreaRanges.centerArea
             }
         };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = {
@@ -103,11 +103,7 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.2f }
                 },
-                areaRanges = new AreaRange[]
-                {
-                    new AreaRange((4, 3), (5, 8)),
-                    new AreaRange((19, 3), (21, 8))
-                }
+                areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
     }
@@ -127,10 +123,7 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Enemies/blob-large", probability = 0.1f },
 
                 },
-                areaRanges = new AreaRange[]
-                {
-                    new AreaRange((6, 3), (18, 8))
-                }
+                areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
     }
