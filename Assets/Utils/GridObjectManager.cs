@@ -7,19 +7,20 @@ public class GridObjectManager : MonoBehaviour
 
     List<ObjectInfo> objectPrefabs = new List<ObjectInfo>();
     List<GameObject> objects = new List<GameObject>();
+
     // Start is called before the first frame update
     public void SetObjects(
         RoomGrid roomGrid,
         StaticDungeon.ObjectProbability<string>[] prefabFreqs,
         AreaRange[] spawnRanges,
         int minObjects = 0,
-        int maxObject = 0,
+        int maxObjects = 0,
         StaticDungeon.Symmetry symmetry = StaticDungeon.Symmetry.None
     )
     {
 
-        int numObjects = Random.Range(maxObject, minObjects);
-        int totalSpawnTiles = AreaRange.GetNumTilesInRanges(spawnRanges);
+        int numObjects = Random.Range(minObjects, maxObjects);
+        int totalSpawnTiles = AreaRange.GetNumTilesInRanges(spawnRanges, symmetry, roomGrid.center);
         int count = 0;
 
         for (int rangeIndex = 0; rangeIndex < spawnRanges.Length; rangeIndex++)

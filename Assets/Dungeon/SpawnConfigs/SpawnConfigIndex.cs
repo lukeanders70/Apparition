@@ -50,12 +50,41 @@ namespace StaticDungeon
         public ObjectRanges[] EnemyRanges { get; set; }
     }
 
+    public class EasyQuadrantSpawnConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "easy-quadrant";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.Quadrant,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.midLeftmidRightStrips
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.2f }
+                },
+                areaRanges = AreaRanges.centerArea
+            }
+        };
+    }
+
     public class EasyDonutSpawnConfig : SpawnConfig
     {
         virtual public string Name { get; set; } = "easy-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 5,
+                minObjects = 1,
                 maxObjects = 5,
                 symmetry = Symmetry.LeftRight,
                 prefabPathProbs = new ObjectProbability<string>[] {
@@ -84,7 +113,7 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "easy-inverse-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 5,
+                minObjects = 1,
                 maxObjects = 5,
                 symmetry = Symmetry.TopBottom,
                 prefabPathProbs = new ObjectProbability<string>[] {
