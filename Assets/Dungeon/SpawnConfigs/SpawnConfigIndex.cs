@@ -11,6 +11,7 @@ namespace StaticDungeon
             { "easy-donut", new EasyDonutSpawnConfig() },
             { "medium-donut", new  MediumDonutSpawnConfig() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
+            { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
             { "ladder", new LadderConfig() }
         };
     }
@@ -55,8 +56,8 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "easy-quadrant";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
-                maxObjects = 5,
+                minObjects = 2,
+                maxObjects = 12,
                 symmetry = Symmetry.Quadrant,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
