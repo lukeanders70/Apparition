@@ -11,6 +11,8 @@ public class RoomController : MonoBehaviour
     [SerializeField]
     private DoorManager doorManager;
 
+    private RoomGrid roomGrid;
+
     /**
      * Call when a room is first created
      */
@@ -32,7 +34,7 @@ public class RoomController : MonoBehaviour
     public void SetRoomInfo(StaticDungeon.Room newRoomInfo)
     {
         StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(newRoomInfo.SpawnConfigProbs);
-        RoomGrid roomGrid = new RoomGrid();
+        roomGrid = new RoomGrid();
         obsticleManager.ClearObjects();
         enemyManager.ClearObjects();
         obsticleManager.SetObsticles(roomGrid, spawnConfigInfo);
@@ -47,7 +49,7 @@ public class RoomController : MonoBehaviour
 
     public void EnterRoom()
     {
-        enemyManager.SpawnObjects();
-        obsticleManager.SpawnObjects();
+        enemyManager.SpawnObjects(roomGrid);
+        obsticleManager.SpawnObjects(roomGrid);
     }
 }

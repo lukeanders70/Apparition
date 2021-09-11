@@ -7,6 +7,11 @@ public class RoomGrid
     public (int, int) center = (13, 6);
     GridCell[,] objectLocations = new GridCell[26, 13];
 
+    public bool IndexInBounds((int, int) index)
+    {
+        return index.Item1 >= 0 && index.Item1 < objectLocations.GetLength(0) && index.Item2 >= 0 && index.Item2 < objectLocations.GetLength(1);
+    }
+
     public Vector2 GetLocationCell(int xIndex, int yIndex, GameObject o)
     {
         (int, int) size = GetSize(o);
@@ -78,6 +83,28 @@ public class RoomGrid
         {
             return ((int, int)) objectLocations[xIndex, yIndex].primaryIndex;
         } else
+        {
+            return null;
+        }
+    }
+
+    public GameObject getObject(int xIndex, int yIndex)
+    {
+        GridCell cell = objectLocations[xIndex, yIndex];
+        if (cell == null)
+        {
+            return null;
+        }
+        else if (cell.type == GridCell.CellType.primary)
+        {
+            return cell.prefab;
+        }
+        else if (cell.primaryIndex != null)
+        {
+            var primaryIndex = ((int, int))cell.primaryIndex;
+            return objectLocations[primaryIndex.Item1, primaryIndex.Item2].prefab;
+        }
+        else
         {
             return null;
         }

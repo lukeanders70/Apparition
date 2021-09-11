@@ -12,7 +12,8 @@ namespace StaticDungeon
             { "medium-donut", new  MediumDonutSpawnConfig() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
-            { "ladder", new LadderConfig() }
+            { "ladder", new LadderConfig() },
+            { "hole-test", new HoleTestSpawnConfig() }
         };
     }
 
@@ -49,6 +50,23 @@ namespace StaticDungeon
         public string Name { get; set; }
         public ObjectRanges[] ObsticleRanges { get; set; }
         public ObjectRanges[] EnemyRanges { get; set; }
+    }
+
+    public class HoleTestSpawnConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "hole-test-config";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 24,
+                maxObjects = 24,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/hole", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.centerArea
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
     }
 
     public class EasyQuadrantSpawnConfig : SpawnConfig

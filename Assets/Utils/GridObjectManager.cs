@@ -104,7 +104,8 @@ public class GridObjectManager : MonoBehaviour
         {
             objectPrefabs.Add(new ObjectInfo(
                 prefab,
-                (Vector3)location
+                (Vector3)location,
+                (x, y)
             ));
         }
     }
@@ -116,7 +117,7 @@ public class GridObjectManager : MonoBehaviour
         return null;
     }
 
-    public void SpawnObjects()
+    public void SpawnObjects(RoomGrid roomGrid)
     {
         for (int i = 0; i < objectPrefabs.Count; i++)
         {
@@ -126,6 +127,10 @@ public class GridObjectManager : MonoBehaviour
                 false
             );
             newObject.transform.localPosition = objectPrefabs[i].spawnPosition;
+            if(newObject.GetComponent<DynamicSpriteSetter>() != null)
+            {
+                newObject.GetComponent<DynamicSpriteSetter>().SpawnCallback(roomGrid, objectPrefabs[i].roomGridLocation);
+            }
             objects.Add(newObject);
         }
     }
@@ -168,9 +173,11 @@ class ObjectInfo
 {
     public GameObject prefab;
     public Vector3 spawnPosition;
-    public ObjectInfo(GameObject pref, Vector3 sPosition)
+    public (int, int) roomGridLocation;
+    public ObjectInfo(GameObject pref, Vector3 sPosition, (int, int) index)
     {
         prefab = pref;
         spawnPosition = sPosition;
+        roomGridLocation = index;
     }
 }
