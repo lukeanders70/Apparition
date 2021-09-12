@@ -12,12 +12,16 @@ public class DynamicSpriteSetter : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private GameObject plugPrefab;
+    [SerializeField]
+    private SpriteMask spriteMask;
 
     private Sprite[] sprites = { };
+    private Sprite[] spriteMasks = { };
 
     public void SpawnCallback(RoomGrid roomGrid, (int, int) location)
     {
         sprites = Resources.LoadAll<Sprite>(spritesPath);
+        spriteMasks = Resources.LoadAll<Sprite>(spritesPath + "-masks");
         var neighboorOfSameType = new Dictionary<string, bool>()
         {
             { "U", IsSameType(roomGrid, (location.Item1, location.Item2 - 1)) },
@@ -35,6 +39,7 @@ public class DynamicSpriteSetter : MonoBehaviour
         };
 
         UpdateMainSprite(neighboorOfSameType);
+        UpdateMainSpriteMasks(neighboorOfSameType);
         AddCorners(cornersWithPlugs);
     }
 
@@ -53,7 +58,30 @@ public class DynamicSpriteSetter : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to find sprite under path " + spritesPath + " with name " + spriteName);
+            Debug.LogError("Failed to find sprite under path " + spritesPath + "-masks with name " + spriteName);
+        }
+    }
+
+    private void UpdateMainSpriteMasks(Dictionary<string, bool> neighboorOfSameType)
+    {
+        if(spriteMask != null)
+        {
+            var spriteName = fileBase + "mask_" +
+                (neighboorOfSameType["U"] ? "U" : "") +
+                (neighboorOfSameType["R"] ? "R" : "") +
+                (neighboorOfSameType["D"] ? "D" : "") +
+                (neighboorOfSameType["L"] ? "L" : "");
+
+            var sprite = System.Array.Find(sprites, (s) => s.name == spriteName);
+            if (sprite != null)
+            {
+                Debug.Log(spriteName);
+                spriteMask.sprite = sprite;
+            }
+            else
+            {
+                Debug.LogError("Failed to find sprite under path " + spritesPath + " with name " + spriteName);
+            }
         }
     }
 
