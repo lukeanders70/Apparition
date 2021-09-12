@@ -75,7 +75,6 @@ public class DynamicSpriteSetter : MonoBehaviour
             var sprite = System.Array.Find(sprites, (s) => s.name == spriteName);
             if (sprite != null)
             {
-                Debug.Log(spriteName);
                 spriteMask.sprite = sprite;
             }
             else

@@ -13,7 +13,7 @@ namespace StaticDungeon
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
             { "ladder", new LadderConfig() },
-            { "hole-test", new HoleTestSpawnConfig() }
+            { "lava", new LavaSpawnConfig() }
         };
     }
 
@@ -24,7 +24,21 @@ namespace StaticDungeon
             new AreaRange((4, 3), (5, 8)),
             new AreaRange((19, 3), (21, 8))
         };
+        public static AreaRange[] largeOffsetTiles =
+        {
+            new AreaRange((2, 1), (5, 4)),
+            new AreaRange((2, 6), (6, 9)),
+            new AreaRange((2, 11), (5, 12)),
+            new AreaRange((8, 2), (12, 5)),
+            new AreaRange((8, 8), (12, 10)),
 
+            new AreaRange((15, 1), (18, 4)),
+            new AreaRange((15, 6), (19, 9)),
+            new AreaRange((15, 11), (18, 12)),
+            new AreaRange((21, 2), (24, 5)),
+            new AreaRange((21, 8), (24, 10)),
+        };
+        public static AreaRange[] largeOffsetTilesCenter = { new AreaRange((8, 6), (12, 7)) };
     }
 
     public enum Symmetry
@@ -52,21 +66,31 @@ namespace StaticDungeon
         public ObjectRanges[] EnemyRanges { get; set; }
     }
 
-    public class HoleTestSpawnConfig : SpawnConfig
+    public class LavaSpawnConfig : SpawnConfig
     {
-        virtual public string Name { get; set; } = "hole-test-config";
+        virtual public string Name { get; set; } = "lava-config";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 24,
-                maxObjects = 24,
+                minObjects = 48,
+                maxObjects = 48,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/hole", probability = 1.0f }
                 },
-                areaRanges = AreaRanges.centerArea
+                areaRanges = AreaRanges.largeOffsetTiles
             }
         };
-        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 1.0f },
+                },
+                areaRanges = AreaRanges.largeOffsetTilesCenter
+            }
+        };
     }
 
     public class EasyQuadrantSpawnConfig : SpawnConfig
