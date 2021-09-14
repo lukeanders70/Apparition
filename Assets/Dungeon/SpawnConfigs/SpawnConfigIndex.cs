@@ -102,7 +102,8 @@ namespace StaticDungeon
                 maxObjects = 12,
                 symmetry = Symmetry.Quadrant,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.3f }
                 },
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
@@ -131,7 +132,8 @@ namespace StaticDungeon
                 maxObjects = 5,
                 symmetry = Symmetry.LeftRight,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.3f }
                 },
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
@@ -160,7 +162,8 @@ namespace StaticDungeon
                 maxObjects = 5,
                 symmetry = Symmetry.TopBottom,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.3f }
                 },
                 areaRanges = AreaRanges.centerArea
             }
