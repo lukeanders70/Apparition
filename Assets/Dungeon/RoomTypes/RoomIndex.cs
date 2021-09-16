@@ -17,13 +17,17 @@ namespace StaticDungeon
 
     public interface Room
     {
+        string WallType { get; set; }
         string Name { get; set; }
         ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; }
+        
     }
 
     public class BasicRoom : Room
     {
         public string Name { get; set; } = "basic-room";
+
+        public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.3f },
@@ -35,6 +39,8 @@ namespace StaticDungeon
     public class BasicHarderRoom : Room
     {
         public string Name { get; set; } = "basic-harder";
+
+        public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-donut"], probability = 1.0f },
@@ -44,6 +50,8 @@ namespace StaticDungeon
     public class LavaRoom : Room
     {
         public string Name { get; set; } = "lava";
+
+        public string WallType { get; set; } = "cave";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava"], probability = 1.0f },
@@ -53,6 +61,8 @@ namespace StaticDungeon
     public class LadderRoom : Room
     {
         public string Name { get; set; } = "ladder";
+
+        public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["ladder"], probability = 1.0f },

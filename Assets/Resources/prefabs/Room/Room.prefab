@@ -100,6 +100,7 @@ MonoBehaviour:
   enemyManager: {fileID: -2748858838668381693}
   obsticleManager: {fileID: 7712903030489081789}
   doorManager: {fileID: 5151347997636064211}
+  baseWalls: {fileID: 2134159161905165178}
 --- !u!1 &122319395466855188
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorwayWallPrefab: {fileID: 150712993764013798, guid: fef37b748426e5e4db302fe376f55eb1, type: 3}
   doorPrefab: {fileID: 6245716550351972836, guid: 56991470a38540e45824fa564afe72a9, type: 3}
+  direction: top
 --- !u!1 &122319396173781871
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorwayWallPrefab: {fileID: 4443395946883208984, guid: db85e5ed43640ed49895c09e8a200473, type: 3}
   doorPrefab: {fileID: 8981912767958232550, guid: 52751f67c33fe4a46a4e4e4acc9bdb59, type: 3}
+  direction: left
 --- !u!1 &122319396511641520
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorwayWallPrefab: {fileID: 3539318607351192135, guid: 032e6888abf5e5848aac8ffae1e21c59, type: 3}
   doorPrefab: {fileID: 2538969067061811689, guid: 0d59a6b88197fd049bb70d9fc7a6ead2, type: 3}
+  direction: bottom
 --- !u!1 &122319396702104686
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorwayWallPrefab: {fileID: 7078538281087346616, guid: 49280d91b10e559459a87f5426cb4977, type: 3}
   doorPrefab: {fileID: 1151531771320315878, guid: 192d029959d70904ca15ae82dda17b5d, type: 3}
+  direction: right
 --- !u!1 &2134159161905165178
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +356,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1216367301
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 73235cec55baed74eae2a81f9fde31f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
