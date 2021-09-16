@@ -8,6 +8,8 @@ public class DoorwayGenerator : MonoBehaviour
     private GameObject doorwayWallPrefab;
     [SerializeField]
     private GameObject doorPrefab;
+    [SerializeField]
+    private string direction;
     
     #nullable enable
     public GameObject AddDoor(GameObject room, GameObject? oppostiteDoor)
@@ -25,10 +27,19 @@ public class DoorwayGenerator : MonoBehaviour
         return door;
     }
 
-    public GameObject AddDoorwayWall(GameObject room)
+    public GameObject AddDoorwayWall(GameObject room, string wallType)
     {
+        var path = "images/Room/" + wallType + "/" + direction + "doorwayWall";
+        Sprite doorwayWallSprite = Resources.Load<Sprite>(path);
         GameObject doorwayWall = Instantiate(doorwayWallPrefab, transform.position, transform.rotation);
         doorwayWall.transform.parent = room.transform;
+        if (doorwayWallSprite != null)
+        {
+            doorwayWall.GetComponent<SpriteRenderer>().sprite = doorwayWallSprite;
+        } else
+        {
+            Debug.LogError("Could not find doorway wall at " + path);
+        }
         return doorwayWall;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DoorManager : MonoBehaviour
 {
@@ -32,22 +33,23 @@ public class DoorManager : MonoBehaviour
 
     public void Start()
     {
-        PlugInvalidDoors();
+        var wallType = gameObject.GetComponent<RoomController>().roomInfo.WallType;
+        PlugInvalidDoors(wallType);
     }
 
-    private void PlugInvalidDoors()
+    private void PlugInvalidDoors(string wallType)
     {
         foreach (Vector2 direction in Constants.directions.Values)
         {
             GameObject door = doors[direction];
             if (door != null && !door.GetComponent<DoorController>().Navigable())
             {
-                AddDoorwayWall(direction);
+                AddDoorwayWall(direction, wallType);
             }
         }
     }
 
-    public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position, float? doorSpawnProbabilityOverride)
+    public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position, string wallType, float? doorSpawnProbabilityOverride)
     {
         foreach (Vector2 direction in Constants.directions.Values)
         {
@@ -62,14 +64,14 @@ public class DoorManager : MonoBehaviour
                     AddDoor(direction, oppositeRoomDoor);
                 } else
                 {
-                    AddDoorwayWall(direction);
+                    AddDoorwayWall(direction, wallType);
                 }
             } else if (doorSpawnProbabilityOverride == null ? Random.value < doorSpawnProbablity : Random.value < doorSpawnProbabilityOverride)
             {
                 AddDoor(direction, null);
             } else
             {
-                AddDoorwayWall(direction);
+                AddDoorwayWall(direction, wallType);
             }
         }
     }
@@ -85,15 +87,28 @@ public class DoorManager : MonoBehaviour
         }
         doors.Add(direction, newDoor);
     }
-    public void AddDoorwayWall(Vector2 direction)
+    public void AddDoorwayWall(Vector2 direction, string wallType)
     {
-        GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoorwayWall(gameObject);
+        GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoorwayWall(gameObject, wallType);
         if (doors.ContainsKey(direction))
         {
             Destroy(doors[direction]);
             doors.Remove(direction);
         }
         doors.Add(direction, newDoor);
+    }
+
+    public void ResetDoorwayWallSprites(string wallType)
+    {
+        var directions = doors.Keys.ToList();
+        foreach (Vector2 doorDirection in directions)
+        {
+            GameObject door = doors[doorDirection];
+            if (door.GetComponent<DoorController>().state == DoorState.Wall)
+            {
+                AddDoorwayWall(doorDirection, wallType);
+            }
+        }
     }
 
     public List<Vector2> getAccessibleDirections()

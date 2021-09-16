@@ -10,8 +10,12 @@ public class RoomController : MonoBehaviour
     private ObsticleManager obsticleManager;
     [SerializeField]
     private DoorManager doorManager;
+    [SerializeField]
+    private GameObject baseWalls;
 
     private RoomGrid roomGrid;
+
+    public StaticDungeon.Room roomInfo;
 
     /**
      * Call when a room is first created
@@ -23,10 +27,10 @@ public class RoomController : MonoBehaviour
         float? doorSpawnProbabilityOverride
     )
     {
-        doorManager.SetupDoors(dungeon, indexPosition, doorSpawnProbabilityOverride);
-
         StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 2 ? levelInfo.FarRooms : Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 1 ? levelInfo.MediumRooms : levelInfo.NearRooms;
-        StaticDungeon.Room roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
+        roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
+
+        doorManager.SetupDoors(dungeon, indexPosition, roomInfo.WallType, doorSpawnProbabilityOverride);
 
         SetRoomInfo(roomInfo);
     }
@@ -35,10 +39,32 @@ public class RoomController : MonoBehaviour
     {
         StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(newRoomInfo.SpawnConfigProbs);
         roomGrid = new RoomGrid();
+
         obsticleManager.ClearObjects();
         enemyManager.ClearObjects();
+
         obsticleManager.SetObsticles(roomGrid, spawnConfigInfo);
         enemyManager.SetEnemies(roomGrid, spawnConfigInfo);
+
+        doorManager.ResetDoorwayWallSprites(newRoomInfo.WallType);
+
+        setWallSprite(newRoomInfo.WallType);
+
+        roomInfo = newRoomInfo;
+    }
+
+    private void setWallSprite(string wallType)
+    {
+        var path = "images/Room/" + wallType + "/" + "baseWalls";
+        Sprite doorwayWallSprite = Resources.Load<Sprite>(path);
+        if (doorwayWallSprite != null)
+        {
+            baseWalls.GetComponent<SpriteRenderer>().sprite = doorwayWallSprite;
+        }
+        else
+        {
+            Debug.LogError("Could not find doorway wall at " + path);
+        }
     }
 
     public void ExitRoom()
