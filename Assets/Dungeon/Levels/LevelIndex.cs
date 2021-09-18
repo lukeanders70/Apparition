@@ -26,11 +26,12 @@ namespace StaticDungeon
         public string Name { get; set; } = "level1";
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.8f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.2f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.5f },
             new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-harder"], probability = 0.5f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
@@ -47,11 +48,12 @@ namespace StaticDungeon
         public string Name { get; set; } = "level2";
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.8f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.2f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.5f },
             new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-harder"], probability = 0.5f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
