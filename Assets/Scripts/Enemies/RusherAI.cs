@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RusherAI : BasicEnemyAI
@@ -43,11 +44,7 @@ public class RusherAI : BasicEnemyAI
 
     override public void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector3 oppositeDirection = collision.contacts[0].normal;
-        oppositeDirection.Normalize();
         Stop();
-        SetIntention(transform.position + (oppositeDirection * 0.3f));
-
         base.OnCollisionEnter2D(collision);
     }
 
@@ -97,10 +94,28 @@ public class RusherAI : BasicEnemyAI
             intendedLocation = position;
         } else
         {
-            Vector3 dir = AIHelpers.RandomDirection();
-            var intendedDistance = Random.Range(1.0f, 3.0f);
-            intendedLocation = transform.position + (dir * intendedDistance);
+            var boxCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
+            foreach (int _ in Enumerable.Range(1, 3))
+            {
+                Vector3 dir = AIHelpers.RandomDirection();
+                var intendedDistance = Random.Range(1.0f, 3.0f);
+                var testPosition = transform.position + (dir * intendedDistance);
+                Collider2D intersects = Physics2D.OverlapBox(
+                    (Vector2)testPosition + boxCollider.offset,
+                    boxCollider.size,
+                    0
+                );
+                if(intersects == null)
+                {
+                    intendedLocation = testPosition;
+                    break;
+                } else
+                {
+                    Stop();
+                }
+            }
         }
+
     }
 
     override public bool Damage(int damage)

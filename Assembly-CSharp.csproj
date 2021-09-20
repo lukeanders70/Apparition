@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
     <Compile Include="Assets\Scripts\Player\SpiritHandler.cs" />
     <Compile Include="Assets\Utils\GridObjectManager.cs" />
+    <Compile Include="Assets\Scripts\Obsticles\DynamicSpriteSetter.cs" />
     <Compile Include="Assets\Scripts\HealthContainerController.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyMovement.cs" />
     <Compile Include="Assets\Dungeon\RoomTypes\RoomIndex.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\Scripts\Obsticles\DynamicSpriteSetter.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
