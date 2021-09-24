@@ -8,12 +8,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private int damage;
     [SerializeField]
-    private Vector3 movement;
+    private Vector2 movement;
 
     [SerializeField]
     CircleCollider2D circleCollider;
-
-    private Vector2 lastPosition;
 
     private void Start()
     {
@@ -21,27 +19,30 @@ public class EnemyMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if( lastPosition == rb.position)
+        if (IsSliding())
         {
-            forceRaycastBounce();
+            ForceRaycastBounce();
         }
 
         rb.velocity = movement * speed;
     }
 
-    void forceRaycastBounce()
+    private bool IsSliding()
+    {
+        return rb.velocity.magnitude < (speed * 0.9);
+    }
+
+    private void ForceRaycastBounce()
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(
-            transform.position + (Vector3)circleCollider.offset,
+            (Vector2)transform.position + circleCollider.offset,
             movement,
-            circleCollider.radius + 0.5f
+            circleCollider.radius + 1.0f
         );
         foreach (RaycastHit2D hit in hits)
         {
             if ((hit.collider != null) && (hit.collider.gameObject != this.gameObject) && (hit.collider.gameObject.tag != "player"))
             {
-                Debug.Log(hit.collider.gameObject);
-                Debug.Log(hit.point);
                 movement = Vector3.Reflect(movement, hit.normal);
                 movement.Normalize();
                 break;
@@ -57,16 +58,17 @@ public class EnemyMovement : MonoBehaviour
             if (colliderHealth != null) {
                 colliderHealth.Damage(damage);
             }
-        } else
+        }
+        else
         {
-            movement = Vector3.Reflect(movement, collision.collider.gameObject.);
+            movement = Vector2.Reflect(movement, collision.GetContact(0).normal);
             movement.Normalize();
         }
     }
 
     void MoveRandomDirection()
     {
-        movement = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+        movement = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
         movement.Normalize();
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4736983304645431534}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.363, y: -0.513, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -123,7 +123,7 @@ MonoBehaviour:
   rb: {fileID: 4736983304645431533}
   speed: 2
   damage: 1
-  movement: {x: 0, y: 0, z: 0}
+  movement: {x: 0, y: 0}
   circleCollider: {fileID: 8757365119298908291}
 --- !u!114 &4736983304645431520
 MonoBehaviour:
@@ -170,7 +170,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 27de8d9a6c6eb4d428111b03b08f3bc8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
