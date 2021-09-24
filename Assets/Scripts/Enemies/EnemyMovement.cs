@@ -59,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
             }
         } else
         {
-            movement = Vector3.Reflect(movement, );
+            movement = Vector3.Reflect(movement, collision.collider.gameObject.);
             movement.Normalize();
         }
     }
