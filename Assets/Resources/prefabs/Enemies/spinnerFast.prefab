@@ -123,6 +123,8 @@ MonoBehaviour:
   rb: {fileID: 4736983304645431533}
   speed: 4
   damage: 1
+  movement: {x: 0, y: 0, z: 0}
+  circleCollider: {fileID: 8757365119298908291}
 --- !u!114 &4736983304645431520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   maxHealth: 1
+  invicible: 0
   deathColor: {r: 0.81568635, g: 0.40784317, b: 0.35686275, a: 0.85490197}
 --- !u!58 &8757365119298908291
 CircleCollider2D:
