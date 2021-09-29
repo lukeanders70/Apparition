@@ -13,6 +13,11 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private GameObject teleportPoint2;
 
+    private void Start()
+    {
+        state = DoorState.Open;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
@@ -24,7 +29,7 @@ public class DoorController : MonoBehaviour
 
     public bool Navigable()
     {
-        return oppostiteDoor != null;
+        return oppostiteDoor != null && state == DoorState.Open;
     }
 
     void PassThrough(GameObject activePlayer)
@@ -56,6 +61,12 @@ public class DoorController : MonoBehaviour
             );
         }
     }
+
+    virtual public void RoomEntered()
+    {
+        return;
+    }
+
 }
 
 public enum DoorState {

@@ -20,6 +20,8 @@ public class DoorManager : MonoBehaviour
 
     public Dictionary<Vector2, GameObject> doors = new Dictionary<Vector2, GameObject>();
 
+    public bool doorsClosed = false;
+
     public void Awake()
     {
         doorPositions = new Dictionary<Vector2, GameObject>()
@@ -49,8 +51,14 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-    public void SetupDoors(Dictionary<Vector2, GameObject> dungeon, Vector2 position, string wallType, float? doorSpawnProbabilityOverride)
+    public void SetupDoors(
+        Dictionary<Vector2, GameObject> dungeon,
+        Vector2 position,
+        StaticDungeon.Room roomInfo,
+        float? doorSpawnProbabilityOverride
+    )
     {
+        var isLockedIn = Random.value < roomInfo.LockInProbability;
         foreach (Vector2 direction in Constants.directions.Values)
         {
             Vector2 oppositeDirection = direction * -1;
@@ -61,25 +69,26 @@ public class DoorManager : MonoBehaviour
                 GameObject oppositeRoomDoor = neighbooringRoom.GetComponent<DoorManager>().doors[oppositeDirection];
                 if (oppositeRoomDoor.GetComponent<DoorController>().state == DoorState.Open)
                 {
-                    AddDoor(direction, oppositeRoomDoor);
+                    AddDoor(direction, oppositeRoomDoor, isLockedIn);
                 } else
                 {
-                    AddDoorwayWall(direction, wallType);
+                    AddDoorwayWall(direction, roomInfo.WallType);
                 }
             } else if (doorSpawnProbabilityOverride == null ? Random.value < doorSpawnProbablity : Random.value < doorSpawnProbabilityOverride)
             {
-                AddDoor(direction, null);
+                AddDoor(direction, null, isLockedIn);
             } else
             {
-                AddDoorwayWall(direction, wallType);
+                AddDoorwayWall(direction, roomInfo.WallType);
             }
         }
+        if (Random.value < roomInfo.LockInProbability) { doorsClosed = true; }
     }
 
     #nullable enable
-    public void AddDoor(Vector2 direction, GameObject? oppositeRoomDoor)
+    public void AddDoor(Vector2 direction, GameObject? oppositeRoomDoor, bool lockedInDoor)
     {
-        GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoor(gameObject, oppositeRoomDoor);
+        GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoor(gameObject, oppositeRoomDoor, lockedInDoor);
         if (doors.ContainsKey(direction))
         {
             Destroy(doors[direction]);
@@ -123,5 +132,16 @@ public class DoorManager : MonoBehaviour
             }
         }
         return accessiblePositions;
+    }
+
+    public void RoomEntered()
+    {
+        if(doorsClosed)
+        {
+            foreach (GameObject door in doors.Values)
+            {
+                door.GetComponent<DoorController>().RoomEntered();
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ public class RoomController : MonoBehaviour
 
     /**
      * Call when a room is first created
-     */
+     */ 
     public void SetupRoom(
         Dictionary<Vector2, GameObject> dungeon,
         Vector2 indexPosition,
@@ -30,7 +30,7 @@ public class RoomController : MonoBehaviour
         StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 2 ? levelInfo.FarRooms : Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 1 ? levelInfo.MediumRooms : levelInfo.NearRooms;
         roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
 
-        doorManager.SetupDoors(dungeon, indexPosition, roomInfo.WallType, doorSpawnProbabilityOverride);
+        doorManager.SetupDoors(dungeon, indexPosition, roomInfo, doorSpawnProbabilityOverride);
 
         SetRoomInfo(roomInfo);
     }
@@ -77,5 +77,6 @@ public class RoomController : MonoBehaviour
     {
         enemyManager.SpawnObjects(roomGrid);
         obsticleManager.SpawnObjects(roomGrid);
+        doorManager.RoomEntered();
     }
 }

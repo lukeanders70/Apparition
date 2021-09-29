@@ -38,4 +38,18 @@ public class EnemyManager : GridObjectManager
             }
         }
     }
+
+    public delegate void EnemyKilledEventHandler(object source, System.EventArgs args);
+
+    public event EnemyKilledEventHandler EnemyKilled;
+
+    public virtual void OnEnemyKilled()
+    {
+        Debug.Log("In Enemy Manager Killed");
+        if (EnemyKilled != null)
+        {
+            Debug.Log("Not Null");
+            EnemyKilled(this, System.EventArgs.Empty);
+        }
+    }
 }

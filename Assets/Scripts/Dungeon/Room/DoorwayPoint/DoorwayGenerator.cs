@@ -9,19 +9,22 @@ public class DoorwayGenerator : MonoBehaviour
     [SerializeField]
     private GameObject doorPrefab;
     [SerializeField]
+    private GameObject lockedInDoorPrefab;
+    [SerializeField]
     private string direction;
     
     #nullable enable
-    public GameObject AddDoor(GameObject room, GameObject? oppostiteDoor)
+    public GameObject AddDoor(GameObject room, GameObject? oppositeDoor, bool lockedInDoor)
     {
-        GameObject door = Instantiate(doorPrefab, transform.position, transform.rotation);
+        var prefab = lockedInDoor ? lockedInDoorPrefab : doorPrefab;
+        GameObject door = Instantiate(prefab, transform.position, transform.rotation);
         door.GetComponent<DoorController>().insideRoom = room;
-        door.GetComponent<DoorController>().oppostiteDoor = oppostiteDoor;
+        door.GetComponent<DoorController>().oppostiteDoor = oppositeDoor;
         door.transform.parent = room.transform;
 
-        if(oppostiteDoor != null)
+        if(oppositeDoor != null)
         {
-            oppostiteDoor.GetComponent<DoorController>().oppostiteDoor = door;
+            oppositeDoor.GetComponent<DoorController>().oppostiteDoor = door;
         }
 
         return door;

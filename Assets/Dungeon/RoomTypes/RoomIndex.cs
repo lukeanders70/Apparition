@@ -21,7 +21,8 @@ namespace StaticDungeon
         string WallType { get; set; }
         string Name { get; set; }
         ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; }
-        
+        float LockInProbability { get; set; }
+
     }
 
     public class BasicRoom : Room
@@ -35,6 +36,8 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.3f },
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-quadratic-spawn-config"], probability = 0.4f }
         };
+
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
     public class BasicMossRoom : BasicRoom
@@ -51,6 +54,8 @@ namespace StaticDungeon
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-donut"], probability = 1.0f },
         };
+
+        virtual public float LockInProbability { get; set; } = 1.0f;
     }
 
     public class LavaRoom : Room
@@ -62,6 +67,7 @@ namespace StaticDungeon
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava"], probability = 1.0f },
         };
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
     public class LadderRoom : Room
@@ -73,5 +79,6 @@ namespace StaticDungeon
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["ladder"], probability = 1.0f },
         };
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 }
