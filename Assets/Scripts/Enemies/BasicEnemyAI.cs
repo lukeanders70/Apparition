@@ -11,7 +11,6 @@ public class BasicEnemyAI : BasicHealth
 
     virtual protected void Start()
     {
-        Debug.Log("starting");
         enemyManager = gameObject.GetComponentInParent<EnemyManager>();
         if(enemyManager == null)
             Debug.LogError("could not find enemy manager for Enemy");
@@ -32,7 +31,6 @@ public class BasicEnemyAI : BasicHealth
 
     override public void Kill()
     {
-        Debug.Log("Calling Enemy Manager Killed");
         base.Kill();
         enemyManager.OnEnemyKilled();
     }

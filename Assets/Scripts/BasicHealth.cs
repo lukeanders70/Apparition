@@ -14,6 +14,8 @@ public class BasicHealth : MonoBehaviour, Health
 
     private ParticleSystem? deathParticals;
 
+    public bool isDestroyed = false;
+
     public void Awake()
     {
         health = maxHealth;
@@ -61,6 +63,7 @@ public class BasicHealth : MonoBehaviour, Health
 
     virtual public void Kill()
     {
+        gameObject.tag = "Destroyed";
         SpawnDeathParticles();
         Destroy(gameObject);
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -95,7 +93,6 @@ public class BlobAI : BasicEnemyAI
         }
         return currentEmptyAncestor;
     }
-
     override public void Kill()
     {
         if (ShouldSpawnSmaller())
@@ -112,11 +109,12 @@ public class BlobAI : BasicEnemyAI
         } else
         {
             GameObject emptyAncestor = GetEmptyAncestor();
-            base.Kill();
             if (emptyAncestor != null)
             {
+                emptyAncestor.tag = "Destroyed";
                 Destroy(emptyAncestor);
             }
+            base.Kill();
         }
     }
 }

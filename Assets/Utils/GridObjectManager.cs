@@ -161,8 +161,13 @@ public class GridObjectManager : MonoBehaviour
     {
         int c = 0;
         foreach (GameObject o in objects)
-            c += o == null ? 0 : 1;
+            c += ObjectDestroyed(o) ? 0 : 1;
         return c;
+    }
+
+    private bool ObjectDestroyed(GameObject o)
+    {
+        return o == null || o.tag == "Destroyed";
     }
 }
 
