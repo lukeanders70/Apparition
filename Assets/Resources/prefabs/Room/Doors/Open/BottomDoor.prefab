@@ -50,10 +50,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 0.5}
+    newSize: {x: 4, y: 0.5}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   state: 1
   insideRoom: {fileID: 0}
   oppostiteDoor: {fileID: 0}
+  animator: {fileID: 0}
   teleportPoint1: {fileID: 3421845233905514833}
   teleportPoint2: {fileID: 5665632856788625837}
 --- !u!1 &3421845233905514833

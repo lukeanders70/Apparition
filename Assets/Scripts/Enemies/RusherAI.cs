@@ -16,9 +16,10 @@ public class RusherAI : BasicEnemyAI
     private Coroutine currentCoroutine = null;
 
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
         SetIntention(null);
+        base.Start();
     }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class RusherAI : BasicEnemyAI
         }
     }
 
-    override public void OnCollisionEnter2D(Collision2D collision)
+    override protected void OnCollisionEnter2D(Collision2D collision)
     {
         Stop();
         base.OnCollisionEnter2D(collision);

@@ -27,11 +27,12 @@ public class BlobAI : BasicEnemyAI
     private Coroutine currentCoroutine = null;
 
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
         invicible = true;
         Invoke("setDamagable", 0.1f);
         InvokeRepeating("Move", 1.0f, moveFrequency);
+        base.Start();
     }
 
     void setDamagable()

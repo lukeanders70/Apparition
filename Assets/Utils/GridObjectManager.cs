@@ -6,7 +6,7 @@ public class GridObjectManager : MonoBehaviour
 {
 
     List<ObjectInfo> objectPrefabs = new List<ObjectInfo>();
-    List<GameObject> objects = new List<GameObject>();
+    public List<GameObject> objects = new List<GameObject>();
 
     // Start is called before the first frame update
     public void SetObjects(
@@ -155,6 +155,14 @@ public class GridObjectManager : MonoBehaviour
         {
             Debug.LogError($"object count {objects.Count} did not equal prefab count {objectPrefabs.Count} in room");
         }
+    }
+
+    public int ObjectCount()
+    {
+        int c = 0;
+        foreach (GameObject o in objects)
+            c += o == null ? 0 : 1;
+        return c;
     }
 }
 

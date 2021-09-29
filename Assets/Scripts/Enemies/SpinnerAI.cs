@@ -1,21 +1,21 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class SpinnerAI : BasicEnemyAI
 {
     public Rigidbody2D rb;
     [SerializeField]
     private float speed;
-    [SerializeField]
-    private int damage;
-    [SerializeField]
+
     private Vector2 movement;
 
     [SerializeField]
     CircleCollider2D circleCollider;
 
-    private void Start()
+    override protected void Start()
     {
         MoveRandomDirection();
+        base.Start();
+
     }
     void FixedUpdate()
     {
@@ -49,21 +49,15 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    override protected void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
-        if( collidedObject.tag == "Player")
-        {
-            Health colliderHealth = collision.collider.GetComponent<Health>();
-            if (colliderHealth != null) {
-                colliderHealth.Damage(damage);
-            }
-        }
-        else
+        if (collidedObject.tag != "Player")
         {
             movement = Vector2.Reflect(movement, collision.GetContact(0).normal);
             movement.Normalize();
         }
+        base.OnCollisionEnter2D(collision);
     }
 
     void MoveRandomDirection()
