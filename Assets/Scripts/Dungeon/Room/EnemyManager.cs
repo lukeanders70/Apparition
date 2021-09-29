@@ -45,10 +45,8 @@ public class EnemyManager : GridObjectManager
 
     public virtual void OnEnemyKilled()
     {
-        Debug.Log("In Enemy Manager Killed");
         if (EnemyKilled != null)
         {
-            Debug.Log("Not Null");
             EnemyKilled(this, System.EventArgs.Empty);
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LockInDoorController : DoorController
@@ -16,16 +14,13 @@ public class LockInDoorController : DoorController
 
     private void OnEnemyKilled(object source, System.EventArgs eventArgs)
     {
-        Debug.Log("In LockedDoorContoller OnEnemyKilled, count is " + roomEnemyManager.ObjectCount());
-        if (roomEnemyManager.ObjectCount() == 1) // final enemy will not be null yet, so total count will show as 1
+        if (roomEnemyManager.ObjectCount() == 0) // final enemy will not be null yet, so total count will show as 1
             SetOpen();
     }
-
     override public void RoomEntered()
     {
         if(roomEnemyManager.objects.Count != 0)
         {
-            Debug.Log("In LockedDoorContoller room entered and setting closed");
             SetClosed();
             roomEnemyManager.EnemyKilled += OnEnemyKilled;
         }
@@ -39,7 +34,6 @@ public class LockInDoorController : DoorController
 
     private void SetOpen()
     {
-        Debug.Log("Setting Doors open");
         state = DoorState.Open;
         animator.SetBool("doorClosed", false);
     }
