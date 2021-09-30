@@ -79,7 +79,18 @@ public class BlobAI : BasicEnemyAI
 
     private bool IsLastChild(GameObject go)
     {
-        return go.transform.parent != null && go.transform.parent.name.Contains("blob") && (go.transform.parent.childCount == 1);
+        return go.transform.parent != null && go.transform.parent.name.Contains("blob") && (NumSurvivingChildren(go.transform.parent) == 1);
+    }
+
+    static private int NumSurvivingChildren(Transform parent)
+    {
+        int c = 0;
+        foreach(Transform child in parent)
+        {
+            if (child.gameObject != null && child.gameObject.tag != "Destroyed")
+                c += 1;
+        }
+        return c;
     }
 
     private GameObject GetEmptyAncestor()
