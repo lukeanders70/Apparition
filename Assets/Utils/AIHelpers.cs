@@ -30,6 +30,29 @@ public class AIHelpers
         }
         return null;
     }
+
+    public static GameObject? GetClosestMovingPlayer(Vector3 position)
+    {
+        GameObject player1 = GameObject.Find("Player1");
+        GameObject player2 = GameObject.Find("Player2");
+        bool player1Moving = player1.GetComponent<Rigidbody2D>().velocity.magnitude > 0.1f;
+        bool player2Moving = player2.GetComponent<Rigidbody2D>().velocity.magnitude > 0.1f;
+
+        if (player1 != null && player2 != null)
+        {
+            var player1Closer = Vector3.Distance(player1.transform.position, position) < Vector3.Distance(player2.transform.position, position);
+            if (player1Moving && ((!player2Moving) || player1Closer))
+            {
+                return player1;
+            }
+            else if (player2Moving && ((!player1Moving) || !player1Closer))
+            {
+                return player2;
+            }
+        }
+        return null;
+    }
+
     public static IEnumerator MoveTo(Rigidbody2D rb, Vector3 position, float speed, System.Action callback)
     {
         while(Vector2.Distance(rb.position, position) > 0.05)

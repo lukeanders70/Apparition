@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1725158747151057044}
   - component: {fileID: 1725158747151057040}
   - component: {fileID: 611150305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rusher
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -149,11 +149,11 @@ MonoBehaviour:
   maxHealth: 3
   invicible: 0
   deathColor: {r: 0.5568628, g: 0.6117647, b: 0.69411767, a: 1}
+  isDestroyed: 0
   damage: 1
   rb: {fileID: 1725158747151057044}
   speed: 3
   animator: {fileID: 611150305}
-  intentionPoint: {fileID: 0}
 --- !u!95 &611150305
 Animator:
   serializedVersion: 3
