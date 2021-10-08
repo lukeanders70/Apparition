@@ -86,7 +86,7 @@ namespace StaticDungeon
                 maxObjects = 5,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 1.0f },
+                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
                 },
                 areaRanges = AreaRanges.largeOffsetTilesCenter
             }

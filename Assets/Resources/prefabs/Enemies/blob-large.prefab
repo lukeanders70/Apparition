@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 807471414205322554}
   - component: {fileID: 807471414205322557}
   - component: {fileID: 807471414205322556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: blob-large
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -128,6 +128,7 @@ MonoBehaviour:
   maxHealth: 1
   invicible: 0
   deathColor: {r: 0.5529412, g: 0.7137255, b: 0.4431373, a: 1}
+  isDestroyed: 0
   damage: 1
   rb: {fileID: 807471414205322557}
   moveFrequency: 1.5
