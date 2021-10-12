@@ -12,7 +12,7 @@ public class BatAI : BasicEnemyAI
 
     private float timeCycle = 0;
 
-    private void Start()
+    override protected void Start()
     {
         base.Start();
         timeCycle = Random.Range(0, oscilationPeriod);

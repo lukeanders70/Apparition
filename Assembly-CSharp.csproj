@@ -98,6 +98,9 @@
     <Compile Include="Assets\Scripts\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\Scripts\BatAI.cs" />
+    <Compile Include="Assets\Scripts\CoinController.cs" />
+    <Compile Include="Assets\InventoryController.cs" />
+    <Compile Include="Assets\CoinCounterController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
