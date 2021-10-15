@@ -13,4 +13,6 @@ public interface Health
     public void Heal(int amount);
 
     public void Kill();
+
+    public void AddDeathCallback(System.Action callback);
 }
