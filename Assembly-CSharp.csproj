@@ -58,12 +58,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemies\RusherAI.cs" />
     <Compile Include="Assets\Scripts\InteractionController.cs" />
+    <Compile Include="Assets\Scripts\InventoryController.cs" />
+    <Compile Include="Assets\Scripts\CoinController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
     <Compile Include="Assets\Scripts\BasicHealth.cs" />
     <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
     <Compile Include="Assets\Scripts\CameraMoveController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
+    <Compile Include="Assets\Scripts\BatAI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\Spirit\SpiritController.cs" />
     <Compile Include="Assets\Scripts\UI\OnlyKeyBoardInputModule.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
     <Compile Include="Assets\Scripts\Player\IndividualPlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\CoinCounterController.cs" />
     <Compile Include="Assets\Scripts\LockInDoorController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Dungeon\Utils.cs" />
@@ -97,10 +101,7 @@
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\Scripts\BatAI.cs" />
-    <Compile Include="Assets\Scripts\CoinController.cs" />
-    <Compile Include="Assets\InventoryController.cs" />
-    <Compile Include="Assets\CoinCounterController.cs" />
+    <Compile Include="Assets\LootDropController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />

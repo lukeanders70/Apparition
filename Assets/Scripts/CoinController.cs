@@ -8,9 +8,9 @@ public class CoinController : MonoBehaviour
     [SerializeField]
     private ParticleSystem ps;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    virtual protected void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject collidedObject = collider.gameObject;
+        GameObject collidedObject = collision.collider.gameObject;
         if (collidedObject.tag == "Player")
         {
             InventoryController inventory = collidedObject.GetComponentInParent<InventoryController>();

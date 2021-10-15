@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class BasicHealth : MonoBehaviour, Health
     private ParticleSystem? deathParticals;
 
     public bool isDestroyed = false;
+
+    private List<Action> deathCallbacks = new List<Action>();
 
     public void Awake()
     {
@@ -63,8 +66,17 @@ public class BasicHealth : MonoBehaviour, Health
 
     virtual public void Kill()
     {
+        foreach (Action deathCallback in deathCallbacks)
+        {
+            deathCallback();
+        }
         gameObject.tag = "Destroyed";
         SpawnDeathParticles();
         Destroy(gameObject);
+    }
+
+    public void AddDeathCallback(Action callback)
+    {
+        deathCallbacks.Add(callback);
     }
 }

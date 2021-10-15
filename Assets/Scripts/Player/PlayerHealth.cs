@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerHealth : MonoBehaviour, Health
 {
@@ -12,6 +13,8 @@ public class PlayerHealth : MonoBehaviour, Health
     private HealthContainerController healthContainer;
     public int health;
     public int maxHealth;
+
+    private List<System.Action> deathCallbacks = new List<System.Action>();
 
     private bool damagable = true;
 
@@ -66,5 +69,10 @@ public class PlayerHealth : MonoBehaviour, Health
                 gameOver.SetActive(true);
             }
         ));
+    }
+
+    public void AddDeathCallback(System.Action callback)
+    {
+        deathCallbacks.Add(callback);
     }
 }

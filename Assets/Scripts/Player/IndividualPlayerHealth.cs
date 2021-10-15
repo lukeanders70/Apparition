@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class IndividualPlayerHealth : MonoBehaviour, Health
 {
@@ -6,6 +7,8 @@ public class IndividualPlayerHealth : MonoBehaviour, Health
     private PlayerHealth healthDelegate;
 
     private ParticleSystem damageParticals;
+
+    private List<System.Action> deathCallbacks = new List<System.Action>();
 
     public void Awake()
     {
@@ -42,5 +45,10 @@ public class IndividualPlayerHealth : MonoBehaviour, Health
     public void Kill()
     {
         healthDelegate.Kill();
+    }
+
+    public void AddDeathCallback(System.Action callback)
+    {
+        deathCallbacks.Add(callback);
     }
 }
