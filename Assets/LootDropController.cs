@@ -34,10 +34,12 @@ public class LootDropController : MonoBehaviour
         for (int i = 0; i < prefabCount; i++)
         {
             GameObject lootInstance = Instantiate(lootPrefab);
-            if (lootInstance != null)
+            GameObject containingRoom = DungeonUtils.GetRoom(gameObject);
+            if (lootInstance != null && containingRoom != null)
             {
                 lootInstance.transform.position = transform.position;
                 lootInstance.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized * scatterVecoity;
+                lootInstance.transform.parent = containingRoom.transform;
             }
         }
     }

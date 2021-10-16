@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dc8fafd96a1e64b9e80a3763bfd7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 10
   ps: {fileID: 3768990683472016124, guid: 029d0d5e9d08b6b499a9a2af01306817, type: 3}
 --- !u!50 &3378591339052559824
 Rigidbody2D:
