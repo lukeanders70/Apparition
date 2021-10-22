@@ -57,3 +57,6 @@ TagManager:
   - name: GameOver
     uniqueID: 2144203611
     locked: 0
+  - name: Transitions
+    uniqueID: 2146856889
+    locked: 0

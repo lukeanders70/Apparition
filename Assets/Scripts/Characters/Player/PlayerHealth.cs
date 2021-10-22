@@ -60,18 +60,18 @@ public class PlayerHealth : MonoBehaviour, Health
 
     public void Kill()
     {
-        GameObject transitions = GameObject.Find("Transitions");
-        StartCoroutine(transitions.GetComponent<Transitions>().LevelTransition(
-            () =>
-            {
-                Destroy(playerHandler.player1.gameObject);
-                Destroy(playerHandler.player2.gameObject);
-                gameOver.SetActive(true);
-            }
-        ));
+        var transitions = GameObject.Find("Transitions");
+        var levelTransition = transitions.GetComponent<Transitions>().LevelTransition();
+        levelTransition.AddLoadingCallback((Animator a, AnimatorStateInfo stateInfo, int layerIndex) =>
+        {
+            Destroy(playerHandler.player1.gameObject);
+            Destroy(playerHandler.player2.gameObject);
+            gameOver.SetActive(true);
+        });
+        levelTransition.StartTransition();
     }
 
-    public void AddDeathCallback(System.Action callback)
+    public void AddDeathCallback(Action callback)
     {
         deathCallbacks.Add(callback);
     }
