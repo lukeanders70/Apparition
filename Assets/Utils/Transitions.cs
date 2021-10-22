@@ -5,13 +5,23 @@ using UnityEngine;
 public class Transitions: MonoBehaviour
 {
     [SerializeField]
-    private Animator levelTransition;
-    public IEnumerator LevelTransition(System.Action callback)
+    private TransitionController levelTransition;
+    public void Start()
     {
-        levelTransition.updateMode = AnimatorUpdateMode.UnscaledTime;
-        levelTransition.SetTrigger("Start");
-        yield return new WaitForSecondsRealtime(1);
-        callback();
-        levelTransition.SetTrigger("End");
+        
+    }
+    public TransitionController LevelTransition()
+    {
+        return levelTransition;
+    }
+
+    public enum TransitionState
+    {
+        Transparent,
+        Start,
+        Load,
+        End
     }
 }
+
+

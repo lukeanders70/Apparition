@@ -20,19 +20,18 @@ public class LadderCollision : MonoBehaviour
             if (dungeon != null)
             {
                 Time.timeScale = 0;
-                StartCoroutine(transitions.GetComponent<Transitions>().LevelTransition(
-                    () =>
+                var levelTransition = transitionHandler.GetComponent<Transitions>().LevelTransition();
+                levelTransition.AddLoadingCallback((Animator a, AnimatorStateInfo stateInfo, int layerIndex) =>
+                {
+                    bool movedDown = dungeon.GetComponent<DungeonGenerator>().MoveDown();
+                    if (movedDown)
                     {
-                        bool movedDown = dungeon.GetComponent<DungeonGenerator>().MoveDown();
-                        if (movedDown)
-                        {
-                            camera.GetComponent<CameraMoveController>().Recenter();
-                            GameObject Player = collidedObject.transform.parent.gameObject;
-                            Player.GetComponent<PlayerHandler>().resetPosition();
-                        }
-                        Time.timeScale = 1;
+                        camera.GetComponent<CameraMoveController>().Recenter();
+                        GameObject Player = collidedObject.transform.parent.gameObject;
+                        Player.GetComponent<PlayerHandler>().resetPosition();
                     }
-                ));
+                    Time.timeScale = 1;
+                });
             } else
             {
                 Debug.LogError("No gameobject 'Dungeon' found");

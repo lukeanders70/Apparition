@@ -104,6 +104,9 @@
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\Utils\DungeonUtils.cs" />
     <Compile Include="Assets\Scripts\Loot\BasicLootController.cs" />
+    <Compile Include="Assets\ActiveIndicator.cs" />
+    <Compile Include="Assets\AnimationCallback.cs" />
+    <Compile Include="Assets\TransitionController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
