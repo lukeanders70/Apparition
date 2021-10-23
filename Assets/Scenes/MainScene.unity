@@ -1818,7 +1818,7 @@ MonoBehaviour:
   gameOver: {fileID: 872256021}
   playerHandler: {fileID: 2087447587}
   healthContainer: {fileID: 662860281}
-  health: 1
+  health: 3
   maxHealth: 3
 --- !u!114 &2087447589
 MonoBehaviour:
