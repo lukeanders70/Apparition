@@ -137,7 +137,7 @@ public class GridObjectManager : MonoBehaviour
 
     public void ExitRoom()
     {
-        if (objects.Count == objects.Count)
+        if (objects.Count == objectPrefabs.Count)
         {
             List<ObjectInfo> newObjectPrefabs = new List<ObjectInfo>();
             for (int i = 0; i < objects.Count; i++)
