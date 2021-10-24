@@ -8,6 +8,7 @@ namespace StaticDungeon
     {
         public static Dictionary<string, SpawnConfig> spawnConfigs = new Dictionary<string, SpawnConfig>()
         {
+            { "empty", new EmptySpawnConfig() },
             { "easy-donut", new EasyDonutSpawnConfig() },
             { "medium-donut", new  MediumDonutSpawnConfig() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
@@ -64,6 +65,13 @@ namespace StaticDungeon
         public string Name { get; set; }
         public ObjectRanges[] ObsticleRanges { get; set; }
         public ObjectRanges[] EnemyRanges { get; set; }
+    }
+
+    public class EmptySpawnConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "empty-config";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = { };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
     }
 
     public class LavaSpawnConfig : SpawnConfig

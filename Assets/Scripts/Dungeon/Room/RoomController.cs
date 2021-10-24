@@ -27,7 +27,18 @@ public class RoomController : MonoBehaviour
         float? doorSpawnProbabilityOverride
     )
     {
-        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 2 ? levelInfo.FarRooms : Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y) > 1 ? levelInfo.MediumRooms : levelInfo.NearRooms;
+        var manDistanceFromStart = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y);
+        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] entryRoomInfo = { new StaticDungeon.ObjectProbability<StaticDungeon.Room> { obj = levelInfo.EntryRoom, probability = 1.0f } };
+
+        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = 
+            manDistanceFromStart > 2 ? 
+                levelInfo.FarRooms : 
+                manDistanceFromStart > 1 ? 
+                    levelInfo.MediumRooms : 
+                    manDistanceFromStart == 1 ? 
+                        levelInfo.NearRooms : 
+                        entryRoomInfo;
+
         roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
 
         doorManager.SetupDoors(dungeon, indexPosition, roomInfo, doorSpawnProbabilityOverride);
