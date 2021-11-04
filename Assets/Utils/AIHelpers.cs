@@ -31,6 +31,18 @@ public class AIHelpers
         return null;
     }
 
+    public static float? ClosestPlayerDistance(Vector3 position)
+    {
+        var player = GetClosestPlayer(position);
+        if(player != null)
+        {
+            return Vector2.Distance(position, player.transform.position);
+        } else
+        {
+            return null;
+        }
+    }
+
     public static GameObject? GetClosestMovingPlayer(Vector3 position)
     {
         GameObject player1 = GameObject.Find("Player1");
