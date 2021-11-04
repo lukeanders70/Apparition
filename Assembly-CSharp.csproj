@@ -107,6 +107,7 @@
     <Compile Include="Assets\ActiveIndicator.cs" />
     <Compile Include="Assets\AnimationCallback.cs" />
     <Compile Include="Assets\TransitionController.cs" />
+    <Compile Include="Assets\BigWolfAI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
