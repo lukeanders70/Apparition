@@ -65,7 +65,8 @@ namespace StaticDungeon
         public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-donut"], probability = 1.0f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["blob-den"], probability = 0.5f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["wolf-den"], probability = 0.5f },
         };
 
         virtual public float LockInProbability { get; set; } = 1.0f;

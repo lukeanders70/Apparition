@@ -10,7 +10,8 @@ namespace StaticDungeon
         {
             { "empty", new EmptySpawnConfig() },
             { "easy-donut", new EasyDonutSpawnConfig() },
-            { "medium-donut", new  MediumDonutSpawnConfig() },
+            { "wolf-den", new  WolfDen() },
+            { "blob-den", new  BlobDen() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
             { "ladder", new LadderConfig() },
@@ -191,20 +192,53 @@ namespace StaticDungeon
         };
     }
 
-    public class MediumDonutSpawnConfig : EasyDonutSpawnConfig
+    public class BlobDen : EasyDonutSpawnConfig
     {
         override public string Name { get; set; } = "medium-donut";
 
         override public ObjectRanges[] EnemyRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 3,
-                maxObjects = 5,
+                minObjects = 1,
+                maxObjects = 2,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 0.0f },
-                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.0f },
                     new ObjectProbability<string> { obj = "Enemies/blob-large", probability = 1.0f },
+                },
+                areaRanges = AreaRanges.midLeftmidRightStrips
+            },
+            new ObjectRanges {
+                minObjects = 0,
+                maxObjects = 3,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/spinnerFast", probability = 3.0f },
+                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 7.0f },
+                },
+                areaRanges = AreaRanges.midLeftmidRightStrips
+            }
+        };
+    }
 
+    public class WolfDen : EasyDonutSpawnConfig
+    {
+        override public string Name { get; set; } = "medium-donut";
+
+        override public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/big-wolf", probability = 1.0f },
+                },
+                areaRanges = AreaRanges.midLeftmidRightStrips
+            },
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 3,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 1.0f },
                 },
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
