@@ -67,7 +67,7 @@
     <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BatAI.cs" />
-    <Compile Include="Assets\LootDropController.cs" />
+    <Compile Include="Assets\Scripts\Loot\LootDropController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Spirit\SpiritController.cs" />
     <Compile Include="Assets\Scripts\UI\OnlyKeyBoardInputModule.cs" />
@@ -104,10 +104,9 @@
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\Utils\DungeonUtils.cs" />
     <Compile Include="Assets\Scripts\Loot\BasicLootController.cs" />
-    <Compile Include="Assets\ActiveIndicator.cs" />
-    <Compile Include="Assets\AnimationCallback.cs" />
-    <Compile Include="Assets\TransitionController.cs" />
-    <Compile Include="Assets\BigWolfAI.cs" />
+    <Compile Include="Assets\Scripts\Misc\AnimationCallback.cs" />
+    <Compile Include="Assets\Scripts\UI\TransitionController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemies\BigWolfAI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
