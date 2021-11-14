@@ -18,92 +18,37 @@ public class RusherAI : BasicEnemyAI
     [SerializeField]
     private float maxWanderDistance;
     [SerializeField]
-    private float aggroRange;
-    [SerializeField]
     private int numCharges;
 
-    private string state;
-    private int numChargesRemaining = 0;
+    private AIStateMachine stateMachine;
 
-    private Coroutine currentCoroutine = null;
-
-    // Start is called before the first frame update
     override protected void Start()
     {
-        StartCoroutine(setStopped());
-        base.Start();
+        stateMachine = new AIStateMachine();
+        stateMachine.RegisterState("idle", new IdleState(gameObject, stateMachine));
+        stateMachine.RegisterState("aggro", new AggroState(gameObject, stateMachine));
+        stateMachine.RegisterState("walk", new WalkState(gameObject, stateMachine));
+
+        stateMachine.EnterState("idle");
     }
 
-    IEnumerator setStopped()
+    public void Update()
     {
-        state = "idle";
-
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        Stop();
-        yield return new WaitForSeconds(3);
-        conditionallyStopCoroutine();
-        currentCoroutine = StartCoroutine(setWalk());
-        yield break;
+        stateMachine.Update();
     }
 
-    IEnumerator setAggro(bool resetCharges = true)
+    private void SetAnimationState(string state)
     {
-        state = "aggro";
-
-        if (resetCharges)
+        foreach(AnimatorControllerParameter param in animator.parameters)
         {
-            numChargesRemaining = numCharges;
+            if(param.name == state)
+            {
+                animator.SetBool(param.name, true);
+            } else if (param.type == AnimatorControllerParameterType.Bool)
+            {
+                animator.SetBool(param.name, false);
+            }
         }
-
-        Stop();
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
-        var runPoint = AIHelpers.GetClosestPlayer(transform.position).transform.position;
-        yield return new WaitForSeconds(0.5f);
-
-        animator.SetBool("run", true);
-        animator.SetBool("idle", false);
-        animator.SetBool("walk", false);
-        while (Vector2.Distance(runPoint, transform.position) > 0.15)
-        {
-            rb.velocity = getVelocityTowardsPoint(runPoint, runSpeed);
-            animator.SetFloat("lastHorizontal", rb.velocity.x);
-            yield return null;
-        }
-        numChargesRemaining = numChargesRemaining - 1;
-        conditionallyStopCoroutine();
-        if (numChargesRemaining <= 0)
-        {
-            numChargesRemaining = numCharges;
-            conditionallyStopCoroutine();
-            currentCoroutine = StartCoroutine(setStopped());
-        }
-        else
-        {
-            conditionallyStopCoroutine();
-            currentCoroutine = StartCoroutine(setAggro(false));
-        }
-        yield break;
-    }
-
-    IEnumerator setWalk()
-    {
-        state = "walk";
-
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        var walkPoint = getWanderPoint();
-        animator.SetBool("run", false);
-        animator.SetBool("idle", false);
-        animator.SetBool("walk", true);
-        var velocity = getVelocityTowardsPoint(walkPoint, walkSpeed);
-        while (Vector2.Distance(walkPoint, (Vector2)transform.position) > 0.15)
-        {
-            rb.velocity = velocity;
-            animator.SetFloat("lastHorizontal", rb.velocity.x);
-            yield return null;
-        }
-        conditionallyStopCoroutine();
-        currentCoroutine = StartCoroutine(setStopped());
-        yield break;
     }
 
     Vector2 getWanderPoint()
@@ -133,40 +78,191 @@ public class RusherAI : BasicEnemyAI
         return dir * speed;
     }
 
-    private void conditionallyStopCoroutine() {
-        if (currentCoroutine != null) { StopCoroutine(currentCoroutine); } 
-    }
-
     private void Stop()
     {
-        animator.SetBool("run", false);
-        animator.SetBool("idle", true);
-        animator.SetBool("walk", false);
         rb.velocity = Vector2.zero;
     }
 
-
     override protected void OnCollisionEnter2D(Collision2D collision)
     {
-        conditionallyStopCoroutine();
-        if (state != "aggro")
-        {
-            currentCoroutine = StartCoroutine(setStopped());
-        } else
-        {
-            numChargesRemaining = numChargesRemaining - 1;
-            currentCoroutine = StartCoroutine(setAggro(false));
-        }
+        stateMachine.OnCollision(collision);
         base.OnCollisionEnter2D(collision);
     }
 
     override public bool Damage(int damage)
     {
-        if(currentCoroutine != null && state != "aggro")
-        {
-            conditionallyStopCoroutine();
-            currentCoroutine = StartCoroutine(setAggro());
-        }
+        stateMachine.EnterState("aggro");
         return base.Damage(damage);
+    }
+
+
+
+    private class IdleState : AIState
+    {
+        private RusherAI AIComp;
+        private GameObject gameObject;
+        private AIStateMachine stateMachine;
+
+        public IdleState(GameObject go, AIStateMachine sm)
+        {
+            gameObject = go;
+            AIComp = gameObject.GetComponent<RusherAI>();
+            stateMachine = sm;
+        }
+
+        public override void OnCollision(Collision2D collision)
+        {
+            stateMachine.EnterState("idle");
+        }
+
+        override public void StartState()
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            AIComp.SetAnimationState("idle");
+            AIComp.Stop();
+            Invoke(() => stateMachine.EnterState("walk"), 3.0f);
+        }
+
+        public override void StopState()
+        {
+            AIComp.CancelInvoke();
+            base.StopState();
+        }
+    }
+
+    private class WalkState : AIState
+    {
+        private RusherAI AIComp;
+        private GameObject gameObject;
+        private Vector2 walkPoint;
+        private AIStateMachine stateMachine;
+
+        public WalkState(GameObject go, AIStateMachine sm)
+        {
+            gameObject = go;
+            AIComp = gameObject.GetComponent<RusherAI>();
+            stateMachine = sm;
+        }
+
+        public override void Update()
+        {
+            var velocity = AIComp.getVelocityTowardsPoint(walkPoint, AIComp.walkSpeed);
+            if (Vector2.Distance(walkPoint, gameObject.transform.position) > 0.15)
+            {
+                AIComp.rb.velocity = velocity;
+                AIComp.animator.SetFloat("lastHorizontal", AIComp.rb.velocity.x);
+            } else
+            {
+                stateMachine.EnterState("idle");
+            }
+            base.Update();
+        }
+
+        public override void OnCollision(Collision2D collision)
+        {
+            stateMachine.EnterState("idle");
+        }
+
+        override public void StartState()
+        {
+            AIComp.SetAnimationState("walk");
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            AIComp.Stop();
+            walkPoint = AIComp.getWanderPoint();
+            base.StartState();
+        }
+
+        public override void StopState()
+        {
+            AIComp.Stop();
+            base.StopState();
+        }
+    }
+
+    private class AggroState : AIState
+    {
+        private RusherAI AIComp;
+        private GameObject gameObject;
+        private Vector2 runPoint;
+        private AIStateMachine stateMachine;
+
+        private int numChargesLeft;
+
+        private bool running = false;
+
+        public AggroState(GameObject go, AIStateMachine sm)
+        {
+            gameObject = go;
+            AIComp = gameObject.GetComponent<RusherAI>();
+            stateMachine = sm;
+
+            numChargesLeft = AIComp.numCharges;
+        }
+
+        public override void Update()
+        {
+            if(running)
+            {
+                var velocity = AIComp.getVelocityTowardsPoint(runPoint, AIComp.runSpeed);
+                if (Vector2.Distance(runPoint, gameObject.transform.position) > 0.15)
+                {
+                    AIComp.rb.velocity = velocity;
+                    AIComp.animator.SetFloat("lastHorizontal", AIComp.rb.velocity.x);
+                }
+                else if (numChargesLeft <= 0)
+                {
+                    stateMachine.EnterState("idle");
+                }
+                else
+                {
+                    numChargesLeft -= 1;
+                    Notice();
+                }
+            }
+            base.Update();
+        }
+
+        public override void OnCollision(Collision2D collision)
+        {
+            AIComp.Stop();
+            if (numChargesLeft <= 0)
+            {
+                stateMachine.EnterState("idle");
+            } else
+            {
+                numChargesLeft -= 1;
+                Notice();
+            }
+        }
+
+        override public void StartState()
+        {
+            numChargesLeft = AIComp.numCharges;
+            Notice();
+            base.StartState();
+        }
+
+        public override void StopState()
+        {
+            AIComp.Stop();
+            base.StopState();
+        }
+
+        private void Notice()
+        {
+            AIComp.SetAnimationState("idle");
+            running = false;
+            AIComp.Stop();
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
+            runPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
+
+            Invoke(Run, 1.0f);
+        }
+
+        private void Run()
+        {
+            AIComp.SetAnimationState("run");
+            running = true;
+        }
     }
 }
