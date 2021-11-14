@@ -30,6 +30,7 @@ public class RusherAI : BasicEnemyAI
         stateMachine.RegisterState("walk", new WalkState(gameObject, stateMachine));
 
         stateMachine.EnterState("idle");
+        base.Start();
     }
 
     public void Update()
