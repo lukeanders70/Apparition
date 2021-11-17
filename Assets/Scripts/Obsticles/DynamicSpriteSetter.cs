@@ -86,24 +86,28 @@ public class DynamicSpriteSetter : MonoBehaviour
 
     private void AddCorners(Dictionary<string, bool> cornersWithPlugs)
     {
-        foreach (KeyValuePair<string, bool> item in cornersWithPlugs) {
-            if (item.Value)
+        if(plugPrefab != null)
+        {
+            foreach (KeyValuePair<string, bool> item in cornersWithPlugs)
             {
-                var spriteName = fileBase + "plug_" + item.Key;
-                var sprite = System.Array.Find(sprites, (s) => s.name == spriteName);
-                if (sprite != null)
+                if (item.Value)
                 {
-                    GameObject plug = Instantiate(
-                        plugPrefab,
-                        gameObject.transform,
-                        true
-                    );
-                    plug.transform.localPosition = Vector3.zero;
-                    plug.GetComponent<SpriteRenderer>().sprite = sprite;
-                }
-                else
-                {
-                    Debug.LogError("Failed to find sprite under path " + spritesPath + " with name " + spriteName);
+                    var spriteName = fileBase + "plug_" + item.Key;
+                    var sprite = System.Array.Find(sprites, (s) => s.name == spriteName);
+                    if (sprite != null)
+                    {
+                        GameObject plug = Instantiate(
+                            plugPrefab,
+                            gameObject.transform,
+                            true
+                        );
+                        plug.transform.localPosition = Vector3.zero;
+                        plug.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to find sprite under path " + spritesPath + " with name " + spriteName);
+                    }
                 }
             }
         }

@@ -15,7 +15,10 @@ namespace StaticDungeon
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
             { "ladder", new LadderConfig() },
-            { "lava", new LavaSpawnConfig() }
+            { "lava", new LavaSpawnConfig() },
+            { "easy-walled", new EasyWalledRoomConfig() },
+            { "easy-walled-alt", new AltWalledRoomConfig() },
+            { "easy-walled-strips", new WalledRoomStrips() }
         };
     }
 
@@ -41,6 +44,51 @@ namespace StaticDungeon
             new AreaRange((21, 8), (24, 10)),
         };
         public static AreaRange[] largeOffsetTilesCenter = { new AreaRange((8, 6), (12, 7)) };
+        public static AreaRange[] Circuit =
+        {
+            // top
+            new AreaRange((3, 2), (11, 3)),
+            new AreaRange((15, 2), (23, 3)),
+
+            // left
+            new AreaRange((3, 3), (4, 5)),
+            new AreaRange((3, 8), (4, 10)),
+
+            //right
+            new AreaRange((22, 3), (23, 5)),
+            new AreaRange((22, 8), (23, 10)),
+
+            // bottom
+            new AreaRange((3, 10), (11, 11)),
+            new AreaRange((15, 10), (23, 11)),
+        };
+
+        public static AreaRange[] TopLeftMiniCircuit =
+        {
+            // top
+            new AreaRange((3, 2), (11, 3)),
+            // left
+            new AreaRange((3, 3), (4, 4)),
+            // right
+            new AreaRange((10, 2), (11, 4)),
+            // bottom
+            new AreaRange((3, 4), (11, 5)),
+        };
+
+        public static AreaRange[] QuadrentStrips =
+{
+            // top left
+            new AreaRange((3, 3), (11, 4)),
+
+            // top right
+            new AreaRange((15, 3), (23, 4)),
+
+            // bottom left
+            new AreaRange((3, 9), (11, 10)),
+
+            // bottom right
+            new AreaRange((15, 9), (23, 10)),
+        };
     }
 
     public enum Symmetry
@@ -98,6 +146,54 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
                 },
                 areaRanges = AreaRanges.largeOffsetTilesCenter
+            }
+        };
+    }
+
+    public class EasyWalledRoomConfig : EasyDonutSpawnConfig
+    {
+        override public string Name { get; set; } = "walled-room-config";
+        override public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 38,
+                maxObjects = 44,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/stone-wall", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.Circuit
+            }
+        };
+    }
+
+    public class AltWalledRoomConfig : EasyDonutSpawnConfig
+    {
+        override public string Name { get; set; } = "alt-walled-room-config";
+        override public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 60,
+                maxObjects = 72,
+                symmetry = Symmetry.Quadrant,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/stone-wall", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.TopLeftMiniCircuit
+            }
+        };
+    }
+
+    public class WalledRoomStrips : EasyDonutSpawnConfig
+    {
+        override public string Name { get; set; } = "walled-room-strips-config";
+        override public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 28,
+                maxObjects = 32,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/stone-wall", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.QuadrentStrips
             }
         };
     }
