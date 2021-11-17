@@ -33,8 +33,8 @@ namespace StaticDungeon
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.5f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-harder"], probability = 0.5f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-harder"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.5f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {

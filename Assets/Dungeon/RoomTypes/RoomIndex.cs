@@ -45,9 +45,12 @@ namespace StaticDungeon
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.3f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.3f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-quadratic-spawn-config"], probability = 0.4f }
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.2f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.15f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-quadratic-spawn-config"], probability = 0.2f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled"], probability = 0.15f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-alt"], probability = 0.15f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-strips"], probability = 0.2f },
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
