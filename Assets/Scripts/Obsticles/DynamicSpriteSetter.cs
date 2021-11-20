@@ -104,10 +104,6 @@ public class DynamicSpriteSetter : MonoBehaviour
                         plug.transform.localPosition = Vector3.zero;
                         plug.GetComponent<SpriteRenderer>().sprite = sprite;
                     }
-                    else
-                    {
-                        Debug.LogError("Failed to find sprite under path " + spritesPath + " with name " + spriteName);
-                    }
                 }
             }
         }
