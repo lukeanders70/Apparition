@@ -11,20 +11,33 @@ public class SpiritController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
-    [SerializeField]
-    private ParticleSystem ps;
+    public ParticleSystem ps;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
+    public GameObject lastParent;
+    public GameObject futureParent;
+    private Coroutine currentCoroutine;
 
     public void Swap(GameObject newParent)
     {
         // set position to parents position and remove parent
         transform.position = transform.parent.transform.position;
+        lastParent = transform.parent.gameObject;
+        futureParent = newParent;
         transform.parent = transform.parent.transform.parent;
 
         spriteRenderer.color = Color.white;
 
-        StartCoroutine(Move(newParent));
+        StartExclusiveMove(newParent);
+    }
+
+    public void StartExclusiveMove(GameObject newParent)
+    {
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+        currentCoroutine = StartCoroutine(Move(newParent));
     }
 
     private IEnumerator Move(GameObject newParent)
@@ -48,7 +61,7 @@ public class SpiritController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
-        if(isMoving && collidedObject.tag == "Enemy")
+        if (isMoving && collidedObject.tag == "Enemy")
         {
             ParticleSystem hitParticals = Instantiate(ps);
             hitParticals.transform.position = transform.position;

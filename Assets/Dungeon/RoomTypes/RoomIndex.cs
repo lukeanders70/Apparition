@@ -13,7 +13,8 @@ namespace StaticDungeon
             { "basic-moss", new BasicMossRoom() },
             { "basic-harder", new BasicHarderRoom() },
             { "ladder", new LadderRoom() },
-            { "lava", new LavaRoom() }
+            { "lava", new LavaRoom() },
+            { "stone-maze", new StoneMaze() }
         };
     }
 
@@ -46,11 +47,11 @@ namespace StaticDungeon
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut"], probability = 0.2f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.15f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-quadratic-spawn-config"], probability = 0.2f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled"], probability = 0.15f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-alt"], probability = 0.15f },
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-strips"], probability = 0.2f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-inverse-donut"], probability = 0.1f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-quadratic-spawn-config"], probability = 0.3f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled"], probability = 0.2f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-alt"], probability = 0.1f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-walled-strips"], probability = 0.1f },
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
@@ -83,6 +84,18 @@ namespace StaticDungeon
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava"], probability = 1.0f },
+        };
+        virtual public float LockInProbability { get; set; } = 0.0f;
+    }
+
+    public class StoneMaze : Room
+    {
+        public string Name { get; set; } = "stone-maze";
+
+        public string WallType { get; set; } = "basic";
+        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+        {
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["short-wall-maze"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
