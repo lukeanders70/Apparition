@@ -256,7 +256,7 @@ namespace StaticDungeon
                 symmetry = Symmetry.Quadrant,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
                 },
                 areaRanges = AreaRanges.largerCenter
@@ -287,7 +287,7 @@ namespace StaticDungeon
                 symmetry = Symmetry.LeftRight,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
                 },
                 areaRanges = AreaRanges.largerCenter
@@ -318,7 +318,7 @@ namespace StaticDungeon
                 symmetry = Symmetry.TopBottom,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
-                    new ObjectProbability<string> { obj = "Obstacles/stoneObstacle", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
                 },
                 areaRanges = AreaRanges.largerCenter
