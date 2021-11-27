@@ -8,33 +8,49 @@ public class AIState
     {
         public System.Action action;
         public float timeLeft;
-        public bool complete = false;
+        private bool cancel = false;
         public Invokable(System.Action a, float t)
         {
             action = a;
             timeLeft = t;
         }
+
+        public void Cancel()
+        {
+            cancel = true;
+        }
+        public bool Canceled()
+        {
+            return cancel;
+        }
     }
 
     private List<Invokable> invokables = new List<Invokable>();
 
-    public void Invoke(System.Action action, float waitTime)
+    public Invokable Invoke(System.Action action, float waitTime)
     {
-        invokables.Add(new Invokable(action, waitTime));
+        var newInvoke = new Invokable(action, waitTime);
+        invokables.Add(newInvoke);
+        return newInvoke;
     }
     virtual public void Update()
     {
         var newInvokables = new List<Invokable>();
-        foreach (Invokable invokeable in invokables)
+        foreach (Invokable invokeable in invokables.ToArray())
         {
             invokeable.timeLeft -= Time.deltaTime;
-            if(invokeable.timeLeft <= 0)
+            if (!invokeable.Canceled())
             {
-                invokeable.action();
-            } else
-            {
-                newInvokables.Add(invokeable);
+                if (invokeable.timeLeft <= 0)
+                {
+                    invokeable.action();
+                }
+                else
+                {
+                    newInvokables.Add(invokeable);
+                }
             }
+
         }
         invokables = newInvokables;
     }

@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.75064945}
+  m_Size: {x: 0.91, y: 0.75064945}
   m_EdgeRadius: 0
 --- !u!50 &1725158747151057044
 Rigidbody2D:
@@ -152,13 +152,13 @@ MonoBehaviour:
   deathColor: {r: 0.5568628, g: 0.6117647, b: 0.69411767, a: 1}
   isDestroyed: 0
   damage: 1
+  enemyManager: {fileID: 0}
   rb: {fileID: 1725158747151057044}
   walkSpeed: 2
   runSpeed: 4
   animator: {fileID: 611150305}
   minWanderDistance: 2
   maxWanderDistance: 3
-  aggroRange: 4
   numCharges: 1
 --- !u!95 &611150305
 Animator:

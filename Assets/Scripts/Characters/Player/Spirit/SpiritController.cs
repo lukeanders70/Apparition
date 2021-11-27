@@ -70,6 +70,18 @@ public class SpiritController : MonoBehaviour
             {
                 healthComponent.Damage(damage);
             }
+        } else if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
+        {
+            spriteRenderer.sortingOrder = 1;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
+        if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
+        {
+            spriteRenderer.sortingOrder = 0;
         }
     }
 }

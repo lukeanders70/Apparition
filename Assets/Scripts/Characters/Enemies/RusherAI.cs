@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class RusherAI : BasicEnemyAI
 {
-    public Rigidbody2D rb;
-
     [SerializeField] 
     private float walkSpeed;
     [SerializeField]
@@ -24,13 +20,14 @@ public class RusherAI : BasicEnemyAI
 
     override protected void Start()
     {
+        base.Start();
+
         stateMachine = new AIStateMachine();
         stateMachine.RegisterState("idle", new IdleState(gameObject, stateMachine));
         stateMachine.RegisterState("aggro", new AggroState(gameObject, stateMachine));
         stateMachine.RegisterState("walk", new WalkState(gameObject, stateMachine));
 
         stateMachine.EnterState("idle");
-        base.Start();
     }
 
     public void Update()
@@ -81,7 +78,7 @@ public class RusherAI : BasicEnemyAI
 
     private void Stop()
     {
-        rb.velocity = Vector2.zero;
+        rigidBody.velocity = Vector2.zero;
     }
 
     override protected void OnCollisionEnter2D(Collision2D collision)
@@ -104,6 +101,8 @@ public class RusherAI : BasicEnemyAI
         private GameObject gameObject;
         private AIStateMachine stateMachine;
 
+        private Invokable walkInvoker;
+
         public IdleState(GameObject go, AIStateMachine sm)
         {
             gameObject = go;
@@ -121,12 +120,15 @@ public class RusherAI : BasicEnemyAI
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            Invoke(() => stateMachine.EnterState("walk"), 3.0f);
+            walkInvoker = Invoke(() => stateMachine.EnterState("walk"), 3.0f);
         }
 
         public override void StopState()
         {
-            AIComp.CancelInvoke();
+            if(walkInvoker != null)
+            {
+                walkInvoker.Cancel();
+            }
             base.StopState();
         }
     }
@@ -135,8 +137,9 @@ public class RusherAI : BasicEnemyAI
     {
         private RusherAI AIComp;
         private GameObject gameObject;
-        private Vector2 walkPoint;
         private AIStateMachine stateMachine;
+
+        private Coroutine walkRoutine;
 
         public WalkState(GameObject go, AIStateMachine sm)
         {
@@ -147,15 +150,7 @@ public class RusherAI : BasicEnemyAI
 
         public override void Update()
         {
-            var velocity = AIComp.getVelocityTowardsPoint(walkPoint, AIComp.walkSpeed);
-            if (Vector2.Distance(walkPoint, gameObject.transform.position) > 0.15)
-            {
-                AIComp.rb.velocity = velocity;
-                AIComp.animator.SetFloat("lastHorizontal", AIComp.rb.velocity.x);
-            } else
-            {
-                stateMachine.EnterState("idle");
-            }
+            AIComp.animator.SetFloat("lastHorizontal", AIComp.rigidBody.velocity.x);
             base.Update();
         }
 
@@ -169,13 +164,22 @@ public class RusherAI : BasicEnemyAI
             AIComp.SetAnimationState("walk");
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             AIComp.Stop();
-            walkPoint = AIComp.getWanderPoint();
+            var walkPoint = AIComp.getWanderPoint();
+            var spline = AIHelpers.Pathfind(AIComp.room, gameObject, walkPoint);
+            walkRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.collider.offset, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
+            {
+                stateMachine.EnterState("idle");
+            }));
             base.StartState();
         }
 
         public override void StopState()
         {
-            AIComp.Stop();
+            if(walkRoutine != null)
+            {
+                AIComp.StopCoroutine(walkRoutine);
+            }
+            AIComp.Stop(); 
             base.StopState();
         }
     }
@@ -184,12 +188,12 @@ public class RusherAI : BasicEnemyAI
     {
         private RusherAI AIComp;
         private GameObject gameObject;
-        private Vector2 runPoint;
         private AIStateMachine stateMachine;
 
-        private int numChargesLeft;
+        private Coroutine runRoutine;
+        private Invokable runInvoke;
 
-        private bool running = false;
+        private int numChargesLeft;
 
         public AggroState(GameObject go, AIStateMachine sm)
         {
@@ -202,24 +206,7 @@ public class RusherAI : BasicEnemyAI
 
         public override void Update()
         {
-            if(running)
-            {
-                var velocity = AIComp.getVelocityTowardsPoint(runPoint, AIComp.runSpeed);
-                if (Vector2.Distance(runPoint, gameObject.transform.position) > 0.15)
-                {
-                    AIComp.rb.velocity = velocity;
-                    AIComp.animator.SetFloat("lastHorizontal", AIComp.rb.velocity.x);
-                }
-                else if (numChargesLeft <= 0)
-                {
-                    stateMachine.EnterState("idle");
-                }
-                else
-                {
-                    numChargesLeft -= 1;
-                    Notice();
-                }
-            }
+            AIComp.animator.SetFloat("lastHorizontal", AIComp.rigidBody.velocity.x);
             base.Update();
         }
 
@@ -245,6 +232,14 @@ public class RusherAI : BasicEnemyAI
 
         public override void StopState()
         {
+            if (runRoutine != null)
+            {
+                AIComp.StopCoroutine(runRoutine);
+            }
+            if (runInvoke != null)
+            {
+                runInvoke.Cancel();
+            }
             AIComp.Stop();
             base.StopState();
         }
@@ -252,18 +247,21 @@ public class RusherAI : BasicEnemyAI
         private void Notice()
         {
             AIComp.SetAnimationState("idle");
-            running = false;
             AIComp.Stop();
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
-            runPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
+            var runPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
 
-            Invoke(Run, 1.0f);
+            runInvoke = Invoke(() => Run(runPoint), 1.0f);
         }
 
-        private void Run()
+        private void Run(Vector2 runPoint)
         {
             AIComp.SetAnimationState("run");
-            running = true;
+            var spline = AIHelpers.Pathfind(AIComp.room, gameObject, runPoint);
+            runRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.collider.offset, AIComp.room.transform.position,  spline, AIComp.runSpeed, () =>
+            {
+                stateMachine.EnterState("idle");
+            }));
         }
     }
 }

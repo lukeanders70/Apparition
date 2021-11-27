@@ -7,13 +7,30 @@ public class BasicEnemyAI : BasicHealth
     [SerializeField]
     private int damage;
 
-    private EnemyManager enemyManager;
+    public Rigidbody2D rigidBody;
+    public Collider2D collider;
+
+    public GameObject room;
+    public RoomGrid roomGrid;
+    public EnemyManager enemyManager;
 
     virtual protected void Start()
     {
         enemyManager = gameObject.GetComponentInParent<EnemyManager>();
-        if(enemyManager == null)
+        room = GetComponentInParent<RoomController>().gameObject;
+        roomGrid = GetComponentInParent<RoomController>().roomGrid;
+        rigidBody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+        if (enemyManager == null)
             Debug.LogError("could not find enemy manager for Enemy");
+        if (roomGrid == null)
+            Debug.LogError("could not find enemy room grid for Enemy");
+        if (rigidBody == null)
+            Debug.LogError("could not find rigid body for Enemy");
+        if (collider == null)
+            Debug.LogError("could not find collider for Enemy");
+        if (room == null)
+            Debug.LogError("could not find room for Enemy");
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D collision)

@@ -13,7 +13,7 @@ public class RoomController : MonoBehaviour
     [SerializeField]
     private GameObject baseWalls;
 
-    private RoomGrid roomGrid;
+    public RoomGrid roomGrid;
 
     public StaticDungeon.Room roomInfo;
 
