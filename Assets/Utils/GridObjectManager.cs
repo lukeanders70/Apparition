@@ -20,14 +20,14 @@ public class GridObjectManager : MonoBehaviour
     {
 
         int numObjects = Random.Range(minObjects, maxObjects);
-        int totalSpawnTiles = AreaRange.GetNumTilesInRanges(spawnRanges, symmetry, roomGrid.center);
+        int totalSpawnTiles = AreaRange.GetNumTilesInRanges(spawnRanges, symmetry, RoomGrid.center);
         int count = 0;
 
         for (int rangeIndex = 0; rangeIndex < spawnRanges.Length; rangeIndex++)
         {
             AreaRange range = spawnRanges[rangeIndex];
-            int xMax = symmetry == StaticDungeon.Symmetry.LeftRight || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endX, roomGrid.center.Item1 - 1) : range.endX;
-            int yMax = symmetry == StaticDungeon.Symmetry.TopBottom || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endY, roomGrid.center.Item2 - 1) : range.endY;
+            int xMax = symmetry == StaticDungeon.Symmetry.LeftRight || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endX, RoomGrid.center.Item1 - 1) : range.endX;
+            int yMax = symmetry == StaticDungeon.Symmetry.TopBottom || symmetry == StaticDungeon.Symmetry.Quadrant ? Mathf.Min(range.endY, RoomGrid.center.Item2 - 1) : range.endY;
             for (int i = range.startX; i < xMax; i++)
             {
                 for (int j = range.startY; j < yMax; j++)
@@ -82,17 +82,17 @@ public class GridObjectManager : MonoBehaviour
                 break;
             case StaticDungeon.Symmetry.LeftRight:
                 AddObject(x, y, prefab, roomGrid);
-                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
+                AddObject((RoomGrid.center.Item1 - 1) + ((RoomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
                 break;
             case StaticDungeon.Symmetry.TopBottom:
                 AddObject(x, y, prefab, roomGrid);
-                AddObject(x, (roomGrid.center.Item2 - 1) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
+                AddObject(x, (RoomGrid.center.Item2 - 1) + ((RoomGrid.center.Item2) - y), prefab, roomGrid);
                 break;
             case StaticDungeon.Symmetry.Quadrant:
                 AddObject(x, y, prefab, roomGrid);
-                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
-                AddObject(x, (roomGrid.center.Item2) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
-                AddObject((roomGrid.center.Item1 - 1) + ((roomGrid.center.Item1 - 1) - x), (roomGrid.center.Item2) + ((roomGrid.center.Item2) - y), prefab, roomGrid);
+                AddObject((RoomGrid.center.Item1 - 1) + ((RoomGrid.center.Item1 - 1) - x), y, prefab, roomGrid);
+                AddObject(x, (RoomGrid.center.Item2) + ((RoomGrid.center.Item2) - y), prefab, roomGrid);
+                AddObject((RoomGrid.center.Item1 - 1) + ((RoomGrid.center.Item1 - 1) - x), (RoomGrid.center.Item2) + ((RoomGrid.center.Item2) - y), prefab, roomGrid);
                 break;
         }
     }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RoomGrid
 {
-    public (int, int) center = (13, 6);
-    GridCell[,] objectLocations = new GridCell[26, 13];
+    #nullable enable
+    public static int cellSize = 8;
+    public static (int, int) center = (13, 6);
+    GridCell?[,] objectLocations = new GridCell[26, 13];
 
     public bool IndexInBounds((int, int) index)
     {
@@ -14,11 +16,28 @@ public class RoomGrid
 
     public Vector2 GetLocationCell(int xIndex, int yIndex, GameObject o)
     {
-        (int, int) size = GetSize(o);
+        IntVector2 size = GetSize(o);
         Vector2 offset = GetOffset(o);
-        float xVal = ((xIndex - center.Item1) + ((float) size.Item1 / 2.0f)) - offset.x;
-        float yVal = -(((yIndex - center.Item2) + ((float) size.Item2 / 2.0f)) + offset.y);
+        float xVal = ((xIndex - center.Item1) + (size.x / 2.0f)) - offset.x;
+        float yVal = -(((yIndex - center.Item2) + (size.y / 2.0f)) + offset.y);
         return new Vector2(xVal, yVal);
+    }
+
+    public IntVector2 GetCellFromLocation(Vector2 location)
+    {
+        Vector2 distanceFromTopLeft = new Vector2(location.x + (center.Item1), (center.Item2) - location.y);
+        return new IntVector2(
+            Mathf.FloorToInt(distanceFromTopLeft.x),
+            Mathf.FloorToInt(distanceFromTopLeft.y)
+        );
+    }
+
+    public static Vector2 GetLocationFromCell(IntVector2 cellIndex)
+    {
+        return new Vector2(
+            cellIndex.x - (center.Item1) + 0.5f,
+            -(cellIndex.y - (center.Item2) + 0.5f)
+        );
     }
 
     public void print()
@@ -49,20 +68,20 @@ public class RoomGrid
         }
         Debug.Log(s);
     }
-
+    //
     public Vector2? addObject(GameObject o, int xIndex, int yIndex)
     {
-        (int, int) size = GetSize(o);
-        if(isEmpty(xIndex, yIndex, size))
+        IntVector2 size = GetSize(o);
+        if(isEmpty(new IntVector2(xIndex, yIndex), size))
         {
             objectLocations[xIndex, yIndex] = new GridCell(o, GridCell.CellType.primary, size);
-            for (int i = xIndex; i < xIndex + size.Item1; i++)
+            for (int i = xIndex; i < xIndex + size.x; i++)
             {
-                for (int j = yIndex; j < yIndex + size.Item2; j++)
+                for (int j = yIndex; j < yIndex + size.y; j++)
                 {
                     if(!(i == xIndex && j == yIndex))
                     {
-                        objectLocations[i, j] = new GridCell(o, GridCell.CellType.overflow, size, (xIndex, yIndex));
+                        objectLocations[i, j] = new GridCell(o, GridCell.CellType.overflow, size, new IntVector2(xIndex, yIndex));
                     }
                 }
             }
@@ -71,26 +90,26 @@ public class RoomGrid
         return null;
     }
 
-    private (int, int)? findPrimaryIndex(int xIndex, int yIndex)
+    private IntVector2? findPrimaryIndex(int xIndex, int yIndex)
     {
         if(objectLocations[xIndex, yIndex] == null)
         {
             return null;
-        } else if(objectLocations[xIndex, yIndex].type == GridCell.CellType.primary)
+        } else if(objectLocations[xIndex, yIndex]?.type == GridCell.CellType.primary)
         {
-            return (xIndex, yIndex);
-        } else if(objectLocations[xIndex, yIndex].primaryIndex != null)
+            return new IntVector2(xIndex, yIndex);
+        } else if(objectLocations[xIndex, yIndex]?.primaryIndex != null)
         {
-            return ((int, int)) objectLocations[xIndex, yIndex].primaryIndex;
+            return objectLocations[xIndex, yIndex]?.primaryIndex;
         } else
         {
             return null;
         }
     }
 
-    public GameObject getObject(int xIndex, int yIndex)
+    public GameObject? getObject(int xIndex, int yIndex)
     {
-        GridCell cell = objectLocations[xIndex, yIndex];
+        GridCell? cell = objectLocations[xIndex, yIndex];
         if (cell == null)
         {
             return null;
@@ -101,8 +120,8 @@ public class RoomGrid
         }
         else if (cell.primaryIndex != null)
         {
-            var primaryIndex = ((int, int))cell.primaryIndex;
-            return objectLocations[primaryIndex.Item1, primaryIndex.Item2].prefab;
+            var primaryIndex = cell.primaryIndex;
+            return objectLocations[primaryIndex.x, primaryIndex.y]?.prefab;
         }
         else
         {
@@ -110,36 +129,37 @@ public class RoomGrid
         }
     }
 
-    public GameObject removeObject(int xIndex, int yIndex)
+    public GameObject? removeObject(int xIndex, int yIndex)
     {
-        (int, int)? primaryIndexNullable = findPrimaryIndex(xIndex, yIndex);
-        if(primaryIndexNullable == null)
+        IntVector2? primaryIndex = findPrimaryIndex(xIndex, yIndex);
+        if(primaryIndex == null)
         {
             return null;
         }
-        (int, int) primaryIndex = ((int, int)) primaryIndexNullable;
-        GridCell primary = objectLocations[primaryIndex.Item1, primaryIndex.Item2];
-        GameObject o = primary.prefab;
-        for(int i = primaryIndex.Item1; i < primaryIndex.Item1 + primary.size.Item1; i++)
+        GridCell? primary = objectLocations[primaryIndex.x, primaryIndex.y];
+        GameObject? o = primary?.prefab;
+        for(int i = primaryIndex.x; i < primaryIndex.x + primary?.size.x; i++)
         {
-            for (int j = primaryIndex.Item1; j < primaryIndex.Item2 + primary.size.Item2; j++)
+            for (int j = primaryIndex.x; j < primaryIndex.y + primary?.size.y; j++)
             {
-                GridCell currentCell = objectLocations[i, j];
                 objectLocations[i, j] = null;
             }
         }
         return o;
     }
-
-    public bool isEmpty(int xIndex, int yIndex, (int, int) size)
+    public bool isEmpty(IntVector2 index, IntVector2? size)
     {
-        if (!IsInRange(xIndex, yIndex, size))
+        if(size == null)
+        {
+            size = new IntVector2(1, 1);
+        }
+        if (!IsInRange(index.x, index.y, size))
         {
             return false;
         }
-        for(int i = xIndex; i < xIndex + size.Item1; i++)
+        for(int i = index.x; i < index.x + size.x; i++)
         {
-            for (int j = yIndex; j < yIndex + size.Item2; j++)
+            for (int j = index.y; j < index.y + size.y; j++)
             {
                 if(objectLocations[i, j] != null)
                 {
@@ -150,26 +170,26 @@ public class RoomGrid
         return true;
     }
 
-    private bool IsInRange(int xIndex, int yIndex, (int, int) size)
+    private bool IsInRange(int xIndex, int yIndex, IntVector2 size)
     {
         return !(
             xIndex < 0 ||
             yIndex < 0 ||
-            xIndex + size.Item1 > objectLocations.GetLength(0) || 
-            yIndex + size.Item2 > objectLocations.GetLength(1)
+            xIndex + size.x > objectLocations.GetLength(0) || 
+            yIndex + size.y > objectLocations.GetLength(1)
             );
     }
 
-    private (int, int) GetSize(GameObject o)
+    private IntVector2 GetSize(GameObject o)
     {
         BoxCollider2D oCollider;
         bool hasCollider = o.TryGetComponent(out oCollider);
         if (hasCollider)
         {
-            return ((int) System.Math.Ceiling(oCollider.size.x), (int) System.Math.Ceiling(oCollider.size.y));
+            return new IntVector2((int) System.Math.Ceiling(oCollider.size.x), (int) System.Math.Ceiling(oCollider.size.y));
         } else
         {
-            return (1, 1);
+            return new IntVector2(1, 1);
         }
     }
     private Vector2 GetOffset(GameObject o)
@@ -197,9 +217,9 @@ class GridCell
 
     public GameObject prefab;
     public CellType type;
-    public (int, int) size;
-    public (int, int)? primaryIndex = null;
-    public GridCell(GameObject o, CellType cellType, (int, int) indexSize, (int, int)? parentIndex = null)
+    public IntVector2 size;
+    public IntVector2? primaryIndex = null;
+    public GridCell(GameObject o, CellType cellType, IntVector2 indexSize, IntVector2? parentIndex = null)
     {
         prefab = o;
         type = cellType;
