@@ -10,8 +10,12 @@ namespace StaticDungeon
         {
             { "entry-room", new EntryRoom() },
             { "basic", new BasicRoom() },
+            { "cobbled", new BasicCobbledRoom() },
+            { "ledge", new BasicLedgeRoom() },
+            { "pyramid", new PyramidRoom() },
+            { "sandstone", new BasicSandstoneRoom() },
             { "basic-moss", new BasicMossRoom() },
-            { "basic-harder", new BasicHarderRoom() },
+            { "mini-boss", new MiniBossRoom() },
             { "ladder", new LadderRoom() },
             { "lava", new LavaRoom() },
             { "stone-maze", new StoneMaze() }
@@ -62,11 +66,31 @@ namespace StaticDungeon
         override public string WallType { get; set; } = "moss";
     }
 
-    public class BasicHarderRoom : Room
+    public class BasicLedgeRoom : BasicRoom
     {
-        public string Name { get; set; } = "basic-harder";
+        override public string WallType { get; set; } = "ledge";
+    }
 
-        public string WallType { get; set; } = "basic";
+    public class BasicCobbledRoom : BasicRoom
+    {
+        override public string WallType { get; set; } = "cobbled";
+    }
+
+    public class PyramidRoom : BasicRoom
+    {
+        override public string WallType { get; set; } = "pyramid";
+    }
+
+    public class BasicSandstoneRoom : BasicRoom
+    {
+        override public string WallType { get; set; } = "sandstone";
+    }
+
+    public class MiniBossRoom : Room
+    {
+        public string Name { get; set; } = "mini-boss";
+
+        public string WallType { get; set; } = "fancy";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["blob-den"], probability = 0.5f },
