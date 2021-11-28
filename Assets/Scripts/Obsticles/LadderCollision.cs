@@ -8,6 +8,11 @@ public class LadderCollision : MonoBehaviour
     [SerializeField]
     Transitions transitionHandler;
 
+    public void Start()
+    {
+        transitionHandler = GameObject.Find("Transitions").GetComponent<Transitions>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
@@ -32,6 +37,7 @@ public class LadderCollision : MonoBehaviour
                     }
                     Time.timeScale = 1;
                 });
+                levelTransition.StartTransition();
             } else
             {
                 Debug.LogError("No gameobject 'Dungeon' found");
