@@ -5,6 +5,7 @@ using UnityEngine;
 public class AIStateMachine
 {
     private AIState currentState = null;
+    private bool currentStateFirstUpdate = false;
     private Dictionary<string, AIState> states = new Dictionary<string, AIState>();
     public void RegisterState(string name, AIState state)
     {
@@ -20,13 +21,22 @@ public class AIStateMachine
                 currentState.StopState();
             }
             currentState = states[name];
-            currentState.StartState();
+            currentStateFirstUpdate = true;
         } else
         {
             Debug.LogError("tried to start state: " + name + " which does not exist");
         }
     }
-    public void Update() { if(currentState != null) { currentState.Update(); } }
+    public void Update() { 
+        if(currentState != null) {
+            if(currentStateFirstUpdate)
+            {
+                currentStateFirstUpdate = false;
+                currentState.StartState();
+            }
+            currentState.Update(); 
+        } 
+    }
 
     public void OnCollision(Collision2D collision) { if (currentState != null) { currentState.OnCollision(collision); } }
 }

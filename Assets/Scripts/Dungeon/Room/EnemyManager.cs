@@ -18,6 +18,7 @@ public class EnemyManager : GridObjectManager
             {
                 SetObjects(
                     roomGrid,
+                    GridCell.CellObjectType.enemy,
                     oRange.prefabPathProbs,
                     oRange.areaRanges,
                     oRange.minObjects,
@@ -29,6 +30,7 @@ public class EnemyManager : GridObjectManager
             {
                 SetObjects(
                     roomGrid,
+                    GridCell.CellObjectType.enemy,
                     oRange.prefabPathProbs,
                     oRange.absoluteLocations,
                     oRange.minObjects,

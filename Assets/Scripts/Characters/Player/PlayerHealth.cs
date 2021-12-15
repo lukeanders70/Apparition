@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour, Health
     public int health;
     public int maxHealth;
 
-    private List<System.Action> deathCallbacks = new List<System.Action>();
+    private List<Action> deathCallbacks = new List<Action>();
 
     private bool damagable = true;
 

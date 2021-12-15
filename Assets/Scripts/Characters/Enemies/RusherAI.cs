@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,9 +19,19 @@ public class RusherAI : BasicEnemyAI
 
     private AIStateMachine stateMachine;
 
+    private PathFinder pathFinder;
+
+    public HashSet<IntVector2> visited = new HashSet<IntVector2> { };
+    public Dictionary<IntVector2, (float H, PathNode node)> fringe = new Dictionary<IntVector2, (float H, PathNode node)> { };
+    public IntVector2 active = new IntVector2(0, 0);
+
     override protected void Start()
     {
         base.Start();
+
+        pathFinder = GetComponentInParent<PathFinder>();
+        if (pathFinder == null)
+            Debug.LogError("could not find pathfinder for rusher enemy");
 
         stateMachine = new AIStateMachine();
         stateMachine.RegisterState("idle", new IdleState(gameObject, stateMachine));
@@ -70,12 +81,6 @@ public class RusherAI : BasicEnemyAI
         return transform.position;
     }
 
-    Vector2 getVelocityTowardsPoint(Vector2 target, float speed)
-    {
-        Vector2 dir = (target - (Vector2)transform.position).normalized;
-        return dir * speed;
-    }
-
     private void Stop()
     {
         rigidBody.velocity = Vector2.zero;
@@ -120,12 +125,12 @@ public class RusherAI : BasicEnemyAI
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            walkInvoker = Invoke(() => stateMachine.EnterState("walk"), 3.0f);
+            walkInvoker = Invoke(() => { stateMachine.EnterState("walk"); }, 3.0f);
         }
 
         public override void StopState()
         {
-            if(walkInvoker != null)
+            if (walkInvoker != null)
             {
                 walkInvoker.Cancel();
             }
@@ -165,8 +170,8 @@ public class RusherAI : BasicEnemyAI
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             AIComp.Stop();
             var walkPoint = AIComp.getWanderPoint();
-            var spline = AIHelpers.Pathfind(AIComp.room, gameObject, walkPoint);
-            walkRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.collider.offset, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
+            var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, walkPoint);
+            walkRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
             {
                 stateMachine.EnterState("idle");
             }));
@@ -257,8 +262,8 @@ public class RusherAI : BasicEnemyAI
         private void Run(Vector2 runPoint)
         {
             AIComp.SetAnimationState("run");
-            var spline = AIHelpers.Pathfind(AIComp.room, gameObject, runPoint);
-            runRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.collider.offset, AIComp.room.transform.position,  spline, AIComp.runSpeed, () =>
+            var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, runPoint);
+            runRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position,  spline, AIComp.runSpeed, () =>
             {
                 stateMachine.EnterState("idle");
             }));

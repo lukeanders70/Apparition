@@ -56,61 +56,63 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Obsticles\DynamicSpriteSetter.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\RusherAI.cs" />
-    <Compile Include="Assets\Scripts\Loot\BasicLootController.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\InteractionController.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\InventoryController.cs" />
-    <Compile Include="Assets\Scripts\Loot\CoinController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
-    <Compile Include="Assets\Scripts\Characters\BasicHealth.cs" />
-    <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
-    <Compile Include="Assets\Scripts\Misc\CameraMoveController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BatAI.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthContainerController.cs" />
+    <Compile Include="Assets\Scripts\UI\CoinCounterController.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\LockInDoorController.cs" />
+    <Compile Include="Assets\Scripts\Misc\AnimationCallback.cs" />
+    <Compile Include="Assets\Scripts\Loot\BasicLootController.cs" />
+    <Compile Include="Assets\Utils\DungeonUtils.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\InteractionController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemies\SpinnerAI.cs" />
+    <Compile Include="Assets\Dungeon\Utils.cs" />
     <Compile Include="Assets\Scripts\Loot\LootDropController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Dungeon\RoomTypes\RoomIndex.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BigWolfAI.cs" />
+    <Compile Include="Assets\Scripts\UI\TitleSceneController.cs" />
+    <Compile Include="Assets\Utils\Health.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Spirit\SpiritController.cs" />
+    <Compile Include="Assets\SpriteBounceBackController.cs" />
+    <Compile Include="Assets\Scripts\UI\GameOver.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\InventoryController.cs" />
+    <Compile Include="Assets\Utils\Transitions.cs" />
     <Compile Include="Assets\Scripts\UI\OnlyKeyBoardInputModule.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BasicEnemyAI.cs" />
+    <Compile Include="Assets\Scripts\Loot\CoinController.cs" />
+    <Compile Include="Assets\Utils\AIStateMachine.cs" />
+    <Compile Include="Assets\Utils\PriorityQueue.cs" />
     <Compile Include="Assets\Utils\Constants.cs" />
+    <Compile Include="Assets\TestAI.cs" />
     <Compile Include="Assets\Utils\AIState.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\PathFinder.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
+    <Compile Include="Assets\Utils\StaticDungeonInfo.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\SpiritHandler.cs" />
+    <Compile Include="Assets\Utils\GridObjectManager.cs" />
+    <Compile Include="Assets\Dungeon\Levels\LevelIndex.cs" />
     <Compile Include="Assets\Scripts\UI\TransitionController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerHandler.cs" />
     <Compile Include="Assets\Scripts\Dungeon\SpawnEnemies.cs" />
     <Compile Include="Assets\Utils\AreaRange.cs" />
-    <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
-    <Compile Include="Assets\Scripts\UI\CoinCounterController.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\LockInDoorController.cs" />
-    <Compile Include="Assets\Scripts\Misc\AnimationCallback.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\PlayerController.cs" />
-    <Compile Include="Assets\Dungeon\Utils.cs" />
-    <Compile Include="Assets\Scripts\UI\TitleSceneController.cs" />
-    <Compile Include="Assets\SpriteBounceBackController.cs" />
-    <Compile Include="Assets\Scripts\UI\GameOver.cs" />
-    <Compile Include="Assets\Utils\AIStateMachine.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\SpiritHandler.cs" />
-    <Compile Include="Assets\Utils\GridObjectManager.cs" />
-    <Compile Include="Assets\Scripts\Obsticles\DynamicSpriteSetter.cs" />
-    <Compile Include="Assets\Scripts\UI\HealthContainerController.cs" />
-    <Compile Include="Assets\Utils\DungeonUtils.cs" />
-    <Compile Include="Assets\Scripts\Characters\Enemies\SpinnerAI.cs" />
-    <Compile Include="Assets\Dungeon\RoomTypes\RoomIndex.cs" />
-    <Compile Include="Assets\Utils\Health.cs" />
-    <Compile Include="Assets\Utils\Transitions.cs" />
-    <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Utils\StaticDungeonInfo.cs" />
-    <Compile Include="Assets\Dungeon\Levels\LevelIndex.cs" />
     <Compile Include="Assets\Utils\RoomGrid.cs" />
+    <Compile Include="Assets\Scripts\Characters\BasicHealth.cs" />
+    <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
+    <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
+    <Compile Include="Assets\Scripts\Misc\CameraMoveController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\TestAI.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
@@ -681,29 +683,8 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -711,95 +692,26 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Path.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Triangle.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

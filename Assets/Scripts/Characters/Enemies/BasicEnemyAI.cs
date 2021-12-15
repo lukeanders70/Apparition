@@ -8,7 +8,7 @@ public class BasicEnemyAI : BasicHealth
     private int damage;
 
     public Rigidbody2D rigidBody;
-    public Collider2D collider;
+    public Collider2D collidr;
 
     public GameObject room;
     public RoomGrid roomGrid;
@@ -20,14 +20,14 @@ public class BasicEnemyAI : BasicHealth
         room = GetComponentInParent<RoomController>().gameObject;
         roomGrid = GetComponentInParent<RoomController>().roomGrid;
         rigidBody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        collidr = GetComponent<Collider2D>();
         if (enemyManager == null)
             Debug.LogError("could not find enemy manager for Enemy");
         if (roomGrid == null)
             Debug.LogError("could not find enemy room grid for Enemy");
         if (rigidBody == null)
             Debug.LogError("could not find rigid body for Enemy");
-        if (collider == null)
+        if (collidr == null)
             Debug.LogError("could not find collider for Enemy");
         if (room == null)
             Debug.LogError("could not find room for Enemy");
