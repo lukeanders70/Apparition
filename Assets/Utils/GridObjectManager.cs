@@ -7,10 +7,12 @@ public class GridObjectManager : MonoBehaviour
 
     List<ObjectInfo> objectPrefabs = new List<ObjectInfo>();
     public List<GameObject> objects = new List<GameObject>();
+    public GridCell.CellObjectType objectType;
 
     // Start is called before the first frame update
     public void SetObjects(
         RoomGrid roomGrid,
+        GridCell.CellObjectType oType,
         StaticDungeon.ObjectProbability<string>[] prefabFreqs,
         AreaRange[] spawnRanges,
         int minObjects = 0,
@@ -18,7 +20,7 @@ public class GridObjectManager : MonoBehaviour
         StaticDungeon.Symmetry symmetry = StaticDungeon.Symmetry.None
     )
     {
-
+        objectType = oType;
         int numObjects = Random.Range(minObjects, maxObjects);
         int totalSpawnTiles = AreaRange.GetNumTilesInRanges(spawnRanges, symmetry, RoomGrid.center);
         int count = 0;
@@ -47,6 +49,7 @@ public class GridObjectManager : MonoBehaviour
 
         public void SetObjects(
         RoomGrid roomGrid,
+        GridCell.CellObjectType oType,
         StaticDungeon.ObjectProbability<string>[] prefabFreqs,
         (int, int)[] spawnLocations,
         int minObjects = 0,
@@ -54,7 +57,7 @@ public class GridObjectManager : MonoBehaviour
         StaticDungeon.Symmetry symmetry = StaticDungeon.Symmetry.None
     )
     {
-
+        objectType = oType;
         foreach ((int, int) spawnLocation in spawnLocations)
         {
             AddObjectWithSymmetrty(
@@ -99,7 +102,7 @@ public class GridObjectManager : MonoBehaviour
 
     public void AddObject(int x, int y, GameObject prefab, RoomGrid roomGrid)
     {
-        Vector2? location = roomGrid.addObject(prefab, x, y);
+        Vector2? location = roomGrid.addObject(prefab, objectType, x, y);
         if (location != null && prefab != null)
         {
             objectPrefabs.Add(new ObjectInfo(

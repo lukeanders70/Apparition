@@ -17,6 +17,7 @@ public class ObsticleManager : GridObjectManager
             {
                 SetObjects(
                     roomGrid,
+                    GridCell.CellObjectType.obstacle,
                     oRange.prefabPathProbs,
                     oRange.areaRanges,
                     oRange.minObjects,
@@ -27,6 +28,7 @@ public class ObsticleManager : GridObjectManager
             {
                 SetObjects(
                     roomGrid,
+                    GridCell.CellObjectType.obstacle,
                     oRange.prefabPathProbs,
                     oRange.absoluteLocations,
                     oRange.minObjects,

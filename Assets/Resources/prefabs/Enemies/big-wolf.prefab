@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6213600828870133410}
   - component: {fileID: 6213600828870133413}
   - component: {fileID: 6213600828870133438}
+  - component: {fileID: 2680989310784047865}
   m_Layer: 0
-  m_Name: Big Wolf
+  m_Name: big-wolf
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.0170753, y: 1.844432}
+  m_Size: {x: 2.9, y: 1.844432}
   m_EdgeRadius: 0
 --- !u!50 &6213600828870133413
 Rigidbody2D:
@@ -170,11 +171,27 @@ MonoBehaviour:
   deathColor: {r: 0.54509807, g: 0.60784316, b: 0.7058824, a: 1}
   isDestroyed: 0
   damage: 1
-  rb: {fileID: 6213600828870133413}
+  rigidBody: {fileID: 0}
+  collidr: {fileID: 0}
+  room: {fileID: 0}
+  enemyManager: {fileID: 0}
   walkSpeed: 3
   runSpeed: 6
   animator: {fileID: 6213600828870133411}
   minWanderDistance: 4
   maxWanderDistance: 6
-  aggroRange: 4
   numCharges: 3
+--- !u!114 &2680989310784047865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213600828870133412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de130b187d3856247b3fd69ccf36505c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComp: {fileID: 6213600828870133410}
+  room: {fileID: 0}

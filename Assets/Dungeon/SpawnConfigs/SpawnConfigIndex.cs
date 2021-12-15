@@ -157,8 +157,8 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "short-wall-maze-config";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 48,
-                maxObjects = 48,
+                minObjects = 30,
+                maxObjects = 30,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 1.0f }
@@ -172,8 +172,7 @@ namespace StaticDungeon
                 maxObjects = 1,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 1.0f },
-                    //new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
+                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
                 },
                 areaRanges = AreaRanges.centerArea
             }

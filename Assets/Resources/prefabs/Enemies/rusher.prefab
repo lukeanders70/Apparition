@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1725158747151057040}
   - component: {fileID: 611150305}
   - component: {fileID: -1102290994613918514}
+  - component: {fileID: -3192168782762060362}
   m_Layer: 8
   m_Name: rusher
   m_TagString: Enemy
@@ -152,13 +153,15 @@ MonoBehaviour:
   deathColor: {r: 0.5568628, g: 0.6117647, b: 0.69411767, a: 1}
   isDestroyed: 0
   damage: 1
+  rigidBody: {fileID: 0}
+  collidr: {fileID: 0}
+  room: {fileID: 0}
   enemyManager: {fileID: 0}
-  rb: {fileID: 1725158747151057044}
   walkSpeed: 2
   runSpeed: 4
   animator: {fileID: 611150305}
-  minWanderDistance: 2
-  maxWanderDistance: 3
+  minWanderDistance: 3
+  maxWanderDistance: 5
   numCharges: 1
 --- !u!95 &611150305
 Animator:
@@ -194,3 +197,17 @@ MonoBehaviour:
   lootPrefab: {fileID: 1623482810070800226, guid: 917c560c8ff628941b7ee77b56e94ec2, type: 3}
   min: 2
   max: 4
+--- !u!114 &-3192168782762060362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725158747151057046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de130b187d3856247b3fd69ccf36505c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComp: {fileID: 1725158747151057045}
+  room: {fileID: 0}

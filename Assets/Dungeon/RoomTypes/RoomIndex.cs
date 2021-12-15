@@ -15,6 +15,7 @@ namespace StaticDungeon
             { "pyramid", new PyramidRoom() },
             { "sandstone", new BasicSandstoneRoom() },
             { "basic-moss", new BasicMossRoom() },
+            { "broken", new BasicBrokeneRoom() },
             { "mini-boss", new MiniBossRoom() },
             { "ladder", new LadderRoom() },
             { "lava", new LavaRoom() },
@@ -37,7 +38,7 @@ namespace StaticDungeon
 
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } = {
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["short-wall-maze"], probability = 1.0f },
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["empty"], probability = 1.0f },
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
@@ -71,6 +72,11 @@ namespace StaticDungeon
         override public string WallType { get; set; } = "ledge";
     }
 
+    public class BasicBrokeneRoom : BasicRoom
+    {
+        override public string WallType { get; set; } = "broken";
+    }
+
     public class BasicCobbledRoom : BasicRoom
     {
         override public string WallType { get; set; } = "cobbled";
@@ -85,6 +91,7 @@ namespace StaticDungeon
     {
         override public string WallType { get; set; } = "sandstone";
     }
+
 
     public class MiniBossRoom : Room
     {

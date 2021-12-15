@@ -25,7 +25,7 @@ public class AIState
         }
     }
 
-    private List<Invokable> invokables = new List<Invokable>();
+    protected List<Invokable> invokables = new List<Invokable>();
 
     public Invokable Invoke(System.Action action, float waitTime)
     {
