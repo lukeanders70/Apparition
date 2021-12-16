@@ -18,6 +18,7 @@ public class PathFinder : MonoBehaviour
     private HashSet<GraphNode> visited;
     private PriorityQueue<PathNode> fringe;
     private PathNode considered;
+    private List<IntVector2> lastPath;
     void Start()
     {
         room = GetComponentInParent<RoomController>().gameObject;
@@ -77,7 +78,8 @@ public class PathFinder : MonoBehaviour
             {
                 if (considered.graphNode.Equals(endingNode))
                 {
-                    return considered.TraceBackPath();
+                    lastPath = considered.TraceBackPath();
+                    return lastPath;
                 }
                 else
                 {
@@ -97,8 +99,8 @@ public class PathFinder : MonoBehaviour
                 }
             }
         }
-
-        return new List<IntVector2>();
+        lastPath = new List<IntVector2>();
+        return lastPath;
     }
 
     public static K MinPosition<T, K>(Dictionary<K, T> l, Func<T, float> mapper)
@@ -116,6 +118,33 @@ public class PathFinder : MonoBehaviour
             }
         }
         return minKey;
+    }
+
+    public IEnumerator MoveAlongSpline(Rigidbody2D rb, Vector2 roomOffset, List<IntVector2> spline, float speed, Action callback)
+    {
+        foreach (IntVector2 gridPosition in spline)
+        {
+            var desiredPosition = (RoomGrid.GetLocationFromCell(gridPosition) + roomOffset - colliderComp.offset);
+            Vector2 initialDirection = (desiredPosition - rb.position).normalized;
+
+            while (Vector2.Distance(rb.position, desiredPosition) > 0.05)
+            {
+                Vector3 dir = (desiredPosition - rb.position).normalized;
+                if (Vector2.Angle(initialDirection, dir) > 90) // we've gone past the point
+                {
+                    break;
+                }
+                rb.velocity = (dir * speed);
+                yield return null;
+            }
+            rb.position = desiredPosition;
+        }
+        rb.velocity = Vector3.zero;
+        if (callback != null)
+        {
+            callback();
+        }
+        yield break;
     }
 
     private GraphNode findClosestGraphNode(Vector2 position)
@@ -189,7 +218,7 @@ public class PathFinder : MonoBehaviour
             foreach (KeyValuePair<IntVector2, GraphNode> pair in graph)
             {
                 Gizmos.color = Color.white;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(pair.Key), new Vector3(0.7f, 0.3f, 0.3f));
+                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(pair.Key) + (Vector2)room.transform.position, new Vector3(0.7f, 0.3f, 0.3f));
             }
         }
         if (visited != null)
@@ -197,7 +226,7 @@ public class PathFinder : MonoBehaviour
             foreach (GraphNode node in visited)
             {
                 Gizmos.color = Color.gray;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.index), new Vector3(0.5f, 0.3f, 0.3f));
+                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.index) + (Vector2)room.transform.position, new Vector3(0.5f, 0.3f, 0.3f));
             }
         }
         if (fringe != null)
@@ -205,13 +234,21 @@ public class PathFinder : MonoBehaviour
             foreach (PathNode node in fringe.getList())
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.graphNode.index), new Vector3(0.3f, 0.3f, 0.3f));
+                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.graphNode.index) + (Vector2)room.transform.position, new Vector3(0.3f, 0.3f, 0.3f));
             }
         }
         if (considered != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(RoomGrid.GetLocationFromCell(considered.graphNode.index), new Vector3(0.1f, 0.3f, 0.3f));
+            Gizmos.DrawCube(RoomGrid.GetLocationFromCell(considered.graphNode.index) + (Vector2)room.transform.position, new Vector3(0.1f, 0.3f, 0.3f));
+        }
+        if (lastPath != null)
+        {
+            foreach(IntVector2 index in lastPath)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(RoomGrid.GetLocationFromCell(index) + (Vector2)room.transform.position, 0.2f);
+            }
         }
     }
 }

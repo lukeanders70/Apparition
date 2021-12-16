@@ -81,33 +81,6 @@ public class AIHelpers
         }
         yield break;
     }
-
-    public static IEnumerator MoveAlongSpline(Rigidbody2D rb, Vector2 roomOffset, List<IntVector2> spline, float speed, Action callback)
-    {
-        foreach (IntVector2 gridPosition in spline)
-        {
-            var desiredPosition = (RoomGrid.GetLocationFromCell(gridPosition) + roomOffset);
-            Vector2 initialDirection = (desiredPosition - rb.position).normalized;
-
-            while (Vector2.Distance(rb.position, desiredPosition) > 0.05)
-            {
-                Vector3 dir = (desiredPosition - rb.position).normalized;
-                if(Vector2.Angle(initialDirection, dir) > 90) // we've gone past the point
-                {
-                    break;
-                }
-                rb.velocity = (dir * speed);
-                yield return null;
-            }
-            rb.position = desiredPosition;
-        }
-        rb.velocity = Vector3.zero;
-        if (callback != null)
-        {
-            callback();
-        }
-        yield break;
-    }
 }
 
 public class IntVector2 : IEquatable<IntVector2>

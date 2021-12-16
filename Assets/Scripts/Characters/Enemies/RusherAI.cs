@@ -171,7 +171,7 @@ public class RusherAI : BasicEnemyAI
             AIComp.Stop();
             var walkPoint = AIComp.getWanderPoint();
             var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, walkPoint);
-            walkRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
+            walkRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
             {
                 stateMachine.EnterState("idle");
             }));
@@ -263,7 +263,7 @@ public class RusherAI : BasicEnemyAI
         {
             AIComp.SetAnimationState("run");
             var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, runPoint);
-            runRoutine = AIComp.StartCoroutine(AIHelpers.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position,  spline, AIComp.runSpeed, () =>
+            runRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position,  spline, AIComp.runSpeed, () =>
             {
                 stateMachine.EnterState("idle");
             }));
