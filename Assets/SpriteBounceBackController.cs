@@ -14,7 +14,7 @@ public class SpriteBounceBackController : MonoBehaviour
         if (spiritController.isMoving && collidedObject.tag == "Wall" && collidedObject.layer >= 8  && !onReturnTrip)
         {
             onReturnTrip = true;
-            ParticleSystem hitParticals = Instantiate(spiritController.ps);
+            ParticleSystem hitParticals = Instantiate(spiritController.hitPs);
             hitParticals.transform.position = transform.position;
             spiritController.StartExclusiveMove(spiritController.lastParent);
         } else if (collidedObject.tag == "Player")

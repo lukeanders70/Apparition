@@ -9,14 +9,29 @@ public class SpiritController : MonoBehaviour
     [SerializeField]
     private int damage = 1;
     [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRendererWhite;
+    [SerializeField]
+    private Rigidbody2D rb;
+    [SerializeField]
+    private float speedMultiplier;
 
-    public ParticleSystem ps;
+    public ParticleSystem hitPs;
+    public ParticleSystem tailPs;
+
+    private ParticleSystem activeTailPs;
 
     public bool isMoving = false;
     public GameObject lastParent;
     public GameObject futureParent;
     private Coroutine currentCoroutine;
+
+    public void Start()
+    {
+        activeTailPs = Instantiate(tailPs);
+        activeTailPs.transform.position = transform.position;
+        activeTailPs.transform.parent = transform;
+        activeTailPs.Stop();
+    }
 
     public void Swap(GameObject newParent)
     {
@@ -26,9 +41,14 @@ public class SpiritController : MonoBehaviour
         futureParent = newParent;
         transform.parent = transform.parent.transform.parent;
 
-        spriteRenderer.color = Color.white;
+        makeOpaque();
 
         StartExclusiveMove(newParent);
+    }
+
+    public void FixedUpdate()
+    {
+        
     }
 
     public void StartExclusiveMove(GameObject newParent)
@@ -44,6 +64,7 @@ public class SpiritController : MonoBehaviour
     {
         isMoving = true;
         Vector3 targetPosition = newParent.transform.position;
+        activeTailPs.Play();
         while (Vector3.Distance(transform.position, targetPosition) > 0.001f)
         {
             targetPosition = newParent.transform.position;
@@ -51,8 +72,9 @@ public class SpiritController : MonoBehaviour
             yield return null;
         }
         transform.SetParent(newParent.transform);
-        spriteRenderer.color = Color.clear;
+        makeTransparent();
         transform.localPosition = Vector3.zero;
+        activeTailPs.Stop();
         isMoving = false;
         newParent.GetComponent<SpiritHandler>().ReceiveSpirit();
         yield break;
@@ -63,7 +85,7 @@ public class SpiritController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if (isMoving && collidedObject.tag == "Enemy")
         {
-            ParticleSystem hitParticals = Instantiate(ps);
+            ParticleSystem hitParticals = Instantiate(hitPs);
             hitParticals.transform.position = transform.position;
             Health healthComponent = collidedObject.GetComponent<Health>();
             if(healthComponent != null)
@@ -72,8 +94,18 @@ public class SpiritController : MonoBehaviour
             }
         } else if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
         {
-            spriteRenderer.sortingOrder = 1;
+            spriteRendererWhite.sortingOrder = 1;
         }
+    }
+
+    private void makeTransparent()
+    {
+        spriteRendererWhite.color = Color.clear;
+    }
+
+    private void makeOpaque()
+    {
+        spriteRendererWhite.color = Color.white;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -81,7 +113,7 @@ public class SpiritController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
         {
-            spriteRenderer.sortingOrder = 0;
+            spriteRendererWhite.sortingOrder = 0;
         }
     }
 }
