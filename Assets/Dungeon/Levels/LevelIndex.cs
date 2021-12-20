@@ -55,18 +55,18 @@ namespace StaticDungeon
         public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.8f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.2f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["pyramid"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstone"], probability = 0.5f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["basic-moss"], probability = 0.5f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["mini-boss"], probability = 0.5f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["pyramid"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstone"], probability = 0.5f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["mini-boss"], probability = 0.3f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["lava"], probability = 0.7f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["pyramid"], probability = 0.5f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstone"], probability = 0.5f }
         };
 
         public Room ExitRoom { get; set; } = RoomIndex.rooms["ladder"];

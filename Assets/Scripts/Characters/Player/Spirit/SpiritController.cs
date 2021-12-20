@@ -46,11 +46,6 @@ public class SpiritController : MonoBehaviour
         StartExclusiveMove(newParent);
     }
 
-    public void FixedUpdate()
-    {
-        
-    }
-
     public void StartExclusiveMove(GameObject newParent)
     {
         if (currentCoroutine != null)
