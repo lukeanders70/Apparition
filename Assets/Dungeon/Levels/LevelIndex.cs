@@ -25,7 +25,7 @@ namespace StaticDungeon
     public class Level1 : Level
     {
         public string Name { get; set; } = "level1";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room"];
+        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room-level-1"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.0f },
@@ -46,13 +46,13 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = RoomIndex.rooms["lava"], probability = 0.6f }
         };
 
-        public Room ExitRoom { get; set; } = RoomIndex.rooms["ladder"];
+        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit-room-level-1"];
     }
 
     public class Level2 : Level
     {
         public string Name { get; set; } = "level2";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room"];
+        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room-level-2"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = RoomIndex.rooms["pyramid"], probability = 0.5f },
@@ -69,6 +69,6 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstone"], probability = 0.5f }
         };
 
-        public Room ExitRoom { get; set; } = RoomIndex.rooms["ladder"];
+        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit-room-level-2"];
     }
 }

@@ -8,7 +8,8 @@ namespace StaticDungeon
     {
         public static Dictionary<string, Room> rooms = new Dictionary<string, Room>()
         {
-            { "entry-room", new EntryRoom() },
+            { "entry-room-level-1", new EntryRoomLevel1() },
+            { "entry-room-level-2", new EntryRoomLevel2() },
             { "basic", new BasicRoom() },
             { "cobbled", new BasicCobbledRoom() },
             { "ledge", new BasicLedgeRoom() },
@@ -17,7 +18,8 @@ namespace StaticDungeon
             { "basic-moss", new BasicMossRoom() },
             { "broken", new BasicBrokeneRoom() },
             { "mini-boss", new MiniBossRoom() },
-            { "ladder", new LadderRoom() },
+            { "exit-room-level-1", new ExitRoomLevel1() },
+            { "exit-room-level-2", new ExitRoomLevel2() },
             { "lava", new LavaRoom() },
             { "stone-maze", new StoneMaze() }
         };
@@ -32,9 +34,9 @@ namespace StaticDungeon
 
     }
 
-    public class EntryRoom : Room
+    public class EntryRoomLevel1 : Room
     {
-        public string Name { get; set; } = "entry-room";
+        virtual public string Name { get; set; } = "entry-room-level-1";
 
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } = {
@@ -42,6 +44,12 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+    }
+
+    public class EntryRoomLevel2 : EntryRoomLevel1
+    {
+        override public string Name { get; set; } = "entry-room-level-2";
+        override public string WallType { get; set; } = "sandstone";
     }
 
     public class BasicRoom : Room
@@ -131,15 +139,22 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class LadderRoom : Room
+    public class ExitRoomLevel1 : Room
     {
-        public string Name { get; set; } = "ladder";
+        virtual public string Name { get; set; } = "exit-room-level-1";
 
-        public string WallType { get; set; } = "basic";
+        virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["ladder"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
+    }
+
+    public class ExitRoomLevel2 : ExitRoomLevel1
+    {
+        override public string Name { get; set; } = "exit-room-level-2";
+
+        override public string WallType { get; set; } = "sandstone";
     }
 }
