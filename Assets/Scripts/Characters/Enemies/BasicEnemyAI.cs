@@ -14,6 +14,8 @@ public class BasicEnemyAI : BasicHealth
     public RoomGrid roomGrid;
     public EnemyManager enemyManager;
 
+    public bool spritiBounceBack = false;
+
     virtual protected void Start()
     {
         enemyManager = gameObject.GetComponentInParent<EnemyManager>();

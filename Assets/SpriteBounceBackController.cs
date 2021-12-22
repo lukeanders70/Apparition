@@ -29,7 +29,7 @@ public class SpriteBounceBackController : MonoBehaviour
     {
         return (spiritController.isMoving && !onReturnTrip) && ( // available for return
                 (collidedObject.tag == "Wall" && collidedObject.layer >= 8) || // is solid wall
-                (collidedObject.GetComponent<BasicHealth>() != null && collidedObject.GetComponent<BasicHealth>().invicible == true) // is invincible enemy
+                (collidedObject.GetComponent<BasicEnemyAI>() != null && collidedObject.GetComponent<BasicEnemyAI>().spritiBounceBack == true) // is invincible enemy
             );
     }
 }
