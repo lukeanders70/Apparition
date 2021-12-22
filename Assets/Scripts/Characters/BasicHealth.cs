@@ -27,15 +27,19 @@ public class BasicHealth : MonoBehaviour, Health
 
     virtual public bool Damage(int damage)
     {
-        if(!invicible)
+        if (!invicible)
         {
             health = Mathf.Max(health - damage, 0);
             if (health == 0)
             {
                 Kill();
             }
+            return true;
         }
-        return true;
+        else
+        {
+            return false;
+        }
     }
 
     public int GetHealth()

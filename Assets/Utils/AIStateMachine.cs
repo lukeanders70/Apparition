@@ -27,6 +27,20 @@ public class AIStateMachine
             Debug.LogError("tried to start state: " + name + " which does not exist");
         }
     }
+
+    /**
+     * use case: damage triggers state change and collision also triggers.
+     * a collision that damages might try to cause two different state changes
+     * in the same frame. This helps decide which to use independent of the order
+     * the events fire
+     */
+    public void EnterStateLowPriority(string name)
+    {
+        if (!currentStateFirstUpdate)
+        {
+            EnterState(name);
+        }
+    }
     public void Update() { 
         if(currentState != null) {
             if(currentStateFirstUpdate)

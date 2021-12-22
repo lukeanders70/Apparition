@@ -14,8 +14,6 @@ public class RusherAI : BasicEnemyAI
     private float minWanderDistance;
     [SerializeField]
     private float maxWanderDistance;
-    [SerializeField]
-    private int numCharges;
 
     private AIStateMachine stateMachine;
 
@@ -94,11 +92,13 @@ public class RusherAI : BasicEnemyAI
 
     override public bool Damage(int damage)
     {
-        stateMachine.EnterState("aggro");
-        return base.Damage(damage);
+        if(base.Damage(damage))
+        {
+            stateMachine.EnterState("aggro");
+            return true;
+        }
+        return false;
     }
-
-
 
     private class IdleState : AIState
     {
@@ -117,7 +117,7 @@ public class RusherAI : BasicEnemyAI
 
         public override void OnCollision(Collision2D collision)
         {
-            stateMachine.EnterState("idle");
+            stateMachine.EnterStateLowPriority("idle");
         }
 
         override public void StartState()
@@ -161,7 +161,7 @@ public class RusherAI : BasicEnemyAI
 
         public override void OnCollision(Collision2D collision)
         {
-            stateMachine.EnterState("idle");
+            stateMachine.EnterStateLowPriority("idle");
         }
 
         override public void StartState()
@@ -198,15 +198,11 @@ public class RusherAI : BasicEnemyAI
         private Coroutine runRoutine;
         private Invokable runInvoke;
 
-        private int numChargesLeft;
-
         public AggroState(GameObject go, AIStateMachine sm)
         {
             gameObject = go;
             AIComp = gameObject.GetComponent<RusherAI>();
             stateMachine = sm;
-
-            numChargesLeft = AIComp.numCharges;
         }
 
         public override void Update()
@@ -217,26 +213,21 @@ public class RusherAI : BasicEnemyAI
 
         public override void OnCollision(Collision2D collision)
         {
-            AIComp.Stop();
-            if (numChargesLeft <= 0)
+            if(collision.gameObject.tag == "wall")
             {
-                stateMachine.EnterState("idle");
-            } else
-            {
-                numChargesLeft -= 1;
-                Notice();
+                stateMachine.EnterStateLowPriority("idle");
             }
         }
 
         override public void StartState()
         {
-            numChargesLeft = AIComp.numCharges;
             Notice();
             base.StartState();
         }
 
         public override void StopState()
         {
+            AIComp.invicible = false;
             if (runRoutine != null)
             {
                 AIComp.StopCoroutine(runRoutine);
@@ -251,6 +242,7 @@ public class RusherAI : BasicEnemyAI
 
         private void Notice()
         {
+            Invoke(() => { AIComp.invicible = true; }, 0.1f);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
