@@ -228,6 +228,7 @@ public class RusherAI : BasicEnemyAI
         public override void StopState()
         {
             AIComp.invicible = false;
+            AIComp.spritiBounceBack = false;
             if (runRoutine != null)
             {
                 AIComp.StopCoroutine(runRoutine);
@@ -242,7 +243,7 @@ public class RusherAI : BasicEnemyAI
 
         private void Notice()
         {
-            Invoke(() => { AIComp.invicible = true; }, 0.1f);
+            Invoke(() => { AIComp.invicible = true; AIComp.spritiBounceBack = true; }, 0.1f);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
