@@ -25,7 +25,7 @@ namespace StaticDungeon
     public class Level1 : Level
     {
         public string Name { get; set; } = "level1";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry-room-level-1"];
+        public Room EntryRoom { get; set; } = RoomIndex.rooms["stone-maze"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = RoomIndex.rooms["basic"], probability = 0.0f },

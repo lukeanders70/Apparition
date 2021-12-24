@@ -18,7 +18,7 @@ public class PathFinder : MonoBehaviour
     private HashSet<GraphNode> visited;
     private PriorityQueue<PathNode> fringe;
     private PathNode considered;
-    private List<IntVector2> lastPath;
+    private List<Vector2> lastPath;
     void Start()
     {
         room = GetComponentInParent<RoomController>().gameObject;
@@ -42,20 +42,20 @@ public class PathFinder : MonoBehaviour
         return (Mathf.Min(xDis, yDis) * (float) Math.Sqrt(2)) + (Mathf.Abs(xDis - yDis)) + distanceSoFar;
     }
 
-    public List<IntVector2> Pathfind(GameObject room, GameObject o, Vector2 desiredPosition)
+    public List<Vector2> Pathfind(GameObject room, GameObject o, Vector2 desiredPosition)
     {
         var endingNode = findClosestGraphNode(desiredPosition - (Vector2)room.transform.position);
         if (endingNode == null)
         {
             Debug.LogError("desired ending position not in graph");
-            return new List<IntVector2>();
+            return new List<Vector2>();
         }
 
         var startingNode = findClosestGraphNode(o.transform.localPosition);
         if (startingNode == null)
         {
             Debug.LogError("desired starting position not in graph");
-            return new List<IntVector2>();
+            return new List<Vector2>();
         }
 
         visited = new HashSet<GraphNode>();
@@ -99,7 +99,7 @@ public class PathFinder : MonoBehaviour
                 }
             }
         }
-        lastPath = new List<IntVector2>();
+        lastPath = new List<Vector2>();
         return lastPath;
     }
 
@@ -120,11 +120,11 @@ public class PathFinder : MonoBehaviour
         return minKey;
     }
 
-    public IEnumerator MoveAlongSpline(Rigidbody2D rb, Vector2 roomOffset, List<IntVector2> spline, float speed, Action callback)
+    public IEnumerator MoveAlongSpline(Rigidbody2D rb, Vector2 roomOffset, List<Vector2> spline, float speed, Action callback)
     {
-        foreach (IntVector2 gridPosition in spline)
+        foreach (Vector2 worldPosition in spline)
         {
-            var desiredPosition = (RoomGrid.GetLocationFromCell(gridPosition) + roomOffset - colliderComp.offset);
+            var desiredPosition = (worldPosition - colliderComp.offset);
             Vector2 initialDirection = (desiredPosition - rb.position).normalized;
 
             while (Vector2.Distance(rb.position, desiredPosition) > 0.05)
@@ -174,15 +174,21 @@ public class PathFinder : MonoBehaviour
 
     private Dictionary<IntVector2, GraphNode> buildGraph()
     {
+        // if height is two, node points should halfway vetween room grid cells so that we
+        // can fit through gaps that are two tall.
+        var xOffset = Mathf.CeilToInt(colliderComp.size.x) % 2 == 0 ? 0.0f : 0.5f;
+        var yOffset = Mathf.CeilToInt(colliderComp.size.y) % 2 == 0 ? 0.0f : 0.5f;
+
         var nodes = new Dictionary<IntVector2, GraphNode>();
         for (int xIndex = 0; xIndex < RoomGrid.dimensions.x; xIndex++)
         {
             for (int yIndex = 0; yIndex < RoomGrid.dimensions.y; yIndex++)
             {
+                var position = new Vector2(xIndex + xOffset, yIndex + yOffset);
                 var index = new IntVector2(xIndex, yIndex);
-                if (roomGrid.isEmptyCenter(index, colliderComp.size, true))
+                if (roomGrid.isPointEmptyCenter(position, colliderComp.size, true))
                 {
-                    var worldPosition = RoomGrid.GetLocationFromCell(index) + (Vector2)room.transform.position;
+                    var worldPosition = RoomGrid.GetLocationFromPoint(position) + (Vector2)room.transform.position;
                     nodes[index] = new GraphNode(index, worldPosition);
                 }
             }
@@ -218,7 +224,7 @@ public class PathFinder : MonoBehaviour
             foreach (KeyValuePair<IntVector2, GraphNode> pair in graph)
             {
                 Gizmos.color = Color.white;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(pair.Key) + (Vector2)room.transform.position, new Vector3(0.7f, 0.3f, 0.3f));
+                Gizmos.DrawCube(pair.Value.worldPosition, new Vector3(0.7f, 0.3f, 0.3f));
             }
         }
         if (visited != null)
@@ -226,7 +232,7 @@ public class PathFinder : MonoBehaviour
             foreach (GraphNode node in visited)
             {
                 Gizmos.color = Color.gray;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.index) + (Vector2)room.transform.position, new Vector3(0.5f, 0.3f, 0.3f));
+                Gizmos.DrawCube(node.worldPosition, new Vector3(0.5f, 0.3f, 0.3f));
             }
         }
         if (fringe != null)
@@ -234,20 +240,20 @@ public class PathFinder : MonoBehaviour
             foreach (PathNode node in fringe.getList())
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawCube(RoomGrid.GetLocationFromCell(node.graphNode.index) + (Vector2)room.transform.position, new Vector3(0.3f, 0.3f, 0.3f));
+                Gizmos.DrawCube(node.graphNode.worldPosition, new Vector3(0.3f, 0.3f, 0.3f));
             }
         }
         if (considered != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(RoomGrid.GetLocationFromCell(considered.graphNode.index) + (Vector2)room.transform.position, new Vector3(0.1f, 0.3f, 0.3f));
+            Gizmos.DrawCube(considered.graphNode.worldPosition, new Vector3(0.1f, 0.3f, 0.3f));
         }
         if (lastPath != null)
         {
-            foreach(IntVector2 index in lastPath)
+            foreach(Vector2 worldPosition in lastPath)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(RoomGrid.GetLocationFromCell(index) + (Vector2)room.transform.position, 0.2f);
+                Gizmos.DrawSphere(worldPosition, 0.2f);
             }
         }
     }
@@ -291,13 +297,13 @@ public class PathNode
         heuristic = h;
     }
 
-    public List<IntVector2> TraceBackPath()
+    public List<Vector2> TraceBackPath()
     {
-        var path = new List<IntVector2>();
+        var path = new List<Vector2>();
         PathNode currentNode = this;
         while (currentNode != null)
         {
-            path.Insert(0, currentNode.graphNode.index);
+            path.Insert(0, currentNode.graphNode.worldPosition);
             currentNode = currentNode.previous;
         }
         return path;
