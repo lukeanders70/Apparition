@@ -27,9 +27,14 @@ public class RoomGrid
     public IntVector2 GetCellFromLocation(Vector2 location)
     {
         Vector2 distanceFromTopLeft = new Vector2(location.x + (center.Item1), (center.Item2) - location.y);
+        return GetCellFromTopLeftOffset(distanceFromTopLeft);
+    }
+
+    public IntVector2 GetCellFromTopLeftOffset(Vector2 topLeftOffset)
+    {
         return new IntVector2(
-            Mathf.FloorToInt(distanceFromTopLeft.x),
-            Mathf.FloorToInt(distanceFromTopLeft.y)
+            Mathf.FloorToInt(topLeftOffset.x),
+            Mathf.FloorToInt(topLeftOffset.y)
         );
     }
 
@@ -38,6 +43,14 @@ public class RoomGrid
         return new Vector2(
             cellIndex.x - (center.Item1) + 0.5f,
             -(cellIndex.y - (center.Item2) + 0.5f)
+        );
+    }
+
+    public static Vector2 GetLocationFromPoint(Vector2 position)
+    {
+        return new Vector2(
+            position.x - (center.Item1),
+            -(position.y - (center.Item2))
         );
     }
 
@@ -187,6 +200,30 @@ public class RoomGrid
             for (int y = yMin; y <= yMax; y++)
             {
                 if (objectLocations[x, y] != null && (!obstacleOnly || objectLocations[x, y]!.objectType == GridCell.CellObjectType.obstacle))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public bool isPointEmptyCenter(Vector2 point, Vector2 size, bool obstacleOnly) {
+        var xDirSize = size.x / 2.0f;
+        var yDirSize = size.y / 2.0f;
+
+        var topLeft = GetCellFromTopLeftOffset(new Vector2(point.x - xDirSize, point.y - yDirSize));
+        var bottomRight = GetCellFromTopLeftOffset(new Vector2(point.x + xDirSize, point.y + yDirSize));
+
+        if (topLeft.x < 0 || bottomRight.x >= dimensions.x || topLeft.y < 0 || topLeft.y >= dimensions.y)
+        {
+            return false;
+        }
+        for (int x = topLeft.x; x <= bottomRight.x; x++)
+        {
+            for (int y = topLeft.y; y <= bottomRight.y; y++)
+            {
+                if (IndexInBounds((x, y)) && objectLocations[x, y] != null && (!obstacleOnly || objectLocations[x, y]!.objectType == GridCell.CellObjectType.obstacle))
                 {
                     return false;
                 }
