@@ -168,11 +168,12 @@ namespace StaticDungeon
         };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
-                maxObjects = 1,
+                minObjects = 2,
+                maxObjects = 4,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/big-wolf", probability = 1.0f },
+                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Enemies/rusher", probability = 0.3f },
                 },
                 areaRanges = AreaRanges.centerArea
             }

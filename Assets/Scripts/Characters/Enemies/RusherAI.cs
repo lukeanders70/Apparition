@@ -213,7 +213,7 @@ public class RusherAI : BasicEnemyAI
 
         public override void OnCollision(Collision2D collision)
         {
-            if(collision.gameObject.tag == "wall")
+            if(collision.gameObject.tag == "wall" || collision.gameObject.tag == "Player")
             {
                 stateMachine.EnterStateLowPriority("idle");
             }
