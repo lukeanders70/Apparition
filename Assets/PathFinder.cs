@@ -19,6 +19,10 @@ public class PathFinder : MonoBehaviour
     private PriorityQueue<PathNode> fringe;
     private PathNode considered;
     private List<Vector2> lastPath;
+
+    private float graphXOffset;
+    private float graphYOffset;
+
     void Start()
     {
         room = GetComponentInParent<RoomController>().gameObject;
@@ -29,6 +33,11 @@ public class PathFinder : MonoBehaviour
             Debug.LogError("could not find collider for Enemy");
         if (room == null)
             Debug.LogError("could not find room for Enemy");
+
+        // if height is two, node points should halfway vetween room grid cells so that we
+        // can fit through gaps that are two tall.
+        graphXOffset = Mathf.CeilToInt(colliderComp.size.x) % 2 == 0 ? 0.0f : 0.5f;
+        graphYOffset = Mathf.CeilToInt(colliderComp.size.y) % 2 == 0 ? 0.0f : 0.5f;
 
         graph = buildGraph();
     }
@@ -51,7 +60,7 @@ public class PathFinder : MonoBehaviour
             return new List<Vector2>();
         }
 
-        var startingNode = findClosestGraphNode(o.transform.localPosition);
+        var startingNode = findClosestGraphNode((Vector2)o.transform.localPosition + colliderComp.offset);
         if (startingNode == null)
         {
             Debug.LogError("desired starting position not in graph");
@@ -149,7 +158,7 @@ public class PathFinder : MonoBehaviour
 
     private GraphNode findClosestGraphNode(Vector2 position)
     {
-        var index = roomGrid.GetCellFromLocation(position);
+        var index = roomGrid.GetCellFromLocation(position + new Vector2(graphXOffset - 0.5f, graphYOffset -0.5f));
         if (graph.ContainsKey(index)){
             return graph[index];
         }
@@ -174,17 +183,12 @@ public class PathFinder : MonoBehaviour
 
     private Dictionary<IntVector2, GraphNode> buildGraph()
     {
-        // if height is two, node points should halfway vetween room grid cells so that we
-        // can fit through gaps that are two tall.
-        var xOffset = Mathf.CeilToInt(colliderComp.size.x) % 2 == 0 ? 0.0f : 0.5f;
-        var yOffset = Mathf.CeilToInt(colliderComp.size.y) % 2 == 0 ? 0.0f : 0.5f;
-
         var nodes = new Dictionary<IntVector2, GraphNode>();
         for (int xIndex = 0; xIndex < RoomGrid.dimensions.x; xIndex++)
         {
             for (int yIndex = 0; yIndex < RoomGrid.dimensions.y; yIndex++)
             {
-                var position = new Vector2(xIndex + xOffset, yIndex + yOffset);
+                var position = new Vector2(xIndex + graphXOffset, yIndex + graphYOffset);
                 var index = new IntVector2(xIndex, yIndex);
                 if (roomGrid.isPointEmptyCenter(position, colliderComp.size, true))
                 {
