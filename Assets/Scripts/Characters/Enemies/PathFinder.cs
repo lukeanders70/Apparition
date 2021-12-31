@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    private static List<IntVector2> cardinalDirections = new List<IntVector2> { new IntVector2(1, 0), new IntVector2(-1, 0), new IntVector2(0, 1), new IntVector2(0, -1) };
-    private static List<IntVector2> angledDirections = new List<IntVector2> { new IntVector2(1, 1), new IntVector2(-1, 1), new IntVector2(1, -1), new IntVector2(-1, -1) };
 
     public BoxCollider2D colliderComp;
 
@@ -162,7 +160,7 @@ public class PathFinder : MonoBehaviour
         if (graph.ContainsKey(index)){
             return graph[index];
         }
-        foreach(IntVector2 dir in cardinalDirections)
+        foreach(IntVector2 dir in AIHelpers.cardinalDirections)
         {
             var testIndex = IntVector2.Add(index, dir);
             if (graph.ContainsKey(testIndex))
@@ -170,7 +168,7 @@ public class PathFinder : MonoBehaviour
                 return graph[testIndex];
             }
         }
-        foreach (IntVector2 dir in angledDirections)
+        foreach (IntVector2 dir in AIHelpers.angledDirections)
         {
             var testIndex = IntVector2.Add(index, dir);
             if (graph.ContainsKey(testIndex))
@@ -200,7 +198,7 @@ public class PathFinder : MonoBehaviour
 
         foreach (KeyValuePair<IntVector2, GraphNode> node in nodes)
         {
-            foreach(IntVector2 dir in cardinalDirections)
+            foreach(IntVector2 dir in AIHelpers.cardinalDirections)
             {
                 var checkIndex = IntVector2.Add(node.Key, dir);
                 if (nodes.ContainsKey(checkIndex))
@@ -208,7 +206,7 @@ public class PathFinder : MonoBehaviour
                     node.Value.neighboors.Add((edgeDist: 1, node: nodes[checkIndex]));
                 }
             }
-            foreach (IntVector2 dir in angledDirections)
+            foreach (IntVector2 dir in AIHelpers.angledDirections)
             {
                 var checkIndex = IntVector2.Add(node.Key, dir);
                 var checkIndexVertical = IntVector2.Add(node.Key, new IntVector2(0, dir.y));

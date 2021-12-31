@@ -6,6 +6,8 @@ using UnityEngine;
 # nullable enable
 public class AIHelpers
 {
+    public static List<IntVector2> cardinalDirections = new List<IntVector2> { new IntVector2(1, 0), new IntVector2(-1, 0), new IntVector2(0, 1), new IntVector2(0, -1) };
+    public static List<IntVector2> angledDirections = new List<IntVector2> { new IntVector2(1, 1), new IntVector2(-1, 1), new IntVector2(1, -1), new IntVector2(-1, -1) };
     public static Vector3 RandomDirection()
     {
         Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
@@ -66,6 +68,11 @@ public class AIHelpers
         return null;
     }
 
+    public static GameObject? GetInactivePlayer()
+    {
+        return GameObject.Find("Player").GetComponent<PlayerHandler>().GetInActivePlayer(); ;
+    }
+
     public static IEnumerator MoveTo(Rigidbody2D rb, Vector3 position, float speed, Action callback)
     {
         while(Vector2.Distance(rb.position, position) > 0.05)
@@ -106,6 +113,11 @@ public class IntVector2 : IEquatable<IntVector2>
     public static IntVector2 Add(IntVector2 v1, IntVector2 v2)
     {
         return new IntVector2(v1.x + v2.x, v1.y + v2.y);
+    }
+
+    public static Vector2 Add(Vector2 v1, IntVector2 v2)
+    {
+        return new Vector2(v1.x + v2.x, v1.y + v2.y);
     }
 
     public bool Equals(IntVector2 other)
