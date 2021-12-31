@@ -51,4 +51,27 @@ public class PlayerHandler : MonoBehaviour
         player1.GetComponent<PlayerMovement>().StartMove();
         player2.GetComponent<PlayerMovement>().StartMove();
     }
+
+    public GameObject GetActivePlayer()
+    {
+        if (player1.GetComponent<SpiritHandler>().spirit.transform.parent == player1.transform) {
+            return player1;
+        } else if (player2.GetComponent<SpiritHandler>().spirit.transform.parent == player2.transform)
+        {
+            return player2;
+        }
+        return null;
+    }
+
+    public GameObject GetInActivePlayer()
+    {
+        if (player1.GetComponent<SpiritHandler>().spirit.transform.parent != player1.transform)
+        {
+            return player1;
+        }
+        else
+        {
+            return player2;
+        }
+    }
 }

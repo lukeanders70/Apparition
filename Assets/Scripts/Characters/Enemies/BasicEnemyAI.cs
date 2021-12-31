@@ -19,8 +19,8 @@ public class BasicEnemyAI : BasicHealth
     virtual protected void Start()
     {
         enemyManager = gameObject.GetComponentInParent<EnemyManager>();
-        room = GetComponentInParent<RoomController>().gameObject;
-        roomGrid = GetComponentInParent<RoomController>().roomGrid;
+        room = GetComponentInParent<RoomController>()?.gameObject;
+        roomGrid = GetComponentInParent<RoomController>()?.roomGrid;
         rigidBody = GetComponent<Rigidbody2D>();
         collidr = GetComponent<Collider2D>();
         if (enemyManager == null)
