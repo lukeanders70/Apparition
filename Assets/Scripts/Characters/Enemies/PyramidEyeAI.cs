@@ -147,15 +147,12 @@ public class PyramidEyeAI : BasicEnemyAI
         {
             AIComp.Stop();
             var inactivePlayer = AIHelpers.GetInactivePlayer();
-            Debug.Log("Start Follow");
             StartFollow(inactivePlayer);
 
             stopFollowInvoker = Invoke(() => {
-                Debug.Log("Stop Follow");
                 StopFollow();
             }, 4.0f);
             fireInvoker = Invoke(() => {
-                Debug.Log("FIRE");
                 var lazer = Instantiate(AIComp.lazerPrefab);
                 lazer.GetComponent<Lazer>().CreateLazer(AIComp.transform.position, AIComp.targetSpriteComp.transform.position);
                 ReturnTarget();

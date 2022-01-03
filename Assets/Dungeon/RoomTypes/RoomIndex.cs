@@ -8,20 +8,29 @@ namespace StaticDungeon
     {
         public static Dictionary<string, Room> rooms = new Dictionary<string, Room>()
         {
-            { "entry-room-level-1", new EntryRoomLevel1() },
-            { "entry-room-level-2", new EntryRoomLevel2() },
-            { "basic", new BasicRoom() },
-            { "cobbled", new BasicCobbledRoom() },
-            { "ledge", new BasicLedgeRoom() },
-            { "pyramid", new PyramidRoom() },
-            { "sandstone", new BasicSandstoneRoom() },
-            { "basic-moss", new BasicMossRoom() },
-            { "broken", new BasicBrokeneRoom() },
-            { "mini-boss", new MiniBossRoom() },
-            { "exit-room-level-1", new ExitRoomLevel1() },
-            { "exit-room-level-2", new ExitRoomLevel2() },
-            { "lava", new LavaRoom() },
-            { "stone-maze", new StoneMaze() }
+            // Shared
+
+            // Level 1
+            { "entry1", new Entry1Room() },
+            { "stoneEasy", new StoneEasyRoom() },
+            { "cobbledStoneEasy", new CobbledStoneEasyRoom() },
+            { "stoneLedgeEasy", new StoneLedgeEasyRoom() },
+            { "mossyStoneEasy", new MossyStoneEasyRoom() },
+            { "brokenStoneEasy", new BrokenStoneEasyRoom() },
+            { "tapestryStoneMiniBoss", new TapestryStoneMiniBossRoom() },
+            { "exit1", new Exit1Room() },
+            { "stoneMaze", new StoneMazeRoom() },
+
+            // Level 2
+            { "entry2", new Entry2Room() },
+            { "sandstoneEasy", new SandstoneEasyRoom() },
+            { "sandstoneSlopeEasy", new SandstoneSlopeEasyRoom() },
+            { "exit2", new Exit2Room() },
+
+            // Level 2
+            { "entry3", new Entry3Room() },
+            { "rockLavaMaze", new RockLavaMazeRoom() },
+            { "exit3", new Exit3Room() },
         };
     }
 
@@ -33,10 +42,10 @@ namespace StaticDungeon
         float LockInProbability { get; set; }
 
     }
-
-    public class EntryRoomLevel1 : Room
+    // Level 1
+    public class Entry1Room : Room
     {
-        virtual public string Name { get; set; } = "entry-room-level-1";
+        virtual public string Name { get; set; } = "Entry 1";
 
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } = {
@@ -46,15 +55,9 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class EntryRoomLevel2 : EntryRoomLevel1
+    public class StoneEasyRoom : Room
     {
-        override public string Name { get; set; } = "entry-room-level-2";
-        override public string WallType { get; set; } = "sandstone";
-    }
-
-    public class BasicRoom : Room
-    {
-        public string Name { get; set; } = "basic-room";
+        virtual public string Name { get; set; } = "Stone Easy";
 
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
@@ -70,40 +73,33 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class BasicMossRoom : BasicRoom
+    public class MossyStoneEasyRoom : StoneEasyRoom
     {
+        override public string Name { get; set; } = "Mossy Stone Easy";
         override public string WallType { get; set; } = "moss";
     }
 
-    public class BasicLedgeRoom : BasicRoom
+    public class StoneLedgeEasyRoom : StoneEasyRoom
     {
+        override public string Name { get; set; } = "Stone Ledge Easy";
         override public string WallType { get; set; } = "ledge";
     }
 
-    public class BasicBrokeneRoom : BasicRoom
+    public class BrokenStoneEasyRoom : StoneEasyRoom
     {
+        override public string Name { get; set; } = "Broken Stone Easy";
         override public string WallType { get; set; } = "broken";
     }
 
-    public class BasicCobbledRoom : BasicRoom
+    public class CobbledStoneEasyRoom : StoneEasyRoom
     {
+        override public string Name { get; set; } = "Cobbled Stone Easy";
         override public string WallType { get; set; } = "cobbled";
     }
 
-    public class PyramidRoom : BasicRoom
+    public class TapestryStoneMiniBossRoom : Room
     {
-        override public string WallType { get; set; } = "pyramid";
-    }
-
-    public class BasicSandstoneRoom : BasicRoom
-    {
-        override public string WallType { get; set; } = "sandstone";
-    }
-
-
-    public class MiniBossRoom : Room
-    {
-        public string Name { get; set; } = "mini-boss";
+        public string Name { get; set; } = "Tapestry Stone Mini-Boss";
 
         public string WallType { get; set; } = "fancy";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
@@ -115,21 +111,9 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 1.0f;
     }
 
-    public class LavaRoom : Room
+    public class StoneMazeRoom : Room
     {
-        public string Name { get; set; } = "lava";
-
-        public string WallType { get; set; } = "cave";
-        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
-        {
-            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava"], probability = 1.0f },
-        };
-        virtual public float LockInProbability { get; set; } = 0.0f;
-    }
-
-    public class StoneMaze : Room
-    {
-        public string Name { get; set; } = "stone-maze";
+        public string Name { get; set; } = "Stone Maze";
 
         public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
@@ -139,9 +123,9 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class ExitRoomLevel1 : Room
+    public class Exit1Room : Room
     {
-        virtual public string Name { get; set; } = "exit-room-level-1";
+        virtual public string Name { get; set; } = "Exit 1";
 
         virtual public string WallType { get; set; } = "basic";
         public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
@@ -151,10 +135,56 @@ namespace StaticDungeon
         virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class ExitRoomLevel2 : ExitRoomLevel1
+    // Level 2 //
+
+    public class Entry2Room : Entry1Room
     {
-        override public string Name { get; set; } = "exit-room-level-2";
+        override public string Name { get; set; } = "Entry 2";
+        override public string WallType { get; set; } = "sandstone";
+    }
+
+    public class SandstoneEasyRoom : StoneEasyRoom
+    {
+        override public string Name { get; set; } = "Sandstone Easy";
+        override public string WallType { get; set; } = "sandstone";
+    }
+
+    public class SandstoneSlopeEasyRoom : StoneEasyRoom
+    {
+        override public string Name { get; set; } = "Sandstone Slope Easy";
+        override public string WallType { get; set; } = "pyramid";
+    }
+
+    public class Exit2Room : Exit1Room
+    {
+        override public string Name { get; set; } = "Exit 2";
 
         override public string WallType { get; set; } = "sandstone";
+    }
+
+    // Level 3 //
+
+    public class Entry3Room : Entry1Room
+    {
+        override public string Name { get; set; } = "Entry 3";
+        override public string WallType { get; set; } = "cave";
+    }
+    public class RockLavaMazeRoom : Room
+    {
+        public string Name { get; set; } = "Rock Lava Maze";
+
+        public string WallType { get; set; } = "cave";
+        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+        {
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava"], probability = 1.0f },
+        };
+        virtual public float LockInProbability { get; set; } = 0.0f;
+    }
+
+    public class Exit3Room : Exit1Room
+    {
+        override public string Name { get; set; } = "exit 3";
+
+        override public string WallType { get; set; } = "cave";
     }
 }
