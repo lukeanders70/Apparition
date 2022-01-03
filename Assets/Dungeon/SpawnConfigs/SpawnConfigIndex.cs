@@ -8,18 +8,22 @@ namespace StaticDungeon
     {
         public static Dictionary<string, SpawnConfig> spawnConfigs = new Dictionary<string, SpawnConfig>()
         {
+            // Shared
             { "empty", new EmptySpawnConfig() },
+            { "ladder", new LadderConfig() },
+            // Level 1
             { "easy-donut", new EasyDonutSpawnConfig() },
             { "wolf-den", new  WolfDen() },
             { "blob-den", new  BlobDen() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
-            { "ladder", new LadderConfig() },
             { "lava", new LavaSpawnConfig() },
             { "easy-walled", new EasyWalledRoomConfig() },
             { "easy-walled-alt", new AltWalledRoomConfig() },
             { "easy-walled-strips", new WalledRoomStrips() },
-            { "short-wall-maze", new ShortWallMazeConfig() }
+            { "short-wall-maze", new ShortWallMazeConfig() },
+            // Level 2
+            { "Level2DonutSpawnConfig", new Level2DonutSpawnConfig() }
         };
     }
 
@@ -118,12 +122,33 @@ namespace StaticDungeon
         public ObjectRanges[] EnemyRanges { get; set; }
     }
 
+    // Shared //
     public class EmptySpawnConfig : SpawnConfig
     {
         virtual public string Name { get; set; } = "empty-config";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = { };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
     }
+
+    public class LadderConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "ladder";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/ladder", probability = 1.0f }
+                },
+                absoluteLocations = new (int, int)[] { (11, 4) }
+            }
+        };
+
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+    }
+
+    // Level 1 //
 
     public class LavaSpawnConfig : SpawnConfig
     {
@@ -395,21 +420,35 @@ namespace StaticDungeon
         };
     }
 
-    public class LadderConfig : SpawnConfig
+    // Level 1 //
+
+    public class Level2DonutSpawnConfig : SpawnConfig
     {
-        virtual public string Name { get; set; } = "ladder";
+        virtual public string Name { get; set; } = "level-2-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
-                maxObjects = 1,
-                symmetry = Symmetry.None,
+                minObjects = 8,
+                maxObjects = 20,
+                symmetry = Symmetry.LeftRight,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/ladder", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
                 },
-                absoluteLocations = new (int, int)[] { (11, 4) }
+                areaRanges = AreaRanges.largerCenter
             }
         };
-
-        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 0.3f }
+                },
+                areaRanges = AreaRanges.centerArea
+            }
+        };
     }
 }
