@@ -9,6 +9,7 @@ namespace StaticDungeon
         public static Level[] levels = {
             new Level1(),
             new Level2(),
+            new Level3(),
         };
     }
 
@@ -42,8 +43,7 @@ namespace StaticDungeon
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 0.4f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 0.6f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 1.0f },
         };
 
         public Room ExitRoom { get; set; } = RoomIndex.rooms["exit1"];
@@ -70,5 +70,25 @@ namespace StaticDungeon
         };
 
         public Room ExitRoom { get; set; } = RoomIndex.rooms["exit2"];
+    }
+
+    public class Level3 : Level
+    {
+        public string Name { get; set; } = "level3";
+        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry3"];
+        public ObjectProbability<Room>[] NearRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 0.5f }
+        };
+        public ObjectProbability<Room>[] MediumRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 0.5f }
+        };
+        public ObjectProbability<Room>[] FarRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 0.5f }
+        };
+
+        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit3"];
     }
 }
