@@ -38,7 +38,6 @@ public class RoomController : MonoBehaviour
                     manDistanceFromStart == 1 ? 
                         levelInfo.NearRooms : 
                         entryRoomInfo;
-
         roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
 
         doorManager.SetupDoors(dungeon, indexPosition, roomInfo, doorSpawnProbabilityOverride);
