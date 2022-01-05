@@ -19,7 +19,7 @@ public class DungeonGenerator : MonoBehaviour
     private Animator levelTransition;
 
     private GameObject level;
-    private int levelIndex = 0;
+    public int levelIndex = 0;
 
     private void Awake()
     {
