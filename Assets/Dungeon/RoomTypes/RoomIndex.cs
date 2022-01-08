@@ -143,16 +143,30 @@ namespace StaticDungeon
         override public string WallType { get; set; } = "sandstone";
     }
 
-    public class SandstoneEasyRoom : StoneEasyRoom
+    public class SandstoneEasyRoom :Room
     {
-        override public string Name { get; set; } = "Sandstone Easy";
-        override public string WallType { get; set; } = "sandstone";
+        virtual public string Name { get; set; } = "Sandstone Easy";
+        virtual public string WallType { get; set; } = "sandstone";
+
+        virtual public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+{
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut-shrine"], probability = 1.0f },
+        };
+
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
-    public class SandstoneSlopeEasyRoom : StoneEasyRoom
+    public class SandstoneSlopeEasyRoom : Room
     {
-        override public string Name { get; set; } = "Sandstone Slope Easy";
-        override public string WallType { get; set; } = "pyramid";
+        virtual public string Name { get; set; } = "Sandstone Slope Easy";
+        virtual public string WallType { get; set; } = "pyramid";
+
+        virtual public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+{
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut-shrine"], probability = 1.0f },
+        };
+
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
     public class Exit2Room : Exit1Room
