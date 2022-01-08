@@ -23,7 +23,7 @@ namespace StaticDungeon
             { "easy-walled-strips", new WalledRoomStrips() },
             { "short-wall-maze", new ShortWallMazeConfig() },
             // Level 2
-            { "Level2DonutSpawnConfig", new Level2DonutSpawnConfig() }
+            { "easy-donut-shrine", new EasyDonutShrine() }
         };
     }
 
@@ -422,32 +422,32 @@ namespace StaticDungeon
 
     // Level 1 //
 
-    public class Level2DonutSpawnConfig : SpawnConfig
+    public class EasyDonutShrine : SpawnConfig
     {
         virtual public string Name { get; set; } = "level-2-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
             new ObjectRanges {
                 minObjects = 8,
                 maxObjects = 20,
-                symmetry = Symmetry.LeftRight,
+                symmetry = Symmetry.Quadrant,
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
                     new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
                     new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
                 },
-                areaRanges = AreaRanges.largerCenter
+                areaRanges = AreaRanges.centerArea
             }
         };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = {
             new ObjectRanges {
-                minObjects = 1,
-                maxObjects = 5,
+                minObjects = 3,
+                maxObjects = 8,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.7f },
-                    new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 0.3f }
+                    new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.5f },
+                    new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 0.5f }
                 },
-                areaRanges = AreaRanges.centerArea
+                areaRanges = AreaRanges.largerCenter
             }
         };
     }
