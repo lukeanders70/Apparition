@@ -154,6 +154,25 @@ public class PathFinder : MonoBehaviour
         yield break;
     }
 
+    public List<Vector2> WanderFind(Vector2 position, int minDistance, int maxDistance)
+    {
+        var startingNode = findClosestGraphNode(position);
+        if (startingNode == null)
+        {
+            Debug.LogError("desired starting position not in graph");
+            return new List<Vector2>();
+        }
+        int desiredDistance = UnityEngine.Random.Range(minDistance, maxDistance + 1);
+        HashSet<GraphNode> explored = new HashSet<GraphNode>();
+        HashSet<GraphNode> fringe = new HashSet<GraphNode>();
+        explored.Add(startingNode);
+        while(desiredDistance > 0)
+        {
+            return new List<Vector2>();
+        }
+        return new List<Vector2>();
+    }
+
     private GraphNode findClosestGraphNode(Vector2 position)
     {
         var index = roomGrid.GetCellFromLocation(position + new Vector2(graphXOffset - 0.5f, graphYOffset -0.5f));

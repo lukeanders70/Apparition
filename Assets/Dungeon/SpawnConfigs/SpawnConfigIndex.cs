@@ -23,7 +23,8 @@ namespace StaticDungeon
             { "easy-walled-strips", new WalledRoomStrips() },
             { "short-wall-maze", new ShortWallMazeConfig() },
             // Level 2
-            { "easy-donut-shrine", new EasyDonutShrine() }
+            { "easy-donut-shrine", new EasyDonutSandShrine() },
+            { "medium-maze-sand-walls", new MediumMazeSandWalls() }
         };
     }
 
@@ -420,9 +421,9 @@ namespace StaticDungeon
         };
     }
 
-    // Level 1 //
+    // Level 2 //
 
-    public class EasyDonutShrine : SpawnConfig
+    public class EasyDonutSandShrine : SpawnConfig
     {
         virtual public string Name { get; set; } = "level-2-donut";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
@@ -431,9 +432,8 @@ namespace StaticDungeon
                 maxObjects = 20,
                 symmetry = Symmetry.Quadrant,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
-                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
-                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
+                    new ObjectProbability<string> { obj = "Obstacles/sandstoneShort", probability = 0.8f },
+                    new ObjectProbability<string> { obj = "Obstacles/sandstonePeg", probability = 0.2f },
                 },
                 areaRanges = AreaRanges.centerArea
             }
@@ -446,6 +446,33 @@ namespace StaticDungeon
                 prefabPathProbs = new ObjectProbability<string>[] {
                     new ObjectProbability<string> { obj = "Enemies/spinner", probability = 0.5f },
                     new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 0.5f }
+                },
+                areaRanges = AreaRanges.largerCenter
+            }
+        };
+    }
+
+    public class MediumMazeSandWalls : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "level-2-donut";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 40,
+                maxObjects = 40,
+                symmetry = Symmetry.Quadrant,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/sandstoneWall", probability = 1.0f },
+                },
+                areaRanges = AreaRanges.largeOffsetTiles
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 2,
+                maxObjects = 4,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 1.0f }
                 },
                 areaRanges = AreaRanges.largerCenter
             }
