@@ -25,6 +25,7 @@ namespace StaticDungeon
             { "entry2", new Entry2Room() },
             { "sandstoneEasy", new SandstoneEasyRoom() },
             { "sandstoneSlopeEasy", new SandstoneSlopeEasyRoom() },
+            { "sandstoneMediumMazeRoom", new SandstoneMediumMazeRoom() },
             { "exit2", new Exit2Room() },
 
             // Level 2
@@ -164,6 +165,19 @@ namespace StaticDungeon
         virtual public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
 {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-donut-shrine"], probability = 1.0f },
+        };
+
+        virtual public float LockInProbability { get; set; } = 0.0f;
+    }
+
+    public class SandstoneMediumMazeRoom : Room
+    {
+        virtual public string Name { get; set; } = "Sandstone Slope Maze Medium";
+        virtual public string WallType { get; set; } = "pyramid";
+
+        virtual public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+{
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["medium-maze-sand-walls"], probability = 1.0f },
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;

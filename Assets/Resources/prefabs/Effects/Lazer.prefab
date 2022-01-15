@@ -4879,6 +4879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 6529770079577318106}
   boxCollider: {fileID: 742249989243027378}
+  damageDuration: 0.1
 --- !u!61 &742249989243027378
 BoxCollider2D:
   m_ObjectHideFlags: 0
