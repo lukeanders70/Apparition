@@ -154,23 +154,43 @@ public class PathFinder : MonoBehaviour
         yield break;
     }
 
-    public List<Vector2> WanderFind(Vector2 position, int minDistance, int maxDistance)
+    public List<Vector2> WanderFind(GameObject o, int minDistance, int maxDistance)
     {
-        var startingNode = findClosestGraphNode(position);
-        if (startingNode == null)
+        var path = new List<Vector2>();
+        int desiredDistance = UnityEngine.Random.Range(minDistance, maxDistance + 1);
+        HashSet<GraphNode> explored = new HashSet<GraphNode>();
+
+        var nextNode = findClosestGraphNode(o.transform.localPosition);
+        if (nextNode == null)
         {
             Debug.LogError("desired starting position not in graph");
             return new List<Vector2>();
         }
-        int desiredDistance = UnityEngine.Random.Range(minDistance, maxDistance + 1);
-        HashSet<GraphNode> explored = new HashSet<GraphNode>();
-        HashSet<GraphNode> fringe = new HashSet<GraphNode>();
-        explored.Add(startingNode);
         while(desiredDistance > 0)
         {
-            return new List<Vector2>();
+            explored.Add(nextNode);
+            path.Add(nextNode.worldPosition);
+            desiredDistance -= 1;
+
+            var travelableNeighboors = new List<GraphNode>();
+            foreach ((float edgeDist, GraphNode node) n in nextNode.neighboors)
+            {
+                if (!explored.Contains(n.node))
+                {
+                    travelableNeighboors.Add(n.node);
+                }
+            }
+            if(travelableNeighboors.Count == 0)
+            {
+                return path;
+            }
+            nextNode = travelableNeighboors[UnityEngine.Random.Range(0, travelableNeighboors.Count)];
+            foreach (GraphNode neighboor in travelableNeighboors)
+            {
+                explored.Add(neighboor);
+            }
         }
-        return new List<Vector2>();
+        return path;
     }
 
     private GraphNode findClosestGraphNode(Vector2 position)

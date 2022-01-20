@@ -11,9 +11,9 @@ public class RusherAI : BasicEnemyAI
     [SerializeField]
     private Animator animator;
     [SerializeField]
-    private float minWanderDistance;
+    private int minWanderDistance;
     [SerializeField]
-    private float maxWanderDistance;
+    private int maxWanderDistance;
 
     private AIStateMachine stateMachine;
 
@@ -169,8 +169,7 @@ public class RusherAI : BasicEnemyAI
             AIComp.SetAnimationState("walk");
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             AIComp.Stop();
-            var walkPoint = AIComp.getWanderPoint();
-            var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, walkPoint);
+            var spline = AIComp.pathFinder.WanderFind(gameObject, AIComp.minWanderDistance, AIComp.maxWanderDistance);
             walkRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
             {
                 stateMachine.EnterState("idle");
