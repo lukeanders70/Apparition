@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\PathFinder.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
+    <Compile Include="Assets\Scripts\Misc\Lazer.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\SpiritHandler.cs" />
     <Compile Include="Assets\Utils\GridObjectManager.cs" />
     <Compile Include="Assets\Scripts\Characters\BasicHealth.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\Scripts\Misc\Lazer.cs" />
+    <Compile Include="Assets\moleAI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />

@@ -58,27 +58,6 @@ public class RusherAI : BasicEnemyAI
         }
     }
 
-    Vector2 getWanderPoint()
-    {
-        var boxCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
-        foreach (int _ in Enumerable.Range(1, 5))
-        {
-            Vector3 dir = AIHelpers.RandomDirection();
-            var intendedDistance = Random.Range(minWanderDistance, maxWanderDistance);
-            var testPosition = transform.position + (dir * intendedDistance);
-            Collider2D intersects = Physics2D.OverlapBox(
-                (Vector2)testPosition + boxCollider.offset,
-                boxCollider.size,
-                0
-            );
-            if (intersects == null)
-            {
-                return testPosition;
-            }
-        }
-        return transform.position;
-    }
-
     private void Stop()
     {
         rigidBody.velocity = Vector2.zero;
