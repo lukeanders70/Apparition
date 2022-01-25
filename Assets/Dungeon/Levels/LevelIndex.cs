@@ -77,11 +77,11 @@ namespace StaticDungeon
         public Room EntryRoom { get; set; } = RoomIndex.rooms["entry3"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockEasy"], probability = 1.0f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockEasy"], probability = 1.0f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {

@@ -17,14 +17,16 @@ namespace StaticDungeon
             { "blob-den", new  BlobDen() },
             { "easy-inverse-donut", new EasyInverseDonutSpawnConfig() },
             { "easy-quadratic-spawn-config", new EasyQuadrantSpawnConfig() },
-            { "lava", new LavaSpawnConfig() },
             { "easy-walled", new EasyWalledRoomConfig() },
             { "easy-walled-alt", new AltWalledRoomConfig() },
             { "easy-walled-strips", new WalledRoomStrips() },
             { "short-wall-maze", new ShortWallMazeConfig() },
             // Level 2
             { "easy-donut-shrine", new EasyDonutSandShrine() },
-            { "medium-maze-sand-walls", new MediumMazeSandWalls() }
+            { "medium-maze-sand-walls", new MediumMazeSandWalls() },
+            // Level 3
+            { "lava-maze", new LavaSpawnConfig() },
+            { "easy-scattered-rocks", new EasyScatteredRocksConfig() },
         };
     }
 
@@ -150,33 +152,6 @@ namespace StaticDungeon
     }
 
     // Level 1 //
-
-    public class LavaSpawnConfig : SpawnConfig
-    {
-        virtual public string Name { get; set; } = "lava-config";
-        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
-            new ObjectRanges {
-                minObjects = 48,
-                maxObjects = 48,
-                symmetry = Symmetry.None,
-                prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Obstacles/hole", probability = 1.0f }
-                },
-                areaRanges = AreaRanges.largeOffsetTiles
-            }
-        };
-        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
-            new ObjectRanges {
-                minObjects = 1,
-                maxObjects = 5,
-                symmetry = Symmetry.None,
-                prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
-                },
-                areaRanges = AreaRanges.centerArea
-            }
-        };
-    }
 
     public class ShortWallMazeConfig : SpawnConfig
     {
@@ -475,6 +450,64 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Enemies/pyramid-eye", probability = 1.0f }
                 },
                 areaRanges = AreaRanges.largerCenter
+            }
+        };
+    }
+
+    // Level 3 // 
+
+    public class LavaSpawnConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "lava-config";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 48,
+                maxObjects = 48,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/hole", probability = 1.0f }
+                },
+                areaRanges = AreaRanges.largeOffsetTiles
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 1.0f },
+                },
+                areaRanges = AreaRanges.centerArea
+            }
+        };
+    }
+
+    public class EasyScatteredRocksConfig: SpawnConfig
+    {
+        virtual public string Name { get; set; } = "easy-scattered-rocks";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 10,
+                maxObjects = 15,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/rock", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/stalagmite", probability = 0.3f }
+                },
+                areaRanges = AreaRanges.largeOffsetTiles
+            }
+        };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 5,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Enemies/mole", probability = 0.5f },
+                    new ObjectProbability<string> { obj = "Enemies/bat", probability = 0.5f },
+                },
+                areaRanges = AreaRanges.centerArea
             }
         };
     }
