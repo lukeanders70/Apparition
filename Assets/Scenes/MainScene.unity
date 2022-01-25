@@ -2125,7 +2125,7 @@ MonoBehaviour:
   roomWidth: 28
   numRooms: 15
   levelTransition: {fileID: 66578517}
-  levelIndex: 0
+  levelIndex: 2
 --- !u!4 &2137089098
 Transform:
   m_ObjectHideFlags: 0
