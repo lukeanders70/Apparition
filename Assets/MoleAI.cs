@@ -16,6 +16,9 @@ public class MoleAI : BasicEnemyAI
     [SerializeField]
     ParticleSystem surface;
 
+    [SerializeField]
+    SpriteRenderer spriteRenderer;
+
     private AIStateMachine stateMachine;
 
     // Start is called before the first frame update
@@ -69,6 +72,8 @@ public class MoleAI : BasicEnemyAI
 
         private Invokable moveInvoker;
 
+        private bool firstLook = true;
+
         public LookState(GameObject go, AIStateMachine sm)
         {
             gameObject = go;
@@ -87,7 +92,9 @@ public class MoleAI : BasicEnemyAI
         {
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            moveInvoker = Invoke(() => { stateMachine.EnterState("move"); }, 3.0f);
+            float lookTime = firstLook ? Random.Range(2.0f, 4.0f) : 3.0f;
+            firstLook = false;
+            moveInvoker = Invoke(() => { stateMachine.EnterState("move"); }, lookTime);
         }
 
         public override void StopState()
@@ -149,6 +156,7 @@ public class MoleAI : BasicEnemyAI
             }
 
             AIComp.gameObject.layer = 11;
+            AIComp.spriteRenderer.sortingLayerName = "GrounDecoration";
             burrowPs = Instantiate(AIComp.burrow);
             burrowPs.transform.parent = AIComp.gameObject.transform;
             burrowPs.transform.localPosition = new Vector3(0,-0.3f,0);
@@ -163,6 +171,7 @@ public class MoleAI : BasicEnemyAI
             psInstanceDive.transform.position = AIComp.transform.position;
             stateMachine.EnterState("look");
             AIComp.gameObject.layer = 0;
+            AIComp.spriteRenderer.sortingLayerName = "Default";
         }
     }
 }
