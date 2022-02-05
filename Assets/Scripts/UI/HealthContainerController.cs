@@ -13,7 +13,7 @@ public class HealthContainerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int healthAmount = ph.health;
+        int healthAmount = PlayerStateInfo.health;
         for(int i = 0; i < healthAmount; i++)
         {
             AddHealth();

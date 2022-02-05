@@ -11,21 +11,29 @@ public class PlayerHealth : MonoBehaviour, Health
     private PlayerHandler playerHandler;
     [SerializeField]
     private HealthContainerController healthContainer;
-    public int health;
     public int maxHealth;
 
     private List<Action> deathCallbacks = new List<Action>();
 
     private bool damagable = true;
 
+    void Start()
+    {
+        if(PlayerStateInfo.health == 0)
+        {
+            PlayerStateInfo.health = maxHealth;
+            healthContainer.UpdateHealth(PlayerStateInfo.health);
+        }
+    }
+
     public bool Damage(int damage)
     {
         if(damagable)
         {
-            health = Math.Max(0, health - 1);
-            healthContainer.UpdateHealth(health);
+            PlayerStateInfo.health = Math.Max(0, PlayerStateInfo.health - 1);
+            healthContainer.UpdateHealth(PlayerStateInfo.health);
             StartCoroutine(HitInvincible());
-            if (health == 0)
+            if (PlayerStateInfo.health == 0)
             {
                 Kill();
             }
@@ -45,7 +53,7 @@ public class PlayerHealth : MonoBehaviour, Health
 
     public int GetHealth()
     {
-        return health;
+        return PlayerStateInfo.health;
     }
 
     public int GetMaxHealth()
@@ -55,7 +63,7 @@ public class PlayerHealth : MonoBehaviour, Health
 
     public void Heal(int amount)
     {
-        Mathf.Min(health + amount, maxHealth);
+        Mathf.Min(PlayerStateInfo.health + amount, maxHealth);
     }
 
     public void Kill()
