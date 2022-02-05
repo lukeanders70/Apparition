@@ -25,7 +25,7 @@ namespace StaticDungeon
 
     public class Level1 : Level
     {
-        public string Name { get; set; } = "level1";
+        public string Name { get; set; } = "Crumbling Catacombs";
         public Room EntryRoom { get; set; } = RoomIndex.rooms["entry1"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
@@ -51,7 +51,7 @@ namespace StaticDungeon
 
     public class Level2 : Level
     {
-        public string Name { get; set; } = "level2";
+        public string Name { get; set; } = "Sand Sea";
         public Room EntryRoom { get; set; } = RoomIndex.rooms["entry2"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
@@ -73,7 +73,7 @@ namespace StaticDungeon
 
     public class Level3 : Level
     {
-        public string Name { get; set; } = "level3";
+        public string Name { get; set; } = "Boiling Burrow";
         public Room EntryRoom { get; set; } = RoomIndex.rooms["entry3"];
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
