@@ -115,7 +115,10 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\moleAI.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemies\MoleAI.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\LevelSplashController.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\DungeonStateInfo.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerStateInfo.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
