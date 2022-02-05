@@ -1931,7 +1931,6 @@ MonoBehaviour:
   gameOver: {fileID: 872256021}
   playerHandler: {fileID: 2087447587}
   healthContainer: {fileID: 662860281}
-  health: 3
   maxHealth: 3
 --- !u!114 &2087447589
 MonoBehaviour:
@@ -1946,7 +1945,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoinCounter: {fileID: 1703413801}
-  numCoins: 0
   maxCoins: 999
 --- !u!1001 &2093705313
 PrefabInstance:
@@ -2125,7 +2123,6 @@ MonoBehaviour:
   roomWidth: 28
   numRooms: 15
   levelTransition: {fileID: 66578517}
-  levelIndex: 2
 --- !u!4 &2137089098
 Transform:
   m_ObjectHideFlags: 0
