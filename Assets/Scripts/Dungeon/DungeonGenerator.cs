@@ -19,22 +19,21 @@ public class DungeonGenerator : MonoBehaviour
     private Animator levelTransition;
 
     private GameObject level;
-    public int levelIndex = 0;
 
     private void Awake()
     {
-        GenerateDungeon(StaticDungeon.LevelIndex.levels[levelIndex]);
+        GenerateDungeon(StaticDungeon.LevelIndex.levels[DungeonStateInfo.levelIndex]);
     }
 
     public bool MoveDown()
     {
-        if (StaticDungeon.LevelIndex.levels.Length > levelIndex + 1)
+        if (StaticDungeon.LevelIndex.levels.Length > DungeonStateInfo.levelIndex + 1)
         {
-            levelIndex = levelIndex + 1;
-            GenerateDungeon(StaticDungeon.LevelIndex.levels[levelIndex]);
+            DungeonStateInfo.levelIndex = DungeonStateInfo.levelIndex + 1;
+            GenerateDungeon(StaticDungeon.LevelIndex.levels[DungeonStateInfo.levelIndex]);
             return true;
         }
-        Debug.LogError("Failed to move down to level index: " + (levelIndex + 1));
+        Debug.LogError("Failed to move down to level index: " + (DungeonStateInfo.levelIndex + 1));
         return false;
     }
 

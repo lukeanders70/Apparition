@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSplashController : MonoBehaviour
@@ -16,6 +17,8 @@ public class LevelSplashController : MonoBehaviour
     private float fadeTime;
     [SerializeField]
     private float scrollTime;
+    [SerializeField]
+    private float levelStartTime;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +29,13 @@ public class LevelSplashController : MonoBehaviour
         splashImageContainer.transform.position = splashImageContainer.transform.position + new Vector3(0f, startingOffset, 0f);
         for (int i = 0; i < DungeonStateInfo.levelIndex; i ++)
         {
-            Debug.Log("Setting " + i + " white");
             spashImages[i].GetComponent<SpriteRenderer>().color = Color.white;
         }
         levelNameText.text = StaticDungeon.LevelIndex.levels[DungeonStateInfo.levelIndex].Name;
         StartCoroutine(FadeIn(spashImages[DungeonStateInfo.levelIndex].GetComponent<SpriteRenderer>(), fadeTime, () => {
             StartCoroutine(Scroll(scrollTime, endingOffset, () => {
                 levelNameText.color = Color.white;
+                Invoke("StartLevel", levelStartTime);
             }));
         }));
     }
@@ -68,10 +71,9 @@ public class LevelSplashController : MonoBehaviour
         callback();
         yield break;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void StartLevel()
     {
-        
+        SceneManager.LoadScene("MainScene");
     }
 }

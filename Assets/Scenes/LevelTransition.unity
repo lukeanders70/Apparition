@@ -407,6 +407,7 @@ MonoBehaviour:
   levelNameText: {fileID: 1946798335}
   fadeTime: 2.5
   scrollTime: 2
+  levelStartTime: 3
 --- !u!4 &993083803
 Transform:
   m_ObjectHideFlags: 0

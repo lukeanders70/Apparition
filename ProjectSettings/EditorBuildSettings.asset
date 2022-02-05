@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/LevelTransition.unity
+    guid: a03415edd23010a4dadf29edf71e14f2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 0f655c13222f64f4ba6937e01d426b97, type: 2}
