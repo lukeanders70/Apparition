@@ -7,7 +7,7 @@ public class TitleSceneController : MonoBehaviour
 {
     public void Enter()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LevelTransition");
     }
 
     public void Quit()
