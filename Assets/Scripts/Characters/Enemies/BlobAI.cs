@@ -63,6 +63,7 @@ public class BlobAI : BasicEnemyAI
 
     private void GameObjectToEmpty()
     {
+        Destroy(animator.gameObject);
         foreach (Component c in GetComponents(typeof(Component)))
         {
             if (c != transform)

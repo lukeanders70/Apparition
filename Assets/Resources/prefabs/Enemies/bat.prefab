@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7189229346824847707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.558363, y: 1.1995156, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 5352286359449648278, guid: 3a80671a06c25fa4fb82522bb5d95d6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &8071257059777879364
 Animator:
   serializedVersion: 3
@@ -124,6 +124,11 @@ MonoBehaviour:
   deathColor: {r: 0.54509807, g: 0.60784316, b: 0.7058824, a: 1}
   isDestroyed: 0
   damage: 1
+  rigidBody: {fileID: 0}
+  collidr: {fileID: 0}
+  room: {fileID: 0}
+  enemyManager: {fileID: 0}
+  spritiBounceBack: 0
   rb: {fileID: 2869787273851884800}
   speed: 5
 --- !u!50 &2869787273851884800
@@ -160,10 +165,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000023841858, y: -0.0995872}
+  m_Offset: {x: 0, y: 0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 2.125, y: 1.625}
     newSize: {x: 2.125, y: 1.625}
     adaptiveTilingThreshold: 0.5

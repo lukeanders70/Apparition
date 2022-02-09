@@ -14,6 +14,8 @@ public class RusherAI : BasicEnemyAI
     private int minWanderDistance;
     [SerializeField]
     private int maxWanderDistance;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
     private AIStateMachine stateMachine;
 
@@ -101,7 +103,7 @@ public class RusherAI : BasicEnemyAI
 
         override public void StartState()
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
             walkInvoker = Invoke(() => { stateMachine.EnterState("walk"); }, 3.0f);
@@ -146,7 +148,7 @@ public class RusherAI : BasicEnemyAI
         override public void StartState()
         {
             AIComp.SetAnimationState("walk");
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
             AIComp.Stop();
             var spline = AIComp.pathFinder.WanderFind(gameObject, AIComp.minWanderDistance, AIComp.maxWanderDistance);
             walkRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
@@ -224,7 +226,7 @@ public class RusherAI : BasicEnemyAI
             Invoke(() => { AIComp.invicible = true; AIComp.spritiBounceBack = true; }, 0.1f);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
+            AIComp.spriteRenderer.color = new Color(1, 0.5f, 0.5f, 1);
             var runPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
 
             runInvoke = Invoke(() => Run(runPoint), 1.0f);

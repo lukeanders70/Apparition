@@ -87,9 +87,6 @@ public class SpiritController : MonoBehaviour
             {
                 healthComponent.Damage(damage);
             }
-        } else if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
-        {
-            spriteRendererWhite.sortingOrder = 1;
         }
     }
 
@@ -101,14 +98,5 @@ public class SpiritController : MonoBehaviour
     private void makeOpaque()
     {
         spriteRendererWhite.color = Color.white;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
-        if (isMoving && collidedObject.tag == "Wall" && collidedObject.layer == 7)
-        {
-            spriteRendererWhite.sortingOrder = 0;
-        }
     }
 }
