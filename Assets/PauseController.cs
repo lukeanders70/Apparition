@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class GameOver : MonoBehaviour
+public class PauseController : MonoBehaviour
 {
 
     [SerializeField]
@@ -16,17 +16,26 @@ public class GameOver : MonoBehaviour
     {
         Time.timeScale = 0;
         ES.gameObject.SetActive(true);
+        ES.firstSelectedGameObject = defaultButton;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        gameObject.SetActive(false);
     }
 
     public void Restart()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameObject.SetActive(false);
     }
 
     public void Quit()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("TitleScene");
+        gameObject.SetActive(false);
     }
 }
