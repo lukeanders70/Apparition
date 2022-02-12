@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\FadeTransitionContoller.cs" />
+    <Compile Include="Assets\PauseController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />

@@ -11,10 +11,24 @@ public class PlayerHandler : MonoBehaviour
     private Vector2 player1StartPosition;
     [SerializeField]
     private Vector2 player2StartPosition;
+    [SerializeField]
+    private GameObject PauseMenu;
 
     public void Awake()
     {
         resetPosition();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonUp("Cancel"))
+        {
+            if (PauseMenu.activeSelf) {
+                PauseMenu.GetComponent<PauseController>().Resume();
+            } else {
+                PauseMenu.SetActive(true);
+            }
+        }
     }
 
     public GameObject getOtherPlayer(GameObject player)
