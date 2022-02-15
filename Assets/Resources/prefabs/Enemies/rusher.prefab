@@ -157,12 +157,13 @@ MonoBehaviour:
   collidr: {fileID: 0}
   room: {fileID: 0}
   enemyManager: {fileID: 0}
+  spritiBounceBack: 0
   walkSpeed: 2
   runSpeed: 4
   animator: {fileID: 611150305}
   minWanderDistance: 3
   maxWanderDistance: 5
-  numCharges: 1
+  spriteRenderer: {fileID: 1725158747151057042}
 --- !u!95 &611150305
 Animator:
   serializedVersion: 3
