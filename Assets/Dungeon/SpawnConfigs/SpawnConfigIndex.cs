@@ -11,6 +11,7 @@ namespace StaticDungeon
             // Shared
             { "empty", new EmptySpawnConfig() },
             { "ladder", new LadderConfig() },
+            { "well", new WellConfig() },
             // Level 1
             { "easy-donut", new EasyDonutSpawnConfig() },
             { "wolf-den", new  WolfDen() },
@@ -145,6 +146,24 @@ namespace StaticDungeon
                     new ObjectProbability<string> { obj = "Obstacles/ladder", probability = 1.0f }
                 },
                 absoluteLocations = new (int, int)[] { (11, 4) }
+            }
+        };
+
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+    }
+
+    public class WellConfig : SpawnConfig
+    {
+        virtual public string Name { get; set; } = "well";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 1,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/heartWell", probability = 1.0f }
+                },
+                absoluteLocations = new (int, int)[] { (12, 5) }
             }
         };
 
