@@ -37,9 +37,9 @@ public class IndividualPlayerHealth : MonoBehaviour, Health
         return healthDelegate.GetMaxHealth();
     }
 
-    public void Heal(int amuount)
+    public void Heal(int amount)
     {
-        healthDelegate.Heal(amuount);
+        healthDelegate.Heal(amount);
     }
 
     public void Kill()
