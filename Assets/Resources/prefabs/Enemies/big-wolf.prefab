@@ -110,6 +110,7 @@ MonoBehaviour:
   animator: {fileID: 1852509478027638076}
   minWanderDistance: 4
   maxWanderDistance: 6
+  spriteRenderer: {fileID: 6100788329980647015}
 --- !u!114 &2680989310784047865
 MonoBehaviour:
   m_ObjectHideFlags: 0

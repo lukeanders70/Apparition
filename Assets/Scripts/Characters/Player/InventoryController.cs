@@ -13,4 +13,15 @@ public class InventoryController : MonoBehaviour
         PlayerStateInfo.coins = Mathf.Min(maxCoins, PlayerStateInfo.coins);
         CoinCounter.UpdateCount(PlayerStateInfo.coins);
     }
+
+    public bool RemoveCoins(int amount = 1)
+    {
+        if(PlayerStateInfo.coins >= amount)
+        {
+            PlayerStateInfo.coins -= amount;
+            CoinCounter.UpdateCount(PlayerStateInfo.coins);
+            return true;
+        }
+        return false;
+    }
 }

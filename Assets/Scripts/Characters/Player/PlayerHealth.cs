@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour, Health
     private PlayerHandler playerHandler;
     [SerializeField]
     private HealthContainerController healthContainer;
-    public int maxHealth;
+    public int startingHealth;
 
     private List<Action> deathCallbacks = new List<Action>();
 
@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour, Health
     {
         if(PlayerStateInfo.health == 0)
         {
-            PlayerStateInfo.health = maxHealth;
+            PlayerStateInfo.health = startingHealth;
             healthContainer.UpdateHealth(PlayerStateInfo.health);
         }
     }
@@ -58,12 +58,17 @@ public class PlayerHealth : MonoBehaviour, Health
 
     public int GetMaxHealth()
     {
-        return maxHealth;
+        return startingHealth;
     }
 
     public void Heal(int amount)
     {
-        Mathf.Min(PlayerStateInfo.health + amount, maxHealth);
+        PlayerStateInfo.health = PlayerStateInfo.health + amount;
+        if(PlayerStateInfo.health > startingHealth)
+        {
+            startingHealth = PlayerStateInfo.health;
+        }
+        healthContainer.UpdateHealth(PlayerStateInfo.health);
     }
 
     public void Kill()

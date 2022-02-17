@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Misc\Lazer.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\SpiritHandler.cs" />
     <Compile Include="Assets\Utils\GridObjectManager.cs" />
+    <Compile Include="Assets\PauseController.cs" />
     <Compile Include="Assets\Scripts\Characters\BasicHealth.cs" />
     <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
     <Compile Include="Assets\Scripts\Misc\CameraMoveController.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Loot\LootDropController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BigWolfAI.cs" />
+    <Compile Include="Assets\FadeTransitionContoller.cs" />
     <Compile Include="Assets\Utils\Health.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerStateInfo.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Spirit\SpiritController.cs" />
@@ -119,8 +121,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\FadeTransitionContoller.cs" />
-    <Compile Include="Assets\PauseController.cs" />
+    <Compile Include="Assets\HeartDispenseController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
