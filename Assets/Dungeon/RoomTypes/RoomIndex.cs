@@ -18,6 +18,7 @@ namespace StaticDungeon
             { "mossyStoneEasy", new MossyStoneEasyRoom() },
             { "brokenStoneEasy", new BrokenStoneEasyRoom() },
             { "tapestryStoneMiniBoss", new TapestryStoneMiniBossRoom() },
+            { "wellStone", new WellStone() },
             { "exit1", new Exit1Room() },
             { "stoneMaze", new StoneMazeRoom() },
 
@@ -108,6 +109,19 @@ namespace StaticDungeon
         {
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["blob-den"], probability = 0.5f },
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["wolf-den"], probability = 0.5f },
+        };
+
+        virtual public float LockInProbability { get; set; } = 1.0f;
+    }
+
+    public class WellStone : Room
+    {
+        public string Name { get; set; } = "Heart Well Stone";
+
+        public string WallType { get; set; } = "moss";
+        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } =
+        {
+            new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["well"], probability = 1.0f },
         };
 
         virtual public float LockInProbability { get; set; } = 1.0f;
