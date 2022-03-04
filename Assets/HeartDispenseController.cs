@@ -34,7 +34,7 @@ public class HeartDispenseController : MonoBehaviour
 
             if (textCanvas.activeSelf)
             {
-                if (Input.GetKeyDown("return"))
+                if (Input.GetKeyDown("e"))
                 {
                     var inventory = closestPlayer.GetComponentInParent<InventoryController>();
                     DepositCoin(inventory);

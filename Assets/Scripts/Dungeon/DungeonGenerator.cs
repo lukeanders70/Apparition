@@ -64,7 +64,7 @@ public class DungeonGenerator : MonoBehaviour
             UpdateEdge(indexPositionToAdd, newRoom, edge, dungeon);
             edge.Remove(indexPositionToAdd);
         }
-        SetExit(dungeon, levelInfo.ExitRoom);
+        SetSpecialRooms(dungeon, levelInfo.SpecialRooms);
     }
 
     private void UpdateEdge(Vector2 roomPosition, GameObject newRoom, List<Vector2> edge, Dictionary<Vector2, GameObject> dungeon)
@@ -78,28 +78,18 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void SetExit(Dictionary<Vector2, GameObject> dungeon, StaticDungeon.Room exitRoomInfo)
+    private void SetSpecialRooms(Dictionary<Vector2, GameObject> dungeon, StaticDungeon.SpecialRoomSpawnConfig[] specialRoomConfigs)
     {
-        float maxDistance = 0;
-        Vector2 maxKey = Vector2.zero;
-        float maxSingleAxisDistance = 0; // tie breaker
-        foreach(Vector2 key in dungeon.Keys)
+        foreach(StaticDungeon.SpecialRoomSpawnConfig specialRoomConfig in specialRoomConfigs)
         {
-            float manDistance = Mathf.Abs(key.x) + Mathf.Abs(key.y);
-            float singleAxisDistance = Mathf.Max(Mathf.Abs(key.x), Mathf.Abs(key.y));
-            if ((manDistance > maxDistance) || (manDistance == maxDistance && singleAxisDistance > maxSingleAxisDistance))
+            var possibleRoomsToOverride = specialRoomConfig.RoomsThatSatisfyCondition(dungeon);
+            var numRoomsToAdd = Random.Range(specialRoomConfig.minRooms, specialRoomConfig.maxRooms);
+            var roomsToOverride = AIHelpers.ChooseN(numRoomsToAdd, possibleRoomsToOverride);
+            foreach(GameObject roomToOverride in roomsToOverride)
             {
-                maxDistance = manDistance;
-                maxKey = key;
-                maxSingleAxisDistance = singleAxisDistance;
+                var roomController = roomToOverride.GetComponent<RoomController>();
+                roomController.SetRoomInfo(specialRoomConfig.room);
             }
-        }
-        if (dungeon[maxKey] != null)
-        {
-            dungeon[maxKey].GetComponent<RoomController>().SetRoomInfo(exitRoomInfo);
-        } else
-        {
-            Debug.LogError("Exit Room Key " + maxKey + " was not found!");
         }
     }
 

@@ -17,6 +17,8 @@ public class RoomController : MonoBehaviour
 
     public StaticDungeon.Room roomInfo;
 
+    public Vector2 position;
+
     /**
      * Call when a room is first created
      */ 
@@ -39,6 +41,7 @@ public class RoomController : MonoBehaviour
                         levelInfo.NearRooms : 
                         entryRoomInfo;
         roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
+        position = indexPosition;
 
         doorManager.SetupDoors(dungeon, indexPosition, roomInfo, doorSpawnProbabilityOverride);
 

@@ -15,6 +15,19 @@ public class AIHelpers
         return dir;
     }
 
+    public static List<T> ChooseN<T>(int n, List<T> l)
+    {
+        var newList = new List<T>();
+        while(n > 0 && l.Count > 0)
+        {
+            var index = UnityEngine.Random.Range(0, l.Count);
+            newList.Add(l[index]);
+            l.RemoveAt(index);
+            n -= 1;
+        }
+        return newList;
+    }
+
     public static GameObject? GetClosestPlayer(Vector3 position)
     {
         GameObject player1 = GameObject.Find("Player1");
@@ -50,6 +63,10 @@ public class AIHelpers
     {
         GameObject player1 = GameObject.Find("Player1");
         GameObject player2 = GameObject.Find("Player2");
+        if(player1 == null && player2 == null)
+        {
+            return null;
+        }
         bool player1Moving = player1.GetComponent<Rigidbody2D>().velocity.magnitude > 0.1f;
         bool player2Moving = player2.GetComponent<Rigidbody2D>().velocity.magnitude > 0.1f;
 
