@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\HeartDispenseController.cs" />
+    <Compile Include="Assets\Dungeon\Levels\SpecialRoomSpawnConfig.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />

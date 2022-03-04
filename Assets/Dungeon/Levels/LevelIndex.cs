@@ -20,7 +20,8 @@ namespace StaticDungeon
         public ObjectProbability<Room>[] NearRooms { get; set; }
         public ObjectProbability<Room>[] MediumRooms { get; set; }
         public ObjectProbability<Room>[] FarRooms { get; set; }
-        public Room ExitRoom { get; set; }
+
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; }
     }
 
     public class Level1 : Level
@@ -43,11 +44,14 @@ namespace StaticDungeon
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 0.8f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["wellStone"], probability = 0.2f },
+            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 1.0f },
         };
 
-        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit1"];
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
+        {
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneExit"]
+        };
     }
 
     public class Level2 : Level
@@ -68,8 +72,10 @@ namespace StaticDungeon
         {
             new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneMediumMazeRoom"], probability = 1.0f },
         };
-
-        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit2"];
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
+{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["sandstoneExit"]
+        };
     }
 
     public class Level3 : Level
@@ -89,6 +95,9 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 1.0f }
         };
 
-        public Room ExitRoom { get; set; } = RoomIndex.rooms["exit3"];
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
+{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["rockExit"]
+        };
     }
 }

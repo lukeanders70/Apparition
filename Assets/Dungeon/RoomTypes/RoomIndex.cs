@@ -124,7 +124,7 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["well"], probability = 1.0f },
         };
 
-        virtual public float LockInProbability { get; set; } = 1.0f;
+        virtual public float LockInProbability { get; set; } = 0.0f;
     }
 
     public class StoneMazeRoom : Room
