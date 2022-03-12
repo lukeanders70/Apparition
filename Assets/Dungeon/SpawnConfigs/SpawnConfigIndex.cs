@@ -360,11 +360,34 @@ namespace StaticDungeon
         };
     }
 
-    public class BlobDen : EasyDonutSpawnConfig
+    public class BlobDen : SpawnConfig
     {
-        override public string Name { get; set; } = "blob-den";
+        public string Name { get; set; } = "blob-den";
 
-        override public ObjectRanges[] EnemyRanges { get; set; } = {
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 8,
+                maxObjects = 20,
+                symmetry = Symmetry.LeftRight,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
+                },
+                areaRanges = AreaRanges.largerCenter
+            },
+            new ObjectRanges {
+                minObjects = 0,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Misc/treasureChest", probability = 1.0f }
+                },
+                absoluteLocations = new (int, int)[] { (12, 5) }
+            },
+        };
+
+        public ObjectRanges[] EnemyRanges { get; set; } = {
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 2,
@@ -387,11 +410,34 @@ namespace StaticDungeon
         };
     }
 
-    public class WolfDen : EasyDonutSpawnConfig
+    public class WolfDen : SpawnConfig
     {
-        override public string Name { get; set; } = "wolf-den";
+        public string Name { get; set; } = "wolf-den";
 
-        override public ObjectRanges[] EnemyRanges { get; set; } = {
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = {
+            new ObjectRanges {
+                minObjects = 8,
+                maxObjects = 20,
+                symmetry = Symmetry.LeftRight,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Obstacles/ShortStone", probability = 0.7f },
+                    new ObjectProbability<string> { obj = "Obstacles/TallStone", probability = 0.1f },
+                    new ObjectProbability<string> { obj = "Obstacles/torch", probability = 0.2f }
+                },
+                areaRanges = AreaRanges.largerCenter
+            },
+            new ObjectRanges {
+                minObjects = 0,
+                maxObjects = 1,
+                symmetry = Symmetry.None,
+                prefabPathProbs = new ObjectProbability<string>[] {
+                    new ObjectProbability<string> { obj = "Misc/treasureChest", probability = 1.0f }
+                },
+                absoluteLocations = new (int, int)[] { (12, 5) }
+            },
+        };
+
+        public ObjectRanges[] EnemyRanges { get; set; } = {
             new ObjectRanges {
                 minObjects = 1,
                 maxObjects = 1,
