@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\RusherAI.cs" />
     <Compile Include="Assets\Scripts\UI\CoinCounterController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\LockInDoorController.cs" />
+    <Compile Include="Assets\Dungeon\Levels\SpecialRoomSpawnConfig.cs" />
     <Compile Include="Assets\Scripts\Misc\AnimationCallback.cs" />
     <Compile Include="Assets\Loot\BasicLootController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\InteractionController.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\InventoryController.cs" />
     <Compile Include="Assets\Loot\CoinController.cs" />
     <Compile Include="Assets\Utils\AIStateMachine.cs" />
+    <Compile Include="Assets\HeartDispenseController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\PathFinder.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
@@ -121,8 +123,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\HeartDispenseController.cs" />
-    <Compile Include="Assets\Dungeon\Levels\SpecialRoomSpawnConfig.cs" />
+    <Compile Include="Assets\TreasureChestController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
