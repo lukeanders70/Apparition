@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace StaticDungeon
 {
     public class LevelIndex
@@ -26,25 +22,55 @@ namespace StaticDungeon
 
     public class Level1 : Level
     {
-        public string Name { get; set; } = "Crumbling Catacombs";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry1"];
+        public string Name { get; set; } = "Crumbling Catacombs 1";
+        public Room EntryRoom { get; set; } = Entry1Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["stoneEasy"], probability = 0.0f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["mossyStoneEasy"], probability = 0.0f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["brokenStoneEasy"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = StoneEasyRoom.Instance, probability = 0.0f },
+            new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.0f },
+            new ObjectProbability<Room> { obj = BrokenStoneEasyRoom.Instance, probability = 1.0f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 0.1f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["mossyStoneEasy"], probability = 0.2f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["stoneMaze"], probability = 0.2f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["cobbledStoneEasy"], probability = 0.2f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["stoneLedgeEasy"], probability = 0.3f }
+            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 0.1f },
+            new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = StoneMazeRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = CobbledStoneEasyRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = StoneLedgeEasyRoom.Instance, probability = 0.3f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["tapestryStoneMiniBoss"], probability = 1.0f },
+            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 1.0f },
+        };
+
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
+        {
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneExit"]
+        };
+    }
+
+    public class Level1point5 : Level
+    {
+        public string Name { get; set; } = "Crumbling Catacombs 2";
+        public Room EntryRoom { get; set; } = Entry1Room.Instance;
+        public ObjectProbability<Room>[] NearRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = StoneEasyRoom.Instance, probability = 0.0f },
+            new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.0f },
+            new ObjectProbability<Room> { obj = BrokenStoneEasyRoom.Instance, probability = 1.0f }
+        };
+        public ObjectProbability<Room>[] MediumRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 0.1f },
+            new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = StoneMazeRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = CobbledStoneEasyRoom.Instance, probability = 0.2f },
+            new ObjectProbability<Room> { obj = StoneLedgeEasyRoom.Instance, probability = 0.3f }
+        };
+        public ObjectProbability<Room>[] FarRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 1.0f },
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
@@ -56,21 +82,45 @@ namespace StaticDungeon
 
     public class Level2 : Level
     {
-        public string Name { get; set; } = "Sand Sea";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry2"];
+        public string Name { get; set; } = "Sand Sea 1";
+        public Room EntryRoom { get; set; } = Entry2Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneSlopeEasy"], probability = 0.5f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneEasy"], probability = 0.5f }
+            new ObjectProbability<Room> { obj = SandstoneSlopeEasyRoom.Instance, probability = 0.5f },
+            new ObjectProbability<Room> { obj = SandstoneEasyRoom.Instance, probability = 0.5f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneMediumMazeRoom"], probability = 0.7f },
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneSlopeEasy"], probability = 0.3f },
+            new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 0.7f },
+            new ObjectProbability<Room> { obj = SandstoneSlopeEasyRoom.Instance, probability = 0.3f },
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["sandstoneMediumMazeRoom"], probability = 1.0f },
+            new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 1.0f },
+        };
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
+{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["sandstoneExit"]
+        };
+    }
+
+    public class Level2point5 : Level
+    {
+        public string Name { get; set; } = "Sand Sea 2";
+        public Room EntryRoom { get; set; } = Entry2Room.Instance;
+        public ObjectProbability<Room>[] NearRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = SandstoneSlopeEasyRoom.Instance, probability = 0.5f },
+            new ObjectProbability<Room> { obj = SandstoneEasyRoom.Instance, probability = 0.5f }
+        };
+        public ObjectProbability<Room>[] MediumRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 0.7f },
+            new ObjectProbability<Room> { obj = SandstoneSlopeEasyRoom.Instance, probability = 0.3f },
+        };
+        public ObjectProbability<Room>[] FarRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 1.0f },
         };
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
 {           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
@@ -80,23 +130,46 @@ namespace StaticDungeon
 
     public class Level3 : Level
     {
-        public string Name { get; set; } = "Boiling Burrow";
-        public Room EntryRoom { get; set; } = RoomIndex.rooms["entry3"];
+        public string Name { get; set; } = "Boiling Burrow 1";
+        public Room EntryRoom { get; set; } = Entry3Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockEasy"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockEasy"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RoomIndex.rooms["rockLavaMaze"], probability = 1.0f }
+            new ObjectProbability<Room> { obj = RockLavaMazeRoom.Instance, probability = 1.0f }
         };
 
-        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
-{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["rockExit"]
+        };
+    }
+
+    public class Level3point5 : Level
+    {
+        public string Name { get; set; } = "Boiling Burrow 2";
+        public Room EntryRoom { get; set; } = Entry3Room.Instance;
+        public ObjectProbability<Room>[] NearRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
+        };
+        public ObjectProbability<Room>[] MediumRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
+        };
+        public ObjectProbability<Room>[] FarRooms { get; set; } =
+        {
+            new ObjectProbability<Room> { obj = RockLavaMazeRoom.Instance, probability = 1.0f }
+        };
+
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
+            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
             SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["rockExit"]
         };
     }
