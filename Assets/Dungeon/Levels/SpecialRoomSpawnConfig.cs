@@ -24,7 +24,7 @@ namespace StaticDungeon
     }
 
     public class StoneWellSpecialSpawn : SpecialRoomSpawnConfig {
-        public Room room { get; set; } = RoomIndex.rooms["wellStone"];
+        public Room room { get; set; } = WellStone.Instance;
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
         public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
@@ -44,7 +44,7 @@ namespace StaticDungeon
 
     public class StoneExitSpecialSpawn : SpecialRoomSpawnConfig
     {
-        virtual public Room room { get; set; } = RoomIndex.rooms["exit1"];
+        virtual public Room room { get; set; } = Exit1Room.Instance;
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
         public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
@@ -70,12 +70,12 @@ namespace StaticDungeon
 
     public class SandstoneExitSpecialSpawn : StoneExitSpecialSpawn
     {
-        override public Room room { get; set; } = RoomIndex.rooms["exit2"];
+        override public Room room { get; set; } = Exit2Room.Instance;
     }
 
     public class RockExitSpecialSpawn : StoneExitSpecialSpawn
     {
-        override public Room room { get; set; } = RoomIndex.rooms["exit3"];
+        override public Room room { get; set; } = Exit3Room.Instance;
     }
 
 }

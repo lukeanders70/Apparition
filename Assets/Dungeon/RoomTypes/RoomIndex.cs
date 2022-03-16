@@ -4,39 +4,6 @@ using UnityEngine;
 
 namespace StaticDungeon
 {
-    public class RoomIndex
-    {
-        public static Dictionary<string, Room> rooms = new Dictionary<string, Room>()
-        {
-            // Shared
-
-            // Level 1
-            { "entry1", new Entry1Room() },
-            { "stoneEasy", new StoneEasyRoom() },
-            { "cobbledStoneEasy", new CobbledStoneEasyRoom() },
-            { "stoneLedgeEasy", new StoneLedgeEasyRoom() },
-            { "mossyStoneEasy", new MossyStoneEasyRoom() },
-            { "brokenStoneEasy", new BrokenStoneEasyRoom() },
-            { "tapestryStoneMiniBoss", new TapestryStoneMiniBossRoom() },
-            { "wellStone", new WellStone() },
-            { "exit1", new Exit1Room() },
-            { "stoneMaze", new StoneMazeRoom() },
-
-            // Level 2
-            { "entry2", new Entry2Room() },
-            { "sandstoneEasy", new SandstoneEasyRoom() },
-            { "sandstoneSlopeEasy", new SandstoneSlopeEasyRoom() },
-            { "sandstoneMediumMazeRoom", new SandstoneMediumMazeRoom() },
-            { "exit2", new Exit2Room() },
-
-            // Level 3
-            { "entry3", new Entry3Room() },
-            { "rockLavaMaze", new RockLavaMazeRoom() },
-            { "rockEasy", new RockEasyRoom() },
-            { "exit3", new Exit3Room() },
-        };
-    }
-
     public interface Room
     {
         string WallType { get; set; }
@@ -48,6 +15,7 @@ namespace StaticDungeon
     // Level 1
     public class Entry1Room : Room
     {
+        public static Entry1Room Instance = new Entry1Room();
         virtual public string Name { get; set; } = "Entry 1";
 
         virtual public string WallType { get; set; } = "basic";
@@ -60,6 +28,7 @@ namespace StaticDungeon
 
     public class StoneEasyRoom : Room
     {
+        public static StoneEasyRoom Instance = new StoneEasyRoom();
         virtual public string Name { get; set; } = "Stone Easy";
 
         virtual public string WallType { get; set; } = "basic";
@@ -78,30 +47,35 @@ namespace StaticDungeon
 
     public class MossyStoneEasyRoom : StoneEasyRoom
     {
+        new public static MossyStoneEasyRoom Instance = new MossyStoneEasyRoom();
         override public string Name { get; set; } = "Mossy Stone Easy";
         override public string WallType { get; set; } = "moss";
     }
 
     public class StoneLedgeEasyRoom : StoneEasyRoom
     {
+        new public static StoneLedgeEasyRoom Instance = new StoneLedgeEasyRoom();
         override public string Name { get; set; } = "Stone Ledge Easy";
         override public string WallType { get; set; } = "ledge";
     }
 
     public class BrokenStoneEasyRoom : StoneEasyRoom
     {
+        new public static BrokenStoneEasyRoom Instance = new BrokenStoneEasyRoom();
         override public string Name { get; set; } = "Broken Stone Easy";
         override public string WallType { get; set; } = "broken";
     }
 
     public class CobbledStoneEasyRoom : StoneEasyRoom
     {
+        new public static CobbledStoneEasyRoom Instance = new CobbledStoneEasyRoom();
         override public string Name { get; set; } = "Cobbled Stone Easy";
         override public string WallType { get; set; } = "cobbled";
     }
 
     public class TapestryStoneMiniBossRoom : Room
     {
+        public static TapestryStoneMiniBossRoom Instance = new TapestryStoneMiniBossRoom();
         public string Name { get; set; } = "Tapestry Stone Mini-Boss";
 
         public string WallType { get; set; } = "fancy";
@@ -116,6 +90,7 @@ namespace StaticDungeon
 
     public class WellStone : Room
     {
+        public static WellStone Instance = new WellStone();
         public string Name { get; set; } = "Heart Well Stone";
 
         public string WallType { get; set; } = "moss";
@@ -129,6 +104,7 @@ namespace StaticDungeon
 
     public class StoneMazeRoom : Room
     {
+        public static StoneMazeRoom Instance = new StoneMazeRoom();
         public string Name { get; set; } = "Stone Maze";
 
         public string WallType { get; set; } = "basic";
@@ -141,6 +117,7 @@ namespace StaticDungeon
 
     public class Exit1Room : Room
     {
+        public static Exit1Room Instance = new Exit1Room();
         virtual public string Name { get; set; } = "Exit 1";
 
         virtual public string WallType { get; set; } = "basic";
@@ -155,12 +132,14 @@ namespace StaticDungeon
 
     public class Entry2Room : Entry1Room
     {
+        new public static Entry2Room Instance = new Entry2Room();
         override public string Name { get; set; } = "Entry 2";
         override public string WallType { get; set; } = "sandstone";
     }
 
     public class SandstoneEasyRoom :Room
     {
+        public static SandstoneEasyRoom Instance = new SandstoneEasyRoom();
         virtual public string Name { get; set; } = "Sandstone Easy";
         virtual public string WallType { get; set; } = "sandstone";
 
@@ -174,6 +153,7 @@ namespace StaticDungeon
 
     public class SandstoneSlopeEasyRoom : Room
     {
+        public static SandstoneSlopeEasyRoom Instance = new SandstoneSlopeEasyRoom();
         virtual public string Name { get; set; } = "Sandstone Slope Easy";
         virtual public string WallType { get; set; } = "pyramid";
 
@@ -187,6 +167,7 @@ namespace StaticDungeon
 
     public class SandstoneMediumMazeRoom : Room
     {
+        public static SandstoneMediumMazeRoom Instance = new SandstoneMediumMazeRoom();
         virtual public string Name { get; set; } = "Sandstone Slope Maze Medium";
         virtual public string WallType { get; set; } = "pyramid";
 
@@ -200,6 +181,7 @@ namespace StaticDungeon
 
     public class Exit2Room : Exit1Room
     {
+        new public static Exit2Room Instance = new Exit2Room();
         override public string Name { get; set; } = "Exit 2";
 
         override public string WallType { get; set; } = "sandstone";
@@ -209,11 +191,13 @@ namespace StaticDungeon
 
     public class Entry3Room : Entry1Room
     {
+        new public static Entry3Room Instance = new Entry3Room();
         override public string Name { get; set; } = "Entry 3";
         override public string WallType { get; set; } = "cave";
     }
     public class RockLavaMazeRoom : Room
     {
+        public static RockLavaMazeRoom Instance = new RockLavaMazeRoom();
         public string Name { get; set; } = "Rock Lava Maze";
 
         public string WallType { get; set; } = "cave";
@@ -226,6 +210,7 @@ namespace StaticDungeon
 
     public class RockEasyRoom : Room
     {
+        public static RockEasyRoom Instance = new RockEasyRoom();
         public string Name { get; set; } = "Rock Easy";
 
         public string WallType { get; set; } = "cave";
@@ -238,6 +223,7 @@ namespace StaticDungeon
 
     public class Exit3Room : Exit1Room
     {
+        new public static Exit3Room Instance = new Exit3Room();
         override public string Name { get; set; } = "exit 3";
 
         override public string WallType { get; set; } = "cave";
