@@ -4,17 +4,6 @@ using UnityEngine;
 
 namespace StaticDungeon
 {
-    public class SpecialRoomSpawnConfigIndex
-    {
-        public static Dictionary<string, SpecialRoomSpawnConfig> specialRoomSpawnConfigs = new Dictionary<string, SpecialRoomSpawnConfig>()
-        {
-            // Shared
-            { "stoneWell", new StoneWellSpecialSpawn() },
-            { "stoneExit", new StoneExitSpecialSpawn() },
-            { "sandstoneExit", new SandstoneExitSpecialSpawn() },
-            { "rockExit", new RockExitSpecialSpawn() },
-        };
-    }
     public interface SpecialRoomSpawnConfig
     {
         public Room room { get; set; }
@@ -24,6 +13,8 @@ namespace StaticDungeon
     }
 
     public class StoneWellSpecialSpawn : SpecialRoomSpawnConfig {
+
+        public static StoneWellSpecialSpawn Instance = new StoneWellSpecialSpawn();
         public Room room { get; set; } = WellStone.Instance;
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
@@ -44,6 +35,7 @@ namespace StaticDungeon
 
     public class StoneExitSpecialSpawn : SpecialRoomSpawnConfig
     {
+        public static StoneExitSpecialSpawn Instance = new StoneExitSpecialSpawn();
         virtual public Room room { get; set; } = Exit1Room.Instance;
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
@@ -70,11 +62,13 @@ namespace StaticDungeon
 
     public class SandstoneExitSpecialSpawn : StoneExitSpecialSpawn
     {
+        new public static SandstoneExitSpecialSpawn Instance = new SandstoneExitSpecialSpawn();
         override public Room room { get; set; } = Exit2Room.Instance;
     }
 
     public class RockExitSpecialSpawn : StoneExitSpecialSpawn
     {
+        new public static RockExitSpecialSpawn Instance = new RockExitSpecialSpawn();
         override public Room room { get; set; } = Exit3Room.Instance;
     }
 

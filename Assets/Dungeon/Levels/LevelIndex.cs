@@ -45,8 +45,8 @@ namespace StaticDungeon
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
         {
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneExit"]
+            StoneWellSpecialSpawn.Instance,
+            StoneExitSpecialSpawn.Instance
         };
     }
 
@@ -75,8 +75,8 @@ namespace StaticDungeon
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
         {
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneExit"]
+            StoneWellSpecialSpawn.Instance,
+            StoneExitSpecialSpawn.Instance
         };
     }
 
@@ -99,8 +99,8 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 1.0f },
         };
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
-{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["sandstoneExit"]
+{           StoneWellSpecialSpawn.Instance,
+            SandstoneExitSpecialSpawn.Instance
         };
     }
 
@@ -123,8 +123,8 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = SandstoneMediumMazeRoom.Instance, probability = 1.0f },
         };
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
-{           SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["sandstoneExit"]
+{           StoneWellSpecialSpawn.Instance,
+            SandstoneExitSpecialSpawn.Instance
         };
     }
 
@@ -146,8 +146,8 @@ namespace StaticDungeon
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["rockExit"]
+            StoneWellSpecialSpawn.Instance,
+            RockExitSpecialSpawn.Instance
         };
     }
 
@@ -169,8 +169,8 @@ namespace StaticDungeon
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["stoneWell"],
-            SpecialRoomSpawnConfigIndex.specialRoomSpawnConfigs["rockExit"]
+            StoneWellSpecialSpawn.Instance,
+            RockExitSpecialSpawn.Instance
         };
     }
 }
