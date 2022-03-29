@@ -118,12 +118,18 @@
     <Compile Include="Assets\Utils\RoomGrid.cs" />
     <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\EnemyManager.cs" />
+    <Compile Include="Assets\TreasureChestController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\TreasureChestController.cs" />
+    <Compile Include="Assets\TileSelectController.cs" />
+    <Compile Include="Assets\TileButtonController.cs" />
+    <Compile Include="Assets\CurrentToolController.cs" />
+    <Compile Include="Assets\CurrentToolCursorController.cs" />
+    <Compile Include="Assets\EditTileController.cs" />
+    <Compile Include="Assets\EditGridController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
