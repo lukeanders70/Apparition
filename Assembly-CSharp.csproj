@@ -127,7 +127,6 @@
     <Compile Include="Assets\TileSelectController.cs" />
     <Compile Include="Assets\TileButtonController.cs" />
     <Compile Include="Assets\CurrentToolController.cs" />
-    <Compile Include="Assets\CurrentToolCursorController.cs" />
     <Compile Include="Assets\EditTileController.cs" />
     <Compile Include="Assets\EditGridController.cs" />
   </ItemGroup>

@@ -27,23 +27,36 @@ public class TileSelectController : MonoBehaviour
         RectTransform tilePrefabRectTrans = TilePrefab.GetComponent<RectTransform>();
         TilePrefabHeight = (tilePrefabRectTrans.sizeDelta.y * tilePrefabRectTrans.localScale.y);
 
+        AddCellClearTile();
         foreach (GameObject prefab in ObsticlePrefabs)
         {
-            AddTile(GridCell.CellObjectType.obstacle, prefab);
+            AddPrefabSetterTile(GridCell.CellObjectType.obstacle, prefab);
         }
         foreach (GameObject prefab in EnemyPrefabs)
         {
-            AddTile(GridCell.CellObjectType.enemy, prefab);
+            AddPrefabSetterTile(GridCell.CellObjectType.enemy, prefab);
         }
     }
 
-    void AddTile(GridCell.CellObjectType type, GameObject prefab)
+    void AddCellClearTile()
+    {
+        AddTile(new CellClearer());
+    }
+
+    void AddPrefabSetterTile(GridCell.CellObjectType type, GameObject prefab)
+    {
+        var sprite = prefab.GetComponentInChildren<SpriteRenderer>().sprite;
+        var tool = new PrefabSetter(GridCell.CellObjectType.obstacle, sprite, prefab);
+        AddTile(tool);
+    }
+
+    void AddTile(Tool tool)
     {
         var newTile = Instantiate(TilePrefab, gameObject.transform);
         newTile.GetComponentInChildren<RectTransform>().anchoredPosition = new Vector2(0, (-0.5f * TilePrefabHeight) - (numTiles * TilePrefabHeight));
         rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(MinHeight, (numTiles * TilePrefabHeight)));
 
-        newTile.GetComponent<TileButtonController>().Setup(type, prefab);
+        newTile.GetComponent<TileButtonController>().Setup(tool);
         numTiles += 1;
     }
 }

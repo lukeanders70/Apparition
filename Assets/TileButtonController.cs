@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class TileButtonController : MonoBehaviour
 {
-    private GameObject tilePrefab;
-    private CurrentToolController toolController;
-    private Sprite sprite;
-    private GridCell.CellObjectType type;
-    // Start is called before the first frame update
-    public void Setup(GridCell.CellObjectType t, GameObject prefab)
+    [SerializeField]
+    private UnityEngine.UI.Image image;
+    private CurrentToolController currentToolController;
+    private Tool tool;  
+    public void Setup(Tool t)
     {
-        type = t;
-        tilePrefab = prefab;
-        sprite = tilePrefab.GetComponentInChildren<SpriteRenderer>().sprite;
-        gameObject.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
-
-        toolController = FindObjectOfType<CurrentToolController>();
+        currentToolController = FindObjectOfType<CurrentToolController>();
+        tool = t;
+        image.sprite = tool.GetSprite();
     }
 
     public void SelectPrefab()
     {
-        toolController.SetTool(type, sprite, tilePrefab);
+        currentToolController.SetTool(tool);
     }
 }
