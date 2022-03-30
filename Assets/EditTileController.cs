@@ -14,7 +14,7 @@ public class EditTileController : MonoBehaviour
 
     private RoomGrid roomGrid;
     private CurrentToolController currentTool;
-    private GameObject uiGrid;
+    private GameObject roomGridGameObject;
     void Start()
     {
         var yIndex = getNumberFromName(gameObject.transform.parent.gameObject.name);
@@ -24,7 +24,7 @@ public class EditTileController : MonoBehaviour
         defaultColor = spriteRenderer.color;
 
         var editGridController = GetComponentInParent<EditGridController>();
-        uiGrid = editGridController.gameObject;
+        roomGridGameObject = editGridController.gameObject;
         roomGrid = editGridController.roomGrid;
         currentTool = FindObjectOfType<CurrentToolController>();
     }
@@ -43,14 +43,7 @@ public class EditTileController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (currentTool.Prefab != null)
-        {
-            Debug.Log(index);
-            var newObj = Instantiate(currentTool.Prefab);
-            newObj.transform.parent = uiGrid.transform;
-            var newPosition = roomGrid.addObject(newObj, currentTool.type, index.x, index.y);
-            newObj.transform.localPosition = new Vector3(newPosition.Value.x, newPosition.Value.y, 0);
-        }
+        currentTool.UseTool(index, roomGrid, roomGridGameObject);
     }
 
     private int getNumberFromName(string name)
