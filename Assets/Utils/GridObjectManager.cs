@@ -39,7 +39,8 @@ public class GridObjectManager : MonoBehaviour
                     float spawnProbability = numTilesLeft != 0 ? (float)numObjectsLeftToSpawn / (float)numTilesLeft : 0;
                     if (spawnProbability > Random.Range(0f, 1.0f))
                     {
-                        AddObjectWithSymmetrty(i, j, loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)), roomGrid, symmetry);
+                        string path = StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs);
+                        AddObjectWithSymmetrty(i, j, loadPrefabFromPath(path), roomGrid, symmetry);
                     }
                     count += 1;
                 }
@@ -60,10 +61,11 @@ public class GridObjectManager : MonoBehaviour
         objectType = oType;
         foreach ((int, int) spawnLocation in spawnLocations)
         {
+            string path = StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs);
             AddObjectWithSymmetrty(
                 spawnLocation.Item1,
                 spawnLocation.Item2,
-                loadPrefabFromPath(StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs)),
+                loadPrefabFromPath(path),
                 roomGrid,
                 symmetry
             );

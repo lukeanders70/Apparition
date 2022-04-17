@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    [SerializeField]
-    private TextAsset staticDungeonJson;
 
     [SerializeField]
     private GameObject RoomPrefab;

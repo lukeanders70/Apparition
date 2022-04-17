@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface Tool
 {
-    public void UseTool(IntVector2 position, RoomGrid roomGrid, GameObject roomGridGameObject);
+    public void UseTool(IntVector2 position, RoomGrid roomGrid, EditGridController roomGridGameObject);
     public Sprite GetSprite();
 }
 
@@ -20,12 +20,9 @@ public class PrefabSetter : Tool
         Prefab = pref;
     }
 
-    public void UseTool(IntVector2 position, RoomGrid roomGrid, GameObject roomGridGameObject)
+    public void UseTool(IntVector2 position, RoomGrid roomGrid, EditGridController roomGridGameObject)
     {
-        var newObj = Object.Instantiate(Prefab);
-        newObj.transform.parent = roomGridGameObject.transform;
-        var newPosition = roomGrid.addObject(newObj, type, position.x, position.y);
-        newObj.transform.localPosition = new Vector3(newPosition.Value.x, newPosition.Value.y, 0);
+        roomGridGameObject.AddObjectToScene(Prefab, type, position.x, position.y);
     }
 
     public Sprite GetSprite()
@@ -41,7 +38,7 @@ public class CellClearer : Tool
         sprite = Resources.Load<Sprite>("images/UI/Icons/trash");
     }
 
-    public void UseTool(IntVector2 position, RoomGrid roomGrid, GameObject roomGridGameObject)
+    public void UseTool(IntVector2 position, RoomGrid roomGrid, EditGridController roomGridGameObject)
     {
         GameObject removedObj = roomGrid.removeObject(position.x, position.y);
         if(removedObj != null)
@@ -68,7 +65,7 @@ public class CurrentToolController : MonoBehaviour
         image.sprite = t.GetSprite();
     }
 
-    public void UseTool(IntVector2 position, RoomGrid roomGrid, GameObject roomGridGameObject)
+    public void UseTool(IntVector2 position, RoomGrid roomGrid, EditGridController roomGridGameObject)
     {
         if(tool != null)
         {

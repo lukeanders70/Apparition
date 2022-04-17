@@ -8,7 +8,7 @@ public class RoomGrid
     public static int cellSize = 8;
     public static (int, int) center = (13, 6);
     public static IntVector2 dimensions = new IntVector2(26, 13);
-    GridCell?[,] objectLocations = new GridCell[26, 13];
+    public GridCell?[,] objectLocations = new GridCell[26, 13];
 
     public bool IndexInBounds((int, int) index)
     {
@@ -88,7 +88,7 @@ public class RoomGrid
         IntVector2 size = GetSize(o);
         if (isEmpty(new IntVector2(xIndex, yIndex), size, false))
         {
-            objectLocations[xIndex, yIndex] = new GridCell(o, GridCell.CellType.primary, oType, size);
+            objectLocations[xIndex, yIndex] = new GridCell(o, GridCell.CellType.primary, oType, size, new IntVector2(xIndex, yIndex));
             for (int i = xIndex; i < xIndex + size.x; i++)
             {
                 for (int j = yIndex; j < yIndex + size.y; j++)
@@ -160,6 +160,17 @@ public class RoomGrid
             }
         }
         return o;
+    }
+
+    public void clear()
+    {
+        for (int i = 0; i < objectLocations.GetLength(1); i++)
+        {
+            for (int j = 0; j < objectLocations.GetLength(0); j++)
+            {
+                removeObject(j, i);
+            }
+        }
     }
     public bool isEmpty(IntVector2 index, IntVector2? size, bool obstacleOnly)
     {
@@ -281,7 +292,7 @@ public class RoomGrid
         }
     }
 }
-
+[System.Serializable]
 public class GridCell
 {
     public enum CellType
@@ -295,7 +306,9 @@ public class GridCell
         obstacle
     }
 
+    [System.NonSerialized]
     public GameObject prefab;
+    public string objectName;
     public CellType type;
     public CellObjectType objectType;
     public IntVector2 size;
@@ -303,6 +316,7 @@ public class GridCell
     public GridCell(GameObject o, CellType cellType, CellObjectType cellObjectType, IntVector2 indexSize, IntVector2? parentIndex = null)
     {
         prefab = o;
+        objectName = prefab.name.Replace("(Clone)", "");
         type = cellType;
         objectType = cellObjectType;
         size = indexSize;

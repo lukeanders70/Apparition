@@ -107,6 +107,7 @@ public class AIHelpers
     }
 }
 
+[Serializable]
 public class IntVector2 : IEquatable<IntVector2>
 {
     public int x;
