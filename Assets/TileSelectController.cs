@@ -46,7 +46,7 @@ public class TileSelectController : MonoBehaviour
     void AddPrefabSetterTile(GridCell.CellObjectType type, GameObject prefab)
     {
         var sprite = prefab.GetComponentInChildren<SpriteRenderer>().sprite;
-        var tool = new PrefabSetter(GridCell.CellObjectType.obstacle, sprite, prefab);
+        var tool = new PrefabSetter(type, sprite, prefab);
         AddTile(tool);
     }
 

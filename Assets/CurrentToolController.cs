@@ -23,6 +23,7 @@ public class PrefabSetter : Tool
     public void UseTool(IntVector2 position, RoomGrid roomGrid, EditGridController roomGridGameObject)
     {
         roomGridGameObject.AddObjectToScene(Prefab, type, position.x, position.y);
+
     }
 
     public Sprite GetSprite()
