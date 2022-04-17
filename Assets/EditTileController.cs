@@ -14,7 +14,7 @@ public class EditTileController : MonoBehaviour
 
     private RoomGrid roomGrid;
     private CurrentToolController currentTool;
-    private GameObject roomGridGameObject;
+    private EditGridController editGridController;
     void Start()
     {
         var yIndex = getNumberFromName(gameObject.transform.parent.gameObject.name);
@@ -23,8 +23,7 @@ public class EditTileController : MonoBehaviour
 
         defaultColor = spriteRenderer.color;
 
-        var editGridController = GetComponentInParent<EditGridController>();
-        roomGridGameObject = editGridController.gameObject;
+        editGridController = GetComponentInParent<EditGridController>();
         roomGrid = editGridController.roomGrid;
         currentTool = FindObjectOfType<CurrentToolController>();
     }
@@ -43,7 +42,7 @@ public class EditTileController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        currentTool.UseTool(index, roomGrid, roomGridGameObject);
+        currentTool.UseTool(index, roomGrid, editGridController);
     }
 
     private int getNumberFromName(string name)
