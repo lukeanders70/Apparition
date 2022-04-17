@@ -34,7 +34,9 @@ public class SaveButtonController : MonoBehaviour
         {
             if (cell.type == GridCell.CellType.primary)
             {
+                Debug.Log(cell.objectType);
                 string foldername = cell.objectType == GridCell.CellObjectType.enemy ? "Enemies" : "Obstacles";
+                Debug.Log("prefabs/" + foldername + "/" + cell.objectName);
                 GameObject prefab = Resources.Load<GameObject>("prefabs/" + foldername + "/" + cell.objectName);
                 cell.prefab = prefab;
                 gridController.AddObjectToScene(prefab, cell.objectType, cell.primaryIndex.x, cell.primaryIndex.y);
