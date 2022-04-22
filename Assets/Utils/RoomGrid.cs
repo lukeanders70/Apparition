@@ -154,7 +154,7 @@ public class RoomGrid
         GameObject? o = primary?.prefab;
         for (int i = primaryIndex.x; i < primaryIndex.x + primary?.size.x; i++)
         {
-            for (int j = primaryIndex.x; j < primaryIndex.y + primary?.size.y; j++)
+            for (int j = primaryIndex.y; j < primaryIndex.y + primary?.size.y; j++)
             {
                 objectLocations[i, j] = null;
             }
@@ -164,13 +164,14 @@ public class RoomGrid
 
     public void clear()
     {
-        for (int i = 0; i < objectLocations.GetLength(1); i++)
+        for (int i = 0; i < objectLocations.GetLength(0); i++)
         {
-            for (int j = 0; j < objectLocations.GetLength(0); j++)
+            for (int j = 0; j < objectLocations.GetLength(1); j++)
             {
-                removeObject(j, i);
+                removeObject(i, j);
             }
         }
+        print();
     }
     public bool isEmpty(IntVector2 index, IntVector2? size, bool obstacleOnly)
     {
