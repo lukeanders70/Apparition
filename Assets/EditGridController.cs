@@ -47,15 +47,14 @@ public class EditGridController : MonoBehaviour
         var newObj = Object.Instantiate(o);
         newObj.transform.parent = transform;
         var newPosition = roomGrid.addObject(newObj, oType, xIndex, yIndex);
+        Debug.Log("Adding object at Grid Position: " + xIndex + ", " + yIndex + " and local position " + newPosition.ToString());
         if (newPosition != null)
         {
             newObj.transform.localPosition = new Vector3(newPosition.Value.x, newPosition.Value.y, 0);
         }
         Behaviour[] componenets = newObj.GetComponentsInChildren<Behaviour>();
-        Debug.Log(componenets.Length);
         foreach(Behaviour component in componenets)
         {
-            Debug.Log("Componenet " + component.GetType().ToString());
             if(component.name != "SpriteRenderer")
             {
                 component.enabled = false;
