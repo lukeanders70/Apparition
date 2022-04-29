@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Dungeon\DungeonStateInfo.cs" />
+    <Compile Include="Assets\TileButtonController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\RusherAI.cs" />
     <Compile Include="Assets\Scripts\UI\CoinCounterController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\LockInDoorController.cs" />
@@ -80,9 +81,13 @@
     <Compile Include="Assets\Scripts\Misc\Lazer.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\SpiritHandler.cs" />
     <Compile Include="Assets\Utils\GridObjectManager.cs" />
+    <Compile Include="Assets\CurrentToolController.cs" />
+    <Compile Include="Assets\EditGridController.cs" />
+    <Compile Include="Assets\TileSelectController.cs" />
     <Compile Include="Assets\PauseController.cs" />
     <Compile Include="Assets\Scripts\Characters\BasicHealth.cs" />
     <Compile Include="Assets\Dungeon\SpawnConfigs\SpawnConfigIndex.cs" />
+    <Compile Include="Assets\EditTileController.cs" />
     <Compile Include="Assets\Scripts\Misc\CameraMoveController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BatAI.cs" />
     <Compile Include="Assets\Scripts\UI\HealthContainerController.cs" />
     <Compile Include="Assets\Utils\DungeonUtils.cs" />
+    <Compile Include="Assets\SaveButtonController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\SpinnerAI.cs" />
     <Compile Include="Assets\Dungeon\RoomTypes\RoomIndex.cs" />
     <Compile Include="Assets\Loot\LootDropController.cs" />
@@ -124,17 +130,15 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\TileSelectController.cs" />
-    <Compile Include="Assets\TileButtonController.cs" />
-    <Compile Include="Assets\CurrentToolController.cs" />
-    <Compile Include="Assets\EditTileController.cs" />
-    <Compile Include="Assets\EditGridController.cs" />
-    <Compile Include="Assets\SaveButtonController.cs" />
+    <Compile Include="Assets\WallDropdownController.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\Resources\rooms\test.txt" />
+     <None Include="Assets\Resources\rooms\1e-1.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
-     <None Include="Assets\Resources\rooms\best.txt" />
+     <None Include="Assets\Resources\rooms\1e-5.txt" />
+     <None Include="Assets\Resources\rooms\1e-2.txt" />
+     <None Include="Assets\Resources\rooms\1e-4.txt" />
+     <None Include="Assets\Resources\rooms\1e-3.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
