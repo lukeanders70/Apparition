@@ -10,13 +10,26 @@ public class SaveButtonController : MonoBehaviour
     [SerializeField]
     EditGridController gridController;
     [SerializeField]
+    Dropdown walTypeDropdown;
+    [SerializeField]
+    Toggle lockInToggle;
+
+    [SerializeField]
     Text FileName;
     public void Save()
     {
         Debug.Log("Saving File");
-        var gridToSave = gridController.SerlializeGrid();
+        var saveRoom = new SaveRoom();
 
-        string json = JsonUtility.ToJson(gridToSave);
+        var gridToSave = gridController.SerlializeGrid();
+        var wallType = walTypeDropdown.options[walTypeDropdown.value].text;
+        var isLockIn = lockInToggle.isOn;
+
+        saveRoom.Cells = gridToSave.Cells;
+        saveRoom.wallType = wallType;
+        saveRoom.lockIn = isLockIn;
+
+        string json = JsonUtility.ToJson(saveRoom);
 
         File.WriteAllText(Application.dataPath + "/Resources/rooms/" + FileName.text + ".txt", json);
         Debug.Log("Save Complete");
@@ -41,4 +54,12 @@ public class SaveButtonController : MonoBehaviour
         }
         Debug.Log("Load Complete");
     }
+}
+
+[System.Serializable]
+public class SaveRoom
+{
+    public List<GridCell> Cells;
+    public bool lockIn;
+    public string wallType;
 }

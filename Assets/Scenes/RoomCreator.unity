@@ -13189,6 +13189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridController: {fileID: 2014923905}
+  walTypeDropdown: {fileID: 516369884}
+  lockInToggle: {fileID: 422442437}
   FileName: {fileID: 630973104}
 --- !u!1001 &1130858554
 PrefabInstance:
@@ -16046,7 +16048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -228.37695}
+  m_AnchoredPosition: {x: 0, y: -228.86554}
   m_SizeDelta: {x: 0, y: 254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370282733
@@ -21058,6 +21060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridController: {fileID: 2014923905}
+  walTypeDropdown: {fileID: 0}
+  lockInToggle: {fileID: 0}
   FileName: {fileID: 630973104}
 --- !u!114 &1826904400
 MonoBehaviour:
