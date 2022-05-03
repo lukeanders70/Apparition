@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
+    <Compile Include="Assets\Dungeon\RoomTypes\RoomLoader.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\1e-1.txt" />
