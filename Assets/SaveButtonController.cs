@@ -18,32 +18,19 @@ public class SaveButtonController : MonoBehaviour
     Text FileName;
     public void Save()
     {
-        Debug.Log("Saving File");
-        var saveRoom = new SaveRoom();
-
         var gridToSave = gridController.SerlializeGrid();
         var wallType = walTypeDropdown.options[walTypeDropdown.value].text;
         var isLockIn = lockInToggle.isOn;
 
-        saveRoom.Cells = gridToSave.Cells;
-        saveRoom.wallType = wallType;
-        saveRoom.lockIn = isLockIn;
-
-        string json = JsonUtility.ToJson(saveRoom);
-
-        File.WriteAllText(Application.dataPath + "/Resources/rooms/" + FileName.text + ".txt", json);
-        Debug.Log("Save Complete");
+        StaticDungeon.RoomLoader.Save(gridToSave, wallType, isLockIn, FileName.text);
     }
 
     public void Load()
     {
-        Debug.Log("Loading File");
-        // Stream the file with a File Stream. (Note that File.Create() 'Creates' or 'Overwrites' a file.)
-        var fileBytes = File.ReadAllBytes(Application.dataPath + "/Resources/rooms/" + FileName.text + ".txt");
-        var gridToLoad = JsonUtility.FromJson<EditGridData>(System.Text.Encoding.UTF8.GetString(fileBytes));
+        var saveRoomData = StaticDungeon.RoomLoader.LoadSaveRoomData(FileName.text);
 
         gridController.ClearGrid();
-        foreach (GridCell cell in gridToLoad.Cells)
+        foreach (GridCell cell in saveRoomData.Cells)
         {
             if (cell.type == GridCell.CellType.primary)
             {
@@ -52,7 +39,25 @@ public class SaveButtonController : MonoBehaviour
                 gridController.AddObjectToScene(prefab, cell.objectType, cell.primaryIndex.x, cell.primaryIndex.y);
             }
         }
+        Debug.Log(saveRoomData.lockIn);
+        Debug.Log(lockInToggle);
+        lockInToggle.isOn = saveRoomData.lockIn;
+        walTypeDropdown.value = findDropDownIndexFromString(saveRoomData.wallType);
         Debug.Log("Load Complete");
+    }
+
+    private int findDropDownIndexFromString(string value)
+    {
+        var index = 0;
+        foreach (Dropdown.OptionData option in walTypeDropdown.options)
+        {
+            if(option.text == value)
+            {
+                return index;
+            }
+            index += 1;
+        }
+        return index;
     }
 }
 

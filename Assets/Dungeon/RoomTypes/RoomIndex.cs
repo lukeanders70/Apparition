@@ -12,6 +12,21 @@ namespace StaticDungeon
         float LockInProbability { get; set; }
 
     }
+
+    public class PreDefRoom : Room
+    {
+        virtual public string Name { get; set; } = "PreDefRoom unset";
+
+        virtual public string WallType { get; set; } = "PreDefRoom unset";
+        public ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; } = {};
+
+        virtual public float LockInProbability { get; set; } = 0.0f;
+
+        PreDefRoom()
+        {
+
+        }
+    }
     // Level 1
     public class Entry1Room : Room
     {

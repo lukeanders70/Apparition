@@ -171,7 +171,6 @@ public class RoomGrid
                 removeObject(i, j);
             }
         }
-        print();
     }
     public bool isEmpty(IntVector2 index, IntVector2? size, bool obstacleOnly)
     {
