@@ -24,7 +24,7 @@ public class ObsticleManager : GridObjectManager
                     oRange.maxObjects,
                     oRange.symmetry
                 );
-            } else
+            } else if (oRange.absoluteLocations != null)
             {
                 SetObjects(
                     roomGrid,
@@ -35,6 +35,16 @@ public class ObsticleManager : GridObjectManager
                     oRange.maxObjects,
                     oRange.symmetry
                 );
+            } else if (oRange.preDefObjects != null)
+            {
+                SetObjects(
+                    roomGrid,
+                    GridCell.CellObjectType.obstacle,
+                    oRange.preDefObjects
+                );
+            } else
+            {
+                Debug.LogError("obsticle range has no spawn data");
             }
 
         }

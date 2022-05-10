@@ -26,7 +26,7 @@ public class EnemyManager : GridObjectManager
                     oRange.symmetry
                 );
             }
-            else
+            else if (oRange.absoluteLocations != null)
             {
                 SetObjects(
                     roomGrid,
@@ -37,6 +37,18 @@ public class EnemyManager : GridObjectManager
                     oRange.maxObjects,
                     oRange.symmetry
                 );
+            }
+            else if (oRange.preDefObjects != null)
+            {
+                SetObjects(
+                    roomGrid,
+                    GridCell.CellObjectType.enemy,
+                    oRange.preDefObjects
+                );
+            }
+            else
+            {
+                Debug.LogError("enemy range has no spawn data");
             }
         }
     }

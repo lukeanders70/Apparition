@@ -9,7 +9,6 @@ public class GridObjectManager : MonoBehaviour
     public List<GameObject> objects = new List<GameObject>();
     public GridCell.CellObjectType objectType;
 
-    // Start is called before the first frame update
     public void SetObjects(
         RoomGrid roomGrid,
         GridCell.CellObjectType oType,
@@ -70,6 +69,24 @@ public class GridObjectManager : MonoBehaviour
                 symmetry
             );
         }
+    }
+
+    public void SetObjects(
+        RoomGrid roomGrid,
+        GridCell.CellObjectType oType,
+        Dictionary<(int, int), string> spawnLocationsMap
+    )
+        {
+            objectType = oType;
+            foreach (KeyValuePair<(int, int), string> spawnLocation in spawnLocationsMap)
+            {
+                AddObject(
+                    spawnLocation.Key.Item1,
+                    spawnLocation.Key.Item2,
+                    loadPrefabFromPath(spawnLocation.Value),
+                    roomGrid
+                );
+            }
     }
 
     public void ClearObjects()

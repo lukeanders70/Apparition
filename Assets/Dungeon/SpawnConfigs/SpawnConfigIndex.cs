@@ -117,6 +117,7 @@ namespace StaticDungeon
         public ObjectProbability<string>[] prefabPathProbs;
         public AreaRange[] areaRanges;
         public (int, int)[] absoluteLocations;
+        public Dictionary<(int, int), string> preDefObjects;
     }
 
     public interface SpawnConfig
@@ -124,6 +125,40 @@ namespace StaticDungeon
         public string Name { get; set; }
         public ObjectRanges[] ObsticleRanges { get; set; }
         public ObjectRanges[] EnemyRanges { get; set; }
+    }
+
+    public class PreDefSpawnConfig : SpawnConfig
+    {
+
+        virtual public string Name { get; set; } = "PreDefSpawnConfig Unset";
+        virtual public ObjectRanges[] ObsticleRanges { get; set; } = { };
+        virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+
+        public PreDefSpawnConfig(List<GridCell> Cells)
+        {
+            var objPrefabDict = new Dictionary<(int, int), string>();
+            var enemyPrefabDict = new Dictionary<(int, int), string>();
+            foreach (GridCell cell in Cells)
+            {
+                if(cell.objectType == GridCell.CellObjectType.obstacle)
+                {
+                    objPrefabDict.Add((cell.primaryIndex.x, cell.primaryIndex.y), "Obstacles/" + cell.objectName);
+                } else
+                {
+                    enemyPrefabDict.Add((cell.primaryIndex.x, cell.primaryIndex.y), "Enemies/" + cell.objectName);
+                }
+            }
+            ObsticleRanges = new ObjectRanges[] {
+                new ObjectRanges {
+                    preDefObjects = objPrefabDict
+                }
+            };
+            EnemyRanges = new ObjectRanges[] {
+                new ObjectRanges {
+                    preDefObjects = enemyPrefabDict
+                }
+            };
+        }
     }
 
     // Shared //

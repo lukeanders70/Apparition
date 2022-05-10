@@ -26,9 +26,10 @@ namespace StaticDungeon
         public Room EntryRoom { get; set; } = Entry1Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = StoneEasyRoom.Instance, probability = 0.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("vest")), probability = 1.0f }
+/*            new ObjectProbability<Room> { obj = StoneEasyRoom.Instance, probability = 0.0f },
             new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.0f },
-            new ObjectProbability<Room> { obj = BrokenStoneEasyRoom.Instance, probability = 1.0f }
+            new ObjectProbability<Room> { obj = BrokenStoneEasyRoom.Instance, probability = 1.0f }*/
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
