@@ -22,9 +22,13 @@ namespace StaticDungeon
 
         virtual public float LockInProbability { get; set; } = 0.0f;
 
-        PreDefRoom()
+        public PreDefRoom(SaveRoom saveRoomData)
         {
-
+            WallType = saveRoomData.wallType;
+            LockInProbability = saveRoomData.lockIn ? 1.0f : 0.0f;
+            SpawnConfigProbs = new ObjectProbability<SpawnConfig>[]{
+                new ObjectProbability<SpawnConfig> { obj = new PreDefSpawnConfig(saveRoomData.Cells), probability = 1.0f },
+            };
         }
     }
     // Level 1
