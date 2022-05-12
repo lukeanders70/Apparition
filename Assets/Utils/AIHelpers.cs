@@ -63,7 +63,7 @@ public class AIHelpers
     {
         GameObject player1 = GameObject.Find("Player1");
         GameObject player2 = GameObject.Find("Player2");
-        if(player1 == null && player2 == null)
+        if(player1 == null || player2 == null)
         {
             return null;
         }
