@@ -416,7 +416,7 @@ namespace StaticDungeon
                 maxObjects = 1,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Misc/treasureChest", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/treasureChest", probability = 1.0f }
                 },
                 absoluteLocations = new (int, int)[] { (12, 5) }
             },
@@ -466,7 +466,7 @@ namespace StaticDungeon
                 maxObjects = 1,
                 symmetry = Symmetry.None,
                 prefabPathProbs = new ObjectProbability<string>[] {
-                    new ObjectProbability<string> { obj = "Misc/treasureChest", probability = 1.0f }
+                    new ObjectProbability<string> { obj = "Obstacles/treasureChest", probability = 1.0f }
                 },
                 absoluteLocations = new (int, int)[] { (12, 5) }
             },

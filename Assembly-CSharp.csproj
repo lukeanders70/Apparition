@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UI\TitleSceneController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\MoleAI.cs" />
+    <Compile Include="Assets\Dungeon\RoomTypes\RoomLoader.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\SpriteBounceBackController.cs" />
     <Compile Include="Assets\Scripts\UI\GameOver.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\InventoryController.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Utils\Transitions.cs" />
     <Compile Include="Assets\Scripts\UI\OnlyKeyBoardInputModule.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BasicEnemyAI.cs" />
+    <Compile Include="Assets\Scripts\RoomEditor\EditWallController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\LevelSplashController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\PyramidEyeAI.cs" />
     <Compile Include="Assets\Scripts\Misc\Follow.cs" />
@@ -131,17 +133,17 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\Dungeon\RoomTypes\RoomLoader.cs" />
-    <Compile Include="Assets\Scripts\RoomEditor\EditWallController.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\Resources\rooms\1e-1.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
-     <None Include="Assets\Resources\rooms\1e-5.txt" />
-     <None Include="Assets\Resources\rooms\1e-2.txt" />
-     <None Include="Assets\Resources\rooms\1e-4.txt" />
-     <None Include="Assets\Resources\rooms\1e-3.txt" />
-     <None Include="Assets\Resources\rooms\vest.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-moss-3.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-stone-2.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-stone-3.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-broken-1.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-broken-2.txt" />
+     <None Include="Assets\Resources\rooms\1-easy-moss-1.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
