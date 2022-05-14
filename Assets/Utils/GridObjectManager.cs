@@ -61,6 +61,7 @@ public class GridObjectManager : MonoBehaviour
         foreach ((int, int) spawnLocation in spawnLocations)
         {
             string path = StaticDungeon.Utils.ChooseFromObjectProbability(prefabFreqs);
+            Debug.Log(path);
             AddObjectWithSymmetrty(
                 spawnLocation.Item1,
                 spawnLocation.Item2,
