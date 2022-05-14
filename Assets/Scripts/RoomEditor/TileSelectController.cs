@@ -54,9 +54,9 @@ public class TileSelectController : MonoBehaviour
     {
         var newTile = Instantiate(TilePrefab, gameObject.transform);
         newTile.GetComponentInChildren<RectTransform>().anchoredPosition = new Vector2(0, (-0.5f * TilePrefabHeight) - (numTiles * TilePrefabHeight));
-        rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(MinHeight, (numTiles * TilePrefabHeight)));
-
-        newTile.GetComponent<TileButtonController>().Setup(tool);
         numTiles += 1;
+
+        rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(MinHeight, (numTiles * TilePrefabHeight)));
+        newTile.GetComponent<TileButtonController>().Setup(tool);
     }
 }
