@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
+    <Compile Include="Assets\RoomSaveState.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />

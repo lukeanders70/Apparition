@@ -17,6 +17,21 @@ public class HeartDispenseController : MonoBehaviour
     [SerializeField]
     private ParticleSystem ps;
 
+    private RoomSaveState roomSave;
+
+    private string saveStateKey = "HeartContainerTaken";
+
+    private void Start()
+    {
+        roomSave = GetComponentInParent<RoomSaveState>();
+        var heartContainerTakenNullable = roomSave.GetBool(saveStateKey);
+        Debug.Log(heartContainerTakenNullable);
+        if (heartContainerTakenNullable is bool heartContainerTaken && heartContainerTaken)
+        {
+            SetInactive();
+        }
+    }
+
     private void Update()
     {
         if(containsHeart)
@@ -64,6 +79,7 @@ public class HeartDispenseController : MonoBehaviour
 
     private void SetInactive()
     {
+        roomSave.AddBool(saveStateKey, true);
         animator.SetBool("isEmpty", true);
         containsHeart = false;
         textCanvas.SetActive(false);

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -2748858838668381693}
   - component: {fileID: 7712903030489081789}
   - component: {fileID: 5914841311711546194}
+  - component: {fileID: 2201821281264855709}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -69,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372e4cf80d27055429e2307d3694ddfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objects: []
+  objectType: 0
   maxEnemies: 5
   minEnemies: 1
 --- !u!114 &7712903030489081789
@@ -83,6 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28e9e4c8fc476647814f9a4c2030948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objects: []
+  objectType: 0
   obsticlePrefabPath: Obstacles/stoneObstacle
   minObsticles: 1
   maxObsticles: 5
@@ -102,6 +107,19 @@ MonoBehaviour:
   obsticleManager: {fileID: 7712903030489081789}
   doorManager: {fileID: 5151347997636064211}
   baseWalls: {fileID: 2134159161905165178}
+  position: {x: 0, y: 0}
+--- !u!114 &2201821281264855709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122319395201439116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb1e9a84a4ede049b7fe4ba408b60b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &122319395466855188
 GameObject:
   m_ObjectHideFlags: 0
