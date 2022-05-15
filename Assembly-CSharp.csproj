@@ -136,15 +136,25 @@
     <Compile Include="Assets\RoomSaveState.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Resources\rooms\1-hard-fancy-lock-1.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-stone-2.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-stone-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
      <None Include="Assets\Resources\rooms\1-easy-moss-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
+     <None Include="Assets\Resources\rooms\1-hard-cobbled-lock-1.txt" />
+     <None Include="Assets\Resources\rooms\1-hard-cobbled-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-2.txt" />
+     <None Include="Assets\Resources\rooms\1-hard-fancy-lock-2.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-3.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-ledge-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-2.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-1.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-ledge-lock-1.txt" />
+     <None Include="Assets\Resources\rooms\1-medium-ledge-1.txt" />
+     <None Include="Assets\Resources\rooms\1-hard-cobbled-2.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
