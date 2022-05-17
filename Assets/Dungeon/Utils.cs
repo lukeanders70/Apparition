@@ -14,7 +14,12 @@ namespace StaticDungeon
     {
         public static T ChooseFromObjectProbability<T>(ObjectProbability<T>[] objProbs)
         {
-            float r = Random.Range(0f, 1.0f);
+            var sumAll = 0.0f;
+            foreach (ObjectProbability<T> objProb in objProbs)
+            {
+                sumAll += objProb.probability;
+            }
+            float r = Random.Range(0f, sumAll);
             var sum = 0f;
             foreach (ObjectProbability<T> objProb in objProbs)
             {
