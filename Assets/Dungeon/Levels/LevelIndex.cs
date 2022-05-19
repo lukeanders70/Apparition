@@ -47,11 +47,6 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-medium-ledge-lock-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-medium-moss-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-medium-moss-2")), probability = 1.0f },
-/*            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 0.1f },
-            new ObjectProbability<Room> { obj = MossyStoneEasyRoom.Instance, probability = 0.2f },
-            new ObjectProbability<Room> { obj = StoneMazeRoom.Instance, probability = 0.2f },
-            new ObjectProbability<Room> { obj = CobbledStoneEasyRoom.Instance, probability = 0.2f },
-            new ObjectProbability<Room> { obj = StoneLedgeEasyRoom.Instance, probability = 0.3f }*/
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
@@ -69,8 +64,7 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-hard-stone-2")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-hard-stone-3")), probability = 1.0f },
 
-/*            new ObjectProbability<Room> { obj = TapestryStoneMiniBossRoom.Instance, probability = 1.0f },
-*/        };
+        };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
         {
