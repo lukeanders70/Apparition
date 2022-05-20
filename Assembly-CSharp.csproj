@@ -136,9 +136,11 @@
     <Compile Include="Assets\RoomSaveState.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Resources\rooms\2-easy-sandstone-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-stone-2.txt" />
+     <None Include="Assets\Resources\rooms\2-easy-sandstone-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-stone-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
