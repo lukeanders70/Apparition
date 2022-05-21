@@ -15,7 +15,7 @@ public class SaveButtonController : MonoBehaviour
     Toggle lockInToggle;
 
     [SerializeField]
-    Text FileName;
+    InputField FileName;
     public void Save()
     {
         var gridToSave = gridController.SerlializeGrid();

@@ -136,6 +136,7 @@
     <Compile Include="Assets\RoomSaveState.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-2.txt" />
@@ -147,6 +148,7 @@
      <None Include="Assets\Resources\rooms\1-medium-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-moss-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-3.txt" />
+     <None Include="Assets\Resources\rooms\2-easy-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-3.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-3.txt" />
@@ -157,19 +159,24 @@
      <None Include="Assets\Resources\rooms\1-easy-stone-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-2.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-3.txt" />
+     <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-moss-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-4.txt" />
      <None Include="Assets\Resources\rooms\1-hard-moss-1.txt" />
+     <None Include="Assets\Resources\rooms\2-medium-sandstone-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-2.txt" />
+     <None Include="Assets\Resources\rooms\2-easy-sandstone-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-4.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-1.txt" />
+     <None Include="Assets\Resources\rooms\2-easy-pyramid-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-1.txt" />
+     <None Include="Assets\Resources\rooms\2-medium-pyramid-1.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
