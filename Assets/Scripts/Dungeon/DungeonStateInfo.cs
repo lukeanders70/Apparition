@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class DungeonStateInfo
 {
-    public static int levelIndex = 0;
+    public static int levelIndex = 1;
 }
