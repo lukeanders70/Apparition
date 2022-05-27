@@ -144,13 +144,16 @@
      <None Include="Assets\Resources\rooms\1-medium-stone-2.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-stone-1.txt" />
+     <None Include="Assets\Resources\rooms\3-hard-cave-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
      <None Include="Assets\Resources\rooms\1-medium-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-moss-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-3.txt" />
+     <None Include="Assets\Resources\rooms\3-easy-cave-1.txt" />
      <None Include="Assets\Resources\rooms\2-easy-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-3.txt" />
+     <None Include="Assets\Resources\rooms\3-medium-cave-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-3.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
@@ -162,6 +165,7 @@
      <None Include="Assets\Resources\rooms\1-easy-stone-3.txt" />
      <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-2.txt" />
+     <None Include="Assets\Resources\rooms\3-medium-cave-2.txt" />
      <None Include="Assets\Resources\rooms\2-hard-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-moss-lock-1.txt" />
@@ -176,8 +180,10 @@
      <None Include="Assets\Resources\rooms\1-easy-moss-4.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-1.txt" />
+     <None Include="Assets\Resources\rooms\3-easy-cave-2.txt" />
      <None Include="Assets\Resources\rooms\2-easy-pyramid-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-2.txt" />
+     <None Include="Assets\Resources\rooms\3-hard-cave-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-1.txt" />
      <None Include="Assets\Resources\rooms\2-medium-pyramid-1.txt" />
     <Reference Include="UnityEngine">
