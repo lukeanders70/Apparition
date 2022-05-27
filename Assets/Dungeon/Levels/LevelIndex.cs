@@ -110,15 +110,18 @@ namespace StaticDungeon
         public Room EntryRoom { get; set; } = Entry3Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-2")), probability = 1.0f },
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RockEasyRoom.Instance, probability = 1.0f }
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-1")), probability = 1.0f },
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = RockLavaMazeRoom.Instance, probability = 1.0f }
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-lock-1")), probability = 1.0f },
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
