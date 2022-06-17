@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3920114469350517416}
   - component: {fileID: 416758831826706696}
   - component: {fileID: 1876106983555924088}
+  - component: {fileID: 7532571891419688631}
   m_Layer: 0
   m_Name: knight
   m_TagString: Enemy
@@ -182,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b667cbe83ab551d4d826341c371e412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
+  health: 5
+  maxHealth: 5
   invicible: 0
   deathColor: {r: 0, g: 0, b: 0, a: 0}
   isDestroyed: 0
@@ -193,12 +194,25 @@ MonoBehaviour:
   room: {fileID: 0}
   enemyManager: {fileID: 0}
   spritiBounceBack: 0
-  walkSpeed: 0
-  runSpeed: 0
-  animator: {fileID: 0}
-  minWanderDistance: 0
-  maxWanderDistance: 0
-  spriteRenderer: {fileID: 0}
+  walkSpeed: 2
+  animator: {fileID: 8290525810664006464}
+  minWanderDistance: 5
+  maxWanderDistance: 3
+  spriteRenderer: {fileID: 8290525810664006465}
   active:
     x: 0
     y: 0
+--- !u!114 &7532571891419688631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8290525810664006471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de130b187d3856247b3fd69ccf36505c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComp: {fileID: 6177520328899147088}
+  room: {fileID: 0}
