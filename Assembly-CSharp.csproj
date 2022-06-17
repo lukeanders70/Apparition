@@ -76,6 +76,7 @@
     <Compile Include="Assets\Loot\CoinController.cs" />
     <Compile Include="Assets\Utils\AIStateMachine.cs" />
     <Compile Include="Assets\Scripts\Obsticles\HeartDispenseController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemies\KnightAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\PathFinder.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\RoomController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorManager.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Assets\Utils\AreaRange.cs" />
     <Compile Include="Assets\Utils\RoomGrid.cs" />
     <Compile Include="Assets\Scripts\Obsticles\LadderCollision.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\Room\RoomSaveState.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Obsticles\TreasureChestController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
@@ -133,8 +135,6 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\Scripts\Dungeon\Room\RoomSaveState.cs" />
-    <Compile Include="Assets\Scripts\Characters\Enemies\KnightAI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />
@@ -177,6 +177,7 @@
      <None Include="Assets\Resources\rooms\1-hard-fancy-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-2.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-3.txt" />
+     <None Include="Assets\Resources\rooms\test.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-4.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-lock-1.txt" />

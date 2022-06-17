@@ -19,7 +19,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 2edc9dee468344748a864d4b5ab010c0, type: 2}
     m_Threshold: 0.33333334
-    m_Position: {x: -1, y: 0}
+    m_Position: {x: -0.9, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalVelocity
@@ -27,7 +27,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: f5d42b7078c20f44e86312fa726475a2, type: 2}
     m_Threshold: 0.6666667
-    m_Position: {x: 1, y: 0}
+    m_Position: {x: 0.9, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalVelocity
@@ -40,8 +40,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalVelocity
     m_Mirror: 0
-  m_BlendParameter: HorizontalVelocity
-  m_BlendParameterY: VerticalVelocity
+  m_BlendParameter: LastHorizontal
+  m_BlendParameterY: LastVertical
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -82,8 +82,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: IsWalking
+  - m_ConditionMode: 1
+    m_ConditionEvent: walk
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1178542845728513985}
@@ -132,7 +132,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: IsWalking
+  - m_Name: walk
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -160,7 +160,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsWalking
+    m_ConditionEvent: walk
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7017180694366631427}

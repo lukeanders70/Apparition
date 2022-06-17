@@ -7,8 +7,6 @@ public class KnightAI : BasicEnemyAI
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
-    private float runSpeed;
-    [SerializeField]
     private Animator animator;
     [SerializeField]
     private int minWanderDistance;
@@ -52,6 +50,7 @@ public class KnightAI : BasicEnemyAI
         {
             if (param.name == state)
             {
+                Debug.Log("setting walk");
                 animator.SetBool(param.name, true);
             }
             else if (param.type == AnimatorControllerParameterType.Bool)
@@ -104,6 +103,7 @@ public class KnightAI : BasicEnemyAI
 
         override public void StartState()
         {
+            Debug.Log("Starting Idle State");
             AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
@@ -137,7 +137,8 @@ public class KnightAI : BasicEnemyAI
 
         public override void Update()
         {
-            AIComp.animator.SetFloat("lastHorizontal", AIComp.rigidBody.velocity.x);
+            AIComp.animator.SetFloat("LastHorizontal", AIComp.rigidBody.velocity.x);
+            AIComp.animator.SetFloat("LastVertical", AIComp.rigidBody.velocity.y);
             base.Update();
         }
 
@@ -148,8 +149,8 @@ public class KnightAI : BasicEnemyAI
 
         override public void StartState()
         {
+            Debug.Log("Starting Walk State");
             AIComp.SetAnimationState("walk");
-            AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
             AIComp.Stop();
             var spline = AIComp.pathFinder.WanderFind(gameObject, AIComp.minWanderDistance, AIComp.maxWanderDistance);
             walkRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
@@ -188,28 +189,26 @@ public class KnightAI : BasicEnemyAI
 
         public override void Update()
         {
-            AIComp.animator.SetFloat("lastHorizontal", AIComp.rigidBody.velocity.x);
+            AIComp.animator.SetFloat("LastHorizontal", AIComp.rigidBody.velocity.x);
+            AIComp.animator.SetFloat("LastVertical", AIComp.rigidBody.velocity.x);
             base.Update();
         }
 
         public override void OnCollision(Collision2D collision)
         {
-            if (collision.gameObject.tag == "wall" || collision.gameObject.tag == "Player")
-            {
-                stateMachine.EnterStateLowPriority("idle");
-            }
+
+            stateMachine.EnterStateLowPriority("idle");
         }
 
         override public void StartState()
         {
+            Debug.Log("Starting Aggro State");
             Notice();
             base.StartState();
         }
 
         public override void StopState()
         {
-            AIComp.invicible = false;
-            AIComp.spritiBounceBack = false;
             if (runRoutine != null)
             {
                 AIComp.StopCoroutine(runRoutine);
@@ -224,20 +223,18 @@ public class KnightAI : BasicEnemyAI
 
         private void Notice()
         {
-            Invoke(() => { AIComp.invicible = true; AIComp.spritiBounceBack = true; }, 0.1f);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            AIComp.spriteRenderer.color = new Color(1, 0.5f, 0.5f, 1);
-            var runPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
+            var walkPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
 
-            runInvoke = Invoke(() => Run(runPoint), 1.0f);
+            runInvoke = Invoke(() => Walk(walkPoint), 0.5f);
         }
 
-        private void Run(Vector2 runPoint)
+        private void Walk(Vector2 walkPoint)
         {
-            AIComp.SetAnimationState("run");
-            var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, runPoint);
-            runRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.runSpeed, () =>
+            AIComp.SetAnimationState("walk");
+            var spline = AIComp.pathFinder.Pathfind(AIComp.room, gameObject, walkPoint);
+            runRoutine = AIComp.StartCoroutine(AIComp.pathFinder.MoveAlongSpline(AIComp.rigidBody, AIComp.room.transform.position, spline, AIComp.walkSpeed, () =>
             {
                 stateMachine.EnterState("idle");
             }));
