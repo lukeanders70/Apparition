@@ -15,8 +15,9 @@ public class SpiritController : MonoBehaviour
     [SerializeField]
     private float speedMultiplier;
 
-    public ParticleSystem hitPs;
     public ParticleSystem tailPs;
+
+    public Vector2 direction;
 
     private ParticleSystem activeTailPs;
 
@@ -62,7 +63,7 @@ public class SpiritController : MonoBehaviour
         activeTailPs.Play();
         while (Vector3.Distance(transform.position, targetPosition) > 0.001f)
         {
-            targetPosition = newParent.transform.position;
+            direction = (targetPosition - transform.position).normalized;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
             yield return null;
         }
@@ -80,8 +81,6 @@ public class SpiritController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if (isMoving && collidedObject.tag == "Enemy")
         {
-            ParticleSystem hitParticals = Instantiate(hitPs);
-            hitParticals.transform.position = transform.position;
             Health healthComponent = collidedObject.GetComponent<Health>();
             if(healthComponent != null)
             {

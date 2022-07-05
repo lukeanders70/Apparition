@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\UI\FadeTransitionContoller.cs" />
     <Compile Include="Assets\Utils\Health.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerStateInfo.cs" />
+    <Compile Include="Assets\ShieldController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Spirit\SpiritController.cs" />
     <Compile Include="Assets\Utils\Transitions.cs" />
     <Compile Include="Assets\Scripts\UI\OnlyKeyBoardInputModule.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
+    <Compile Include="Assets\SwipeController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />
