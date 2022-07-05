@@ -14,15 +14,18 @@ public class SpriteBounceBackController : MonoBehaviour
         GameObject collidedObject = collision.GetComponent<Collider2D>().gameObject;
         if (ShouldReturn(collidedObject))
         {
-
-            onReturnTrip = true;
-            ParticleSystem hitParticals = Instantiate(spiritController.hitPs);
-            hitParticals.transform.position = transform.position;
-            spiritController.StartExclusiveMove(spiritController.lastParent);
+            Return();
         } else if (collidedObject.tag == "Player")
         {
             onReturnTrip = false;
         }
+    }
+
+    public void Return()
+    {
+
+        onReturnTrip = true;
+        spiritController.StartExclusiveMove(spiritController.lastParent);
     }
 
     private bool ShouldReturn(GameObject collidedObject)

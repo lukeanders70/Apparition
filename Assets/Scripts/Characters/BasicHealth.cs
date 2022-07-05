@@ -15,6 +15,8 @@ public class BasicHealth : MonoBehaviour, Health
 
     private ParticleSystem? deathParticals;
 
+    private ParticleSystem? hitParticales;
+
     public bool isDestroyed = false;
 
     private List<Action> deathCallbacks = new List<Action>();
@@ -23,12 +25,19 @@ public class BasicHealth : MonoBehaviour, Health
     {
         health = maxHealth;
         deathParticals = Resources.Load<ParticleSystem>("prefabs/Effects/Destroy");
+        hitParticales = Resources.Load<ParticleSystem>("prefabs/Effects/Hit");
     }
 
     virtual public bool Damage(int damage)
     {
         if (!invicible)
         {
+            if (hitParticales != null)
+            {
+                ParticleSystem? hitParticalsInstance = Instantiate(hitParticales);
+                hitParticalsInstance.transform.position = transform.position;
+            }
+
             health = Mathf.Max(health - damage, 0);
             if (health == 0)
             {

@@ -14,6 +14,12 @@ public class KnightAI : BasicEnemyAI
     private int maxWanderDistance;
     [SerializeField]
     private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private ShieldController shield;
+    [SerializeField]
+    private ShieldController shield2;
+
+    private Vector2 lastHitDirection;
 
     private AIStateMachine stateMachine;
 
@@ -35,8 +41,25 @@ public class KnightAI : BasicEnemyAI
         stateMachine.RegisterState("idle", new IdleState(gameObject, stateMachine));
         stateMachine.RegisterState("aggro", new AggroState(gameObject, stateMachine));
         stateMachine.RegisterState("walk", new WalkState(gameObject, stateMachine));
+        stateMachine.RegisterState("stagger", new StaggerState(gameObject, stateMachine));
 
         stateMachine.EnterState("idle");
+    }
+
+    public void ShieldHit()
+    {
+        Debug.Log("invincible");
+        invicible = true;
+        shield.Hit();
+        shield2.Hit();
+        Invoke("ShieldHitOver", 0.5f);
+    }
+    private void ShieldHitOver()
+    {
+        Debug.Log("not invincible");
+        shield.HitOver();
+        shield2.HitOver();
+        invicible = false;
     }
 
     public void Update()
@@ -50,8 +73,7 @@ public class KnightAI : BasicEnemyAI
         {
             if (param.name == state)
             {
-                Debug.Log("setting walk");
-                animator.SetBool(param.name, true);
+               animator.SetBool(param.name, true);
             }
             else if (param.type == AnimatorControllerParameterType.Bool)
             {
@@ -71,14 +93,68 @@ public class KnightAI : BasicEnemyAI
         base.OnCollisionEnter2D(collision);
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        var spriritController = collider.gameObject.GetComponent<SpiritController>();
+        if (spriritController != null)
+        {
+            lastHitDirection = spriritController.direction;
+        }
+    }
+
     override public bool Damage(int damage)
     {
         if (base.Damage(damage))
         {
-            stateMachine.EnterState("aggro");
+            shield.PauseShield();
+            shield2.PauseShield();
+            stateMachine.EnterState("stagger");
             return true;
         }
         return false;
+    }
+
+    private class StaggerState : AIState
+    {
+        private KnightAI AIComp;
+        private GameObject gameObject;
+        private AIStateMachine stateMachine;
+        private Coroutine staggerRoutine;
+
+        public StaggerState(GameObject go, AIStateMachine sm)
+        {
+            gameObject = go;
+            AIComp = gameObject.GetComponent<KnightAI>();
+            stateMachine = sm;
+        }
+
+        override public void StartState()
+        {
+            AIComp.shield.PauseShield();
+            AIComp.shield2.PauseShield();
+            AIComp.Stop();
+            AIComp.rigidBody.AddForce(AIComp.lastHitDirection * 1);
+            AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
+            AIComp.SetAnimationState("idle");
+
+            staggerRoutine = AIComp.StartCoroutine(AIHelpers.MoveTo(
+                AIComp.rigidBody,
+                AIComp.transform.position + (Vector3)(AIComp.lastHitDirection * 0.35f),
+                0.8f,
+                () => stateMachine.EnterState("aggro")
+            ));
+        }
+
+        public override void StopState()
+        {
+            AIComp.shield.UnPauseSheild();
+            AIComp.shield2.UnPauseSheild();
+            if (staggerRoutine != null)
+            {
+                AIComp.StopCoroutine(staggerRoutine);
+            }
+            base.StopState();
+        }
     }
 
     private class IdleState : AIState
@@ -103,7 +179,6 @@ public class KnightAI : BasicEnemyAI
 
         override public void StartState()
         {
-            Debug.Log("Starting Idle State");
             AIComp.spriteRenderer.color = new Color(1, 1, 1, 1);
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
@@ -149,7 +224,6 @@ public class KnightAI : BasicEnemyAI
 
         override public void StartState()
         {
-            Debug.Log("Starting Walk State");
             AIComp.SetAnimationState("walk");
             AIComp.Stop();
             var spline = AIComp.pathFinder.WanderFind(gameObject, AIComp.minWanderDistance, AIComp.maxWanderDistance);
@@ -202,7 +276,6 @@ public class KnightAI : BasicEnemyAI
 
         override public void StartState()
         {
-            Debug.Log("Starting Aggro State");
             Notice();
             base.StartState();
         }
