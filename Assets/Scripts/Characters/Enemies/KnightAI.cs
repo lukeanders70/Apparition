@@ -18,6 +18,10 @@ public class KnightAI : BasicEnemyAI
     private ShieldController shield;
     [SerializeField]
     private ShieldController shield2;
+    [SerializeField]
+    private SwipeController attackEffect;
+
+    private SwipeController currentEffect = null;
 
     private Vector2 lastHitDirection;
 
@@ -48,7 +52,6 @@ public class KnightAI : BasicEnemyAI
 
     public void ShieldHit()
     {
-        Debug.Log("invincible");
         invicible = true;
         shield.Hit();
         shield2.Hit();
@@ -56,7 +59,6 @@ public class KnightAI : BasicEnemyAI
     }
     private void ShieldHitOver()
     {
-        Debug.Log("not invincible");
         shield.HitOver();
         shield2.HitOver();
         invicible = false;
@@ -65,6 +67,18 @@ public class KnightAI : BasicEnemyAI
     public void Update()
     {
         stateMachine.Update();
+    }
+
+    public void Attack(Vector2 direction)
+    {
+        if(currentEffect != null)
+        {
+            return;
+        }
+        currentEffect = Instantiate(attackEffect.gameObject).GetComponent<SwipeController>();
+        currentEffect.transform.position = (Vector2)transform.position;
+        Debug.Log(direction);
+        currentEffect.direction = direction;
     }
 
     private void SetAnimationState(string state)
@@ -265,6 +279,19 @@ public class KnightAI : BasicEnemyAI
         {
             AIComp.animator.SetFloat("LastHorizontal", AIComp.rigidBody.velocity.x);
             AIComp.animator.SetFloat("LastVertical", AIComp.rigidBody.velocity.x);
+            if (AIComp.currentEffect == null) {
+                var closestPlayerDistance = AIHelpers.ClosestPlayerDistance(gameObject.transform.position);
+                if(closestPlayerDistance < 2){
+                    var attackDirection = AIHelpers.GetClosestPlayerDirection(gameObject.transform.position);
+                    if(attackDirection != null)
+                    {
+                        AIComp.Attack((Vector2)attackDirection);
+                    } else
+                    {
+                        Debug.Log("Knight tried to attack, but failed to find direction of suitable target");
+                    }
+                }
+            }
             base.Update();
         }
 

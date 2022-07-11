@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6410220168420645060}
   - component: {fileID: 2678798218863663433}
   - component: {fileID: 8159188893325111818}
+  - component: {fileID: 7015067960068457027}
   m_Layer: 0
   m_Name: Swipe
   m_TagString: Untagged
@@ -113,9 +114,22 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.375
+--- !u!114 &7015067960068457027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382020209373387849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69c332eae9438549939fed208240d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2678798218863663433}
