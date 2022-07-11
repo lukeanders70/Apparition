@@ -59,6 +59,19 @@ public class AIHelpers
         }
     }
 
+    public static Vector2? GetClosestPlayerDirection(Vector3 position)
+    {
+        var player = GetClosestPlayer(position);
+        if (player != null)
+        {
+            return (player.transform.position - position).normalized;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static GameObject? GetClosestMovingPlayer(Vector3 position)
     {
         GameObject player1 = GameObject.Find("Player1");
