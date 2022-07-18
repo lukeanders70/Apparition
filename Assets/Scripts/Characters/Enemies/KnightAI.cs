@@ -19,6 +19,8 @@ public class KnightAI : BasicEnemyAI
     [SerializeField]
     private ShieldController shield2;
     [SerializeField]
+    private SwordController sword;
+    [SerializeField]
     private SwipeController attackEffect;
 
     private SwipeController currentEffect = null;
@@ -71,14 +73,7 @@ public class KnightAI : BasicEnemyAI
 
     public void Attack(Vector2 direction)
     {
-        if(currentEffect != null)
-        {
-            return;
-        }
-        currentEffect = Instantiate(attackEffect.gameObject).GetComponent<SwipeController>();
-        currentEffect.transform.position = (Vector2)transform.position;
-        Debug.Log(direction);
-        currentEffect.direction = direction;
+        sword.Attack();
     }
 
     private void SetAnimationState(string state)
@@ -228,6 +223,13 @@ public class KnightAI : BasicEnemyAI
         {
             AIComp.animator.SetFloat("LastHorizontal", AIComp.rigidBody.velocity.x);
             AIComp.animator.SetFloat("LastVertical", AIComp.rigidBody.velocity.y);
+            if(AIComp.rigidBody.velocity.x > 0)
+            {
+                AIComp.sword.SetRight();
+            } else
+            {
+                AIComp.sword.SetLeft();
+            }
             base.Update();
         }
 
@@ -279,6 +281,13 @@ public class KnightAI : BasicEnemyAI
         {
             AIComp.animator.SetFloat("LastHorizontal", AIComp.rigidBody.velocity.x);
             AIComp.animator.SetFloat("LastVertical", AIComp.rigidBody.velocity.x);
+            if (AIComp.rigidBody.velocity.x > 0)
+            {
+                AIComp.sword.SetRight();
+            } else
+            {
+                AIComp.sword.SetLeft();
+            }
             if (AIComp.currentEffect == null) {
                 var closestPlayerDistance = AIHelpers.ClosestPlayerDistance(gameObject.transform.position);
                 if(closestPlayerDistance < 2){
@@ -325,9 +334,20 @@ public class KnightAI : BasicEnemyAI
         {
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            var walkPoint = AIHelpers.GetClosestPlayer(gameObject.transform.position).transform.position;
-
-            runInvoke = Invoke(() => Walk(walkPoint), 0.5f);
+            var closestPlayer = AIHelpers.GetClosestPlayer(gameObject.transform.position);
+            if(closestPlayer != null)
+            {
+                var walkPoint = AIHelpers.GetClosestEmpty(new List<Vector3> { new Vector3(1.0f, 0.0f), new Vector3(-1.0f, 0.0f) }, closestPlayer.transform.position);
+                if(walkPoint != null)
+                {
+                    runInvoke = Invoke(() => Walk((Vector2)walkPoint), 0.5f);
+                    return;
+                } else
+                {
+                    Debug.Log("Failed To File Walk Point");
+                }
+            }
+            stateMachine.EnterState("idle");
         }
 
         private void Walk(Vector2 walkPoint)

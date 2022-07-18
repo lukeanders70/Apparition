@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordController : MonoBehaviour
 {
     public int damage = 1;
+    public Animator animator;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collidedObject = collision.gameObject;
@@ -16,5 +17,20 @@ public class SwordController : MonoBehaviour
                 colliderHealth.Damage(damage);
             }
         }
+    }
+
+    public void SetLeft()
+    {
+        transform.localPosition = new Vector3(-0.7f, transform.localPosition.y);
+    }
+
+    public void SetRight()
+    {
+        transform.localPosition = new Vector3(0.7f, transform.localPosition.y);
+    }
+
+    public void Attack()
+    {
+        animator.SetTrigger("attack");
     }
 }

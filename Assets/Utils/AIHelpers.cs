@@ -47,6 +47,34 @@ public class AIHelpers
         return null;
     }
 
+    public static Vector3? GetClosestEmpty(List<Vector3> directionsToCheck, Vector3 closePosition)
+    {
+        Vector3? bestSolution = null;
+        var closestPosition = -1.0f;
+        foreach(Vector3 direction in directionsToCheck)
+        {
+            var positionToCheck = closePosition + direction;
+            var distanceFromOptimal = Vector3.Distance(positionToCheck, closePosition);
+            var isClosest = (closestPosition == -1.0f || distanceFromOptimal < closestPosition);
+            var isEmpty = true;
+            foreach (Collider c in Physics.OverlapSphere(positionToCheck, 0.2f))
+            {
+                if(c.gameObject.tag == "Wall")
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
+            if (isClosest && isEmpty)
+            {
+                bestSolution = positionToCheck;
+                closestPosition = distanceFromOptimal;
+            }
+        }
+        return bestSolution;
+    }
+
     public static float? ClosestPlayerDistance(Vector3 position)
     {
         var player = GetClosestPlayer(position);
