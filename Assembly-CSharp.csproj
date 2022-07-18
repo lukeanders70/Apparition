@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\SwordController.cs" />
+    <Compile Include="Assets\SwoardController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />

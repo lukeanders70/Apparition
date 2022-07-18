@@ -50,7 +50,7 @@ public class ShieldController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Spirit")
+        if(boxCollider.enabled && collision.gameObject.name == "Spirit")
         {
             var bounceBackController = collision.gameObject.GetComponentInChildren<SpriteBounceBackController>();
             bounceBackController.Return();

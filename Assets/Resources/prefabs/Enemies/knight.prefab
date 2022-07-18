@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 399448501}
   - component: {fileID: 399448504}
   - component: {fileID: 399448503}
+  - component: {fileID: 4300577809138853374}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399448500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.66693544, y: -0.4985561, z: 0}
+  m_LocalPosition: {x: 0.7, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8290525810664006466}
@@ -129,6 +130,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4300577809138853374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399448500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a533410bcb796a499f2b91b3b503f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  animator: {fileID: 399448503}
 --- !u!1 &7355090978443399339
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentKnight: {fileID: 1876106983555924088}
-  KnightDistance: 0.8
+  KnightDistance: 1
   rotSpeed: 60
   animator: {fileID: 4363488188895651482}
   KnightDisOffset: {x: 0, y: -0.2, z: 0}
@@ -507,6 +522,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8290525810664006465}
   shield: {fileID: 4363488188895651483}
   shield2: {fileID: 5442879666141294601}
+  sword: {fileID: 4300577809138853374}
   attackEffect: {fileID: 7015067960068457027, guid: ff9c452ec6046124b95f649cfe09f4fe, type: 3}
   active:
     x: 0
@@ -538,6 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  animator: {fileID: 0}
 --- !u!1 &9000415541984171127
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentKnight: {fileID: 1876106983555924088}
-  KnightDistance: 0.8
+  KnightDistance: 1
   rotSpeed: 60
   animator: {fileID: 2750486549724998819}
   KnightDisOffset: {x: 0, y: -0.2, z: 0}

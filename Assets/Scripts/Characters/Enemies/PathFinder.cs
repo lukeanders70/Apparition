@@ -54,7 +54,7 @@ public class PathFinder : MonoBehaviour
         var endingNode = findClosestGraphNode(desiredPosition - (Vector2)room.transform.position);
         if (endingNode == null)
         {
-            Debug.LogError("desired ending position not in graph");
+            Debug.LogError("desired ending position not in graph: " + desiredPosition);
             return new List<Vector2>();
         }
 
