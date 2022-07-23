@@ -22,12 +22,15 @@ public class SwordController : MonoBehaviour
     public void SetLeft()
     {
         transform.localPosition = new Vector3(-0.7f, transform.localPosition.y);
+        animator.SetFloat("direction", -1.0f);
     }
 
     public void SetRight()
     {
         transform.localPosition = new Vector3(0.7f, transform.localPosition.y);
+        animator.SetFloat("direction", 1.0f);
     }
+
 
     public void Attack()
     {

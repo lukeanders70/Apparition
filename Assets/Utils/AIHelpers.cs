@@ -47,14 +47,14 @@ public class AIHelpers
         return null;
     }
 
-    public static Vector3? GetClosestEmpty(List<Vector3> directionsToCheck, Vector3 closePosition)
+    public static Vector3? GetClosestEmpty(List<Vector3> directionsToCheck, Vector3 closePosition, Vector3 currentPosition)
     {
         Vector3? bestSolution = null;
         var closestPosition = -1.0f;
         foreach(Vector3 direction in directionsToCheck)
         {
             var positionToCheck = closePosition + direction;
-            var distanceFromOptimal = Vector3.Distance(positionToCheck, closePosition);
+            var distanceFromOptimal = Vector3.Distance(positionToCheck, currentPosition);
             var isClosest = (closestPosition == -1.0f || distanceFromOptimal < closestPosition);
             var isEmpty = true;
             foreach (Collider c in Physics.OverlapSphere(positionToCheck, 0.2f))
