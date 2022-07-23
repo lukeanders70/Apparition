@@ -337,7 +337,11 @@ public class KnightAI : BasicEnemyAI
             var closestPlayer = AIHelpers.GetClosestPlayer(gameObject.transform.position);
             if(closestPlayer != null)
             {
-                var walkPoint = AIHelpers.GetClosestEmpty(new List<Vector3> { new Vector3(1.0f, 0.0f), new Vector3(-1.0f, 0.0f) }, closestPlayer.transform.position);
+                var walkPoint = AIHelpers.GetClosestEmpty(
+                    new List<Vector3> { new Vector3(1.0f, 0.0f), new Vector3(-1.0f, 0.0f) },
+                    closestPlayer.transform.position,
+                    AIComp.transform.position
+                );
                 if(walkPoint != null)
                 {
                     runInvoke = Invoke(() => Walk((Vector2)walkPoint), 0.5f);
