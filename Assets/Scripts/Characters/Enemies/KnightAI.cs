@@ -73,7 +73,16 @@ public class KnightAI : BasicEnemyAI
 
     public void Attack(Vector2 direction)
     {
+        shield.PauseShield();
+        shield2.PauseShield();
         sword.Attack();
+        Invoke("UnPauseShields" , .0f);
+    }
+
+    public void UnPauseShields()
+    {
+        shield.UnPauseSheild();
+        shield.UnPauseSheild();
     }
 
     private void SetAnimationState(string state)
@@ -338,7 +347,7 @@ public class KnightAI : BasicEnemyAI
             if(closestPlayer != null)
             {
                 var walkPoint = AIHelpers.GetClosestEmpty(
-                    new List<Vector3> { new Vector3(1.0f, 0.0f), new Vector3(-1.0f, 0.0f) },
+                    new List<Vector3> { new Vector3(1.5f, 0.0f), new Vector3(-1.5f, 0.0f) },
                     closestPlayer.transform.position,
                     AIComp.transform.position
                 );
