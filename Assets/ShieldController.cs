@@ -71,7 +71,7 @@ public class ShieldController : MonoBehaviour
     public void PauseShield()
     {
         boxCollider.enabled = false;
-        spriteRenderer.color = new Color(1, 1, 1, 0.2f);
+        spriteRenderer.color = new Color(1, 1, 1, 0.1f);
     }
 
     public void UnPauseSheild()
