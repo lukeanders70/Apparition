@@ -26,15 +26,14 @@ namespace StaticDungeon
         public Room EntryRoom { get; set; } = Entry1Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
-            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("test")), probability = 1.0f },
-/*            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-2")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-3")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-4")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-moss-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-moss-2")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-moss-3")), probability = 1.0f },
-            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-moss-4")), probability = 1.0f }*/
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-moss-4")), probability = 1.0f }
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
@@ -117,12 +116,14 @@ namespace StaticDungeon
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-1")), probability = 1.0f },
-            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-2")), probability = 1.0f },
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-2")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-lock-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-hard-cave-lock-2")), probability = 1.0f },
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
