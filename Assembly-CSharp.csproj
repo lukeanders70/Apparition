@@ -152,6 +152,7 @@
      <None Include="Assets\Resources\rooms\1-medium-stone-1.txt" />
      <None Include="Assets\Resources\rooms\3-hard-cave-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
+     <None Include="Assets\Resources\rooms\3-medium-cave-4.txt" />
      <None Include="Assets\Material\Sprite-Grayscale.shader" />
      <None Include="Assets\Resources\rooms\3-hard-cave-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-moss-2.txt" />

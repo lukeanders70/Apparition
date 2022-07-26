@@ -97,6 +97,8 @@ namespace StaticDungeon
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-1")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-2")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-lock-1")), probability = 1.0f },
         };
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
 {           StoneWellSpecialSpawn.Instance,
@@ -112,11 +114,16 @@ namespace StaticDungeon
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-2")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-3")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-4")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-5")), probability = 1.0f },
         };
         public ObjectProbability<Room>[] MediumRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-1")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-2")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-3")), probability = 1.0f },
+            new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-medium-cave-4")), probability = 1.0f },
         };
         public ObjectProbability<Room>[] FarRooms { get; set; } =
         {
