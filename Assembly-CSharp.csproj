@@ -167,6 +167,7 @@
      <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-lock-1.txt" />
+     <None Include="Assets\Resources\rooms\2-hard-pyramid-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-2.txt" />
@@ -175,6 +176,7 @@
      <None Include="Assets\Resources\rooms\1-medium-ledge-2.txt" />
      <None Include="Assets\Resources\rooms\3-medium-cave-2.txt" />
      <None Include="Assets\Resources\rooms\2-hard-pyramid-1.txt" />
+     <None Include="Assets\Resources\rooms\2-hard-pyramid-lock-1.txt" />
      <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-moss-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-1.txt" />
