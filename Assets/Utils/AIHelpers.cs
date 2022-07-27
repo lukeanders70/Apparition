@@ -28,6 +28,20 @@ public class AIHelpers
         return newList;
     }
 
+    public static GameObject? GetSpiritDestinationPlayer()
+    {
+        GameObject spirit = GameObject.Find("Spirit");
+        if(spirit)
+        {
+            SpiritController controller = spirit.GetComponent<SpiritController>();
+            if(controller)
+            {
+                return controller.futureParent;
+            }
+        }
+        return null;
+    }
+
     public static GameObject? GetClosestPlayer(Vector3 position)
     {
         GameObject player1 = GameObject.Find("Player1");

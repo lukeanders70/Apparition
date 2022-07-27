@@ -343,12 +343,12 @@ public class KnightAI : BasicEnemyAI
         {
             AIComp.SetAnimationState("idle");
             AIComp.Stop();
-            var closestPlayer = AIHelpers.GetClosestPlayer(gameObject.transform.position);
-            if(closestPlayer != null)
+            var targetPlayer = AIHelpers.GetSpiritDestinationPlayer();
+            if(targetPlayer != null)
             {
                 var walkPoint = AIHelpers.GetClosestEmpty(
                     new List<Vector3> { new Vector3(1.5f, 0.0f), new Vector3(-1.5f, 0.0f) },
-                    closestPlayer.transform.position,
+                    targetPlayer.transform.position,
                     AIComp.transform.position
                 );
                 if(walkPoint != null)
