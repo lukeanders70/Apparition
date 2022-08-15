@@ -6,6 +6,8 @@ public class InventoryController : MonoBehaviour
 {
     [SerializeField]
     private CoinCounterController CoinCounter;
+    [SerializeField]
+    private KeyHolderController KeyHolder;
     public int maxCoins = 999;
     public void AddCoins(int amount = 1)
     {
@@ -23,5 +25,15 @@ public class InventoryController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void GiveKey()
+    {
+        KeyHolder.GiveKey();
+    }
+
+    public void RemoveKey()
+    {
+        KeyHolder.RemoveKey();
     }
 }
