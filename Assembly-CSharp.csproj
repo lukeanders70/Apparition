@@ -141,6 +141,7 @@
     <Compile Include="Assets\Utils\AIHelpers.cs" />
     <Compile Include="Assets\TitleImageController.cs" />
     <Compile Include="Assets\KeyController.cs" />
+    <Compile Include="Assets\Scripts\UI\KeyHolderController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />
