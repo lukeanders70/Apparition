@@ -32,8 +32,8 @@ public class InventoryController : MonoBehaviour
         KeyHolder.GiveKey();
     }
 
-    public void RemoveKey()
+    public bool RemoveKey()
     {
-        KeyHolder.RemoveKey();
+        return KeyHolder.RemoveKey();
     }
 }
