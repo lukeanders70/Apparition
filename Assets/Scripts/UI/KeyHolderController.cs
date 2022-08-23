@@ -7,14 +7,19 @@ public class KeyHolderController : MonoBehaviour
 {
     [SerializeField]
     private GameObject keyImage;
+    private bool hasKey = false;
 
     public void GiveKey()
     {
+        hasKey = true;
         keyImage.SetActive(true);
     }
 
-    public void RemoveKey()
+    public bool RemoveKey()
     {
+        var didHaveKey = hasKey;
+        hasKey = false;
         keyImage.SetActive(false);
+        return didHaveKey;
     }
 }
