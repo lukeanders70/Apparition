@@ -7,7 +7,7 @@ public class BossDoorController : DoorController
     [SerializeField]
     public Animator animator;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    virtual protected void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
         if (collidedObject.tag == "Player")

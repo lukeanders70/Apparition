@@ -57,11 +57,11 @@ public class SaveButtonController : MonoBehaviour
         return index;
     }
 }
-
 [System.Serializable]
 public class SaveRoom
 {
     public List<GridCell> Cells;
     public bool lockIn;
     public string wallType;
+    public bool isExit;
 }
