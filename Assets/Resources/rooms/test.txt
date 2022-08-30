@@ -1,1 +1,1 @@
-{"Cells":[{"objectName":"knight","type":0,"objectType":0,"size":{"x":1,"y":1},"primaryIndex":{"x":10,"y":5}}],"lockIn":false,"wallType":"Option A"}
+{"Cells":[{"objectName":"knight","type":0,"objectType":0,"size":{"x":1,"y":2},"primaryIndex":{"x":10,"y":5}}],"lockIn":false,"wallType":"basic"}
