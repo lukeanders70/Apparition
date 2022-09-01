@@ -5,7 +5,7 @@ namespace StaticDungeon
 {
     public static class RoomLoader
     {
-        public static void Save(EditGridData gridToSave, string wallType, bool lockIn, string fileName)
+        public static void Save(EditGridData gridToSave, string wallType, bool lockIn, bool bossRoom, string fileName)
         {
             Debug.Log("Saving File");
             var saveRoom = new SaveRoom();

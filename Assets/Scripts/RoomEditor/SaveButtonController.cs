@@ -10,6 +10,8 @@ public class SaveButtonController : MonoBehaviour
     Dropdown walTypeDropdown;
     [SerializeField]
     Toggle lockInToggle;
+    [SerializeField]
+    Toggle bossRoomToggle;
 
     [SerializeField]
     InputField FileName;
@@ -18,8 +20,9 @@ public class SaveButtonController : MonoBehaviour
         var gridToSave = gridController.SerlializeGrid();
         var wallType = walTypeDropdown.options[walTypeDropdown.value].text;
         var isLockIn = lockInToggle.isOn;
+        var isBossRoom = !isLockIn && bossRoomToggle.isOn;
 
-        StaticDungeon.RoomLoader.Save(gridToSave, wallType, isLockIn, FileName.text);
+        StaticDungeon.RoomLoader.Save(gridToSave, wallType, isLockIn, isBossRoom, FileName.text);
     }
 
     public void Load()
@@ -39,6 +42,7 @@ public class SaveButtonController : MonoBehaviour
         Debug.Log(saveRoomData.lockIn);
         Debug.Log(lockInToggle);
         lockInToggle.isOn = saveRoomData.lockIn;
+        bossRoomToggle.isOn = saveRoomData.bossRoom;
         walTypeDropdown.value = findDropDownIndexFromString(saveRoomData.wallType);
         Debug.Log("Load Complete");
     }
@@ -64,4 +68,5 @@ public class SaveRoom
     public bool lockIn;
     public string wallType;
     public bool isExit;
+    public bool bossRoom;
 }
