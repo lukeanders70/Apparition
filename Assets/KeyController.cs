@@ -9,10 +9,12 @@ public class KeyController : MonoBehaviour
     public float maxOffsetMagnitude;
     [SerializeField]
     private ParticleSystem ps;
+
+    private Vector3 originalPosition;
     // Start is called before the first frame update
     void Start()
     {
-
+        originalPosition = transform.position;
     }
 
     private void Update()
@@ -20,7 +22,7 @@ public class KeyController : MonoBehaviour
         timeSinceStart = timeSinceStart + Time.deltaTime;
         var rads = (timeSinceStart / frequencySeconds) * (2 * Mathf.PI);
         var offset = maxOffsetMagnitude * Mathf.Sin(rads);
-        transform.position = new Vector3(0, offset);
+        transform.position = originalPosition + new Vector3(0, offset);
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D collision)

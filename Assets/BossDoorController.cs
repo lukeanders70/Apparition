@@ -23,7 +23,7 @@ public class BossDoorController : DoorController
                 InventoryController inventory = collidedObject.GetComponentInParent<InventoryController>();
                 if (inventory.RemoveKey())
                 {
-                    SetOpen();
+                    SetAllOpen();
                 }
             }
         }
@@ -36,13 +36,22 @@ public class BossDoorController : DoorController
         }
     }
 
-    private void SetClosed()
+    private void SetAllOpen()
+    {
+        var bossDoorControllers = FindObjectsOfType<BossDoorController>();
+        foreach (BossDoorController controller in bossDoorControllers)
+        {
+            controller.SetOpen();
+        }
+    }
+
+    public void SetClosed()
     {
         state = DoorState.Locked;
         animator.SetBool("doorOpen", false);
     }
 
-    private void SetOpen()
+    public void SetOpen()
     {
         state = DoorState.Open;
         animator.SetBool("doorOpen", true);
