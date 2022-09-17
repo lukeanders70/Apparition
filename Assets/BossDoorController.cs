@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,37 @@ public class BossDoorController : DoorController
     [SerializeField]
     public Animator animator;
 
+    private void Start()
+    {
+        state = DoorState.Locked;
+    }
+
     virtual protected void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.collider.gameObject;
-        if (collidedObject.tag == "Player")
+        if (state == DoorState.Locked)
         {
-            InventoryController inventory = collidedObject.GetComponentInParent<InventoryController>();
-            if (inventory.RemoveKey()) {
-                SetOpen();
+            if (collidedObject.tag == "Player")
+            {
+                InventoryController inventory = collidedObject.GetComponentInParent<InventoryController>();
+                if (inventory.RemoveKey())
+                {
+                    SetOpen();
+                }
+            }
+        }
+        else
+        {
+            if (collidedObject.tag == "Player" && oppostiteDoor != null)
+            {
+                PassThrough(collidedObject);
             }
         }
     }
 
     private void SetClosed()
     {
-        state = DoorState.Closed;
+        state = DoorState.Locked;
         animator.SetBool("doorOpen", false);
     }
 

@@ -11,6 +11,7 @@ public class TileSelectController : MonoBehaviour
 
     private GameObject[] ObsticlePrefabs;
     private GameObject[] EnemyPrefabs;
+    private GameObject[] MiscPrefabs;
     private RectTransform rectTrans;
     private float TilePrefabHeight;
 
@@ -21,6 +22,7 @@ public class TileSelectController : MonoBehaviour
     {
         ObsticlePrefabs = Resources.LoadAll<GameObject>("prefabs/Obstacles");
         EnemyPrefabs = Resources.LoadAll<GameObject>("prefabs/Enemies");
+        MiscPrefabs = Resources.LoadAll<GameObject>("prefabs/Misc");
         rectTrans = gameObject.GetComponent<RectTransform>();
         rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, MinHeight);
 
@@ -31,6 +33,10 @@ public class TileSelectController : MonoBehaviour
         foreach (GameObject prefab in ObsticlePrefabs)
         {
             AddPrefabSetterTile(GridCell.CellObjectType.obstacle, prefab);
+        }
+        foreach (GameObject prefab in MiscPrefabs)
+        {
+            AddPrefabSetterTile(GridCell.CellObjectType.misc, prefab);
         }
         foreach (GameObject prefab in EnemyPrefabs)
         {

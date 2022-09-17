@@ -22,6 +22,7 @@ public class DoorManager : MonoBehaviour
 
     public bool doorsClosed = false;
 
+
     public void Awake()
     {
         doorPositions = new Dictionary<Vector2, GameObject>()
@@ -44,7 +45,7 @@ public class DoorManager : MonoBehaviour
         foreach (Vector2 direction in Constants.directions.Values)
         {
             GameObject door = doors[direction];
-            if (door != null && !door.GetComponent<DoorController>().Navigable())
+            if (door != null && !door.GetComponent<DoorController>().IsRealDoor())
             {
                 AddDoorwayWall(direction, wallType);
             }
@@ -59,6 +60,7 @@ public class DoorManager : MonoBehaviour
     )
     {
         var isLockedIn = Random.value < roomInfo.LockInProbability;
+        var isBossRoom = roomInfo.isBossRoom;
         foreach (Vector2 direction in Constants.directions.Values)
         {
             Vector2 oppositeDirection = direction * -1;
@@ -70,7 +72,8 @@ public class DoorManager : MonoBehaviour
                 if (oppositeRoomDoor.GetComponent<DoorController>().state == DoorState.Open)
                 {
                     AddDoor(direction, oppositeRoomDoor, isLockedIn);
-                } else
+                } 
+                else
                 {
                     AddDoorwayWall(direction, roomInfo.WallType);
                 }
@@ -96,8 +99,20 @@ public class DoorManager : MonoBehaviour
         }
         doors.Add(direction, newDoor);
     }
+
+    public void AddBossDoor(Vector2 direction, GameObject? oppositeRoomDoor)
+    {
+        GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddBossDoor(gameObject, oppositeRoomDoor);
+        if (doors.ContainsKey(direction))
+        {
+            Destroy(doors[direction]);
+            doors.Remove(direction);
+        }
+        doors.Add(direction, newDoor);
+    }
     public void AddDoorwayWall(Vector2 direction, string wallType)
     {
+        Debug.Log("Add Doorway Wall");
         GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoorwayWall(gameObject, wallType);
         if (doors.ContainsKey(direction))
         {
@@ -105,6 +120,33 @@ public class DoorManager : MonoBehaviour
             doors.Remove(direction);
         }
         doors.Add(direction, newDoor);
+    }
+
+    public void SetBossRoomNeighbors(Dictionary<Vector2, GameObject> dungeon, Vector2 position)
+    {
+        foreach (Vector2 direction in Constants.directions.Values)
+        {
+            Vector2 oppositeDirection = direction * -1;
+            Vector2 neighboorPosition = position + direction;
+            if (dungeon.ContainsKey(neighboorPosition) && doors.ContainsKey(direction) && doors[direction].GetComponent<DoorController>().state == DoorState.Open)
+            {
+                GameObject neighbooringRoom = dungeon[neighboorPosition];
+                GameObject oppositeRoomDoor = neighbooringRoom.GetComponent<DoorManager>().doors[oppositeDirection];
+
+                DoorManager OppositeDoorManager = neighbooringRoom.GetComponent<DoorManager>();
+                GameObject oppositeRoomDoorPosition = OppositeDoorManager.doorPositions[oppositeDirection];
+                DoorwayGenerator oppositeRoomGenerator = oppositeRoomDoorPosition.GetComponent<DoorwayGenerator>();
+                GameObject newOppositeBossDoor = oppositeRoomGenerator.AddBossDoor(neighbooringRoom, doors[direction]);
+
+                // remove the old door from the opposite room
+                if (OppositeDoorManager.doors.ContainsKey(oppositeDirection))
+                {
+                    Destroy(OppositeDoorManager.doors[oppositeDirection]);
+                    OppositeDoorManager.doors.Remove(oppositeDirection);
+                }
+                OppositeDoorManager.doors.Add(oppositeDirection, newOppositeBossDoor);
+            }
+        }
     }
 
     public void ResetDoorwayWallSprites(string wallType)

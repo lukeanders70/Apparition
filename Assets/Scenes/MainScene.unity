@@ -3089,7 +3089,7 @@ MonoBehaviour:
   RoomPrefab: {fileID: 122319395201439116, guid: 06f4f4a2047988742840751afbd0162c, type: 3}
   roomHeight: 16
   roomWidth: 28
-  numRooms: 25
+  numRooms: 3
   levelTransition: {fileID: 66578517}
 --- !u!4 &2137089098
 Transform:

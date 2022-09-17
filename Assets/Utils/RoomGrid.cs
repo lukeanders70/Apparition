@@ -303,7 +303,8 @@ public class GridCell
 
     public enum CellObjectType { 
         enemy,
-        obstacle
+        obstacle,
+        misc
     }
 
     [System.NonSerialized]

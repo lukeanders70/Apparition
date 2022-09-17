@@ -45,10 +45,10 @@ public class RoomController : MonoBehaviour
 
         doorManager.SetupDoors(dungeon, indexPosition, roomInfo, doorSpawnProbabilityOverride);
 
-        SetRoomInfo(roomInfo);
+        SetRoomInfo(dungeon, indexPosition, roomInfo);
     }
 
-    public void SetRoomInfo(StaticDungeon.Room newRoomInfo)
+    public void SetRoomInfo(Dictionary<Vector2, GameObject> dungeon, Vector2 indexPosition, StaticDungeon.Room newRoomInfo)
     {
         StaticDungeon.SpawnConfig spawnConfigInfo = StaticDungeon.Utils.ChooseFromObjectProbability(newRoomInfo.SpawnConfigProbs);
         roomGrid = new RoomGrid();
@@ -62,6 +62,11 @@ public class RoomController : MonoBehaviour
         doorManager.ResetDoorwayWallSprites(newRoomInfo.WallType);
 
         setWallSprite(newRoomInfo.WallType);
+
+        if(newRoomInfo.isBossRoom)
+        {
+            doorManager.SetBossRoomNeighbors(dungeon, indexPosition);
+        }
 
         roomInfo = newRoomInfo;
     }

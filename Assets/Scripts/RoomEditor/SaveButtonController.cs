@@ -34,13 +34,11 @@ public class SaveButtonController : MonoBehaviour
         {
             if (cell.type == GridCell.CellType.primary)
             {
-                string foldername = cell.objectType == GridCell.CellObjectType.enemy ? "Enemies" : "Obstacles";
+                string foldername = cell.objectType == GridCell.CellObjectType.enemy ? "Enemies" : cell.objectType == GridCell.CellObjectType.obstacle ? "Obstacles" : "Misc";
                 GameObject prefab = Resources.Load<GameObject>("prefabs/" + foldername + "/" + cell.objectName);
                 gridController.AddObjectToScene(prefab, cell.objectType, cell.primaryIndex.x, cell.primaryIndex.y);
             }
         }
-        Debug.Log(saveRoomData.lockIn);
-        Debug.Log(lockInToggle);
         lockInToggle.isOn = saveRoomData.lockIn;
         bossRoomToggle.isOn = saveRoomData.bossRoom;
         walTypeDropdown.value = findDropDownIndexFromString(saveRoomData.wallType);

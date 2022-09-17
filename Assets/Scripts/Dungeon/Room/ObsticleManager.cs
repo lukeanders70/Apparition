@@ -49,5 +49,17 @@ public class ObsticleManager : GridObjectManager
 
         }
 
+        foreach (StaticDungeon.ObjectRanges oRange in spawnConfigInfo.MiscRanges)
+        {
+            if (oRange.preDefObjects != null)
+            {
+                SetObjects(
+                    roomGrid,
+                    GridCell.CellObjectType.misc,
+                    oRange.preDefObjects
+                );
+            }
+        }
+
     }
 }

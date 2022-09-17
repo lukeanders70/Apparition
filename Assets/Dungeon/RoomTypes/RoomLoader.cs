@@ -13,6 +13,7 @@ namespace StaticDungeon
             saveRoom.Cells = gridToSave.Cells;
             saveRoom.wallType = wallType;
             saveRoom.lockIn = lockIn;
+            saveRoom.bossRoom = bossRoom;
 
             string json = JsonUtility.ToJson(saveRoom);
 
