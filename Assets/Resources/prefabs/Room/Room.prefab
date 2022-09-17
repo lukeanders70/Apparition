@@ -166,6 +166,7 @@ MonoBehaviour:
   doorwayWallPrefab: {fileID: 150712993764013798, guid: fef37b748426e5e4db302fe376f55eb1, type: 3}
   doorPrefab: {fileID: 6245716550351972836, guid: 56991470a38540e45824fa564afe72a9, type: 3}
   lockedInDoorPrefab: {fileID: 6245716550351972836, guid: 86bc71a0aba719341b184e7c023a0c04, type: 3}
+  bossDoorPrefab: {fileID: 8616940261890117041, guid: 99dbdfe15419c844f889b82ea51aa629, type: 3}
   direction: top
 --- !u!1 &122319396173781871
 GameObject:
@@ -213,6 +214,7 @@ MonoBehaviour:
   doorwayWallPrefab: {fileID: 4443395946883208984, guid: db85e5ed43640ed49895c09e8a200473, type: 3}
   doorPrefab: {fileID: 8981912767958232550, guid: 52751f67c33fe4a46a4e4e4acc9bdb59, type: 3}
   lockedInDoorPrefab: {fileID: 8981912767958232550, guid: 1e32b97b167930c4f924b6282cd6d5ef, type: 3}
+  bossDoorPrefab: {fileID: 7687958551518583011, guid: 15845c12dbb27ab44955b0986ca40ad2, type: 3}
   direction: left
 --- !u!1 &122319396511641520
 GameObject:
@@ -260,6 +262,7 @@ MonoBehaviour:
   doorwayWallPrefab: {fileID: 3539318607351192135, guid: 032e6888abf5e5848aac8ffae1e21c59, type: 3}
   doorPrefab: {fileID: 2538969067061811689, guid: 0d59a6b88197fd049bb70d9fc7a6ead2, type: 3}
   lockedInDoorPrefab: {fileID: 2538969067061811689, guid: 3e132be168dae754fad526403f22bb3d, type: 3}
+  bossDoorPrefab: {fileID: 108568394358633077, guid: 2f0839215a75902448ef33c9bad068ea, type: 3}
   direction: bottom
 --- !u!1 &122319396702104686
 GameObject:
@@ -307,6 +310,7 @@ MonoBehaviour:
   doorwayWallPrefab: {fileID: 7078538281087346616, guid: 49280d91b10e559459a87f5426cb4977, type: 3}
   doorPrefab: {fileID: 1151531771320315878, guid: 192d029959d70904ca15ae82dda17b5d, type: 3}
   lockedInDoorPrefab: {fileID: 1151531771320315878, guid: 0d9f643d7f7a41a41bcf309d8f525def, type: 3}
+  bossDoorPrefab: {fileID: 1765275519133173168, guid: deae2608e8f528344a5339a56a73fbc6, type: 3}
   direction: right
 --- !u!1 &2134159161905165178
 GameObject:

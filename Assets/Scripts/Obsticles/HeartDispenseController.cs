@@ -25,7 +25,6 @@ public class HeartDispenseController : MonoBehaviour
     {
         roomSave = GetComponentInParent<RoomSaveState>();
         var heartContainerTakenNullable = roomSave.GetBool(saveStateKey);
-        Debug.Log(heartContainerTakenNullable);
         if (heartContainerTakenNullable is bool heartContainerTaken && heartContainerTaken)
         {
             SetInactive();

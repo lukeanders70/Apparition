@@ -86,7 +86,7 @@ public class DungeonGenerator : MonoBehaviour
             foreach(GameObject roomToOverride in roomsToOverride)
             {
                 var roomController = roomToOverride.GetComponent<RoomController>();
-                roomController.SetRoomInfo(specialRoomConfig.room);
+                roomController.SetRoomInfo(dungeon, roomController.position, specialRoomConfig.room);
             }
         }
     }

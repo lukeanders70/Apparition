@@ -36,6 +36,10 @@ public class EditGridController : MonoBehaviour
         {
             Destroy(go);
         }
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Misc"))
+        {
+            Destroy(go);
+        }
         roomGrid.clear();
 
     }

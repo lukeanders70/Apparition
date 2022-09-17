@@ -125,6 +125,7 @@ namespace StaticDungeon
         public string Name { get; set; }
         public ObjectRanges[] ObsticleRanges { get; set; }
         public ObjectRanges[] EnemyRanges { get; set; }
+        public ObjectRanges[] MiscRanges { get; set; }
     }
 
     public class PreDefSpawnConfig : SpawnConfig
@@ -133,18 +134,23 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "PreDefSpawnConfig Unset";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = { };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
 
         public PreDefSpawnConfig(List<GridCell> Cells)
         {
             var objPrefabDict = new Dictionary<(int, int), string>();
             var enemyPrefabDict = new Dictionary<(int, int), string>();
+            var miscPrefabDict = new Dictionary<(int, int), string>();
             foreach (GridCell cell in Cells)
             {
                 if(cell.objectType == GridCell.CellObjectType.obstacle)
                 {
                     objPrefabDict.Add((cell.primaryIndex.x, cell.primaryIndex.y), "Obstacles/" + cell.objectName);
-                } else
+                } else if(cell.objectType == GridCell.CellObjectType.misc)
                 {
+                    miscPrefabDict.Add((cell.primaryIndex.x, cell.primaryIndex.y), "Misc/" + cell.objectName);
+                }
+                else {
                     enemyPrefabDict.Add((cell.primaryIndex.x, cell.primaryIndex.y), "Enemies/" + cell.objectName);
                 }
             }
@@ -158,6 +164,13 @@ namespace StaticDungeon
                     preDefObjects = enemyPrefabDict
                 }
             };
+            MiscRanges = new ObjectRanges[]
+            {
+                new ObjectRanges
+                {
+                    preDefObjects = miscPrefabDict
+                }
+            };
         }
     }
 
@@ -167,6 +180,8 @@ namespace StaticDungeon
         virtual public string Name { get; set; } = "empty-config";
         virtual public ObjectRanges[] ObsticleRanges { get; set; } = { };
         virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class LadderConfig : SpawnConfig
@@ -185,6 +200,8 @@ namespace StaticDungeon
         };
 
         virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class WellConfig : SpawnConfig
@@ -203,6 +220,8 @@ namespace StaticDungeon
         };
 
         virtual public ObjectRanges[] EnemyRanges { get; set; } = { };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     // Level 1 //
@@ -233,6 +252,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.centerArea
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class EasyWalledRoomConfig : EasyDonutSpawnConfig
@@ -331,6 +352,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.centerArea
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class EasyDonutSpawnConfig : SpawnConfig
@@ -362,6 +385,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.centerArea
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class EasyInverseDonutSpawnConfig : SpawnConfig
@@ -393,6 +418,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class BlobDen : SpawnConfig
@@ -443,6 +470,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class WolfDen : SpawnConfig
@@ -494,6 +523,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.midLeftmidRightStrips
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     // Level 2 //
@@ -525,6 +556,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.largerCenter
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class MediumMazeSandWalls : SpawnConfig
@@ -552,6 +585,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.largerCenter
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     // Level 3 // 
@@ -581,6 +616,8 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.centerArea
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 
     public class EasyScatteredRocksConfig: SpawnConfig
@@ -610,5 +647,7 @@ namespace StaticDungeon
                 areaRanges = AreaRanges.centerArea
             }
         };
+
+        virtual public ObjectRanges[] MiscRanges { get; set; } = { };
     }
 }

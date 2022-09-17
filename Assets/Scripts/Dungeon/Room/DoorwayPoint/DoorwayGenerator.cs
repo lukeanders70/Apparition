@@ -11,6 +11,8 @@ public class DoorwayGenerator : MonoBehaviour
     [SerializeField]
     private GameObject lockedInDoorPrefab;
     [SerializeField]
+    private GameObject bossDoorPrefab;
+    [SerializeField]
     private string direction;
     
     #nullable enable
@@ -41,8 +43,24 @@ public class DoorwayGenerator : MonoBehaviour
             doorwayWall.GetComponent<SpriteRenderer>().sprite = doorwayWallSprite;
         } else
         {
-            Debug.LogError("Could not find doorway wall at " + path);
+            Debug.LogError("Could not find doorway wall at location: " + path);
         }
         return doorwayWall;
+    }
+
+    public GameObject AddBossDoor(GameObject room, GameObject? oppositeDoor)
+    {
+        Debug.Log("add boss door");
+        GameObject door = Instantiate(bossDoorPrefab, transform.position, transform.rotation);
+        door.GetComponent<DoorController>().insideRoom = room;
+        door.GetComponent<DoorController>().oppostiteDoor = oppositeDoor;
+        door.transform.parent = room.transform;
+
+        if (oppositeDoor != null)
+        {
+            oppositeDoor.GetComponent<DoorController>().oppostiteDoor = door;
+        }
+
+        return door;
     }
 }

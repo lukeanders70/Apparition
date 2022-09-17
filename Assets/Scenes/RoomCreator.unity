@@ -13621,6 +13621,7 @@ MonoBehaviour:
   gridController: {fileID: 2014923905}
   walTypeDropdown: {fileID: 516369884}
   lockInToggle: {fileID: 422442437}
+  bossRoomToggle: {fileID: 1201191486}
   FileName: {fileID: 1203351648}
 --- !u!1001 &1130858554
 PrefabInstance:
@@ -22156,6 +22157,7 @@ MonoBehaviour:
   gridController: {fileID: 2014923905}
   walTypeDropdown: {fileID: 516369884}
   lockInToggle: {fileID: 422442437}
+  bossRoomToggle: {fileID: 1201191486}
   FileName: {fileID: 1203351648}
 --- !u!114 &1826904400
 MonoBehaviour:

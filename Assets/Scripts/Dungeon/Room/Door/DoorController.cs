@@ -27,12 +27,18 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    public bool Navigable()
+    virtual public bool Navigable()
     {
         return oppostiteDoor != null && state == DoorState.Open;
     }
 
-    void PassThrough(GameObject activePlayer)
+    // as opposed to doorway wall
+    virtual public bool IsRealDoor()
+    {
+        return oppostiteDoor != null && state != DoorState.Wall;
+    }
+
+    public void PassThrough(GameObject activePlayer)
     {
         if (Navigable())
         {

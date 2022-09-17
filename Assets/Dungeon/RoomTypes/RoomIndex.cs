@@ -11,6 +11,8 @@ namespace StaticDungeon
         ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; }
         float LockInProbability { get; set; }
 
+        bool isBossRoom { get; set; }
+
     }
 
     public class PreDefRoom : Room
@@ -22,13 +24,16 @@ namespace StaticDungeon
 
         virtual public float LockInProbability { get; set; } = 0.0f;
 
+        virtual public bool isBossRoom { get; set; } = false;
+
         public PreDefRoom(SaveRoom saveRoomData)
         {
             WallType = saveRoomData.wallType;
-            LockInProbability = saveRoomData.lockIn ? 1.0f : 0.0f;
+            LockInProbability = saveRoomData.lockIn && !saveRoomData.bossRoom ? 1.0f : 0.0f;
             SpawnConfigProbs = new ObjectProbability<SpawnConfig>[]{
                 new ObjectProbability<SpawnConfig> { obj = new PreDefSpawnConfig(saveRoomData.Cells), probability = 1.0f },
             };
+            isBossRoom = saveRoomData.bossRoom;
         }
     }
     // Level 1
@@ -43,6 +48,7 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
     }
 
     public class StoneEasyRoom : Room
@@ -62,6 +68,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class MossyStoneEasyRoom : StoneEasyRoom
@@ -105,6 +113,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 1.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class WellStone : Room
@@ -119,6 +129,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class StoneMazeRoom : Room
@@ -132,6 +144,8 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["short-wall-maze"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class Exit1Room : Room
@@ -145,6 +159,8 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["ladder"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = true;
+
     }
 
     // Level 2 //
@@ -168,6 +184,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class SandstoneSlopeEasyRoom : Room
@@ -182,6 +200,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class SandstoneMediumMazeRoom : Room
@@ -196,6 +216,8 @@ namespace StaticDungeon
         };
 
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class Exit2Room : Exit1Room
@@ -225,6 +247,8 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["lava-maze"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class RockEasyRoom : Room
@@ -238,6 +262,8 @@ namespace StaticDungeon
             new ObjectProbability<SpawnConfig> { obj = SpawnConfigIndex.spawnConfigs["easy-scattered-rocks"], probability = 1.0f },
         };
         virtual public float LockInProbability { get; set; } = 0.0f;
+        virtual public bool isBossRoom { get; set; } = false;
+
     }
 
     public class Exit3Room : Exit1Room
