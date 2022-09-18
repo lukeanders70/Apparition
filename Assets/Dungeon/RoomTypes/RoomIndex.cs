@@ -10,7 +10,6 @@ namespace StaticDungeon
         string Name { get; set; }
         ObjectProbability<SpawnConfig>[] SpawnConfigProbs { get; set; }
         float LockInProbability { get; set; }
-
         bool isBossRoom { get; set; }
 
     }

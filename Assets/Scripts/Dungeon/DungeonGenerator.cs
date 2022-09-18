@@ -78,13 +78,19 @@ public class DungeonGenerator : MonoBehaviour
 
     private void SetSpecialRooms(Dictionary<Vector2, GameObject> dungeon, StaticDungeon.SpecialRoomSpawnConfig[] specialRoomConfigs)
     {
-        foreach(StaticDungeon.SpecialRoomSpawnConfig specialRoomConfig in specialRoomConfigs)
+        List<GameObject> assignedSpecialRooms = new List<GameObject>();
+        foreach (StaticDungeon.SpecialRoomSpawnConfig specialRoomConfig in specialRoomConfigs)
         {
             var possibleRoomsToOverride = specialRoomConfig.RoomsThatSatisfyCondition(dungeon);
+            foreach(GameObject assignedSpecialRoom in assignedSpecialRooms)
+            {
+                possibleRoomsToOverride.Remove(assignedSpecialRoom);
+            }
             var numRoomsToAdd = Random.Range(specialRoomConfig.minRooms, specialRoomConfig.maxRooms);
             var roomsToOverride = AIHelpers.ChooseN(numRoomsToAdd, possibleRoomsToOverride);
             foreach(GameObject roomToOverride in roomsToOverride)
             {
+                assignedSpecialRooms.Add(roomToOverride);
                 var roomController = roomToOverride.GetComponent<RoomController>();
                 roomController.SetRoomInfo(dungeon, roomController.position, specialRoomConfig.room);
             }
