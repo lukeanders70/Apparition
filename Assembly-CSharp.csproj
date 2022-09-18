@@ -162,12 +162,14 @@
      <None Include="Assets\Resources\rooms\3-hard-cave-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-moss-1.txt" />
+     <None Include="Assets\Resources\rooms\1-key.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-3.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-1.txt" />
      <None Include="Assets\Resources\rooms\2-easy-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-3.txt" />
      <None Include="Assets\Resources\rooms\3-medium-cave-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-3.txt" />
+     <None Include="Assets\Resources\rooms\2-key.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-1.txt" />
@@ -205,6 +207,7 @@
      <None Include="Assets\Resources\rooms\3-hard-cave-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-1.txt" />
      <None Include="Assets\Resources\rooms\2-medium-pyramid-1.txt" />
+     <None Include="Assets\Resources\rooms\3-key.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-5.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

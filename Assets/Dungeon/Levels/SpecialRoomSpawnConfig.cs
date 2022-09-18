@@ -33,6 +33,28 @@ namespace StaticDungeon
         }
     }
 
+    public class StoneKeySpecialSpawn : SpecialRoomSpawnConfig
+    {
+
+        public static StoneKeySpecialSpawn Instance = new StoneKeySpecialSpawn();
+        virtual public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-key"));
+        public int minRooms { get; set; } = 1;
+        public int maxRooms { get; set; } = 1;
+        public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
+        {
+            var possible = new List<GameObject>();
+            foreach (Vector2 key in dungeon.Keys)
+            {
+                float manDistance = Mathf.Abs(key.x) + Mathf.Abs(key.y);
+                if (manDistance > 2)
+                {
+                    possible.Add(dungeon[key]);
+                }
+            }
+            return possible;
+        }
+    }
+
     public class StoneExitSpecialSpawn : SpecialRoomSpawnConfig
     {
         public static StoneExitSpecialSpawn Instance = new StoneExitSpecialSpawn();
@@ -66,10 +88,22 @@ namespace StaticDungeon
         override public Room room { get; set; } = Exit2Room.Instance;
     }
 
+    public class SandstoneKeySpecialSpawn : StoneKeySpecialSpawn
+    {
+        new public static SandstoneKeySpecialSpawn Instance = new SandstoneKeySpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-key"));
+    }
+
     public class RockExitSpecialSpawn : StoneExitSpecialSpawn
     {
         new public static RockExitSpecialSpawn Instance = new RockExitSpecialSpawn();
         override public Room room { get; set; } = Exit3Room.Instance;
+    }
+
+    public class RockKeySpecialSpawn : StoneKeySpecialSpawn
+    {
+        new public static RockKeySpecialSpawn Instance = new RockKeySpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-key"));
     }
 
 }
