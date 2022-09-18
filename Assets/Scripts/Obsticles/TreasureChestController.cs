@@ -11,12 +11,20 @@ public class TreasureChestController : MonoBehaviour
     [SerializeField]
     private LootDropController lootController;
     private EnemyManager roomEnemyManager;
+    private RoomSaveState roomSave;
 
     private bool isOpen = false;
 
     private void Start()
     {
         roomEnemyManager = transform.parent.gameObject.GetComponent<EnemyManager>();
+        roomSave = GetComponentInParent<RoomSaveState>();
+        var alreadyOpenedNullable = roomSave.GetBool("TreasureChestOpened");
+        if (alreadyOpenedNullable is bool alreadyOpened && alreadyOpened)
+        {
+            isOpen = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -44,6 +52,7 @@ public class TreasureChestController : MonoBehaviour
 
     private void Open()
     {
+        roomSave.AddBool("TreasureChestOpened", true);
         lidAnimator.SetBool("lift-lid", true);
         isOpen = true;
         Invoke("DropLoot", 1.0f);

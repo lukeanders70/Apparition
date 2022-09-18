@@ -46,7 +46,8 @@ namespace StaticDungeon
             foreach (Vector2 key in dungeon.Keys)
             {
                 float manDistance = Mathf.Abs(key.x) + Mathf.Abs(key.y);
-                if (manDistance > 2)
+                
+                if (manDistance > 1 && dungeon[key].GetComponent<DoorManager>().getAccessibleDirections().Count > 1)
                 {
                     possible.Add(dungeon[key]);
                 }
