@@ -1,0 +1,1 @@
+{"Cells":[{"objectName":"heartWell","type":0,"objectType":1,"size":{"x":2,"y":2},"primaryIndex":{"x":12,"y":5}}],"lockIn":false,"wallType":"sandstone","isExit":false,"bossRoom":false}

@@ -12,10 +12,10 @@ namespace StaticDungeon
         public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon);
     }
 
-    public class StoneWellSpecialSpawn : SpecialRoomSpawnConfig {
+    public class OneWellSpecialSpawn : SpecialRoomSpawnConfig {
 
-        public static StoneWellSpecialSpawn Instance = new StoneWellSpecialSpawn();
-        public Room room { get; set; } = WellStone.Instance;
+        public static OneWellSpecialSpawn Instance = new OneWellSpecialSpawn();
+        virtual public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-well"));
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
         public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
@@ -33,10 +33,10 @@ namespace StaticDungeon
         }
     }
 
-    public class StoneKeySpecialSpawn : SpecialRoomSpawnConfig
+    public class OneKeySpecialSpawn : SpecialRoomSpawnConfig
     {
 
-        public static StoneKeySpecialSpawn Instance = new StoneKeySpecialSpawn();
+        public static OneKeySpecialSpawn Instance = new OneKeySpecialSpawn();
         virtual public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-key"));
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
@@ -56,10 +56,10 @@ namespace StaticDungeon
         }
     }
 
-    public class StoneExitSpecialSpawn : SpecialRoomSpawnConfig
+    public class OneLadderSpecialSpawn : SpecialRoomSpawnConfig
     {
-        public static StoneExitSpecialSpawn Instance = new StoneExitSpecialSpawn();
-        virtual public Room room { get; set; } = Exit1Room.Instance;
+        public static OneLadderSpecialSpawn Instance = new OneLadderSpecialSpawn();
+        virtual public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-ladder"));
         public int minRooms { get; set; } = 1;
         public int maxRooms { get; set; } = 1;
         public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
@@ -83,28 +83,64 @@ namespace StaticDungeon
         }
     }
 
-    public class SandstoneExitSpecialSpawn : StoneExitSpecialSpawn
+    public class OneStartSpecialSpawn : SpecialRoomSpawnConfig
     {
-        new public static SandstoneExitSpecialSpawn Instance = new SandstoneExitSpecialSpawn();
-        override public Room room { get; set; } = Exit2Room.Instance;
+        public static OneStartSpecialSpawn Instance = new OneStartSpecialSpawn();
+        virtual public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-start"));
+        public int minRooms { get; set; } = 1;
+        public int maxRooms { get; set; } = 1;
+        public List<GameObject> RoomsThatSatisfyCondition(Dictionary<Vector2, GameObject> dungeon)
+        {
+            return new List<GameObject> { dungeon[new Vector2(0, 0)] };
+        }
     }
 
-    public class SandstoneKeySpecialSpawn : StoneKeySpecialSpawn
+    public class TwoLadderSpecialSpawn : OneLadderSpecialSpawn
     {
-        new public static SandstoneKeySpecialSpawn Instance = new SandstoneKeySpecialSpawn();
+        new public static TwoLadderSpecialSpawn Instance = new TwoLadderSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-ladder"));
+    }
+
+    public class TwoKeySpecialSpawn : OneKeySpecialSpawn
+    {
+        new public static TwoKeySpecialSpawn Instance = new TwoKeySpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-key"));
     }
 
-    public class RockExitSpecialSpawn : StoneExitSpecialSpawn
+    public class TwoWellSpecialSpawn : OneWellSpecialSpawn
     {
-        new public static RockExitSpecialSpawn Instance = new RockExitSpecialSpawn();
-        override public Room room { get; set; } = Exit3Room.Instance;
+        new public static TwoWellSpecialSpawn Instance = new TwoWellSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-well"));
     }
 
-    public class RockKeySpecialSpawn : StoneKeySpecialSpawn
+    public class TwoStartSpecialSpawn : OneStartSpecialSpawn
     {
-        new public static RockKeySpecialSpawn Instance = new RockKeySpecialSpawn();
+        new public static TwoStartSpecialSpawn Instance = new TwoStartSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-start"));
+    }
+
+     public class ThreeLadderSpecialSpawn : OneLadderSpecialSpawn
+    {
+        new public static TwoLadderSpecialSpawn Instance = new TwoLadderSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-ladder"));
+    }
+
+    public class ThreeKeySpecialSpawn : OneKeySpecialSpawn
+    {
+        new public static TwoKeySpecialSpawn Instance = new TwoKeySpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-key"));
+    }
+
+    public class ThreeWellSpecialSpawn : OneWellSpecialSpawn
+    {
+        new public static TwoWellSpecialSpawn Instance = new TwoWellSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-well"));
+    }
+
+    public class ThreeStartSpecialSpawn : OneStartSpecialSpawn
+    {
+        new public static TwoStartSpecialSpawn Instance = new TwoStartSpecialSpawn();
+        override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-start"));
     }
 
 }

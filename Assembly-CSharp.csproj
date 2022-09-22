@@ -93,12 +93,14 @@
     <Compile Include="Assets\Scripts\RoomEditor\EditTileController.cs" />
     <Compile Include="Assets\Scripts\Misc\CameraMoveController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\Door\DoorController.cs" />
+    <Compile Include="Assets\TitleImageController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\DoorwayPoint\DoorwayGenerator.cs" />
     <Compile Include="Assets\Scripts\Obsticles\DynamicSpriteSetter.cs" />
     <Compile Include="Assets\Scripts\RoomEditor\WallDropdownController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BatAI.cs" />
     <Compile Include="Assets\Scripts\UI\HealthContainerController.cs" />
     <Compile Include="Assets\Utils\DungeonUtils.cs" />
+    <Compile Include="Assets\BossDoorController.cs" />
     <Compile Include="Assets\Scripts\RoomEditor\SaveButtonController.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\SpinnerAI.cs" />
     <Compile Include="Assets\Dungeon\RoomTypes\RoomIndex.cs" />
@@ -135,26 +137,25 @@
     <Compile Include="Assets\Scripts\Dungeon\Room\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Obsticles\TreasureChestController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Room\ObsticleManager.cs" />
+    <Compile Include="Assets\Scripts\UI\KeyHolderController.cs" />
+    <Compile Include="Assets\KeyController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemies\BlobAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\IndividualPlayerHealth.cs" />
     <Compile Include="Assets\Utils\AIHelpers.cs" />
-    <Compile Include="Assets\TitleImageController.cs" />
-    <Compile Include="Assets\KeyController.cs" />
-    <Compile Include="Assets\Scripts\UI\KeyHolderController.cs" />
-    <Compile Include="Assets\BossDoorController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\rooms\2-medium-sandstone-1.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-1.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-1.txt" />
      <None Include="Assets\Resources\rooms\3-hard-cave-lock-2.txt" />
+     <None Include="Assets\Resources\rooms\1-well.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-2.txt" />
      <None Include="Assets\Resources\rooms\2-medium-pyramid-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-stone-2.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-stone-1.txt" />
-     <None Include="Assets\Resources\rooms\test-boss.txt" />
+     <None Include="Assets\Resources\rooms\2-ladder.txt" />
      <None Include="Assets\Resources\rooms\3-hard-cave-1.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-1.txt" />
      <None Include="Assets\Resources\rooms\3-medium-cave-4.txt" />
@@ -173,18 +174,23 @@
      <None Include="Assets\Resources\rooms\1-hard-fancy-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-stone-1.txt" />
+     <None Include="Assets\Resources\rooms\2-start.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-lock-1.txt" />
      <None Include="Assets\Resources\rooms\2-hard-pyramid-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-3.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-2.txt" />
+     <None Include="Assets\Resources\rooms\1-start.txt" />
      <None Include="Assets\Resources\rooms\1-hard-fancy-lock-2.txt" />
      <None Include="Assets\Resources\rooms\1-easy-stone-3.txt" />
      <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-2.txt" />
+     <None Include="Assets\Resources\rooms\2-well.txt" />
      <None Include="Assets\Resources\rooms\3-medium-cave-2.txt" />
      <None Include="Assets\Resources\rooms\2-hard-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\2-hard-pyramid-lock-1.txt" />
      <None Include="Assets\Resources\rooms\2-medium-sandstone-lock-2.txt" />
+     <None Include="Assets\Resources\rooms\3-start.txt" />
+     <None Include="Assets\Resources\rooms\1-ladder.txt" />
      <None Include="Assets\Resources\rooms\1-hard-moss-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-1.txt" />
      <None Include="Assets\Resources\rooms\3-medium-cave-3.txt" />
@@ -194,13 +200,13 @@
      <None Include="Assets\Resources\rooms\1-hard-fancy-2.txt" />
      <None Include="Assets\Resources\rooms\1-medium-broken-2.txt" />
      <None Include="Assets\Resources\rooms\2-easy-sandstone-3.txt" />
-     <None Include="Assets\Resources\rooms\test.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-1.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-4.txt" />
      <None Include="Assets\Resources\rooms\1-easy-moss-4.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-lock-1.txt" />
      <None Include="Assets\Resources\rooms\1-medium-ledge-1.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-2.txt" />
+     <None Include="Assets\Resources\rooms\3-ladder.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-3.txt" />
      <None Include="Assets\Resources\rooms\2-easy-pyramid-2.txt" />
      <None Include="Assets\Resources\rooms\1-hard-cobbled-2.txt" />
@@ -209,6 +215,7 @@
      <None Include="Assets\Resources\rooms\2-medium-pyramid-1.txt" />
      <None Include="Assets\Resources\rooms\3-key.txt" />
      <None Include="Assets\Resources\rooms\3-easy-cave-5.txt" />
+     <None Include="Assets\Resources\rooms\3-well.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

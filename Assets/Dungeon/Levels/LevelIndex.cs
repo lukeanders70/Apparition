@@ -68,9 +68,10 @@ namespace StaticDungeon
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
         {
-            StoneWellSpecialSpawn.Instance,
-            StoneExitSpecialSpawn.Instance,
-            StoneKeySpecialSpawn.Instance
+            OneStartSpecialSpawn.Instance,
+            OneWellSpecialSpawn.Instance,
+            OneLadderSpecialSpawn.Instance,
+            OneKeySpecialSpawn.Instance
         };
     }
 
@@ -101,10 +102,11 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-2")), probability = 1.0f },
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-lock-1")), probability = 1.0f },
         };
-        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
-{           StoneWellSpecialSpawn.Instance,
-            SandstoneExitSpecialSpawn.Instance,
-            SandstoneKeySpecialSpawn.Instance
+        public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
+            TwoStartSpecialSpawn.Instance,
+            TwoWellSpecialSpawn.Instance,
+            TwoLadderSpecialSpawn.Instance,
+            TwoKeySpecialSpawn.Instance
         };
     }
 
@@ -136,9 +138,10 @@ namespace StaticDungeon
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
-            StoneWellSpecialSpawn.Instance,
-            RockExitSpecialSpawn.Instance,
-            RockKeySpecialSpawn.Instance
+            ThreeStartSpecialSpawn.Instance,
+            ThreeWellSpecialSpawn.Instance,
+            ThreeLadderSpecialSpawn.Instance,
+            ThreeKeySpecialSpawn.Instance
         };
     }
 }
