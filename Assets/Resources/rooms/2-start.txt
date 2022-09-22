@@ -1,0 +1,1 @@
+{"Cells":[],"lockIn":false,"wallType":"sandstone","isExit":false,"bossRoom":false}

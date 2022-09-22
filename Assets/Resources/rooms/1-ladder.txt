@@ -1,0 +1,1 @@
+{"Cells":[{"objectName":"ladder","type":0,"objectType":1,"size":{"x":4,"y":3},"primaryIndex":{"x":11,"y":4}}],"lockIn":false,"wallType":"basic","isExit":false,"bossRoom":false}
