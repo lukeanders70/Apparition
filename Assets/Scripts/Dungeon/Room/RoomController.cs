@@ -30,16 +30,14 @@ public class RoomController : MonoBehaviour
     )
     {
         var manDistanceFromStart = Mathf.Abs(indexPosition.x) + Mathf.Abs(indexPosition.y);
-        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] entryRoomInfo = { new StaticDungeon.ObjectProbability<StaticDungeon.Room> { obj = levelInfo.EntryRoom, probability = 1.0f } };
 
-        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs = 
-            manDistanceFromStart > 4 ? 
-                levelInfo.FarRooms : 
-                manDistanceFromStart > 2 ? 
-                    levelInfo.MediumRooms : 
-                    manDistanceFromStart <= 2 ? 
-                        levelInfo.NearRooms : 
-                        entryRoomInfo;
+        StaticDungeon.ObjectProbability<StaticDungeon.Room>[] roomProbs =
+            manDistanceFromStart > 4 ?
+                levelInfo.FarRooms :
+                manDistanceFromStart > 2 ?
+                    levelInfo.MediumRooms :
+                    levelInfo.NearRooms;
+
         roomInfo = StaticDungeon.Utils.ChooseFromObjectProbability(roomProbs);
         position = indexPosition;
 

@@ -12,7 +12,6 @@ namespace StaticDungeon
     public interface Level
     {
         public string Name { get; set; }
-        public Room EntryRoom { get; set; }
         public ObjectProbability<Room>[] NearRooms { get; set; }
         public ObjectProbability<Room>[] MediumRooms { get; set; }
         public ObjectProbability<Room>[] FarRooms { get; set; }
@@ -23,7 +22,6 @@ namespace StaticDungeon
     public class Level1 : Level
     {
         public string Name { get; set; } = "Crumbling Catacombs 1";
-        public Room EntryRoom { get; set; } = Entry1Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("1-easy-stone-1")), probability = 1.0f },
@@ -78,7 +76,6 @@ namespace StaticDungeon
     public class Level2 : Level
     {
         public string Name { get; set; } = "Sand Sea 1";
-        public Room EntryRoom { get; set; } = Entry2Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-easy-pyramid-1")), probability = 1.0f },
@@ -113,7 +110,6 @@ namespace StaticDungeon
     public class Level3 : Level
     {
         public string Name { get; set; } = "Boiling Burrow 1";
-        public Room EntryRoom { get; set; } = Entry3Room.Instance;
         public ObjectProbability<Room>[] NearRooms { get; set; } =
         {
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-easy-cave-1")), probability = 1.0f },
