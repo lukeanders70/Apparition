@@ -23,7 +23,6 @@ namespace StaticDungeon
 
         public static SaveRoom LoadSaveRoomData(string fileName)
         {
-            Debug.Log("Loading File");
             var fileBytes = File.ReadAllBytes(Application.dataPath + "/Resources/rooms/" + fileName + ".txt");
             var saveRoomData = JsonUtility.FromJson<SaveRoom>(System.Text.Encoding.UTF8.GetString(fileBytes));
             return saveRoomData;
