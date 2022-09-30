@@ -112,7 +112,6 @@ public class DoorManager : MonoBehaviour
     }
     public void AddDoorwayWall(Vector2 direction, string wallType)
     {
-        Debug.Log("Add Doorway Wall");
         GameObject newDoor = doorPositions[direction].GetComponent<DoorwayGenerator>().AddDoorwayWall(gameObject, wallType);
         if (doors.ContainsKey(direction))
         {
