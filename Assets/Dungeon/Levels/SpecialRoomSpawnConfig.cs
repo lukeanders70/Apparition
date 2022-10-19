@@ -121,25 +121,25 @@ namespace StaticDungeon
 
      public class ThreeLadderSpecialSpawn : OneLadderSpecialSpawn
     {
-        new public static TwoLadderSpecialSpawn Instance = new TwoLadderSpecialSpawn();
+        new public static ThreeLadderSpecialSpawn Instance = new ThreeLadderSpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-ladder"));
     }
 
     public class ThreeKeySpecialSpawn : OneKeySpecialSpawn
     {
-        new public static TwoKeySpecialSpawn Instance = new TwoKeySpecialSpawn();
+        new public static ThreeKeySpecialSpawn Instance = new ThreeKeySpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-key"));
     }
 
     public class ThreeWellSpecialSpawn : OneWellSpecialSpawn
     {
-        new public static TwoWellSpecialSpawn Instance = new TwoWellSpecialSpawn();
+        new public static ThreeWellSpecialSpawn Instance = new ThreeWellSpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-well"));
     }
 
     public class ThreeStartSpecialSpawn : OneStartSpecialSpawn
     {
-        new public static TwoStartSpecialSpawn Instance = new TwoStartSpecialSpawn();
+        new public static ThreeStartSpecialSpawn Instance = new ThreeStartSpecialSpawn();
         override public Room room { get; set; } = new PreDefRoom(RoomLoader.LoadSaveRoomData("3-start"));
     }
 
