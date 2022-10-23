@@ -66,10 +66,10 @@ namespace StaticDungeon
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } =
         {
+            OneLadderSpecialSpawn.Instance,
+            OneKeySpecialSpawn.Instance,
             OneStartSpecialSpawn.Instance,
             OneWellSpecialSpawn.Instance,
-            OneLadderSpecialSpawn.Instance,
-            OneKeySpecialSpawn.Instance
         };
     }
 
@@ -100,10 +100,10 @@ namespace StaticDungeon
             new ObjectProbability<Room> { obj = new PreDefRoom(RoomLoader.LoadSaveRoomData("2-hard-pyramid-lock-1")), probability = 1.0f },
         };
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
-            TwoStartSpecialSpawn.Instance,
-            TwoWellSpecialSpawn.Instance,
             TwoLadderSpecialSpawn.Instance,
-            TwoKeySpecialSpawn.Instance
+            TwoKeySpecialSpawn.Instance,
+            TwoStartSpecialSpawn.Instance,
+            TwoWellSpecialSpawn.Instance
         };
     }
 
@@ -134,10 +134,10 @@ namespace StaticDungeon
         };
 
         public SpecialRoomSpawnConfig[] SpecialRooms { get; set; } = {
+            ThreeLadderSpecialSpawn.Instance,
+            ThreeKeySpecialSpawn.Instance,
             ThreeStartSpecialSpawn.Instance,
             ThreeWellSpecialSpawn.Instance,
-            ThreeLadderSpecialSpawn.Instance,
-            ThreeKeySpecialSpawn.Instance
         };
     }
 }
