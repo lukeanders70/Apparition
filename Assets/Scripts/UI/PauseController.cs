@@ -27,6 +27,7 @@ public class PauseController : MonoBehaviour
 
     public void Restart()
     {
+        DungeonStateInfo.levelIndex = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameObject.SetActive(false);
@@ -34,6 +35,7 @@ public class PauseController : MonoBehaviour
 
     public void Quit()
     {
+        DungeonStateInfo.levelIndex = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("TitleScene");
         gameObject.SetActive(false);

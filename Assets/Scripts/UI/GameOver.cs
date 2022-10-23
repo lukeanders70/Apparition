@@ -20,12 +20,14 @@ public class GameOver : MonoBehaviour
 
     public void Restart()
     {
+        DungeonStateInfo.levelIndex = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
     {
+        DungeonStateInfo.levelIndex = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("TitleScene");
     }
