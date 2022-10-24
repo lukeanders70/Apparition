@@ -3093,7 +3093,7 @@ PrefabInstance:
     - target: {fileID: 7921790221821092337, guid: c179d0c6168f20e4284c1c44b8341c00, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 716123098}
+      objectReference: {fileID: 0}
     - target: {fileID: 7921790221821092337, guid: c179d0c6168f20e4284c1c44b8341c00, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
