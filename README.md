@@ -4,4 +4,37 @@ Apparition is a top down, pixel art rougue-like game. It follows the adventure o
 
 This is a short game, developed entirely by me including art, animations, and design. It has three levels with distict themes and enemies.
 
-![image](https://user-images.githubusercontent.com/15095707/197423852-917524f4-e478-483e-9f3e-4b40e9e4c2e4.png)
+## How to Play (Windows only)
+1. Navigate to the [releases page](https://github.com/lukeanders70/Apparition/releases/tag/v1.0) on this repo and find the latest release.
+2. Under assets, find and download the zip file named Apparition-v\<version\>.zip
+3. unzip the folder, open, and run Apparition.exe
+
+## Screenshots
+\
+\
+\
+![Victory](Screenshots/title.png?raw=true)
+\
+\
+\
+![Desert](Screenshots/blob.png?raw=true)
+\
+\
+\
+![Cave](Screenshots/key.png?raw=true)
+\
+\
+\
+![Tower](Screenshots/sandstone-spinner.png?raw=true)
+\
+\
+\
+![World](Screenshots/sandstone-target.png?raw=true)
+\
+\
+\
+![Victory](Screenshots/cave-bats.png?raw=true)
+\
+\
+\
+![Victory](Screenshots/cave-heart.png?raw=true)
