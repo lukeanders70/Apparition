@@ -10,9 +10,6 @@ This is a short game, developed entirely by me including art, animations, and de
 3. unzip the folder, open, and run Apparition.exe
 
 ## Screenshots
-\
-\
-\
 ![Victory](Screenshots/title.png?raw=true)
 \
 \
