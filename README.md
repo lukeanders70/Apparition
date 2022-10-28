@@ -10,28 +10,29 @@ This is a short game, developed entirely by me including art, animations, and de
 3. unzip the folder, open, and run Apparition.exe
 
 ## Screenshots
-![Victory](Screenshots/title.png?raw=true)
+
+![Title](Screenshots/Title.png?raw=true)
 \
 \
 \
-![Desert](Screenshots/blob.png?raw=true)
+![Blob](Screenshots/blob.png?raw=true)
 \
 \
 \
-![Cave](Screenshots/key.png?raw=true)
+![Key](Screenshots/key.png?raw=true)
 \
 \
 \
-![Tower](Screenshots/sandstone-spinner.png?raw=true)
+![Spinner](Screenshots/sandstone-spinner.png?raw=true)
 \
 \
 \
-![World](Screenshots/sandstone-target.png?raw=true)
+![Target](Screenshots/sandstone-target.png?raw=true)
 \
 \
 \
-![Victory](Screenshots/cave-bats.png?raw=true)
+![Bats](Screenshots/cave-bats.png?raw=true)
 \
 \
 \
-![Victory](Screenshots/cave-heart.png?raw=true)
+![Heart](Screenshots/cave-heart.png?raw=true)
