@@ -4,7 +4,7 @@ Spirit is a top down, pixel art rougue-like game. It follows the adventure of a 
 
 This is a short game, developed entirely by me including art, animations, and design. It has three levels with distict themes and enemies.
 
-## How to Play (Windows only)
+## How to Play (Windows and Mac)
 1. Navigate to the [releases page](https://github.com/lukeanders70/Apparition/releases/tag/v1.0) on this repo and find the latest release.
 2. Under assets, find and download the zip file named Apparition-v\<version\>.zip
 3. unzip the folder, open, and run Apparition.exe
